@@ -1418,47 +1418,47 @@ yyreduce:
 
   case 6:
 #line 34 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->VarDecl\n\n"); }
     break;
 
   case 7:
 #line 35 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->FuncDecl\n\n"); }
     break;
 
   case 8:
 #line 36 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->AssignStmt\n\n"); }
     break;
 
   case 9:
 #line 37 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->Expr\n\n"); }
     break;
 
   case 10:
 #line 38 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->IfStmt\n\n"); }
     break;
 
   case 11:
 #line 39 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->WhileStmt\n\n"); }
     break;
 
   case 12:
 #line 40 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->BreakStmt\n\n"); }
     break;
 
   case 13:
 #line 41 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->ContinueStmt\n\n"); }
     break;
 
   case 14:
 #line 42 "parser.y"
-    { printf("\n"); }
+    { printf("stmt--->CallStmt\n\n"); }
     break;
 
   case 19:
@@ -1469,11 +1469,6 @@ yyreduce:
   case 22:
 #line 65 "parser.y"
     { /* empty */ }
-    break;
-
-  case 25:
-#line 71 "parser.y"
-    { printf("oper->CallStmt\n"); }
     break;
 
   case 26:
@@ -1489,26 +1484,6 @@ yyreduce:
   case 30:
 #line 83 "parser.y"
     { printf("oper->default args\n"); }
-    break;
-
-  case 31:
-#line 87 "parser.y"
-    { printf("oper->funcDecl\n"); }
-    break;
-
-  case 32:
-#line 91 "parser.y"
-    { printf("oper->break\n"); }
-    break;
-
-  case 33:
-#line 95 "parser.y"
-    { printf("oper->continue\n"); }
-    break;
-
-  case 34:
-#line 99 "parser.y"
-    { printf("oper->while stmt\n"); }
     break;
 
   case 35:
@@ -1558,7 +1533,7 @@ yyreduce:
 
 
 /* Line 1267 of yacc.c.  */
-#line 1562 "y.tab.c"
+#line 1537 "y.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);

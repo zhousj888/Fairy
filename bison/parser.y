@@ -31,15 +31,15 @@ Program:
 
 Stmt:
     StmtSeparator
-|   VarDecl StmtSeparator                       { printf("\n"); }
-|   FuncDecl                                    { printf("\n"); }
-|   AssignStmt StmtSeparator                    { printf("\n"); }
-|   Expr                                        { printf("\n"); }
-|   IfStmt                                      { printf("\n"); }
-|   WhileStmt                                   { printf("\n"); }
-|   BreakStmt StmtSeparator                     { printf("\n"); }
-|   ContinueStmt StmtSeparator                  { printf("\n"); }
-|   CallStmt StmtSeparator                      { printf("\n"); }
+|   VarDecl StmtSeparator                       { printf("stmt--->VarDecl\n\n"); }
+|   FuncDecl                                    { printf("stmt--->FuncDecl\n\n"); }
+|   AssignStmt StmtSeparator                    { printf("stmt--->AssignStmt\n\n"); }
+|   Expr                                        { printf("stmt--->Expr\n\n"); }
+|   IfStmt                                      { printf("stmt--->IfStmt\n\n"); }
+|   WhileStmt                                   { printf("stmt--->WhileStmt\n\n"); }
+|   BreakStmt StmtSeparator                     { printf("stmt--->BreakStmt\n\n"); }
+|   ContinueStmt StmtSeparator                  { printf("stmt--->ContinueStmt\n\n"); }
+|   CallStmt StmtSeparator                      { printf("stmt--->CallStmt\n\n"); }
 ;
 
 StmtSeparator:
@@ -68,7 +68,7 @@ ActualParams:
 ;
 
 CallStmt:
-    T_Identifier '(' ActualParams  ')'              { printf("oper->CallStmt\n"); }
+    T_Identifier '(' ActualParams  ')'
 ;
 
 
@@ -84,19 +84,19 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func T_Identifier '(' Args ')' EmptyOrNewLines Closure       { printf("oper->funcDecl\n"); }
+    T_Func T_Identifier '(' Args ')' EmptyOrNewLines Closure
 ;
 
 BreakStmt:
-    T_Break                                         { printf("oper->break\n"); }
+    T_Break                                         
 ;
 
 ContinueStmt:
-    T_Continue                                      { printf("oper->continue\n"); }
+    T_Continue                                      
 ;
 
 WhileStmt:
-    T_While Expr Closure                            { printf("oper->while stmt\n"); }
+    T_While Expr Closure                            
 ;
 
 
