@@ -1,43 +1,39 @@
 //Expr
 a + b
-// a - b
-// a * b
-// a / b
-// a % b
-// a > b
-// a < b
-// a < b
-// a < b
-// a < b
-// a <= b
-// a >= b
-// a == b
-// a != b
-// a && b
-// a || b
+a - b
+a * b
+a / b
+a % b
+a > b
+a < b
+a <= b
+a >= b
+a == b
+a != b
+a && b
+a || b
 // a ... b
 // a ..< b
-// -a
-// +a
-// !a
-// 123
-// 0x123
-// 1.123
-// (123)
+-a
++a
+!a
+123
+0x123
+1.123
+(123)
 // [1,2,3]
 // {a:1,b:2}
 // "abcd"
 // a ? 1 : 2
 
-
-
 // //VarDecl StmtSeparator
-// var a
+var a
+let a
 
-// //FuncDecl
-// func test(a = 1,b,c) {
-//     return
-// }
+//FuncDecl
+func test(a = 1,b,c) {
+    return
+}
 
 // //call
 // test(b: 1,2){}

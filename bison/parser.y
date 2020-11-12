@@ -113,7 +113,7 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func T_Identifier '(' Args ')' ClosureOrNextLine
+    T_Func T_Identifier '(' Args ')' ClosureOrNextLine        { printf("\tENDFUNC\n\n"); }
 ;
 
 ClassDecl:
@@ -145,9 +145,9 @@ IfStmt:
 ;
 
 VarDecl:
-    T_Var T_Identifier                              
-|   T_Let T_Identifier                              
-|   VarDecl '=' Expr                                
+    T_Var T_Identifier                              { printf("\tvar %s \n", $2); }
+|   T_Let T_Identifier                              { printf("\tlet %s \n", $2); }
+|   VarDecl '=' Expr                                { printf("\tpop %s \n", $1); }
 ;
 
 AssignStmt:
