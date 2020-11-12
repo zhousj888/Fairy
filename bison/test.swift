@@ -27,10 +27,20 @@ func test(width = 1, height = 2, content) {}
 //没有指定名字的参数按顺序匹配没有默认值的参数
 //所以下方收到的参数width = 1,height = 3,content = {}
 test(1,2,3)
+
+
 test(width: 1,2,3)
+
+
 test(width:1,2,3){}
+
+
 1...3
 1..<3
 for i in Arr {
+}
+
+class Son : Father
+{
 
 }

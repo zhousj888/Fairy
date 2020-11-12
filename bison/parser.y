@@ -6,7 +6,7 @@ int yylex();
 #define YYSTYPE char *
 %}
 
-%token T_Int T_Var T_Void T_Return T_Print T_ReadInt T_While T_EOL T_Let T_Func T_For T_In
+%token T_Int T_Var T_Void T_Return T_Print T_ReadInt T_While T_EOL T_Let T_Func T_For T_In T_Class
 %token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne 
 %token T_And T_Or T_IntConstant T_StringConstant T_Identifier T_IntervalTo T_IntervalLess
 
@@ -41,6 +41,7 @@ Stmt:
 |   ContinueStmt StmtSeparator                  { printf("stmt--->ContinueStmt\n\n"); }
 |   CallStmt                                    { printf("stmt--->CallStmt\n\n"); }
 |   ForStmt                                     { printf("stmt--->ForStmt\n\n"); }
+|   ClassDecl                                   { printf("stmt--->ClassDecl\n\n"); }
 ;
 
 StmtSeparator:
@@ -53,17 +54,14 @@ NewLines:
 |   NewLines T_EOL
 ;
 
-EmptyOrNewLines:
-    /* empty */             { /* empty */ }
-|   NewLines
-;
 
 Closure:
     '{' Program '}'
 ;
 
-EmptyOrClosure:
-|   Closure
+ClosureOrNextLine:
+    Closure
+|   T_EOL Closure
 ;
 
 ActualParams:
@@ -78,11 +76,12 @@ ActualParam:
 ;
 
 CallStmt:
-    T_Identifier '(' ActualParams  ')' EmptyOrClosure
+    T_Identifier '(' ActualParams  ')'
+|   CallStmt Closure
 ;
 
 ForStmt:
-    T_For Expr T_In Expr Closure
+    T_For Expr T_In Expr ClosureOrNextLine
 ;
 
 
@@ -98,7 +97,12 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func T_Identifier '(' Args ')' EmptyOrNewLines Closure
+    T_Func T_Identifier '(' Args ')' ClosureOrNextLine
+;
+
+ClassDecl:
+    T_Class T_Identifier ClosureOrNextLine
+|   T_Class T_Identifier ':' T_Identifier ClosureOrNextLine
 ;
 
 BreakStmt:
@@ -110,13 +114,13 @@ ContinueStmt:
 ;
 
 WhileStmt:
-    T_While Expr Closure                            
+    T_While Expr ClosureOrNextLine
 ;
 
 
 IfStmt:
-    T_If Expr Closure                               { printf("oper->if stmt\n"); }
-|   IfStmt T_Else Closure                           { printf("oper->if else stmt\n"); }
+    T_If Expr ClosureOrNextLine                     { printf("oper->if stmt\n"); }
+|   IfStmt T_Else ClosureOrNextLine                 { printf("oper->if else stmt\n"); }
 |   IfStmt T_Else IfStmt                            { printf("oper->if else if stmt\n"); }
 ;
 

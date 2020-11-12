@@ -48,6 +48,7 @@ STRING              (\042[^\042\n]*\042)
 "..<"               { printf("token: %s \n",yytext); return T_IntervalLess; }
 "for"               { printf("token: %s \n",yytext); return T_For; }
 "in"                { printf("token: %s \n",yytext); return T_In; }
+"class"             { printf("token: %s \n",yytext); return T_Class; }
 
 {INTEGER}           { printf("token: %s \n",yytext); _DUPTEXT return T_IntConstant; }
 {STRING}            { printf("token: %s \n",yytext); _DUPTEXT return T_StringConstant; }
