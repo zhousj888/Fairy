@@ -1,0 +1,7 @@
+bison/lex.yy.c
+bison/lex.yy.o
+bison/tcc
+bison/y.output
+bison/y.tab.c
+bison/y.tab.h
+bison/y.tab.o
