@@ -32,7 +32,6 @@ Program:
 Stmt:
     T_EOS
 |   VarDecl                                         { printf("\n"); }
-|   LetDecl                                         { printf("\n"); }
 |   FuncDecl                                        { printf("\n"); }
 |   AssignStmt                                      { printf("\n"); }
 |   Expr                                            { printf("\n"); }
@@ -81,11 +80,8 @@ IfStmt:
 
 VarDecl:
     T_Var T_Identifier                              { printf("oper->var %s \n", $2); }
+|   T_Let T_Identifier                              { printf("oper->let %s \n", $2); }
 |   VarDecl '=' Expr                                { printf("oper->var&assign pop %s \n",$2); }
-;
-
-LetDecl:
-    T_Let T_Identifier                              { printf("oper->let %s \n", $2); }
 ;
 
 AssignStmt:

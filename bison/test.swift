@@ -1,4 +1,5 @@
 var b = 1
+let c = 2
 1
 let a
 var a

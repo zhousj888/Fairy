@@ -28,7 +28,7 @@ Rules never reduced
 
 
 State 12 conflicts: 2 reduce/reduce
-State 39 conflicts: 1 shift/reduce
+State 38 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -41,44 +41,42 @@ Grammar
 
     4 Stmt: T_EOS
     5     | VarDecl
-    6     | LetDecl
-    7     | FuncDecl
-    8     | AssignStmt
-    9     | Expr
-   10     | IfStmt
-   11     | WhileStmt
-   12     | BreakStmt
-   13     | ContinueStmt
+    6     | FuncDecl
+    7     | AssignStmt
+    8     | Expr
+    9     | IfStmt
+   10     | WhileStmt
+   11     | BreakStmt
+   12     | ContinueStmt
 
-   14 Closure: '{' Program '}'
+   13 Closure: '{' Program '}'
 
-   15 Args: /* empty */
-   16     | Arg ',' Args
+   14 Args: /* empty */
+   15     | Arg ',' Args
 
-   17 Arg: T_Identifier
-   18    | Arg '=' Expr
+   16 Arg: T_Identifier
+   17    | Arg '=' Expr
 
-   19 FuncDecl: T_Func T_Identifier '(' Args ')' Closure
+   18 FuncDecl: T_Func T_Identifier '(' Args ')' Closure
 
-   20 BreakStmt: T_Break
+   19 BreakStmt: T_Break
 
-   21 ContinueStmt: T_Continue
+   20 ContinueStmt: T_Continue
 
-   22 WhileStmt: T_While Expr Closure
+   21 WhileStmt: T_While Expr Closure
 
-   23 IfStmt: T_If Expr Closure
-   24       | IfStmt T_Else Closure
-   25       | IfStmt T_Else IfStmt
+   22 IfStmt: T_If Expr Closure
+   23       | IfStmt T_Else Closure
+   24       | IfStmt T_Else IfStmt
 
-   26 VarDecl: T_Var T_Identifier
+   25 VarDecl: T_Var T_Identifier
+   26        | T_Let T_Identifier
    27        | VarDecl '=' Expr
 
-   28 LetDecl: T_Let T_Identifier
+   28 AssignStmt: T_Identifier '=' Expr
 
-   29 AssignStmt: T_Identifier '=' Expr
-
-   30 Expr: T_IntConstant
-   31     | T_Identifier
+   29 Expr: T_IntConstant
+   30     | T_Identifier
 
 
 Terminals, with rules where they appear
@@ -86,42 +84,42 @@ Terminals, with rules where they appear
 $end (0) 0
 '!' (33)
 '%' (37)
-'(' (40) 19
-')' (41) 19
+'(' (40) 18
+')' (41) 18
 '*' (42)
 '+' (43)
-',' (44) 16
+',' (44) 15
 '-' (45)
 '/' (47)
 '<' (60)
-'=' (61) 18 27 29
+'=' (61) 17 27 28
 '>' (62)
-'{' (123) 14
-'}' (125) 14
+'{' (123) 13
+'}' (125) 13
 error (256)
 T_Int (258)
-T_Var (259) 26
+T_Var (259) 25
 T_Void (260)
 T_Return (261)
 T_Print (262)
 T_ReadInt (263)
-T_While (264) 22
+T_While (264) 21
 T_EOS (265) 4
-T_Let (266) 28
-T_Func (267) 19
-T_If (268) 23
-T_Else (269) 24 25
-T_Break (270) 20
-T_Continue (271) 21
+T_Let (266) 26
+T_Func (267) 18
+T_If (268) 22
+T_Else (269) 23 24
+T_Break (270) 19
+T_Continue (271) 20
 T_Le (272)
 T_Ge (273)
 T_Eq (274)
 T_Ne (275)
 T_And (276)
 T_Or (277)
-T_IntConstant (278) 30
+T_IntConstant (278) 29
 T_StringConstant (279)
-T_Identifier (280) 17 19 26 28 29 31
+T_Identifier (280) 16 18 25 26 28 30
 
 
 Nonterminals, with rules where they appear
@@ -129,33 +127,31 @@ Nonterminals, with rules where they appear
 $accept (40)
     on left: 0
 Program (41)
-    on left: 1 2 3, on right: 0 3 14
+    on left: 1 2 3, on right: 0 3 13
 Stmt (42)
-    on left: 4 5 6 7 8 9 10 11 12 13, on right: 2 3
+    on left: 4 5 6 7 8 9 10 11 12, on right: 2 3
 Closure (43)
-    on left: 14, on right: 19 22 23 24
+    on left: 13, on right: 18 21 22 23
 Args (44)
-    on left: 15 16, on right: 16 19
+    on left: 14 15, on right: 15 18
 Arg (45)
-    on left: 17 18, on right: 16 18
+    on left: 16 17, on right: 15 17
 FuncDecl (46)
-    on left: 19, on right: 7
+    on left: 18, on right: 6
 BreakStmt (47)
-    on left: 20, on right: 12
+    on left: 19, on right: 11
 ContinueStmt (48)
-    on left: 21, on right: 13
+    on left: 20, on right: 12
 WhileStmt (49)
-    on left: 22, on right: 11
+    on left: 21, on right: 10
 IfStmt (50)
-    on left: 23 24 25, on right: 10 24 25
+    on left: 22 23 24, on right: 9 23 24
 VarDecl (51)
-    on left: 26 27, on right: 5 27
-LetDecl (52)
-    on left: 28, on right: 6
-AssignStmt (53)
-    on left: 29, on right: 8
-Expr (54)
-    on left: 30 31, on right: 9 18 22 23 27 29
+    on left: 25 26 27, on right: 5 27
+AssignStmt (52)
+    on left: 28, on right: 7
+Expr (53)
+    on left: 29 30, on right: 8 17 21 22 27 28
 
 
 state 0
@@ -183,26 +179,25 @@ state 0
     WhileStmt     go to state 16
     IfStmt        go to state 17
     VarDecl       go to state 18
-    LetDecl       go to state 19
-    AssignStmt    go to state 20
-    Expr          go to state 21
+    AssignStmt    go to state 19
+    Expr          go to state 20
 
 
 state 1
 
-   26 VarDecl: T_Var . T_Identifier
+   25 VarDecl: T_Var . T_Identifier
 
-    T_Identifier  shift, and go to state 22
+    T_Identifier  shift, and go to state 21
 
 
 state 2
 
-   22 WhileStmt: T_While . Expr Closure
+   21 WhileStmt: T_While . Expr Closure
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 23
+    T_Identifier   shift, and go to state 22
 
-    Expr  go to state 24
+    Expr  go to state 23
 
 
 state 3
@@ -214,64 +209,64 @@ state 3
 
 state 4
 
-   28 LetDecl: T_Let . T_Identifier
+   26 VarDecl: T_Let . T_Identifier
 
-    T_Identifier  shift, and go to state 25
+    T_Identifier  shift, and go to state 24
 
 
 state 5
 
-   19 FuncDecl: T_Func . T_Identifier '(' Args ')' Closure
+   18 FuncDecl: T_Func . T_Identifier '(' Args ')' Closure
 
-    T_Identifier  shift, and go to state 26
+    T_Identifier  shift, and go to state 25
 
 
 state 6
 
-   23 IfStmt: T_If . Expr Closure
+   22 IfStmt: T_If . Expr Closure
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 23
+    T_Identifier   shift, and go to state 22
 
-    Expr  go to state 27
+    Expr  go to state 26
 
 
 state 7
 
-   20 BreakStmt: T_Break .
+   19 BreakStmt: T_Break .
 
-    $default  reduce using rule 20 (BreakStmt)
+    $default  reduce using rule 19 (BreakStmt)
 
 
 state 8
 
-   21 ContinueStmt: T_Continue .
+   20 ContinueStmt: T_Continue .
 
-    $default  reduce using rule 21 (ContinueStmt)
+    $default  reduce using rule 20 (ContinueStmt)
 
 
 state 9
 
-   30 Expr: T_IntConstant .
+   29 Expr: T_IntConstant .
 
-    $default  reduce using rule 30 (Expr)
+    $default  reduce using rule 29 (Expr)
 
 
 state 10
 
-   29 AssignStmt: T_Identifier . '=' Expr
-   31 Expr: T_Identifier .
+   28 AssignStmt: T_Identifier . '=' Expr
+   30 Expr: T_Identifier .
 
-    '='  shift, and go to state 28
+    '='  shift, and go to state 27
 
-    $default  reduce using rule 31 (Expr)
+    $default  reduce using rule 30 (Expr)
 
 
 state 11
 
     0 $accept: Program . $end
 
-    $end  shift, and go to state 29
+    $end  shift, and go to state 28
 
 
 state 12
@@ -296,7 +291,7 @@ state 12
     '}'       [reduce using rule 2 (Program)]
     $default  reduce using rule 1 (Program)
 
-    Program       go to state 30
+    Program       go to state 29
     Stmt          go to state 12
     FuncDecl      go to state 13
     BreakStmt     go to state 14
@@ -304,48 +299,47 @@ state 12
     WhileStmt     go to state 16
     IfStmt        go to state 17
     VarDecl       go to state 18
-    LetDecl       go to state 19
-    AssignStmt    go to state 20
-    Expr          go to state 21
+    AssignStmt    go to state 19
+    Expr          go to state 20
 
 
 state 13
 
-    7 Stmt: FuncDecl .
+    6 Stmt: FuncDecl .
 
-    $default  reduce using rule 7 (Stmt)
+    $default  reduce using rule 6 (Stmt)
 
 
 state 14
 
-   12 Stmt: BreakStmt .
-
-    $default  reduce using rule 12 (Stmt)
-
-
-state 15
-
-   13 Stmt: ContinueStmt .
-
-    $default  reduce using rule 13 (Stmt)
-
-
-state 16
-
-   11 Stmt: WhileStmt .
+   11 Stmt: BreakStmt .
 
     $default  reduce using rule 11 (Stmt)
 
 
-state 17
+state 15
 
-   10 Stmt: IfStmt .
-   24 IfStmt: IfStmt . T_Else Closure
-   25       | IfStmt . T_Else IfStmt
+   12 Stmt: ContinueStmt .
 
-    T_Else  shift, and go to state 31
+    $default  reduce using rule 12 (Stmt)
+
+
+state 16
+
+   10 Stmt: WhileStmt .
 
     $default  reduce using rule 10 (Stmt)
+
+
+state 17
+
+    9 Stmt: IfStmt .
+   23 IfStmt: IfStmt . T_Else Closure
+   24       | IfStmt . T_Else IfStmt
+
+    T_Else  shift, and go to state 30
+
+    $default  reduce using rule 9 (Stmt)
 
 
 state 18
@@ -353,127 +347,120 @@ state 18
     5 Stmt: VarDecl .
    27 VarDecl: VarDecl . '=' Expr
 
-    '='  shift, and go to state 32
+    '='  shift, and go to state 31
 
     $default  reduce using rule 5 (Stmt)
 
 
 state 19
 
-    6 Stmt: LetDecl .
+    7 Stmt: AssignStmt .
 
-    $default  reduce using rule 6 (Stmt)
+    $default  reduce using rule 7 (Stmt)
 
 
 state 20
 
-    8 Stmt: AssignStmt .
+    8 Stmt: Expr .
 
     $default  reduce using rule 8 (Stmt)
 
 
 state 21
 
-    9 Stmt: Expr .
+   25 VarDecl: T_Var T_Identifier .
 
-    $default  reduce using rule 9 (Stmt)
+    $default  reduce using rule 25 (VarDecl)
 
 
 state 22
 
-   26 VarDecl: T_Var T_Identifier .
+   30 Expr: T_Identifier .
 
-    $default  reduce using rule 26 (VarDecl)
+    $default  reduce using rule 30 (Expr)
 
 
 state 23
 
-   31 Expr: T_Identifier .
+   21 WhileStmt: T_While Expr . Closure
 
-    $default  reduce using rule 31 (Expr)
+    '{'  shift, and go to state 32
+
+    Closure  go to state 33
 
 
 state 24
 
-   22 WhileStmt: T_While Expr . Closure
+   26 VarDecl: T_Let T_Identifier .
 
-    '{'  shift, and go to state 33
-
-    Closure  go to state 34
+    $default  reduce using rule 26 (VarDecl)
 
 
 state 25
 
-   28 LetDecl: T_Let T_Identifier .
+   18 FuncDecl: T_Func T_Identifier . '(' Args ')' Closure
 
-    $default  reduce using rule 28 (LetDecl)
+    '('  shift, and go to state 34
 
 
 state 26
 
-   19 FuncDecl: T_Func T_Identifier . '(' Args ')' Closure
+   22 IfStmt: T_If Expr . Closure
 
-    '('  shift, and go to state 35
+    '{'  shift, and go to state 32
+
+    Closure  go to state 35
 
 
 state 27
 
-   23 IfStmt: T_If Expr . Closure
+   28 AssignStmt: T_Identifier '=' . Expr
 
-    '{'  shift, and go to state 33
+    T_IntConstant  shift, and go to state 9
+    T_Identifier   shift, and go to state 22
 
-    Closure  go to state 36
+    Expr  go to state 36
 
 
 state 28
-
-   29 AssignStmt: T_Identifier '=' . Expr
-
-    T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 23
-
-    Expr  go to state 37
-
-
-state 29
 
     0 $accept: Program $end .
 
     $default  accept
 
 
-state 30
+state 29
 
     3 Program: Stmt Program .
 
     $default  reduce using rule 3 (Program)
 
 
-state 31
+state 30
 
-   24 IfStmt: IfStmt T_Else . Closure
-   25       | IfStmt T_Else . IfStmt
+   23 IfStmt: IfStmt T_Else . Closure
+   24       | IfStmt T_Else . IfStmt
 
     T_If  shift, and go to state 6
-    '{'   shift, and go to state 33
+    '{'   shift, and go to state 32
 
-    Closure  go to state 38
-    IfStmt   go to state 39
+    Closure  go to state 37
+    IfStmt   go to state 38
 
 
-state 32
+state 31
 
    27 VarDecl: VarDecl '=' . Expr
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 23
+    T_Identifier   shift, and go to state 22
 
-    Expr  go to state 40
+    Expr  go to state 39
 
 
-state 33
+state 32
 
-   14 Closure: '{' . Program '}'
+   13 Closure: '{' . Program '}'
 
     T_Var          shift, and go to state 1
     T_While        shift, and go to state 2
@@ -488,7 +475,7 @@ state 33
 
     $default  reduce using rule 1 (Program)
 
-    Program       go to state 41
+    Program       go to state 40
     Stmt          go to state 12
     FuncDecl      go to state 13
     BreakStmt     go to state 14
@@ -496,154 +483,153 @@ state 33
     WhileStmt     go to state 16
     IfStmt        go to state 17
     VarDecl       go to state 18
-    LetDecl       go to state 19
-    AssignStmt    go to state 20
-    Expr          go to state 21
+    AssignStmt    go to state 19
+    Expr          go to state 20
+
+
+state 33
+
+   21 WhileStmt: T_While Expr Closure .
+
+    $default  reduce using rule 21 (WhileStmt)
 
 
 state 34
 
-   22 WhileStmt: T_While Expr Closure .
+   18 FuncDecl: T_Func T_Identifier '(' . Args ')' Closure
 
-    $default  reduce using rule 22 (WhileStmt)
+    T_Identifier  shift, and go to state 41
+
+    $default  reduce using rule 14 (Args)
+
+    Args  go to state 42
+    Arg   go to state 43
 
 
 state 35
 
-   19 FuncDecl: T_Func T_Identifier '(' . Args ')' Closure
+   22 IfStmt: T_If Expr Closure .
 
-    T_Identifier  shift, and go to state 42
-
-    $default  reduce using rule 15 (Args)
-
-    Args  go to state 43
-    Arg   go to state 44
+    $default  reduce using rule 22 (IfStmt)
 
 
 state 36
 
-   23 IfStmt: T_If Expr Closure .
+   28 AssignStmt: T_Identifier '=' Expr .
 
-    $default  reduce using rule 23 (IfStmt)
+    $default  reduce using rule 28 (AssignStmt)
 
 
 state 37
 
-   29 AssignStmt: T_Identifier '=' Expr .
+   23 IfStmt: IfStmt T_Else Closure .
 
-    $default  reduce using rule 29 (AssignStmt)
+    $default  reduce using rule 23 (IfStmt)
 
 
 state 38
 
-   24 IfStmt: IfStmt T_Else Closure .
+   23 IfStmt: IfStmt . T_Else Closure
+   24       | IfStmt . T_Else IfStmt
+   24       | IfStmt T_Else IfStmt .
 
+    T_Else  shift, and go to state 30
+
+    T_Else    [reduce using rule 24 (IfStmt)]
     $default  reduce using rule 24 (IfStmt)
 
 
 state 39
-
-   24 IfStmt: IfStmt . T_Else Closure
-   25       | IfStmt . T_Else IfStmt
-   25       | IfStmt T_Else IfStmt .
-
-    T_Else  shift, and go to state 31
-
-    T_Else    [reduce using rule 25 (IfStmt)]
-    $default  reduce using rule 25 (IfStmt)
-
-
-state 40
 
    27 VarDecl: VarDecl '=' Expr .
 
     $default  reduce using rule 27 (VarDecl)
 
 
+state 40
+
+   13 Closure: '{' Program . '}'
+
+    '}'  shift, and go to state 44
+
+
 state 41
 
-   14 Closure: '{' Program . '}'
+   16 Arg: T_Identifier .
 
-    '}'  shift, and go to state 45
+    $default  reduce using rule 16 (Arg)
 
 
 state 42
 
-   17 Arg: T_Identifier .
+   18 FuncDecl: T_Func T_Identifier '(' Args . ')' Closure
 
-    $default  reduce using rule 17 (Arg)
+    ')'  shift, and go to state 45
 
 
 state 43
 
-   19 FuncDecl: T_Func T_Identifier '(' Args . ')' Closure
+   15 Args: Arg . ',' Args
+   17 Arg: Arg . '=' Expr
 
-    ')'  shift, and go to state 46
+    '='  shift, and go to state 46
+    ','  shift, and go to state 47
 
 
 state 44
 
-   16 Args: Arg . ',' Args
-   18 Arg: Arg . '=' Expr
+   13 Closure: '{' Program '}' .
 
-    '='  shift, and go to state 47
-    ','  shift, and go to state 48
+    $default  reduce using rule 13 (Closure)
 
 
 state 45
 
-   14 Closure: '{' Program '}' .
+   18 FuncDecl: T_Func T_Identifier '(' Args ')' . Closure
 
-    $default  reduce using rule 14 (Closure)
+    '{'  shift, and go to state 32
+
+    Closure  go to state 48
 
 
 state 46
 
-   19 FuncDecl: T_Func T_Identifier '(' Args ')' . Closure
+   17 Arg: Arg '=' . Expr
 
-    '{'  shift, and go to state 33
+    T_IntConstant  shift, and go to state 9
+    T_Identifier   shift, and go to state 22
 
-    Closure  go to state 49
+    Expr  go to state 49
 
 
 state 47
 
-   18 Arg: Arg '=' . Expr
+   15 Args: Arg ',' . Args
 
-    T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 23
+    T_Identifier  shift, and go to state 41
 
-    Expr  go to state 50
+    $default  reduce using rule 14 (Args)
+
+    Args  go to state 50
+    Arg   go to state 43
 
 
 state 48
 
-   16 Args: Arg ',' . Args
+   18 FuncDecl: T_Func T_Identifier '(' Args ')' Closure .
 
-    T_Identifier  shift, and go to state 42
-
-    $default  reduce using rule 15 (Args)
-
-    Args  go to state 51
-    Arg   go to state 44
+    $default  reduce using rule 18 (FuncDecl)
 
 
 state 49
 
-   19 FuncDecl: T_Func T_Identifier '(' Args ')' Closure .
+   17 Arg: Arg '=' Expr .
 
-    $default  reduce using rule 19 (FuncDecl)
+    $default  reduce using rule 17 (Arg)
 
 
 state 50
 
-   18 Arg: Arg '=' Expr .
+   15 Args: Arg ',' Args .
 
-    $default  reduce using rule 18 (Arg)
-
-
-state 51
-
-   16 Args: Arg ',' Args .
-
-    $default  reduce using rule 16 (Args)
+    $default  reduce using rule 15 (Args)
