@@ -31,18 +31,18 @@ Program:
 
 Stmt:
     StmtSeparator
-|   VarDecl StmtSeparator                       { printf("stmt--->VarDecl\n\n"); }
-|   FuncDecl                                    { printf("stmt--->FuncDecl\n\n"); }
-|   AssignStmt StmtSeparator                    { printf("stmt--->AssignStmt\n\n"); }
-|   Expr                                        { printf("stmt--->Expr\n\n"); }
-|   IfStmt                                      { printf("stmt--->IfStmt\n\n"); }
-|   WhileStmt                                   { printf("stmt--->WhileStmt\n\n"); }
-|   BreakStmt StmtSeparator                     { printf("stmt--->BreakStmt\n\n"); }
-|   ContinueStmt StmtSeparator                  { printf("stmt--->ContinueStmt\n\n"); }
-|   ForStmt                                     { printf("stmt--->ForStmt\n\n"); }
-|   ClassDecl                                   { printf("stmt--->ClassDecl\n\n"); }
-|   ReturnStmt                                  { printf("stmt--->ReturnStmt\n\n"); }
-|   RepeatWileStmt                              { printf("stmt--->RepeatWileStmt\n\n"); }
+|   VarDecl StmtSeparator                       
+|   FuncDecl                                    
+|   AssignStmt StmtSeparator                    
+|   Expr                                        
+|   IfStmt                                      
+|   WhileStmt                                   
+|   BreakStmt StmtSeparator                     
+|   ContinueStmt StmtSeparator                  
+|   ForStmt                                     
+|   ClassDecl                                   
+|   ReturnStmt                                  
+|   RepeatWileStmt                              
 ;
 
 StmtSeparator:
@@ -108,8 +108,8 @@ Args:
 ;
 
 Arg:
-    T_Identifier                                    { printf("oper->args\n"); }
-|   Arg '=' Expr                                    { printf("oper->default args\n"); }
+    T_Identifier                                    
+|   Arg '=' Expr                                    
 ;
 
 FuncDecl:
@@ -139,15 +139,15 @@ RepeatWileStmt:
 
 
 IfStmt:
-    T_If Expr ClosureOrNextLine                     { printf("oper->if stmt\n"); }
-|   IfStmt T_Else ClosureOrNextLine                 { printf("oper->if else stmt\n"); }
-|   IfStmt T_Else IfStmt                            { printf("oper->if else if stmt\n"); }
+    T_If Expr ClosureOrNextLine                     
+|   IfStmt T_Else ClosureOrNextLine                 
+|   IfStmt T_Else IfStmt                            
 ;
 
 VarDecl:
-    T_Var T_Identifier                              { printf("oper->var %s \n", $2); }
-|   T_Let T_Identifier                              { printf("oper->let %s \n", $2); }
-|   VarDecl '=' Expr                                { printf("oper->var&assign pop %s \n",$2); }
+    T_Var T_Identifier                              
+|   T_Let T_Identifier                              
+|   VarDecl '=' Expr                                
 ;
 
 AssignStmt:
@@ -155,8 +155,8 @@ AssignStmt:
 ;
 
 IntervalExpr:
-    Expr T_IntervalTo Expr                          { printf("oper->IntervalTo \n"); }
-|   Expr T_IntervalLess Expr                        { printf("oper->IntervalLess \n"); }
+    Expr T_IntervalTo Expr                          
+|   Expr T_IntervalLess Expr                        
 ;
 
 
@@ -195,14 +195,14 @@ Expr:
 |   T_IntConstant           { printf("\tpush %s\n", $1); }
 |   T_DecimalConstant       { printf("\tpush %s\n", $1); }
 |   T_Identifier            { printf("\tpush %s\n", $1); }
-|   CallExpr                { printf("oper->CallExpr\n"); }
-|   '(' Expr ')'            { /* empty */ }
-|   IntervalExpr            { /* empty */ }
-|   T_StringConstant        { /* empty */ }
-|   ArrayExpr               { printf("oper->arrayExpr\n"); }
-|   DictionExpr             { printf("oper->DictionExpr\n"); }
-|   ObjCallExpr             { printf("oper->ObjCallExpr\n"); }
-|   Expr '?' Expr ':' Expr  { printf("oper->conditional operation\n"); }
+|   CallExpr                
+|   '(' Expr ')'            
+|   IntervalExpr            
+|   T_StringConstant        
+|   ArrayExpr               
+|   DictionExpr             
+|   ObjCallExpr             
+|   Expr '?' Expr ':' Expr  
 ;
 
 %%
