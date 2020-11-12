@@ -14,6 +14,8 @@ SINGLE_COMMENT1     ("//"[^\n]*)
 SINGLE_COMMENT2     ("#"[^\n]*)
 OPERATOR            ([+*-/%=:;,!<>(){}\?\.\[\]])
 INTEGER             ([0-9]+)
+HEXINTEGER          (0[xX][0-9a-fA-F]+)
+DECIMAL             ([0-9]+\.[0-9]+)
 IDENTIFIER          ([_a-zA-Z][_a-zA-Z0-9]*)
 UNTERM_STRING       (\042[^\042\n]*)
 STRING              (\042[^\042\n]*\042)
@@ -51,6 +53,9 @@ STRING              (\042[^\042\n]*\042)
 "repeat"            { printf("token: %s \n",yytext); return T_Repeat; }
 
 {INTEGER}           { printf("token: %s \n",yytext); _DUPTEXT return T_IntConstant; }
+{HEXINTEGER}        { printf("token: %s \n",yytext); _DUPTEXT return T_IntConstant; }
+{DECIMAL}           { printf("token: %s \n",yytext); _DUPTEXT return T_DecimalConstant; }
+
 {STRING}            { printf("token: %s \n",yytext); _DUPTEXT return T_StringConstant; }
 {IDENTIFIER}        { printf("token: %s \n",yytext); _DUPTEXT return T_Identifier; }
 

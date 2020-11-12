@@ -8,7 +8,7 @@ int yylex();
 
 %token T_Int T_Var T_Void T_Return T_ReadInt T_While T_Repeat T_EOL T_Let T_Func T_For T_In T_Class
 %token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne 
-%token T_And T_Or T_IntConstant T_StringConstant T_Identifier T_IntervalTo T_IntervalLess
+%token T_And T_Or T_IntConstant T_StringConstant T_Identifier T_IntervalTo T_IntervalLess T_DecimalConstant
 
 %left '='
 %left T_Or
@@ -190,8 +190,10 @@ Expr:
 |   Expr T_Or Expr          { printf("\tor\n"); }
 |   Expr T_And Expr         { printf("\tand\n"); }
 |   '-' Expr %prec '!'      { printf("\tneg\n"); }
+|   '+' Expr %prec '!'      { /* empty */ }
 |   '!' Expr                { printf("\tnot\n"); }
 |   T_IntConstant           { printf("\tpush %s\n", $1); }
+|   T_DecimalConstant       { printf("\tpush %s\n", $1); }
 |   T_Identifier            { printf("\tpush %s\n", $1); }
 |   CallExpr                { printf("oper->CallExpr\n"); }
 |   '(' Expr ')'            { /* empty */ }
