@@ -31,14 +31,15 @@ Program:
 
 Stmt:
     StmtSeparator
-|   VarDecl                                         { printf("\n"); }
-|   FuncDecl                                        { printf("\n"); }
-|   AssignStmt                                      { printf("\n"); }
-|   Expr                                            { printf("\n"); }
-|   IfStmt                                          { printf("\n"); }
-|   WhileStmt                                       { printf("\n"); }
-|   BreakStmt                                       { printf("\n"); }
-|   ContinueStmt                                    { printf("\n"); }
+|   VarDecl StmtSeparator                       { printf("\n"); }
+|   FuncDecl                                    { printf("\n"); }
+|   AssignStmt StmtSeparator                    { printf("\n"); }
+|   Expr                                        { printf("\n"); }
+|   IfStmt                                      { printf("\n"); }
+|   WhileStmt                                   { printf("\n"); }
+|   BreakStmt StmtSeparator                     { printf("\n"); }
+|   ContinueStmt StmtSeparator                  { printf("\n"); }
+|   CallStmt StmtSeparator                      { printf("\n"); }
 ;
 
 StmtSeparator:
@@ -59,6 +60,17 @@ EmptyOrNewLines:
 Closure:
     '{' Program '}'
 ;
+
+ActualParams:
+    /* empty */             { /* empty */ }
+|   Expr
+|   ActualParams ',' Expr
+;
+
+CallStmt:
+    T_Identifier '(' ActualParams  ')'              { printf("oper->CallStmt\n"); }
+;
+
 
 Args:
     /* empty */             { /* empty */ }
