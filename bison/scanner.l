@@ -21,7 +21,7 @@ UNTERM_STRING       (\042[^\042\n]*)
 STRING              (\042[^\042\n]*\042)
 
 %%
-\n                  { printf("token: T_EOL \n"); cur_line++; return T_EOL; }
+\n                  { cur_line++; return T_EOL; }
 {WHITESPACE}        { /* ignore every whitespace */ }
 {SINGLE_COMMENT1}   { /* skip for single line comment */    }
 {SINGLE_COMMENT2}   { /* skip for single line comment */    }

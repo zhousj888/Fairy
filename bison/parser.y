@@ -62,7 +62,7 @@ ExprsByComma:
 ;
 
 Closure:
-    '{' Program '}'
+    '{' Program '}'                                    { printf("\t闭包结束\n"); }
 |   '{' '(' ExprsByComma ')' T_In Program '}'
 ;
 
@@ -78,13 +78,13 @@ ActualParams:
 ;
 
 ActualParam:
-    Expr
-|   T_Identifier ':' Expr
+    Expr                                                { printf("\t记录栈顶参数 \n"); }
+|   T_Identifier ':' Expr                               { printf("\t记录栈顶参数 -> %s \n",$1); }
 ;
 
 CallExpr:
     T_Identifier '(' ActualParams  ')'
-|   CallExpr Closure
+|   CallExpr Closure                                    { printf("\t记录栈闭包 -> %s \n",$1); }
 ;
 
 ObjCallExpr:
@@ -108,12 +108,16 @@ Args:
 ;
 
 Arg:
-    T_Identifier                                    
-|   Arg '=' Expr                                    
+    T_Identifier                                          
+|   Arg '=' Expr                                          
 ;
 
 FuncDecl:
-    T_Func T_Identifier '(' Args ')' ClosureOrNextLine        { printf("\tENDFUNC\n\n"); }
+    T_Func FuncName '(' Args ')' ClosureOrNextLine        { printf("\tENDFUNC\n\n"); }
+;
+
+FuncName:
+    T_Identifier                                          { printf("\tFUNC @%s:\n", $1); }
 ;
 
 ClassDecl:
