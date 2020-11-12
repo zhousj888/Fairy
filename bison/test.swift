@@ -40,7 +40,6 @@ test(width:1,2,3){}
 for i in Arr {
 }
 
-class Son : Father
-{
+class Son : Father{}
 
-}
+return 1

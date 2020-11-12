@@ -42,6 +42,7 @@ Stmt:
 |   CallStmt                                    { printf("stmt--->CallStmt\n\n"); }
 |   ForStmt                                     { printf("stmt--->ForStmt\n\n"); }
 |   ClassDecl                                   { printf("stmt--->ClassDecl\n\n"); }
+|   ReturnStmt                                  { printf("stmt--->ReturnStmt\n\n"); }
 ;
 
 StmtSeparator:
@@ -78,6 +79,11 @@ ActualParam:
 CallStmt:
     T_Identifier '(' ActualParams  ')'
 |   CallStmt Closure
+;
+
+ReturnStmt:
+    T_Return Expr
+|   T_Return
 ;
 
 ForStmt:
