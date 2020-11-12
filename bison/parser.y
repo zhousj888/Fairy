@@ -6,8 +6,8 @@ int yylex();
 #define YYSTYPE char *
 %}
 
-%token T_Int T_Var T_Void T_Return T_Print T_ReadInt T_While T_EOL T_Let T_Func
-%token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne  
+%token T_Int T_Var T_Void T_Return T_Print T_ReadInt T_While T_EOL T_Let T_Func T_For T_In
+%token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne 
 %token T_And T_Or T_IntConstant T_StringConstant T_Identifier T_IntervalTo T_IntervalLess
 
 %left '='
@@ -40,6 +40,7 @@ Stmt:
 |   BreakStmt StmtSeparator                     { printf("stmt--->BreakStmt\n\n"); }
 |   ContinueStmt StmtSeparator                  { printf("stmt--->ContinueStmt\n\n"); }
 |   CallStmt                                    { printf("stmt--->CallStmt\n\n"); }
+|   ForStmt                                     { printf("stmt--->ForStmt\n\n"); }
 ;
 
 StmtSeparator:
@@ -78,6 +79,10 @@ ActualParam:
 
 CallStmt:
     T_Identifier '(' ActualParams  ')' EmptyOrClosure
+;
+
+ForStmt:
+    T_For Expr T_In Expr Closure
 ;
 
 

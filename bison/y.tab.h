@@ -49,21 +49,23 @@
      T_EOL = 265,
      T_Let = 266,
      T_Func = 267,
-     T_If = 268,
-     T_Else = 269,
-     T_Break = 270,
-     T_Continue = 271,
-     T_Le = 272,
-     T_Ge = 273,
-     T_Eq = 274,
-     T_Ne = 275,
-     T_And = 276,
-     T_Or = 277,
-     T_IntConstant = 278,
-     T_StringConstant = 279,
-     T_Identifier = 280,
-     T_IntervalTo = 281,
-     T_IntervalLess = 282
+     T_For = 268,
+     T_In = 269,
+     T_If = 270,
+     T_Else = 271,
+     T_Break = 272,
+     T_Continue = 273,
+     T_Le = 274,
+     T_Ge = 275,
+     T_Eq = 276,
+     T_Ne = 277,
+     T_And = 278,
+     T_Or = 279,
+     T_IntConstant = 280,
+     T_StringConstant = 281,
+     T_Identifier = 282,
+     T_IntervalTo = 283,
+     T_IntervalLess = 284
    };
 #endif
 /* Tokens.  */
@@ -77,21 +79,23 @@
 #define T_EOL 265
 #define T_Let 266
 #define T_Func 267
-#define T_If 268
-#define T_Else 269
-#define T_Break 270
-#define T_Continue 271
-#define T_Le 272
-#define T_Ge 273
-#define T_Eq 274
-#define T_Ne 275
-#define T_And 276
-#define T_Or 277
-#define T_IntConstant 278
-#define T_StringConstant 279
-#define T_Identifier 280
-#define T_IntervalTo 281
-#define T_IntervalLess 282
+#define T_For 268
+#define T_In 269
+#define T_If 270
+#define T_Else 271
+#define T_Break 272
+#define T_Continue 273
+#define T_Le 274
+#define T_Ge 275
+#define T_Eq 276
+#define T_Ne 277
+#define T_And 278
+#define T_Or 279
+#define T_IntConstant 280
+#define T_StringConstant 281
+#define T_Identifier 282
+#define T_IntervalTo 283
+#define T_IntervalLess 284
 
 
 
