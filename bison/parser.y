@@ -199,7 +199,7 @@ Expr:
 |   '(' Expr ')'            { /* empty */ }
 |   IntervalExpr            { /* empty */ }
 |   T_StringConstant        { /* empty */ }
-|   ArrayExpr               { printf("oper->arratExpr\n"); }
+|   ArrayExpr               { printf("oper->arrayExpr\n"); }
 |   DictionExpr             { printf("oper->DictionExpr\n"); }
 |   ObjCallExpr             { printf("oper->ObjCallExpr\n"); }
 |   Expr '?' Expr ':' Expr  { printf("oper->conditional operation\n"); }

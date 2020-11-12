@@ -1,47 +1,70 @@
-var b = 1
-let c = 2
-1
-let a
+//Expr
+a + b
+a - b
+a * b
+a / b
+a % b
+a > b
+a < b
+a < b
+a < b
+a < b
+a <= b
+a >= b
+a == b
+a != b
+a && b
+a || b
+a ... b
+a ..< b
+-a
++a
+!a
+123
+0x123
+1.123
+(123)
+[1,2,3]
+{a:1,b:2}
+"abcd"
+a ? 1 : 2
+
+
+
+//VarDecl StmtSeparator
 var a
-a
+
+//FuncDecl
+func test(a = 1,b,c) {
+    return
+}
+
+//call
+test(b: 1,2){}
+
+//AssignStmt StmtSeparator    
 a = 1
-var a
 
-if 1 {
-}
-if 1 {
-} else {
-}
-if 1 {
-}else if 1 {
-}else {
+//IfStmt    
+if a {
 }
 
-while 1 {
+//WhileStmt  
+while a {
+    continue
 }
-break 
-continue
+repeat {
+    break
+} while a
 
-func test(width = 1, height = 2, content) {}
-//指定名字的参数优先匹配
-//没有指定名字的参数按顺序匹配没有默认值的参数
-//所以下方收到的参数width = 1,height = 3,content = {}
-test(1,2,3)
-
-
-test(width: 1,2,3)
-
-
-test(width:1,2,3){}
-
-
-1...3
-1..<3
-for i in Arr {
+//ForStmt
+for i in arr {
+    continue
+    break
 }
 
-class Son : Father{}
+//ClassDecl                   
+class Son: Father {}
 
-return 1
-
-- 1+1
+//obj call
+a.test()
