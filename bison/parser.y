@@ -39,7 +39,7 @@ Stmt:
 |   WhileStmt                                   { printf("stmt--->WhileStmt\n\n"); }
 |   BreakStmt StmtSeparator                     { printf("stmt--->BreakStmt\n\n"); }
 |   ContinueStmt StmtSeparator                  { printf("stmt--->ContinueStmt\n\n"); }
-|   CallStmt StmtSeparator                      { printf("stmt--->CallStmt\n\n"); }
+|   CallStmt                                    { printf("stmt--->CallStmt\n\n"); }
 ;
 
 StmtSeparator:
@@ -61,14 +61,23 @@ Closure:
     '{' Program '}'
 ;
 
+EmptyOrClosure:
+|   Closure
+;
+
 ActualParams:
     /* empty */             { /* empty */ }
-|   Expr
-|   ActualParams ',' Expr
+|   ActualParam
+|   ActualParams ',' ActualParam
+;
+
+ActualParam:
+    Expr
+|   T_Identifier ':' Expr
 ;
 
 CallStmt:
-    T_Identifier '(' ActualParams  ')'
+    T_Identifier '(' ActualParams  ')' EmptyOrClosure
 ;
 
 

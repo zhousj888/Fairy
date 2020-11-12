@@ -12,7 +12,7 @@ void unterminate_string();
 WHITESPACE          ([ \t\r\a]+)
 SINGLE_COMMENT1     ("//"[^\n]*)
 SINGLE_COMMENT2     ("#"[^\n]*)
-OPERATOR            ([+*-/%=;,!<>(){}])
+OPERATOR            ([+*-/%=:;,!<>(){}])
 INTEGER             ([0-9]+)
 IDENTIFIER          ([_a-zA-Z][_a-zA-Z0-9]*)
 UNTERM_STRING       (\042[^\042\n]*)
