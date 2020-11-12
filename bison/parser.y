@@ -6,7 +6,7 @@ int yylex();
 #define YYSTYPE char *
 %}
 
-%token T_Int T_Var T_Void T_Return T_Print T_ReadInt T_While T_EOS T_Let T_Func
+%token T_Int T_Var T_Void T_Return T_Print T_ReadInt T_While T_EOL T_Let T_Func
 %token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne
 %token T_And T_Or T_IntConstant T_StringConstant T_Identifier
 
@@ -25,12 +25,12 @@ int yylex();
 Program:
     /* empty */             { /* empty */ }
 |   Stmt
-|   Stmt Program  
+|   Stmt Program
 ;
 
 
 Stmt:
-    T_EOS
+    StmtSeparator
 |   VarDecl                                         { printf("\n"); }
 |   FuncDecl                                        { printf("\n"); }
 |   AssignStmt                                      { printf("\n"); }
@@ -41,13 +41,29 @@ Stmt:
 |   ContinueStmt                                    { printf("\n"); }
 ;
 
+StmtSeparator:
+    ';'
+|   NewLines
+;
+
+NewLines:
+    T_EOL
+|   NewLines T_EOL
+;
+
+EmptyOrNewLines:
+    /* empty */             { /* empty */ }
+|   NewLines
+;
+
 Closure:
     '{' Program '}'
 ;
 
 Args:
     /* empty */             { /* empty */ }
-|   Arg ',' Args
+|   Arg
+|   Args ',' Arg 
 ;
 
 Arg:
@@ -56,7 +72,7 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func T_Identifier '(' Args ')' Closure        { printf("oper->funcDecl\n"); }
+    T_Func T_Identifier '(' Args ')' EmptyOrNewLines Closure       { printf("oper->funcDecl\n"); }
 ;
 
 BreakStmt:

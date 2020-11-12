@@ -46,7 +46,7 @@
      T_Print = 262,
      T_ReadInt = 263,
      T_While = 264,
-     T_EOS = 265,
+     T_EOL = 265,
      T_Let = 266,
      T_Func = 267,
      T_If = 268,
@@ -72,7 +72,7 @@
 #define T_Print 262
 #define T_ReadInt 263
 #define T_While 264
-#define T_EOS 265
+#define T_EOL 265
 #define T_Let 266
 #define T_Func 267
 #define T_If 268
