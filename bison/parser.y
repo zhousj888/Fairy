@@ -35,7 +35,6 @@ Stmt:
 |   LetDecl                                         { printf("\n"); }
 |   FuncDecl                                        { printf("\n"); }
 |   AssignStmt                                      { printf("\n"); }
-|   DeclAssign                                      { printf("\n"); }
 |   Expr                                            { printf("\n"); }
 |   IfStmt                                          { printf("\n"); }
 |   WhileStmt                                       { printf("\n"); }
@@ -54,7 +53,7 @@ Args:
 
 Arg:
     T_Identifier                                    { printf("oper->args\n"); }
-|   Arg '=' Expr                                   { printf("oper->default args\n"); }
+|   Arg '=' Expr                                    { printf("oper->default args\n"); }
 ;
 
 FuncDecl:
@@ -80,13 +79,9 @@ IfStmt:
 |   IfStmt T_Else IfStmt                            { printf("oper->if else if stmt\n"); }
 ;
 
-DeclAssign:
-    T_Var T_Identifier '=' Expr                     { printf("oper->var %s \n", $2);printf("pop %s \n", $2); }
-|   T_Let T_Identifier '=' Expr                     { printf("oper->let %s \n", $2);printf("pop %s \n", $2); }
-;
-
 VarDecl:
     T_Var T_Identifier                              { printf("oper->var %s \n", $2); }
+|   VarDecl '=' Expr                                { printf("oper->var&assign pop %s \n",$2); }
 ;
 
 LetDecl:
