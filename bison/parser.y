@@ -39,7 +39,6 @@ Stmt:
 |   WhileStmt                                   { printf("stmt--->WhileStmt\n\n"); }
 |   BreakStmt StmtSeparator                     { printf("stmt--->BreakStmt\n\n"); }
 |   ContinueStmt StmtSeparator                  { printf("stmt--->ContinueStmt\n\n"); }
-|   CallStmt                                    { printf("stmt--->CallStmt\n\n"); }
 |   ForStmt                                     { printf("stmt--->ForStmt\n\n"); }
 |   ClassDecl                                   { printf("stmt--->ClassDecl\n\n"); }
 |   ReturnStmt                                  { printf("stmt--->ReturnStmt\n\n"); }
@@ -76,9 +75,13 @@ ActualParam:
 |   T_Identifier ':' Expr
 ;
 
-CallStmt:
+CallExpr:
     T_Identifier '(' ActualParams  ')'
-|   CallStmt Closure
+|   CallExpr Closure
+;
+
+ObjCallExpr:
+    Expr '.' CallExpr
 ;
 
 ReturnStmt:
@@ -145,6 +148,27 @@ IntervalExpr:
 |   Expr T_IntervalLess Expr                        { printf("oper->IntervalLess \n"); }
 ;
 
+ArrayElement:
+    /* empty */             { /* empty */ }
+|   Expr
+|   ArrayElement ',' Expr
+;
+
+ArrayExpr:
+    '[' ArrayElement ']'
+;
+
+DictionElement:
+    /* empty */             { /* empty */ }
+|   T_Identifier ':' Expr
+|   T_StringConstant ':' Expr
+|   DictionElement ',' DictionElement
+;
+
+DictionExpr:
+    '{' DictionElement '}'
+;
+
 Expr:
     Expr '+' Expr           { printf("\tadd\n"); }
 |   Expr '-' Expr           { printf("\tsub\n"); }
@@ -163,9 +187,13 @@ Expr:
 |   '!' Expr                { printf("\tnot\n"); }
 |   T_IntConstant           { printf("\tpush %s\n", $1); }
 |   T_Identifier            { printf("\tpush %s\n", $1); }
-|   CallStmt                { /* empty */ }
+|   CallExpr                { printf("oper->CallExpr\n"); }
 |   '(' Expr ')'            { /* empty */ }
 |   IntervalExpr            { /* empty */ }
+|   T_StringConstant        { /* empty */ }
+|   ArrayExpr               { printf("oper->arratExpr\n"); }
+|   DictionExpr             { printf("oper->DictionExpr\n"); }
+|   ObjCallExpr             { printf("oper->ObjCallExpr\n"); }
 ;
 
 %%
