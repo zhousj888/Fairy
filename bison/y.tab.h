@@ -61,7 +61,9 @@
      T_Or = 277,
      T_IntConstant = 278,
      T_StringConstant = 279,
-     T_Identifier = 280
+     T_Identifier = 280,
+     T_IntervalTo = 281,
+     T_IntervalLess = 282
    };
 #endif
 /* Tokens.  */
@@ -88,6 +90,8 @@
 #define T_IntConstant 278
 #define T_StringConstant 279
 #define T_Identifier 280
+#define T_IntervalTo 281
+#define T_IntervalLess 282
 
 
 

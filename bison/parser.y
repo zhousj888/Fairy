@@ -7,8 +7,8 @@ int yylex();
 %}
 
 %token T_Int T_Var T_Void T_Return T_Print T_ReadInt T_While T_EOL T_Let T_Func
-%token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne
-%token T_And T_Or T_IntConstant T_StringConstant T_Identifier
+%token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne  
+%token T_And T_Or T_IntConstant T_StringConstant T_Identifier T_IntervalTo T_IntervalLess
 
 %left '='
 %left T_Or
@@ -125,6 +125,11 @@ AssignStmt:
     T_Identifier '=' Expr                           { printf("oper->pop %s \n", $1); }
 ;
 
+IntervalExpr:
+    Expr T_IntervalTo Expr                          { printf("oper->IntervalTo \n"); }
+|   Expr T_IntervalLess Expr                        { printf("oper->IntervalLess \n"); }
+;
+
 Expr:
     T_IntConstant                                   { printf("oper->push %s \n", $1); }
 |   T_Identifier                                    { printf("oper->push %s \n", $1); }
@@ -132,6 +137,7 @@ Expr:
 |   '(' Expr ')'
 |   '-' Expr %prec '!'                              { printf("\tneg\n"); }
 |   '!' Expr                                        { printf("\tnot\n"); }
+|   IntervalExpr                                    
 ;
 
 %%

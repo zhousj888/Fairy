@@ -44,6 +44,8 @@ STRING              (\042[^\042\n]*\042)
 "!="                { printf("token: %s \n",yytext); return T_Ne; }
 "&&"                { printf("token: %s \n",yytext); return T_And; }
 "||"                { printf("token: %s \n",yytext); return T_Or; }
+"..."               { printf("token: %s \n",yytext); return T_IntervalTo; }
+"..<"               { printf("token: %s \n",yytext); return T_IntervalLess; }
 
 {INTEGER}           { printf("token: %s \n",yytext); _DUPTEXT return T_IntConstant; }
 {STRING}            { printf("token: %s \n",yytext); _DUPTEXT return T_StringConstant; }

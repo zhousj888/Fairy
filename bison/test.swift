@@ -29,3 +29,8 @@ func test(width = 1, height = 2, content) {}
 test(1,2,3)
 test(width: 1,2,3)
 test(width:1,2,3){}
+1...3
+1..<3
+for i in Arr {
+
+}
