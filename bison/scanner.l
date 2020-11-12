@@ -12,7 +12,7 @@ void unterminate_string();
 WHITESPACE          ([ \t\r\a]+)
 SINGLE_COMMENT1     ("//"[^\n]*)
 SINGLE_COMMENT2     ("#"[^\n]*)
-OPERATOR            ([+*-/%=\.\[\]:;,!<>(){}])
+OPERATOR            ([+*-/%=:;,!<>(){}\?\.\[\]])
 INTEGER             ([0-9]+)
 IDENTIFIER          ([_a-zA-Z][_a-zA-Z0-9]*)
 UNTERM_STRING       (\042[^\042\n]*)
@@ -31,7 +31,6 @@ STRING              (\042[^\042\n]*\042)
 "int"               { printf("token: %s \n",yytext); return T_Int; }
 "void"              { printf("token: %s \n",yytext); return T_Void; }
 "return"            { printf("token: %s \n",yytext); return T_Return; }
-"print"             { printf("token: %s \n",yytext); return T_Print; }
 "readint"           { printf("token: %s \n",yytext); return T_ReadInt; }
 "while"             { printf("token: %s \n",yytext); return T_While; }
 "if"                { printf("token: %s \n",yytext); return T_If; }
@@ -49,6 +48,7 @@ STRING              (\042[^\042\n]*\042)
 "for"               { printf("token: %s \n",yytext); return T_For; }
 "in"                { printf("token: %s \n",yytext); return T_In; }
 "class"             { printf("token: %s \n",yytext); return T_Class; }
+"repeat"            { printf("token: %s \n",yytext); return T_Repeat; }
 
 {INTEGER}           { printf("token: %s \n",yytext); _DUPTEXT return T_IntConstant; }
 {STRING}            { printf("token: %s \n",yytext); _DUPTEXT return T_StringConstant; }

@@ -15,10 +15,10 @@ class Son: Father {
 
     }
     
-    func testFunc(param1: param1 = 1,param2,closure: closure) {
+    func testFunc(param1 = 1,param2,closure) {
     }
 
-    func run(taget: taget) {
+    func run(taget) {
         print("run \(target + name)")
         if target == "home" {
             //xxx

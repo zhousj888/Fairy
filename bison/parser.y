@@ -6,7 +6,7 @@ int yylex();
 #define YYSTYPE char *
 %}
 
-%token T_Int T_Var T_Void T_Return T_Print T_ReadInt T_While T_EOL T_Let T_Func T_For T_In T_Class
+%token T_Int T_Var T_Void T_Return T_ReadInt T_While T_Repeat T_EOL T_Let T_Func T_For T_In T_Class
 %token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne 
 %token T_And T_Or T_IntConstant T_StringConstant T_Identifier T_IntervalTo T_IntervalLess
 
@@ -42,6 +42,7 @@ Stmt:
 |   ForStmt                                     { printf("stmt--->ForStmt\n\n"); }
 |   ClassDecl                                   { printf("stmt--->ClassDecl\n\n"); }
 |   ReturnStmt                                  { printf("stmt--->ReturnStmt\n\n"); }
+|   RepeatWileStmt                              { printf("stmt--->RepeatWileStmt\n\n"); }
 ;
 
 StmtSeparator:
@@ -54,9 +55,15 @@ NewLines:
 |   NewLines T_EOL
 ;
 
+ExprsByComma:
+    /* empty */             { /* empty */ }
+|   Expr
+|   ExprsByComma ',' Expr
+;
 
 Closure:
     '{' Program '}'
+|   '{' '(' ExprsByComma ')' T_In Program '}'
 ;
 
 ClosureOrNextLine:
@@ -126,6 +133,10 @@ WhileStmt:
     T_While Expr ClosureOrNextLine
 ;
 
+RepeatWileStmt:
+    T_Repeat ClosureOrNextLine T_While Expr
+;
+
 
 IfStmt:
     T_If Expr ClosureOrNextLine                     { printf("oper->if stmt\n"); }
@@ -148,14 +159,9 @@ IntervalExpr:
 |   Expr T_IntervalLess Expr                        { printf("oper->IntervalLess \n"); }
 ;
 
-ArrayElement:
-    /* empty */             { /* empty */ }
-|   Expr
-|   ArrayElement ',' Expr
-;
 
 ArrayExpr:
-    '[' ArrayElement ']'
+    '[' ExprsByComma ']'
 ;
 
 DictionElement:
@@ -194,6 +200,7 @@ Expr:
 |   ArrayExpr               { printf("oper->arratExpr\n"); }
 |   DictionExpr             { printf("oper->DictionExpr\n"); }
 |   ObjCallExpr             { printf("oper->ObjCallExpr\n"); }
+|   Expr '?' Expr ':' Expr  { printf("oper->conditional operation\n"); }
 ;
 
 %%
