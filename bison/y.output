@@ -15,11 +15,9 @@ Terminals which are not used
    '<'
    '>'
    '+'
-   '-'
    '*'
    '/'
    '%'
-   '!'
 
 
 Rules never reduced
@@ -27,9 +25,13 @@ Rules never reduced
     2 Program: Stmt
 
 
-State 13 conflicts: 2 reduce/reduce
-State 15 conflicts: 1 shift/reduce
-State 52 conflicts: 1 shift/reduce
+State 10 conflicts: 1 shift/reduce
+State 16 conflicts: 2 reduce/reduce
+State 18 conflicts: 1 shift/reduce
+State 19 conflicts: 16 reduce/reduce
+State 29 conflicts: 1 shift/reduce
+State 60 conflicts: 1 shift/reduce
+State 68 conflicts: 1 shift/reduce
 
 
 Grammar
@@ -101,19 +103,23 @@ Grammar
 
    45 Expr: T_IntConstant
    46     | T_Identifier
+   47     | CallStmt
+   48     | '(' Expr ')'
+   49     | '-' Expr
+   50     | '!' Expr
 
 
 Terminals, with rules where they appear
 
 $end (0) 0
-'!' (33)
+'!' (33) 50
 '%' (37)
-'(' (40) 28 34
-')' (41) 28 34
+'(' (40) 28 34 48
+')' (41) 28 34 48
 '*' (42)
 '+' (43)
 ',' (44) 25 31
-'-' (45)
+'-' (45) 49
 '/' (47)
 ':' (58) 27
 ';' (59) 14
@@ -171,7 +177,7 @@ ActualParams (50)
 ActualParam (51)
     on left: 26 27, on right: 24 25
 CallStmt (52)
-    on left: 28, on right: 13
+    on left: 28, on right: 13 47
 Args (53)
     on left: 29 30 31, on right: 31 34
 Arg (54)
@@ -191,7 +197,8 @@ VarDecl (60)
 AssignStmt (61)
     on left: 44, on right: 7
 Expr (62)
-    on left: 45 46, on right: 8 26 27 33 37 38 43 44
+    on left: 45 46 47 48 49 50, on right: 8 26 27 33 37 38 43 44 48
+    49 50
 
 
 state 0
@@ -208,30 +215,33 @@ state 0
     T_Continue     shift, and go to state 8
     T_IntConstant  shift, and go to state 9
     T_Identifier   shift, and go to state 10
-    ';'            shift, and go to state 11
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    ';'            shift, and go to state 13
+    '('            shift, and go to state 14
 
     $default  reduce using rule 1 (Program)
 
-    Program        go to state 12
-    Stmt           go to state 13
-    StmtSeparator  go to state 14
-    NewLines       go to state 15
-    CallStmt       go to state 16
-    FuncDecl       go to state 17
-    BreakStmt      go to state 18
-    ContinueStmt   go to state 19
-    WhileStmt      go to state 20
-    IfStmt         go to state 21
-    VarDecl        go to state 22
-    AssignStmt     go to state 23
-    Expr           go to state 24
+    Program        go to state 15
+    Stmt           go to state 16
+    StmtSeparator  go to state 17
+    NewLines       go to state 18
+    CallStmt       go to state 19
+    FuncDecl       go to state 20
+    BreakStmt      go to state 21
+    ContinueStmt   go to state 22
+    WhileStmt      go to state 23
+    IfStmt         go to state 24
+    VarDecl        go to state 25
+    AssignStmt     go to state 26
+    Expr           go to state 27
 
 
 state 1
 
    41 VarDecl: T_Var . T_Identifier
 
-    T_Identifier  shift, and go to state 25
+    T_Identifier  shift, and go to state 28
 
 
 state 2
@@ -239,9 +249,13 @@ state 2
    37 WhileStmt: T_While . Expr Closure
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 26
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
 
-    Expr  go to state 27
+    CallStmt  go to state 30
+    Expr      go to state 31
 
 
 state 3
@@ -255,14 +269,14 @@ state 4
 
    42 VarDecl: T_Let . T_Identifier
 
-    T_Identifier  shift, and go to state 28
+    T_Identifier  shift, and go to state 32
 
 
 state 5
 
    34 FuncDecl: T_Func . T_Identifier '(' Args ')' EmptyOrNewLines Closure
 
-    T_Identifier  shift, and go to state 29
+    T_Identifier  shift, and go to state 33
 
 
 state 6
@@ -270,9 +284,13 @@ state 6
    38 IfStmt: T_If . Expr Closure
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 26
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
 
-    Expr  go to state 30
+    CallStmt  go to state 30
+    Expr      go to state 34
 
 
 state 7
@@ -302,27 +320,70 @@ state 10
    44 AssignStmt: T_Identifier . '=' Expr
    46 Expr: T_Identifier .
 
-    '='  shift, and go to state 31
-    '('  shift, and go to state 32
+    '='  shift, and go to state 35
+    '('  shift, and go to state 36
 
+    '('       [reduce using rule 46 (Expr)]
     $default  reduce using rule 46 (Expr)
 
 
 state 11
+
+   49 Expr: '-' . Expr
+
+    T_IntConstant  shift, and go to state 9
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
+
+    CallStmt  go to state 30
+    Expr      go to state 37
+
+
+state 12
+
+   50 Expr: '!' . Expr
+
+    T_IntConstant  shift, and go to state 9
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
+
+    CallStmt  go to state 30
+    Expr      go to state 38
+
+
+state 13
 
    14 StmtSeparator: ';' .
 
     $default  reduce using rule 14 (StmtSeparator)
 
 
-state 12
+state 14
+
+   48 Expr: '(' . Expr ')'
+
+    T_IntConstant  shift, and go to state 9
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
+
+    CallStmt  go to state 30
+    Expr      go to state 39
+
+
+state 15
 
     0 $accept: Program . $end
 
-    $end  shift, and go to state 33
+    $end  shift, and go to state 40
 
 
-state 13
+state 16
 
     2 Program: Stmt .
     3        | Stmt . Program
@@ -337,7 +398,10 @@ state 13
     T_Continue     shift, and go to state 8
     T_IntConstant  shift, and go to state 9
     T_Identifier   shift, and go to state 10
-    ';'            shift, and go to state 11
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    ';'            shift, and go to state 13
+    '('            shift, and go to state 14
 
     $end      reduce using rule 1 (Program)
     $end      [reduce using rule 2 (Program)]
@@ -345,266 +409,343 @@ state 13
     '}'       [reduce using rule 2 (Program)]
     $default  reduce using rule 1 (Program)
 
-    Program        go to state 34
-    Stmt           go to state 13
-    StmtSeparator  go to state 14
-    NewLines       go to state 15
-    CallStmt       go to state 16
-    FuncDecl       go to state 17
-    BreakStmt      go to state 18
-    ContinueStmt   go to state 19
-    WhileStmt      go to state 20
-    IfStmt         go to state 21
-    VarDecl        go to state 22
-    AssignStmt     go to state 23
-    Expr           go to state 24
+    Program        go to state 41
+    Stmt           go to state 16
+    StmtSeparator  go to state 17
+    NewLines       go to state 18
+    CallStmt       go to state 19
+    FuncDecl       go to state 20
+    BreakStmt      go to state 21
+    ContinueStmt   go to state 22
+    WhileStmt      go to state 23
+    IfStmt         go to state 24
+    VarDecl        go to state 25
+    AssignStmt     go to state 26
+    Expr           go to state 27
 
 
-state 14
+state 17
 
     4 Stmt: StmtSeparator .
 
     $default  reduce using rule 4 (Stmt)
 
 
-state 15
+state 18
 
    15 StmtSeparator: NewLines .
    17 NewLines: NewLines . T_EOL
 
-    T_EOL  shift, and go to state 35
+    T_EOL  shift, and go to state 42
 
     T_EOL     [reduce using rule 15 (StmtSeparator)]
     $default  reduce using rule 15 (StmtSeparator)
 
 
-state 16
+state 19
 
    13 Stmt: CallStmt .
+   47 Expr: CallStmt .
 
-    $default  reduce using rule 13 (Stmt)
+    $end           reduce using rule 13 (Stmt)
+    $end           [reduce using rule 47 (Expr)]
+    T_Var          reduce using rule 13 (Stmt)
+    T_Var          [reduce using rule 47 (Expr)]
+    T_While        reduce using rule 13 (Stmt)
+    T_While        [reduce using rule 47 (Expr)]
+    T_EOL          reduce using rule 13 (Stmt)
+    T_EOL          [reduce using rule 47 (Expr)]
+    T_Let          reduce using rule 13 (Stmt)
+    T_Let          [reduce using rule 47 (Expr)]
+    T_Func         reduce using rule 13 (Stmt)
+    T_Func         [reduce using rule 47 (Expr)]
+    T_If           reduce using rule 13 (Stmt)
+    T_If           [reduce using rule 47 (Expr)]
+    T_Break        reduce using rule 13 (Stmt)
+    T_Break        [reduce using rule 47 (Expr)]
+    T_Continue     reduce using rule 13 (Stmt)
+    T_Continue     [reduce using rule 47 (Expr)]
+    T_IntConstant  reduce using rule 13 (Stmt)
+    T_IntConstant  [reduce using rule 47 (Expr)]
+    T_Identifier   reduce using rule 13 (Stmt)
+    T_Identifier   [reduce using rule 47 (Expr)]
+    '-'            reduce using rule 13 (Stmt)
+    '-'            [reduce using rule 47 (Expr)]
+    '!'            reduce using rule 13 (Stmt)
+    '!'            [reduce using rule 47 (Expr)]
+    ';'            reduce using rule 13 (Stmt)
+    ';'            [reduce using rule 47 (Expr)]
+    '}'            reduce using rule 13 (Stmt)
+    '}'            [reduce using rule 47 (Expr)]
+    '('            reduce using rule 13 (Stmt)
+    '('            [reduce using rule 47 (Expr)]
+    $default       reduce using rule 13 (Stmt)
 
 
-state 17
+state 20
 
     6 Stmt: FuncDecl .
 
     $default  reduce using rule 6 (Stmt)
 
 
-state 18
+state 21
 
    11 Stmt: BreakStmt . StmtSeparator
 
     T_EOL  shift, and go to state 3
-    ';'    shift, and go to state 11
+    ';'    shift, and go to state 13
 
-    StmtSeparator  go to state 36
-    NewLines       go to state 15
+    StmtSeparator  go to state 43
+    NewLines       go to state 18
 
 
-state 19
+state 22
 
    12 Stmt: ContinueStmt . StmtSeparator
 
     T_EOL  shift, and go to state 3
-    ';'    shift, and go to state 11
+    ';'    shift, and go to state 13
 
-    StmtSeparator  go to state 37
-    NewLines       go to state 15
+    StmtSeparator  go to state 44
+    NewLines       go to state 18
 
 
-state 20
+state 23
 
    10 Stmt: WhileStmt .
 
     $default  reduce using rule 10 (Stmt)
 
 
-state 21
+state 24
 
     9 Stmt: IfStmt .
    39 IfStmt: IfStmt . T_Else Closure
    40       | IfStmt . T_Else IfStmt
 
-    T_Else  shift, and go to state 38
+    T_Else  shift, and go to state 45
 
     $default  reduce using rule 9 (Stmt)
 
 
-state 22
+state 25
 
     5 Stmt: VarDecl . StmtSeparator
    43 VarDecl: VarDecl . '=' Expr
 
     T_EOL  shift, and go to state 3
-    '='    shift, and go to state 39
-    ';'    shift, and go to state 11
+    '='    shift, and go to state 46
+    ';'    shift, and go to state 13
 
-    StmtSeparator  go to state 40
-    NewLines       go to state 15
+    StmtSeparator  go to state 47
+    NewLines       go to state 18
 
 
-state 23
+state 26
 
     7 Stmt: AssignStmt . StmtSeparator
 
     T_EOL  shift, and go to state 3
-    ';'    shift, and go to state 11
+    ';'    shift, and go to state 13
 
-    StmtSeparator  go to state 41
-    NewLines       go to state 15
+    StmtSeparator  go to state 48
+    NewLines       go to state 18
 
 
-state 24
+state 27
 
     8 Stmt: Expr .
 
     $default  reduce using rule 8 (Stmt)
 
 
-state 25
+state 28
 
    41 VarDecl: T_Var T_Identifier .
 
     $default  reduce using rule 41 (VarDecl)
 
 
-state 26
+state 29
 
+   28 CallStmt: T_Identifier . '(' ActualParams ')' EmptyOrClosure
    46 Expr: T_Identifier .
 
+    '('  shift, and go to state 36
+
+    '('       [reduce using rule 46 (Expr)]
     $default  reduce using rule 46 (Expr)
 
 
-state 27
+state 30
+
+   47 Expr: CallStmt .
+
+    $default  reduce using rule 47 (Expr)
+
+
+state 31
 
    37 WhileStmt: T_While Expr . Closure
 
-    '{'  shift, and go to state 42
+    '{'  shift, and go to state 49
 
-    Closure  go to state 43
+    Closure  go to state 50
 
 
-state 28
+state 32
 
    42 VarDecl: T_Let T_Identifier .
 
     $default  reduce using rule 42 (VarDecl)
 
 
-state 29
+state 33
 
    34 FuncDecl: T_Func T_Identifier . '(' Args ')' EmptyOrNewLines Closure
 
-    '('  shift, and go to state 44
+    '('  shift, and go to state 51
 
 
-state 30
+state 34
 
    38 IfStmt: T_If Expr . Closure
 
-    '{'  shift, and go to state 42
+    '{'  shift, and go to state 49
 
-    Closure  go to state 45
+    Closure  go to state 52
 
 
-state 31
+state 35
 
    44 AssignStmt: T_Identifier '=' . Expr
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 26
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
 
-    Expr  go to state 46
+    CallStmt  go to state 30
+    Expr      go to state 53
 
 
-state 32
+state 36
 
    28 CallStmt: T_Identifier '(' . ActualParams ')' EmptyOrClosure
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 47
+    T_Identifier   shift, and go to state 54
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
 
     $default  reduce using rule 23 (ActualParams)
 
-    ActualParams  go to state 48
-    ActualParam   go to state 49
-    Expr          go to state 50
+    ActualParams  go to state 55
+    ActualParam   go to state 56
+    CallStmt      go to state 30
+    Expr          go to state 57
 
 
-state 33
+state 37
+
+   49 Expr: '-' Expr .
+
+    $default  reduce using rule 49 (Expr)
+
+
+state 38
+
+   50 Expr: '!' Expr .
+
+    $default  reduce using rule 50 (Expr)
+
+
+state 39
+
+   48 Expr: '(' Expr . ')'
+
+    ')'  shift, and go to state 58
+
+
+state 40
 
     0 $accept: Program $end .
 
     $default  accept
 
 
-state 34
+state 41
 
     3 Program: Stmt Program .
 
     $default  reduce using rule 3 (Program)
 
 
-state 35
+state 42
 
    17 NewLines: NewLines T_EOL .
 
     $default  reduce using rule 17 (NewLines)
 
 
-state 36
+state 43
 
    11 Stmt: BreakStmt StmtSeparator .
 
     $default  reduce using rule 11 (Stmt)
 
 
-state 37
+state 44
 
    12 Stmt: ContinueStmt StmtSeparator .
 
     $default  reduce using rule 12 (Stmt)
 
 
-state 38
+state 45
 
    39 IfStmt: IfStmt T_Else . Closure
    40       | IfStmt T_Else . IfStmt
 
     T_If  shift, and go to state 6
-    '{'   shift, and go to state 42
+    '{'   shift, and go to state 49
 
-    Closure  go to state 51
-    IfStmt   go to state 52
+    Closure  go to state 59
+    IfStmt   go to state 60
 
 
-state 39
+state 46
 
    43 VarDecl: VarDecl '=' . Expr
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 26
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
 
-    Expr  go to state 53
+    CallStmt  go to state 30
+    Expr      go to state 61
 
 
-state 40
+state 47
 
     5 Stmt: VarDecl StmtSeparator .
 
     $default  reduce using rule 5 (Stmt)
 
 
-state 41
+state 48
 
     7 Stmt: AssignStmt StmtSeparator .
 
     $default  reduce using rule 7 (Stmt)
 
 
-state 42
+state 49
 
    20 Closure: '{' . Program '}'
 
@@ -618,200 +759,221 @@ state 42
     T_Continue     shift, and go to state 8
     T_IntConstant  shift, and go to state 9
     T_Identifier   shift, and go to state 10
-    ';'            shift, and go to state 11
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    ';'            shift, and go to state 13
+    '('            shift, and go to state 14
 
     $default  reduce using rule 1 (Program)
 
-    Program        go to state 54
-    Stmt           go to state 13
-    StmtSeparator  go to state 14
-    NewLines       go to state 15
-    CallStmt       go to state 16
-    FuncDecl       go to state 17
-    BreakStmt      go to state 18
-    ContinueStmt   go to state 19
-    WhileStmt      go to state 20
-    IfStmt         go to state 21
-    VarDecl        go to state 22
-    AssignStmt     go to state 23
-    Expr           go to state 24
+    Program        go to state 62
+    Stmt           go to state 16
+    StmtSeparator  go to state 17
+    NewLines       go to state 18
+    CallStmt       go to state 19
+    FuncDecl       go to state 20
+    BreakStmt      go to state 21
+    ContinueStmt   go to state 22
+    WhileStmt      go to state 23
+    IfStmt         go to state 24
+    VarDecl        go to state 25
+    AssignStmt     go to state 26
+    Expr           go to state 27
 
 
-state 43
+state 50
 
    37 WhileStmt: T_While Expr Closure .
 
     $default  reduce using rule 37 (WhileStmt)
 
 
-state 44
+state 51
 
    34 FuncDecl: T_Func T_Identifier '(' . Args ')' EmptyOrNewLines Closure
 
-    T_Identifier  shift, and go to state 55
+    T_Identifier  shift, and go to state 63
 
     $default  reduce using rule 29 (Args)
 
-    Args  go to state 56
-    Arg   go to state 57
+    Args  go to state 64
+    Arg   go to state 65
 
 
-state 45
+state 52
 
    38 IfStmt: T_If Expr Closure .
 
     $default  reduce using rule 38 (IfStmt)
 
 
-state 46
+state 53
 
    44 AssignStmt: T_Identifier '=' Expr .
 
     $default  reduce using rule 44 (AssignStmt)
 
 
-state 47
+state 54
 
    27 ActualParam: T_Identifier . ':' Expr
+   28 CallStmt: T_Identifier . '(' ActualParams ')' EmptyOrClosure
    46 Expr: T_Identifier .
 
-    ':'  shift, and go to state 58
+    ':'  shift, and go to state 66
+    '('  shift, and go to state 36
 
     $default  reduce using rule 46 (Expr)
 
 
-state 48
+state 55
 
    25 ActualParams: ActualParams . ',' ActualParam
    28 CallStmt: T_Identifier '(' ActualParams . ')' EmptyOrClosure
 
-    ','  shift, and go to state 59
-    ')'  shift, and go to state 60
+    ','  shift, and go to state 67
+    ')'  shift, and go to state 68
 
 
-state 49
+state 56
 
    24 ActualParams: ActualParam .
 
     $default  reduce using rule 24 (ActualParams)
 
 
-state 50
+state 57
 
    26 ActualParam: Expr .
 
     $default  reduce using rule 26 (ActualParam)
 
 
-state 51
+state 58
+
+   48 Expr: '(' Expr ')' .
+
+    $default  reduce using rule 48 (Expr)
+
+
+state 59
 
    39 IfStmt: IfStmt T_Else Closure .
 
     $default  reduce using rule 39 (IfStmt)
 
 
-state 52
+state 60
 
    39 IfStmt: IfStmt . T_Else Closure
    40       | IfStmt . T_Else IfStmt
    40       | IfStmt T_Else IfStmt .
 
-    T_Else  shift, and go to state 38
+    T_Else  shift, and go to state 45
 
     T_Else    [reduce using rule 40 (IfStmt)]
     $default  reduce using rule 40 (IfStmt)
 
 
-state 53
+state 61
 
    43 VarDecl: VarDecl '=' Expr .
 
     $default  reduce using rule 43 (VarDecl)
 
 
-state 54
+state 62
 
    20 Closure: '{' Program . '}'
 
-    '}'  shift, and go to state 61
+    '}'  shift, and go to state 69
 
 
-state 55
+state 63
 
    32 Arg: T_Identifier .
 
     $default  reduce using rule 32 (Arg)
 
 
-state 56
+state 64
 
    31 Args: Args . ',' Arg
    34 FuncDecl: T_Func T_Identifier '(' Args . ')' EmptyOrNewLines Closure
 
-    ','  shift, and go to state 62
-    ')'  shift, and go to state 63
+    ','  shift, and go to state 70
+    ')'  shift, and go to state 71
 
 
-state 57
+state 65
 
    30 Args: Arg .
    33 Arg: Arg . '=' Expr
 
-    '='  shift, and go to state 64
+    '='  shift, and go to state 72
 
     $default  reduce using rule 30 (Args)
 
 
-state 58
+state 66
 
    27 ActualParam: T_Identifier ':' . Expr
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 26
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
 
-    Expr  go to state 65
+    CallStmt  go to state 30
+    Expr      go to state 73
 
 
-state 59
+state 67
 
    25 ActualParams: ActualParams ',' . ActualParam
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 47
+    T_Identifier   shift, and go to state 54
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
 
-    ActualParam  go to state 66
-    Expr         go to state 50
+    ActualParam  go to state 74
+    CallStmt     go to state 30
+    Expr         go to state 57
 
 
-state 60
+state 68
 
    28 CallStmt: T_Identifier '(' ActualParams ')' . EmptyOrClosure
 
-    '{'  shift, and go to state 42
+    '{'  shift, and go to state 49
 
+    '{'       [reduce using rule 21 (EmptyOrClosure)]
     $default  reduce using rule 21 (EmptyOrClosure)
 
-    Closure         go to state 67
-    EmptyOrClosure  go to state 68
+    Closure         go to state 75
+    EmptyOrClosure  go to state 76
 
 
-state 61
+state 69
 
    20 Closure: '{' Program '}' .
 
     $default  reduce using rule 20 (Closure)
 
 
-state 62
+state 70
 
    31 Args: Args ',' . Arg
 
-    T_Identifier  shift, and go to state 55
+    T_Identifier  shift, and go to state 63
 
-    Arg  go to state 69
+    Arg  go to state 77
 
 
-state 63
+state 71
 
    34 FuncDecl: T_Func T_Identifier '(' Args ')' . EmptyOrNewLines Closure
 
@@ -819,85 +981,89 @@ state 63
 
     $default  reduce using rule 18 (EmptyOrNewLines)
 
-    NewLines         go to state 70
-    EmptyOrNewLines  go to state 71
+    NewLines         go to state 78
+    EmptyOrNewLines  go to state 79
 
 
-state 64
+state 72
 
    33 Arg: Arg '=' . Expr
 
     T_IntConstant  shift, and go to state 9
-    T_Identifier   shift, and go to state 26
+    T_Identifier   shift, and go to state 29
+    '-'            shift, and go to state 11
+    '!'            shift, and go to state 12
+    '('            shift, and go to state 14
 
-    Expr  go to state 72
+    CallStmt  go to state 30
+    Expr      go to state 80
 
 
-state 65
+state 73
 
    27 ActualParam: T_Identifier ':' Expr .
 
     $default  reduce using rule 27 (ActualParam)
 
 
-state 66
+state 74
 
    25 ActualParams: ActualParams ',' ActualParam .
 
     $default  reduce using rule 25 (ActualParams)
 
 
-state 67
+state 75
 
    22 EmptyOrClosure: Closure .
 
     $default  reduce using rule 22 (EmptyOrClosure)
 
 
-state 68
+state 76
 
    28 CallStmt: T_Identifier '(' ActualParams ')' EmptyOrClosure .
 
     $default  reduce using rule 28 (CallStmt)
 
 
-state 69
+state 77
 
    31 Args: Args ',' Arg .
    33 Arg: Arg . '=' Expr
 
-    '='  shift, and go to state 64
+    '='  shift, and go to state 72
 
     $default  reduce using rule 31 (Args)
 
 
-state 70
+state 78
 
    17 NewLines: NewLines . T_EOL
    19 EmptyOrNewLines: NewLines .
 
-    T_EOL  shift, and go to state 35
+    T_EOL  shift, and go to state 42
 
     $default  reduce using rule 19 (EmptyOrNewLines)
 
 
-state 71
+state 79
 
    34 FuncDecl: T_Func T_Identifier '(' Args ')' EmptyOrNewLines . Closure
 
-    '{'  shift, and go to state 42
+    '{'  shift, and go to state 49
 
-    Closure  go to state 73
+    Closure  go to state 81
 
 
-state 72
+state 80
 
    33 Arg: Arg '=' Expr .
 
     $default  reduce using rule 33 (Arg)
 
 
-state 73
+state 81
 
    34 FuncDecl: T_Func T_Identifier '(' Args ')' EmptyOrNewLines Closure .
 

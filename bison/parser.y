@@ -128,6 +128,10 @@ AssignStmt:
 Expr:
     T_IntConstant                                   { printf("oper->push %s \n", $1); }
 |   T_Identifier                                    { printf("oper->push %s \n", $1); }
+|   CallStmt
+|   '(' Expr ')'
+|   '-' Expr %prec '!'                              { printf("\tneg\n"); }
+|   '!' Expr                                        { printf("\tnot\n"); }
 ;
 
 %%
