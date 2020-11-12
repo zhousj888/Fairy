@@ -146,13 +146,26 @@ IntervalExpr:
 ;
 
 Expr:
-    T_IntConstant                                   { printf("oper->push %s \n", $1); }
-|   T_Identifier                                    { printf("oper->push %s \n", $1); }
-|   CallStmt
-|   '(' Expr ')'
-|   '-' Expr %prec '!'                              { printf("\tneg\n"); }
-|   '!' Expr                                        { printf("\tnot\n"); }
-|   IntervalExpr                                    
+    Expr '+' Expr           { printf("\tadd\n"); }
+|   Expr '-' Expr           { printf("\tsub\n"); }
+|   Expr '*' Expr           { printf("\tmul\n"); }
+|   Expr '/' Expr           { printf("\tdiv\n"); }
+|   Expr '%' Expr           { printf("\tmod\n"); }
+|   Expr '>' Expr           { printf("\tcmpgt\n"); }
+|   Expr '<' Expr           { printf("\tcmplt\n"); }
+|   Expr T_Ge Expr          { printf("\tcmpge\n"); }
+|   Expr T_Le Expr          { printf("\tcmple\n"); }
+|   Expr T_Eq Expr          { printf("\tcmpeq\n"); }
+|   Expr T_Ne Expr          { printf("\tcmpne\n"); }
+|   Expr T_Or Expr          { printf("\tor\n"); }
+|   Expr T_And Expr         { printf("\tand\n"); }
+|   '-' Expr %prec '!'      { printf("\tneg\n"); }
+|   '!' Expr                { printf("\tnot\n"); }
+|   T_IntConstant           { printf("\tpush %s\n", $1); }
+|   T_Identifier            { printf("\tpush %s\n", $1); }
+|   CallStmt                { /* empty */ }
+|   '(' Expr ')'            { /* empty */ }
+|   IntervalExpr            { /* empty */ }
 ;
 
 %%

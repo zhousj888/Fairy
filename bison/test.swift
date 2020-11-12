@@ -43,3 +43,5 @@ for i in Arr {
 class Son : Father{}
 
 return 1
+
+- 1+1
