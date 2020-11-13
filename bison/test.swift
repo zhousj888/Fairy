@@ -52,18 +52,24 @@
 // }
 
 //WhileStmt  
-// while a {
-//     while b {
-//         continue
-//     }
-//     continue
-// }
-// repeat {
-//     while a {
+while a {
+    repeat {
+        continue
+        break
+    } while a
+    continue
+    break
+}
 
-//     }
-//     break
-// } while a
+// jz endWhile
+// beginWhile:
+// continue = jmp before jmp
+// break = jmp endwhile
+// xxx
+// continuePoint
+// jnz beginWhile
+// endWhile
+
 
 // //ForStmt
 // for i in arr {

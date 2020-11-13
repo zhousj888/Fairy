@@ -151,23 +151,23 @@ BreakStmt:
 ;
 
 ContinueStmt:
-    T_Continue                          { printf("\tjmp _begWhile_%d\n", _WHILE_ID); }
+    T_Continue                          { printf("\tjmp _continuePoint_%d\n", _WHILE_ID); }
 ;
 
 WhileStmt:
-    WhileBegin Expr JzEndWhile ClosureOrNextLine EndWhile
+    T_While Expr BeginJzEndWhile WhileBeginTag ClosureOrNextLine EndWhile
 ;
 
-WhileBegin:
-    T_While         { _BEG_WHILE; printf("\t_begWhile_%d:\n", _WHILE_ID); }
+WhileBeginTag:
+    /* empty */      { printf("\t_begWhile_%d:\n", _WHILE_ID); }
 ;
 
-JzEndWhile:
-    /* empty */     { printf("\tjz _endWhile_%d\n", _WHILE_ID); }
+BeginJzEndWhile:
+    /* empty */     { _BEG_WHILE; printf("\tjz _endWhile_%d\n", _WHILE_ID); }
 ;
 
 EndWhile:
-    /* empty */     { printf("\tjmp _begWhile_%d\n\t_endWhile_%d:\n\n", _WHILE_ID, _WHILE_ID); _END_WHILE; }
+    /* empty */     { printf("\t_continuePoint_%d\n", _WHILE_ID); printf("\tjnz _begWhile_%d\n", _WHILE_ID); printf("\t_endWhile_%d:\n\n", _WHILE_ID); _END_WHILE; }
 ;
 
 RepeatWileStmt:
@@ -175,11 +175,11 @@ RepeatWileStmt:
 ;
 
 EndRepeat:
-    /* empty */     { printf("\tjnz _begWhile_%d\n", _WHILE_ID); printf("\t_endWhile_%d\n", _WHILE_ID); _END_WHILE}
+    /* empty */     { printf("\t_continuePoint_%d\n", _WHILE_ID);printf("\tjnz _begWhile_%d\n", _WHILE_ID); printf("\t_endWhile_%d\n", _WHILE_ID); _END_WHILE}
 ;
 
 RepeatBegin:
-    T_Repeat                        { printf("\t_begWhile_%d\n", _WHILE_ID); }
+    T_Repeat                        { _BEG_WHILE; printf("\t_begWhile_%d\n", _WHILE_ID); }
 ;
 
 WholeIfStmt:
