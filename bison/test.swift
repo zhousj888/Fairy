@@ -43,22 +43,18 @@
 
 // //IfStmt    
 if a {
+    if a {
+
+    }else if a {
+
+    }else {
+
+    }
 }else if a{
 
-}else if a {
-
-}else if a {
-
 }else {
-    
+
 }
-// if a {
-// } else {
-// }
-// if a {
-// }else if b {
-// }else {
-// }
 
 // //WhileStmt  
 // while a {

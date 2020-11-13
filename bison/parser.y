@@ -4,6 +4,15 @@
 void yyerror(const char*);
 int yylex();
 #define YYSTYPE char *
+
+int ifStmtId = 0, ifThenId = 0, ifStackTop = -1, ifThenStatckTop = -1, ifStack[100][100];
+
+#define _BEG_IF             {ifStack[++ifStackTop][0] = ++ifStmtId;}
+#define _END_IF             {ifStackTop--;}
+#define _IF_ID              (ifStack[ifStackTop][0])
+#define _IF_THEN_ID         (ifStack[ifStackTop][1])
+#define _IF_THEN_ID_PLUS    {ifStack[ifStackTop][1]++;}
+
 %}
 
 %token T_Int T_Var T_Void T_Return T_ReadInt T_While T_Repeat T_EOL T_Let T_Func T_For T_In T_Class
@@ -159,23 +168,23 @@ IfStmt:
 ;
 
 JmpEndIf:
-    /* empty */                                     { printf("\tjmp _endif_\n"); }
+    /* empty */                                     { printf("\tjmp _endif_%d\n", _IF_ID); }
 ;
 
 IfThen:
-    /* empty */                                     { printf("\t_ifThen_\n"); }
+    /* empty */                                     { printf("\t_ifThen_%d_%d\n", _IF_ID, _IF_THEN_ID); _IF_THEN_ID_PLUS;}
 ;
 
 JzIfThen:
-    /* empty */                                     { printf("\tjz _ifThen_\n"); }
+    /* empty */                                     { printf("\tjz _ifThen_%d_%d\n",_IF_ID,_IF_THEN_ID); }
 ;
 
 BeginIf:
-    /* empty */                                      { printf("\t_begIf_:\n"); }
+    /* empty */                                      { _BEG_IF; printf("\t_begIf_%d:\n",_IF_ID); }
 ;
 
 EndIf:
-    /* empty */                                     { printf("\t_endIf_:\n\n"); }
+    /* empty */                                     { printf("\t_endIf_%d:\n",_IF_ID); _END_IF; }
 ;
 
 VarDecl:
