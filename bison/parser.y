@@ -78,13 +78,17 @@ ActualParams:
 ;
 
 ActualParam:
-    Expr                                                { printf("\t记录栈顶参数 \n"); }
-|   T_Identifier ':' Expr                               { printf("\t记录栈顶参数 -> %s \n",$1); }
+    Expr                                                { printf("\t记录栈顶参数到栈顶方法 \n"); }
+|   T_Identifier ':' Expr                               { printf("\t记录栈顶参数到栈顶方法 -> %s \n",$1); }
 ;
 
 CallExpr:
-    T_Identifier '(' ActualParams  ')'
+    CallFuncName '(' ActualParams  ')'
 |   CallExpr Closure                                    { printf("\t记录栈闭包 -> %s \n",$1); }
+;
+
+CallFuncName:
+    T_Identifier                                        { printf("\t调用方法 -> %s \n",$1); }
 ;
 
 ObjCallExpr:
@@ -92,8 +96,8 @@ ObjCallExpr:
 ;
 
 ReturnStmt:
-    T_Return Expr
-|   T_Return
+    T_Return Expr                                       { printf("\tret ~\n\n"); }
+|   T_Return                                            { printf("\tret\n\n"); }
 ;
 
 ForStmt:
@@ -109,7 +113,7 @@ Args:
 
 Arg:
     T_Identifier                                          
-|   Arg '=' Expr                                          
+|   Arg '=' Expr                                          { printf("\t\n",$1); }
 ;
 
 FuncDecl:

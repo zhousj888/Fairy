@@ -32,7 +32,7 @@
 
 //FuncDecl
 // func test(a = 1,b,c) {
-//     return
+//     return a + b + c
 // }
 
 // //call
