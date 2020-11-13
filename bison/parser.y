@@ -171,7 +171,15 @@ EndWhile:
 ;
 
 RepeatWileStmt:
-    T_Repeat ClosureOrNextLine T_While Expr
+    RepeatBegin ClosureOrNextLine T_While Expr EndRepeat
+;
+
+EndRepeat:
+    /* empty */     { printf("\tjnz _begWhile_%d\n", _WHILE_ID); printf("\t_endWhile_%d\n", _WHILE_ID); _END_WHILE}
+;
+
+RepeatBegin:
+    T_Repeat                        { printf("\t_begWhile_%d\n", _WHILE_ID); }
 ;
 
 WholeIfStmt:
