@@ -153,8 +153,8 @@ WholeIfStmt:
 ;
 
 IfStmt:
-    T_If Expr JzEndThen ClosureOrNextLine JmpEndIf EndThen
-|   IfStmt T_Else ClosureOrNextLine JmpEndIf
+    T_If Expr JzIfThen ClosureOrNextLine JmpEndIf IfThen
+|   IfStmt T_Else ClosureOrNextLine
 |   IfStmt T_Else IfStmt
 ;
 
@@ -162,12 +162,12 @@ JmpEndIf:
     /* empty */                                     { printf("\tjmp _endif_\n"); }
 ;
 
-EndThen:
-    /* empty */                                     { printf("\t_endThen_\n"); }
+IfThen:
+    /* empty */                                     { printf("\t_ifThen_\n"); }
 ;
 
-JzEndThen:
-    /* empty */                                     { printf("\tjz _endThen_\n"); }
+JzIfThen:
+    /* empty */                                     { printf("\tjz _ifThen_\n"); }
 ;
 
 BeginIf:

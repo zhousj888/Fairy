@@ -43,8 +43,11 @@
 
 // //IfStmt    
 if a {
-}else if b {
-}else if c {
+}else if a{
+
+}else if a {
+
+}else if a {
 
 }else {
     
