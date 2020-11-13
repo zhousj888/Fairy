@@ -31,9 +31,9 @@
 // let a
 
 //FuncDecl
-func test(a = 1,b,c) {
-    return a + b + c
-}
+// func test(a = 1,b,c) {
+//     return a + b + c
+// }
 
 // //call
 // test(a:1){}
@@ -42,7 +42,19 @@ func test(a = 1,b,c) {
 // a = 1
 
 // //IfStmt    
+if a {
+}else if b {
+}else if c {
+
+}else {
+    
+}
 // if a {
+// } else {
+// }
+// if a {
+// }else if b {
+// }else {
 // }
 
 // //WhileStmt  

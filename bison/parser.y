@@ -35,7 +35,7 @@ Stmt:
 |   FuncDecl                                    
 |   AssignStmt StmtSeparator                    
 |   Expr                                        
-|   IfStmt                                      
+|   WholeIfStmt                                      
 |   WhileStmt                                   
 |   BreakStmt StmtSeparator                     
 |   ContinueStmt StmtSeparator                  
@@ -62,8 +62,12 @@ ExprsByComma:
 ;
 
 Closure:
-    '{' Program '}'                                    { printf("\t闭包结束\n"); }
-|   '{' '(' ExprsByComma ')' T_In Program '}'
+    ClosureStart '{' Program '}'                                    { printf("\t闭包结束\n"); }
+|   ClosureStart '{' '(' ExprsByComma ')' T_In Program '}'
+;
+
+ClosureStart:
+    /* empty */             { printf("\t闭包开始\n"); }
 ;
 
 ClosureOrNextLine:
@@ -144,11 +148,34 @@ RepeatWileStmt:
     T_Repeat ClosureOrNextLine T_While Expr
 ;
 
+WholeIfStmt:
+    BeginIf IfStmt EndIf
+;
 
 IfStmt:
-    T_If Expr ClosureOrNextLine                     
-|   IfStmt T_Else ClosureOrNextLine                 
-|   IfStmt T_Else IfStmt                            
+    T_If Expr JzEndThen ClosureOrNextLine JmpEndIf EndThen
+|   IfStmt T_Else ClosureOrNextLine JmpEndIf
+|   IfStmt T_Else IfStmt
+;
+
+JmpEndIf:
+    /* empty */                                     { printf("\tjmp _endif_\n"); }
+;
+
+EndThen:
+    /* empty */                                     { printf("\t_endThen_\n"); }
+;
+
+JzEndThen:
+    /* empty */                                     { printf("\tjz _endThen_\n"); }
+;
+
+BeginIf:
+    /* empty */                                      { printf("\t_begIf_:\n"); }
+;
+
+EndIf:
+    /* empty */                                     { printf("\t_endIf_:\n\n"); }
 ;
 
 VarDecl:
