@@ -73,13 +73,12 @@ ClosureOrNextLine:
 
 ActualParams:
     /* empty */             { /* empty */ }
-|   ActualParam
+    ActualParam
 |   ActualParams ',' ActualParam
 ;
 
 ActualParam:
-    Expr                                                { printf("\t记录栈顶参数到栈顶方法 \n"); }
-|   T_Identifier ':' Expr                               { printf("\t记录栈顶参数到栈顶方法 -> %s \n",$1); }
+    T_Identifier ':' Expr                               { printf("\t记录栈顶参数到栈顶方法 -> %s \n",$1);} 
 ;
 
 CallExpr:
@@ -113,7 +112,7 @@ Args:
 
 Arg:
     T_Identifier                                          
-|   Arg '=' Expr                                          { printf("\t\n",$1); }
+|   Arg '=' Expr                                          
 ;
 
 FuncDecl:

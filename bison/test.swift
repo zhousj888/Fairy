@@ -36,7 +36,7 @@
 // }
 
 // //call
-test(b: 1,2){}
+test(b: 1,c:2){}
 
 // //AssignStmt StmtSeparator    
 // a = 1
