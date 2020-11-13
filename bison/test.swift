@@ -31,12 +31,12 @@
 // let a
 
 //FuncDecl
-// func test(a = 1,b,c) {
-//     return a + b + c
-// }
+func test(a = 1,b,c) {
+    return a + b + c
+}
 
 // //call
-test(a:1){}
+// test(a:1){}
 
 // //AssignStmt StmtSeparator    
 // a = 1
