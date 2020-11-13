@@ -83,7 +83,7 @@ ActualParam:
 
 CallExpr:
     CallFuncName '(' ActualParams ')'                   { printf("\t跳转到方法 -> %s\n",$1); }
-|   CallExpr Closure                                    { printf("\t记录栈闭包 -> %s \n",$1); }
+|   CallFuncName '(' ActualParams ')' Closure           { printf("\t记录闭包参数 -> %s \n",$1);  printf("\t跳转到方法 -> %s\n",$1); }
 ;
 
 CallFuncName:
