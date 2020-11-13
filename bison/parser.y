@@ -25,7 +25,7 @@ int yylex();
 Program:
     /* empty */             { /* empty */ }
 |   Stmt
-|   Stmt Program
+|   Program Stmt 
 ;
 
 
@@ -73,21 +73,21 @@ ClosureOrNextLine:
 
 ActualParams:
     /* empty */             { /* empty */ }
-    ActualParam
+|   ActualParam
 |   ActualParams ',' ActualParam
 ;
 
 ActualParam:
-    T_Identifier ':' Expr                               { printf("\t记录栈顶参数到栈顶方法 -> %s \n",$1);} 
+    T_Identifier ':' Expr                               { printf("\t记录栈顶参数 -> %s 到参数集 \n",$1);} 
 ;
 
 CallExpr:
-    CallFuncName '(' ActualParams  ')'
+    CallFuncName '(' ActualParams ')'                   { printf("\t跳转到方法 -> %s\n",$1); }
 |   CallExpr Closure                                    { printf("\t记录栈闭包 -> %s \n",$1); }
 ;
 
 CallFuncName:
-    T_Identifier                                        { printf("\t调用方法 -> %s \n",$1); }
+    T_Identifier                                        { printf("\t调用方法 -> %s,创建参数集 \n",$1); }
 ;
 
 ObjCallExpr:
@@ -203,7 +203,7 @@ Expr:
 |   T_DecimalConstant       { printf("\tpush %s\n", $1); }
 |   T_Identifier            { printf("\tpush %s\n", $1); }
 |   CallExpr                
-|   '(' Expr ')'            
+|   '(' Expr ')'
 |   IntervalExpr            
 |   T_StringConstant        
 |   ArrayExpr               
