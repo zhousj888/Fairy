@@ -42,27 +42,25 @@
 // a = 1
 
 // //IfStmt    
-if a {
-    if a {
+// if a {
+//     if a {
+//     }else if a {
+//     }else {
+//     }
+// }else if a{
+// }else {
+// }
 
-    }else if a {
-
-    }else {
-
-    }
-}else if a{
-
-}else {
-
-}
-
-// //WhileStmt  
+//WhileStmt  
 // while a {
+//     while b {
+//         continue
+//     }
 //     continue
 // }
-// repeat {
-//     break
-// } while a
+repeat {
+    break
+} while a
 
 // //ForStmt
 // for i in arr {

@@ -5,13 +5,18 @@ void yyerror(const char*);
 int yylex();
 #define YYSTYPE char *
 
-int ifStmtId = 0, ifThenId = 0, ifStackTop = -1, ifThenStatckTop = -1, ifStack[100][100];
+int ifStmtId = 0, ifThenId = 0, ifTop = -1, ifThenStatckTop = -1, ifStack[100][100];
+int whileStmtId = 0, whileTop = -1, whileStack[100];
 
-#define _BEG_IF             {ifStack[++ifStackTop][0] = ++ifStmtId;}
-#define _END_IF             {ifStackTop--;}
-#define _IF_ID              (ifStack[ifStackTop][0])
-#define _IF_THEN_ID         (ifStack[ifStackTop][1])
-#define _IF_THEN_ID_PLUS    {ifStack[ifStackTop][1]++;}
+#define _BEG_IF             {ifStack[++ifTop][0] = ++ifStmtId;}
+#define _END_IF             {ifTop--;}
+#define _IF_ID              (ifStack[ifTop][0])
+#define _IF_THEN_ID         (ifStack[ifTop][1])
+#define _IF_THEN_ID_PLUS    {ifStack[ifTop][1]++;}
+
+#define _BEG_WHILE          {whileStack[++whileTop] = ++whileStmtId;}
+#define _END_WHILE          {whileTop--;}
+#define _WHILE_ID           (whileStack[whileTop])
 
 %}
 
@@ -142,15 +147,27 @@ ClassDecl:
 ;
 
 BreakStmt:
-    T_Break                                         
+    T_Break                             { printf("\tjmp _endWhile_%d\n", _WHILE_ID); }
 ;
 
 ContinueStmt:
-    T_Continue                                      
+    T_Continue                          { printf("\tjmp _begWhile_%d\n", _WHILE_ID); }
 ;
 
 WhileStmt:
-    T_While Expr ClosureOrNextLine
+    WhileBegin Expr JzEndWhile ClosureOrNextLine EndWhile
+;
+
+WhileBegin:
+    T_While         { _BEG_WHILE; printf("\t_begWhile_%d:\n", _WHILE_ID); }
+;
+
+JzEndWhile:
+    /* empty */     { printf("\tjz _endWhile_%d\n", _WHILE_ID); }
+;
+
+EndWhile:
+    /* empty */     { printf("\tjmp _begWhile_%d\n\t_endWhile_%d:\n\n", _WHILE_ID, _WHILE_ID); _END_WHILE; }
 ;
 
 RepeatWileStmt:
