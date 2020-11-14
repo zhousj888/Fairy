@@ -52,14 +52,14 @@
 // }
 
 //WhileStmt  
-while a {
-    repeat {
-        continue
-        break
-    } while a
-    continue
-    break
-}
+// while a {
+//     repeat {
+//         continue
+//         break
+//     } while a
+//     continue
+//     break
+// }
 
 // jz endWhile
 // beginWhile:
@@ -78,7 +78,21 @@ while a {
 // }
 
 // //ClassDecl                   
-// class Son: Father {}
+class Son 
+{
+    var a = 1
+    func init() {
+
+    }
+    func init(a,b,c){
+
+    }
+    func test(a,b,c) {
+
+    }
+}
+
+a = Students()
 
 // //obj call
 // a.test()

@@ -47,8 +47,7 @@ Stmt:
     StmtSeparator
 |   VarDecl StmtSeparator                       
 |   FuncDecl                                    
-|   AssignStmt StmtSeparator                    
-|   Expr                                        
+|   AssignStmt StmtSeparator                                                           
 |   WholeIfStmt                                      
 |   WhileStmt                                   
 |   BreakStmt StmtSeparator                     
@@ -73,6 +72,24 @@ ExprsByComma:
     /* empty */             { /* empty */ }
 |   Expr
 |   ExprsByComma ',' Expr
+;
+
+ClassDefBlock:
+    '{' ClassDefStmts '}'
+|   T_EOL ClassDefBlock
+;
+
+ClassDefStmts:
+    /* empty */
+|   ClassDefStmt
+|   ClassDefStmts ClassDefStmt
+;
+
+ClassDefStmt:
+    NewLines
+|   VarDecl StmtSeparator
+|   FuncDecl
+|   ClassDecl
 ;
 
 Closure:
@@ -142,8 +159,8 @@ FuncName:
 ;
 
 ClassDecl:
-    T_Class T_Identifier ClosureOrNextLine
-|   T_Class T_Identifier ':' T_Identifier ClosureOrNextLine
+    T_Class T_Identifier ClassDefBlock
+|   T_Class T_Identifier ':' T_Identifier ClassDefBlock
 ;
 
 BreakStmt:
