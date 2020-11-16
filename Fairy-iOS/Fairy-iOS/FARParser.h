@@ -11,7 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARParser : NSObject
 
-- (void)parse;
+- (void)parse:(NSString *)code;
 
 @end
 

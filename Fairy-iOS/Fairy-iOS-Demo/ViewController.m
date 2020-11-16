@@ -17,11 +17,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    NSLog(@"11");
+    
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"test"
+                                                     ofType:@"far"];
+    NSString* content = [NSString stringWithContentsOfFile:path
+                                                  encoding:NSUTF8StringEncoding
+                                                      error:NULL];
+    
     FARParser *parser = [[FARParser alloc] init];
-    NSLog(@"22");
-    [parser parse];
-    NSLog(@"33");
+    [parser parse:content];
 }
 
 

@@ -13,9 +13,10 @@ void* yy_scan_string (const char * yystr);
 
 @implementation FARParser
 
-- (void)parse {
-    yy_scan_string("var a = 1\n");
+- (void)parse:(NSString *)code {
+    yy_scan_string(code.UTF8String);
     yyparse();
 }
+
 
 @end
