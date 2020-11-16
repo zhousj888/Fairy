@@ -6,7 +6,7 @@
 //
 
 #import "ViewController.h"
-#import "Fairy_iOS.h"
+#import <Fairy_iOS/Fairy_iOS.h>
 
 @interface ViewController ()
 
@@ -17,8 +17,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    [[FARTest alloc] init];
-    
+    NSLog(@"11");
+    FARParser *parser = [[FARParser alloc] init];
+    NSLog(@"22");
+    [parser parse];
+    NSLog(@"33");
 }
 
 

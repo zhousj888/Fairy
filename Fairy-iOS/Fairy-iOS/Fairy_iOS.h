@@ -6,7 +6,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <Fairy_iOS/FARTest.h>
+#import <Fairy_iOS/FARParser.h>
+
 
 //! Project version number for Fairy_iOS.
 FOUNDATION_EXPORT double Fairy_iOSVersionNumber;

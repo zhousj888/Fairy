@@ -1,5 +1,5 @@
 //
-//  FARTest.h
+//  FARParser.h
 //  Fairy-iOS
 //
 //  Created by 周孙静 on 2020/11/16.
@@ -9,7 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FARTest : NSObject
+@interface FARParser : NSObject
+
+- (void)parse;
 
 @end
 
