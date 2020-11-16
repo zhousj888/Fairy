@@ -78,7 +78,10 @@
 // }
 
 //ClassDecl    
-var a = 1               
+var a = 1    
+func test3() {
+    
+}           
 class Son:Father
 {
     var a = 1
@@ -91,6 +94,10 @@ class Son:Father
     func test(a,b,c) {
 
     }
+}
+
+func test2() {
+
 }
 
 // a = Students()

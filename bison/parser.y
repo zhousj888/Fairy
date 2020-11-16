@@ -7,6 +7,7 @@ int yylex();
 
 int ifStmtId = 0, ifThenId = 0, ifTop = -1, ifThenStatckTop = -1, ifStack[100][100];
 int whileStmtId = 0, whileTop = -1, whileStack[100];
+char *currentClassName = NULL;
 
 #define _BEG_IF             {ifStack[++ifTop][0] = ++ifStmtId;}
 #define _END_IF             {ifTop--;}
@@ -90,7 +91,6 @@ ClassDefStmt:
     NewLines
 |   VarDecl StmtSeparator
 |   FuncDecl
-|   ClassDecl
 ;
 
 Closure:
@@ -156,16 +156,16 @@ FuncDecl:
 ;
 
 FuncName:
-    T_Identifier                                          { printf("\tFUNC @%s:\n", $1); }
+    T_Identifier                                          { if(currentClassName){printf("\tFUNC @%s %s:\n",currentClassName, $1);} else {printf("\tFUNC @%s:\n", $1);}  }
 ;
 
 ClassDecl:
-    T_Class ClassName ClassDefBlock                       { printf("\tENDCLASS\n\n"); }
-|   T_Class ClassName ':' SuperClassName ClassDefBlock    { printf("\tENDCLASS\n\n"); }
+    T_Class ClassName ClassDefBlock                       { printf("\tENDCLASS\n\n");currentClassName = NULL;}
+|   T_Class ClassName ':' SuperClassName ClassDefBlock    { printf("\tENDCLASS\n\n");currentClassName = NULL; }
 ;
 
 ClassName:
-    T_Identifier                        { printf("\tCLASS_BEGIN:%s\n",$1); }
+    T_Identifier                        { printf("\tCLASS_BEGIN:%s\n",$1); currentClassName = $1; }
 ;
 
 SuperClassName:
