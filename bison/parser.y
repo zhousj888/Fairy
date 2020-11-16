@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 void yyerror(const char*);
-int yylex();
+int yylex(void);
 #define YYSTYPE char *
 
 int ifStmtId = 0, ifThenId = 0, ifTop = -1, ifThenStatckTop = -1, ifStack[100][100];
@@ -302,6 +302,3 @@ Expr:
 
 %%
 
-int main() {
-    return yyparse();
-}

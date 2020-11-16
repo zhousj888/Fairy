@@ -4,7 +4,7 @@
 int cur_line = 1;
 void yyerror(const char *msg);
 void unrecognized_char(char c);
-void unterminate_string();
+void unterminate_string(void);
 #define _DUPTEXT {yylval = strdup(yytext);}
 %}
 
