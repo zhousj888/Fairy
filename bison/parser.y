@@ -160,8 +160,16 @@ FuncName:
 ;
 
 ClassDecl:
-    T_Class T_Identifier ClassDefBlock
-|   T_Class T_Identifier ':' T_Identifier ClassDefBlock
+    T_Class ClassName ClassDefBlock                       { printf("\tENDCLASS\n\n"); }
+|   T_Class ClassName ':' SuperClassName ClassDefBlock    { printf("\tENDCLASS\n\n"); }
+;
+
+ClassName:
+    T_Identifier                        { printf("\tCLASS_BEGIN:%s\n",$1); }
+;
+
+SuperClassName:
+    T_Identifier                        { printf("\tSuperClass:%s\n",$1); }
 ;
 
 BreakStmt:
@@ -233,7 +241,8 @@ EndIf:
 VarDecl:
     T_Var T_Identifier                              { printf("\tvar %s \n", $2); }
 |   T_Let T_Identifier                              { printf("\tlet %s \n", $2); }
-|   VarDecl '=' Expr                                { printf("\tpop %s \n", $1); }
+|   T_Var T_Identifier '=' Expr                     { printf("\tpop %s \n", $2); }
+|   T_Let T_Identifier '=' Expr                     { printf("\tpop %s \n", $2); }
 ;
 
 AssignStmt:
