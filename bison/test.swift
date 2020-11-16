@@ -78,21 +78,21 @@
 // }
 
 // //ClassDecl                   
-class Son 
-{
-    var a = 1
-    func init() {
+// class Son 
+// {
+//     var a = 1
+//     func init() {
 
-    }
-    func init(a,b,c){
+//     }
+//     func init(a,b,c){
 
-    }
-    func test(a,b,c) {
+//     }
+//     func test(a,b,c) {
 
-    }
-}
+//     }
+// }
 
-a = Students()
+// a = Students()
 
 // //obj call
-// a.test()
+test()

@@ -55,7 +55,9 @@ Stmt:
 |   ForStmt                                     
 |   ClassDecl                                   
 |   ReturnStmt                                  
-|   RepeatWileStmt                              
+|   RepeatWileStmt
+|   ObjCallExpr
+|   CallExpr
 ;
 
 StmtSeparator:
