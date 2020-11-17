@@ -50,7 +50,10 @@ NSString *transCmdToDescription(int cmd) {
 }
 
 NSString *transCharsToNSString(char *chars) {
-    return [NSString stringWithUTF8String:chars];
+    if (chars) {
+        return [NSString stringWithUTF8String:chars];
+    }
+    return @"";
 }
 
 

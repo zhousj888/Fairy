@@ -1,5 +1,5 @@
 //Expr
-// a + b
+// a+ b *c
 // a - b
 // a * b
 // a / b
@@ -41,7 +41,7 @@ test(a:1)
 // //AssignStmt StmtSeparator    
 // a = 1
 
-// //IfStmt    
+// //IfStmt   
 // if a {
 //     if a {
 //     }else if a {
