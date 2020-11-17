@@ -17,6 +17,16 @@ void* yy_scan_string (const char * yystr);
 static NSMutableArray<FARCommand *> *commandArr;
 static NSMutableArray<FARCommandTag *> *tagArr;
 
+
+char *generString(int stringLength,char *fmt,...) {
+    char *result = (char*)malloc(stringLength * sizeof(char));
+    va_list argList;
+    va_start(argList, fmt);
+    vsprintf(result, fmt, argList);
+    va_end(argList);
+    return result;
+}
+
 NSString *transCmdToDescription(int cmd) {
     switch (cmd) {
         case FAROperCmdPush:{return @"push";}

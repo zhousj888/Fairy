@@ -9,6 +9,7 @@ void addCmd1(int cmd);
 void addCmd2(int cmd, char *oper1);
 void addCmd3(int cmd, char *oper1, char *oper2);
 void addTag(char *format,...);
+char *generString(int stringLength,char *fmt,...);
 
 #define YYSTYPE char *
 
@@ -226,23 +227,23 @@ IfStmt:
 ;
 
 JmpEndIf:
-    /* empty */                                     { printf("\tjmp _endif_%d\n", _IF_ID); }
+    /* empty */                                     { char *text = generString(11,"_endif_%d",_IF_ID);addCmd2(FAROperCmdJmp,text); }
 ;
 
 IfThen:
-    /* empty */                                     { printf("\t_ifThen_%d_%d\n", _IF_ID, _IF_THEN_ID); _IF_THEN_ID_PLUS;}
+    /* empty */                                     { addTag("_ifThen_%d_%d", _IF_ID, _IF_THEN_ID);  _IF_THEN_ID_PLUS;}
 ;
 
 JzIfThen:
-    /* empty */                                     { printf("\tjz _ifThen_%d_%d\n",_IF_ID,_IF_THEN_ID); }
+    /* empty */                                     { addCmd2(FAROperCmdJz,generString(15,"_ifThen_%d_%d",_IF_ID,_IF_THEN_ID)); }
 ;
 
 BeginIf:
-    /* empty */                                      { _BEG_IF; printf("\t_begIf_%d:\n",_IF_ID);}
+    /* empty */                                      { _BEG_IF; addTag("_begIf_%d",_IF_ID);}
 ;
 
 EndIf:
-    /* empty */                                     { printf("\t_endIf_%d:\n",_IF_ID); _END_IF; }
+    /* empty */                                     { addTag("_endIf_%d",_IF_ID);  _END_IF; }
 ;
 
 VarDecl:
