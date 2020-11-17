@@ -1,5 +1,5 @@
 //Expr
-a + b
+// a + b
 // a - b
 // a * b
 // a / b
@@ -27,8 +27,8 @@ a + b
 // a ? 1 : 2
 
 // //VarDecl StmtSeparator
-// var a
-// let a
+var a
+let a
 
 // FuncDecl
 // func test(a = 1,b,c) {

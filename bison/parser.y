@@ -134,8 +134,8 @@ ObjCallExpr:
 ;
 
 ReturnStmt:
-    T_Return Expr                                       { printf("\tret ~\n\n"); }
-|   T_Return                                            { printf("\tret\n\n"); }
+    T_Return Expr                                       { printf("\tret ~\n\n");addCmd1(FAROperCmdRet,"~"); }
+|   T_Return                                            { printf("\tret\n\n");addCmd0(FAROperCmdRet);}
 ;
 
 ForStmt:
@@ -275,21 +275,21 @@ DictionExpr:
 
 Expr:
     Expr '+' Expr           { addCmd0(FAROperCmdAdd); }
-|   Expr '-' Expr           { printf("\tsub\n"); }
-|   Expr '*' Expr           { printf("\tmul\n"); }
-|   Expr '/' Expr           { printf("\tdiv\n"); }
-|   Expr '%' Expr           { printf("\tmod\n"); }
-|   Expr '>' Expr           { printf("\tcmpgt\n"); }
-|   Expr '<' Expr           { printf("\tcmplt\n"); }
-|   Expr T_Ge Expr          { printf("\tcmpge\n"); }
-|   Expr T_Le Expr          { printf("\tcmple\n"); }
-|   Expr T_Eq Expr          { printf("\tcmpeq\n"); }
-|   Expr T_Ne Expr          { printf("\tcmpne\n"); }
-|   Expr T_Or Expr          { printf("\tor\n"); }
-|   Expr T_And Expr         { printf("\tand\n"); }
-|   '-' Expr %prec '!'      { printf("\tneg\n"); }
+|   Expr '-' Expr           { addCmd0(FAROperCmdSub); }
+|   Expr '*' Expr           { addCmd0(FAROperCmdMul); }
+|   Expr '/' Expr           { addCmd0(FAROperCmdDiv); }
+|   Expr '%' Expr           { addCmd0(FAROperCmdMod); }
+|   Expr '>' Expr           { addCmd0(FAROperCmdCmpgt); }
+|   Expr '<' Expr           { addCmd0(FAROperCmdCmplt); }
+|   Expr T_Ge Expr          { addCmd0(FAROperCmdCmpge); }
+|   Expr T_Le Expr          { addCmd0(FAROperCmdCmple); }
+|   Expr T_Eq Expr          { addCmd0(FAROperCmdCmpeq); }
+|   Expr T_Ne Expr          { addCmd0(FAROperCmdCmpne); }
+|   Expr T_Or Expr          { addCmd0(FAROperCmdOr); }
+|   Expr T_And Expr         { addCmd0(FAROperCmdAnd); }
+|   '-' Expr %prec '!'      { addCmd0(FAROperCmdNeg); }
 |   '+' Expr %prec '!'      { /* empty */ }
-|   '!' Expr                { printf("\tnot\n"); }
+|   '!' Expr                { addCmd0(FAROperCmdNot); }
 |   T_IntConstant           { addCmd1(FAROperCmdPush,$1); }
 |   T_DecimalConstant       { addCmd1(FAROperCmdPush,$1); }
 |   T_Identifier            { addCmd1(FAROperCmdPush,$1); }
