@@ -242,10 +242,10 @@ EndIf:
 ;
 
 VarDecl:
-    T_Var T_Identifier                              { printf("\tvar %s \n", $2); }
-|   T_Let T_Identifier                              { printf("\tlet %s \n", $2); }
-|   T_Var T_Identifier '=' Expr                     { printf("\tpop %s \n", $2); }
-|   T_Let T_Identifier '=' Expr                     { printf("\tpop %s \n", $2); }
+    T_Var T_Identifier                              { addCmd1(FAROperCmdVar, $2); }
+|   T_Let T_Identifier                              { addCmd1(FAROperCmdLet, $2); }
+|   T_Var T_Identifier '=' Expr                     { addCmd1(FAROperCmdPop, $2); }
+|   T_Let T_Identifier '=' Expr                     { addCmd1(FAROperCmdPop, $2); }
 ;
 
 AssignStmt:

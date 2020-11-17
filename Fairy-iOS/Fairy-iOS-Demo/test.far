@@ -27,13 +27,13 @@
 // a ? 1 : 2
 
 // //VarDecl StmtSeparator
-var a
-let a
+// var a
+// let a
 
 // FuncDecl
-// func test(a = 1,b,c) {
-//     return a + b + c
-// }
+func test(a = 1,b,c) {
+    return a + b + c
+}
 
 // //call
 // test(a:1){}
