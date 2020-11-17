@@ -34,7 +34,9 @@ enum {
     FAROperCmdAnd,
     FAROperCmdNeg,
     FAROperCmdNot,
-    FAROperCmdRet
+    FAROperCmdRet,
+    
+    FAROperSaveIfNil,
 };
 
 #endif /* FAROperCmd_h */

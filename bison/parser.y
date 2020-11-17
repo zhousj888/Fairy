@@ -157,8 +157,8 @@ Args:
 ;
 
 Arg:
-    T_Identifier                                          { printf("\t 在参数集中查找 %s \n",$1); }
-|   Arg '=' Expr                                          { printf("\t 尝试 %s = top 到参数集 \n",$1); }
+    T_Identifier
+|   Arg '=' Expr                                          { addCmd1(FAROperSaveIfNil,$1); }
 ;
 
 FuncDecl:

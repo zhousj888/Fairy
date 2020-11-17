@@ -42,6 +42,7 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperCmdNeg:{return @"neg";}
         case FAROperCmdNot:{return @"not";}
         case FAROperCmdRet:{return @"ret";}
+        case FAROperSaveIfNil:{return @"saveIfNil";}
     }
     return @"unknow";
 }
