@@ -39,6 +39,8 @@ enum {
     FAROperSave,
     FAROperSaveIfNil,
     FAROperCreateNewEnv,
+    
+    FAROperExit,
 };
 
 #endif /* FAROperCmd_h */

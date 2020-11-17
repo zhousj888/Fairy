@@ -9,9 +9,10 @@
 
 @implementation FARCommandTag
 
-+ (instancetype)tagWithName:(NSString *)name {
++ (instancetype)tagWithName:(NSString *)name codeIndex:(NSInteger)codeIndex{
     FARCommandTag *tag = [[FARCommandTag alloc] init];
     tag.name = name;
+    tag.codeIndex = codeIndex;
     return tag;
 }
 

@@ -88,7 +88,7 @@ void addTag(char *format,...) {
     va_start(argList, format);
     NSString *tag = [[NSString alloc] initWithFormat:transCharsToNSString(format) arguments:argList];
     NSLog(@"TAG: %@",tag);
-    [tagArr addObject:[FARCommandTag tagWithName:tag]];
+    [tagArr addObject:[FARCommandTag tagWithName:tag codeIndex:commandArr.count]];
     va_end(argList);
 }
 
