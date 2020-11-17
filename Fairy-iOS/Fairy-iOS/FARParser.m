@@ -72,25 +72,24 @@ void addCmd3(int cmd, char *oper1, char *oper2) {
     [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2)]];
 }
 
-void tagFuncStart(char *prefix, char *tag) {
-    NSString *funcName = [NSString stringWithFormat:@"%s_%s",prefix,tag];
-    NSLog(@"FUNC START:%@",funcName);
-    [tagArr addObject:[FARCommandTag funcTagWithName:funcName isStart:YES]];
+
+void addTag1(char *tag) {
+    NSString *tagStr = [NSString stringWithFormat:@"%s",tag];
+    NSLog(@"TAG %@",tagStr);
+    [tagArr addObject:[FARCommandTag tagWithName:tagStr]];
 }
 
-void tagFuncEnd() {
-    NSLog(@"FUNC END!");
-    [tagArr addObject:[FARCommandTag funcTagWithName:nil isStart:NO]];
+void addTag2(char *tag1, char *tag2) {
+    NSString *tagStr = [NSString stringWithFormat:@"%s_%s",tag1,tag2];
+    NSLog(@"TAG: %@",tagStr);
+    [tagArr addObject:[FARCommandTag tagWithName:tagStr]];
 }
 
-void tagClassStart(char *className,char *superClassName) {
-    [tagArr addObject:[FARCommandTag classTagWithName:transCharsToNSString(className) superClassName:transCharsToNSString(superClassName) isStart:YES]];
+void addTag3(char *tag1, char *tag2, char *tag3) {
+    NSString *tagStr = [NSString stringWithFormat:@"%s_%s_%s",tag1,tag2,tag3];
+    NSLog(@"TAG: %@",tagStr);
+    [tagArr addObject:[FARCommandTag tagWithName:tagStr]];
 }
-
-void tagClassEnd() {
-    [tagArr addObject:[FARCommandTag classTagWithName:nil superClassName:nil isStart:NO]];
-}
-
 
 @implementation FARParser
 

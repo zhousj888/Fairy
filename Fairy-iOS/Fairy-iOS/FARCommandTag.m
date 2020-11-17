@@ -9,26 +9,9 @@
 
 @implementation FARCommandTag
 
-+ (instancetype)funcTagWithName:(NSString *)name isStart:(BOOL)isStart {
++ (instancetype)tagWithName:(NSString *)name {
     FARCommandTag *tag = [[FARCommandTag alloc] init];
     tag.name = name;
-    tag.type = isStart ? FARCommandTagTypeFuncStart : FARCommandTagTypeFuncEnd;
-    return tag;
-}
-
-
-+ (instancetype)classTagWithName:(NSString *)name superClassName:(NSString *)superClassName isStart:(BOOL)isStart {
-    FARCommandTag *tag = [[FARCommandTag alloc] init];
-    tag.name = name;
-    tag.superClassName = superClassName;
-    tag.type = isStart ? FARCommandTagTypeFuncClassStart : FARCommandTagTypeFuncClassEnd;
-    return tag;
-}
-
-+ (instancetype)closureTagWithName:(NSString *)name isStart:(BOOL)isStart {
-    FARCommandTag *tag = [[FARCommandTag alloc] init];
-    tag.name = name;
-    tag.type = isStart ? FARCommandTagTypeFuncClosureStart : FARCommandTagTypeFuncClosureEnd;
     return tag;
 }
 

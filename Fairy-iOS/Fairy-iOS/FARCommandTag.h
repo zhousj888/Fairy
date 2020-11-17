@@ -21,13 +21,8 @@ typedef NS_ENUM(NSInteger, FARCommandTagType) {
 @interface FARCommandTag : NSObject
 
 @property (nonatomic, copy) NSString *name;
-@property (nonatomic, assign) FARCommandTagType type;
-//class
-@property (nonatomic, copy) NSString *superClassName;
 
-+ (instancetype)funcTagWithName:( NSString * _Nullable ) name isStart:(BOOL)isStart;
-+ (instancetype)classTagWithName:( NSString * _Nullable )name superClassName:( NSString * _Nullable )superClassName isStart:(BOOL)isStart;
-+ (instancetype)closureTagWithName:(NSString * _Nullable)name isStart:(BOOL)isStart;
++ (instancetype)tagWithName:(NSString *)name;
 
 @end
 

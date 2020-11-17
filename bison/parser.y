@@ -8,10 +8,10 @@ int yylex(void);
 void addCmd1(int cmd);
 void addCmd2(int cmd, char *oper1);
 void addCmd3(int cmd, char *oper1, char *oper2);
-void tagFuncStart(char *prefix, char *tag);
-void tagFuncEnd();
-void tagClassStart(char *className,char *superClassName);
-void tagClassEnd();
+
+void addTag1(char *tag);
+void addTag2(char *tag1, char *tag2);
+void addTag3(char *tag1, char *tag2, char *tag3);
 
 #define YYSTYPE char *
 
@@ -162,11 +162,11 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func FuncName '(' Args ')' ClosureOrNextLine        { tagFuncEnd(); }
+    T_Func FuncName '(' Args ')' ClosureOrNextLine        { addTag1("FUNC_END"); }
 ;
 
 FuncName:
-    T_Identifier                                          { if(currentClassName){tagFuncStart(currentClassName,$1);} else {tagFuncStart("",$1);}  }
+    T_Identifier                                          { if(currentClassName){addTag3("FUNC",currentClassName, $1);} else {addTag2("FUNC",$1);}  }
 ;
 
 ClassDecl:
