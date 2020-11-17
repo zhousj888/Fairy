@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import <Fairy_iOS/FARParser.h>
+#import <Fairy_iOS/FARVirtualMachine.h>
 
 
 //! Project version number for Fairy_iOS.

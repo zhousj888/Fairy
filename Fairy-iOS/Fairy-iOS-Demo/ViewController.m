@@ -23,9 +23,8 @@
     NSString* content = [NSString stringWithContentsOfFile:path
                                                   encoding:NSUTF8StringEncoding
                                                       error:NULL];
-    
-    FARParser *parser = [[FARParser alloc] init];
-    [parser parse:content];
+    FARVirtualMachine *vm = [[FARVirtualMachine alloc] init];
+    [vm runWithCode:content];
 }
 
 

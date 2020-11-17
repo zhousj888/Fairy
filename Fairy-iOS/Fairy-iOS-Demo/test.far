@@ -52,14 +52,14 @@
 // }
 
 // // WhileStmt  
-while a {
-    repeat {
-        continue
-        break
-    } while a
-    continue
-    break
-}
+// while a {
+//     repeat {
+//         continue
+//         break
+//     } while a
+//     continue
+//     break
+// }
 
 // // jz endWhile
 // // beginWhile:
@@ -81,7 +81,7 @@ while a {
 // var a = 1    
 // func test3() {
     
-// }           
+// } 
 // class Son:Father
 // {
 //     var a = 1

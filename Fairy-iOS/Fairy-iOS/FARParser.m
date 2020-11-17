@@ -94,12 +94,19 @@ void addTag(char *format,...) {
 
 @implementation FARParser
 
-- (void)parse:(NSString *)code {
+- (FARVMCode *)parse:(NSString *)code {
     commandArr = [NSMutableArray array];
     tagArr = [NSMutableArray array];
     yy_scan_string(code.UTF8String);
     yyparse();
     NSLog(@"cmd sum = %@",@(commandArr.count));
+    
+    FARVMCode *vmCode = [[FARVMCode alloc] init];
+    vmCode.commandArr = commandArr;
+    vmCode.tagArr = tagArr;
+    commandArr = nil;
+    tagArr = nil;
+    return vmCode;
 }
 
 

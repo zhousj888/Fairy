@@ -6,12 +6,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FARVMCode.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FARParser : NSObject
 
-- (void)parse:(NSString *)code;
+- (FARVMCode *)parse:(NSString *)code;
 
 @end
 
