@@ -8,10 +8,7 @@ int yylex(void);
 void addCmd1(int cmd);
 void addCmd2(int cmd, char *oper1);
 void addCmd3(int cmd, char *oper1, char *oper2);
-
-void addTag1(char *tag);
-void addTag2(char *tag1, char *tag2);
-void addTag3(char *tag1, char *tag2, char *tag3);
+void addTag(char *format,...);
 
 #define YYSTYPE char *
 
@@ -162,11 +159,11 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func FuncName '(' Args ')' ClosureOrNextLine        { addTag1("FUNC_END"); }
+    T_Func FuncName '(' Args ')' ClosureOrNextLine        { addTag("FUNC_END"); }
 ;
 
 FuncName:
-    T_Identifier                                          { if(currentClassName){addTag3("FUNC",currentClassName, $1);} else {addTag2("FUNC",$1);}  }
+    T_Identifier                                          { if(currentClassName){addTag("FUNC:%s_%s",currentClassName,$1);} else {addTag("FUNC:%s",$1);}  }
 ;
 
 ClassDecl:
@@ -241,7 +238,7 @@ JzIfThen:
 ;
 
 BeginIf:
-    /* empty */                                      { _BEG_IF; printf("\t_begIf_%d:\n",_IF_ID); }
+    /* empty */                                      { _BEG_IF; printf("\t_begIf_%d:\n",_IF_ID);}
 ;
 
 EndIf:

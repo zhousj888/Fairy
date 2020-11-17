@@ -73,22 +73,13 @@ void addCmd3(int cmd, char *oper1, char *oper2) {
 }
 
 
-void addTag1(char *tag) {
-    NSString *tagStr = [NSString stringWithFormat:@"%s",tag];
-    NSLog(@"TAG %@",tagStr);
-    [tagArr addObject:[FARCommandTag tagWithName:tagStr]];
-}
-
-void addTag2(char *tag1, char *tag2) {
-    NSString *tagStr = [NSString stringWithFormat:@"%s_%s",tag1,tag2];
-    NSLog(@"TAG: %@",tagStr);
-    [tagArr addObject:[FARCommandTag tagWithName:tagStr]];
-}
-
-void addTag3(char *tag1, char *tag2, char *tag3) {
-    NSString *tagStr = [NSString stringWithFormat:@"%s_%s_%s",tag1,tag2,tag3];
-    NSLog(@"TAG: %@",tagStr);
-    [tagArr addObject:[FARCommandTag tagWithName:tagStr]];
+void addTag(char *format,...) {
+    va_list argList;
+    va_start(argList, format);
+    NSString *tag = [[NSString alloc] initWithFormat:transCharsToNSString(format) arguments:argList];
+    NSLog(@"TAG: %@",tag);
+    [tagArr addObject:[FARCommandTag tagWithName:tag]];
+    va_end(argList);
 }
 
 @implementation FARParser

@@ -39,17 +39,17 @@
 // test(a:1)
 
 // //AssignStmt StmtSeparator    
-a = 1
+// a = 1
 
-// //IfStmt   
-// if a {
-//     if a {
-//     }else if a {
-//     }else {
-//     }
-// }else if a{
-// }else {
-// }
+//IfStmt   
+if a {
+    if a {
+    }else if a {
+    }else {
+    }
+}else if a{
+}else {
+}
 
 // // WhileStmt  
 // while a {
@@ -82,19 +82,19 @@ a = 1
 // func test3() {
     
 // }           
-class Son:Father
-{
-    var a = 1
-    func init() {
+// class Son:Father
+// {
+//     var a = 1
+//     func init() {
 
-    }
-    func init(a,b,c){
+//     }
+//     func init(a,b,c){
 
-    }
-    func test(a,b,c) {
+//     }
+//     func test(a,b,c) {
 
-    }
-}
+//     }
+// }
 
 // func test2() {
 
