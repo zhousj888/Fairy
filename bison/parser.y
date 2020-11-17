@@ -124,7 +124,7 @@ ActualParams:
 ;
 
 ActualParam:
-    T_Identifier ':' Expr                               { printf("\t记录栈顶参数 -> %s 到参数集 \n",$1);} 
+    T_Identifier ':' Expr                               { addCmd1(FAROperSave,$1); } 
 ;
 
 CallExpr:
@@ -133,7 +133,7 @@ CallExpr:
 ;
 
 CallFuncName:
-    T_Identifier                                        { printf("\t调用方法 -> %s,创建参数集 \n",$1); }
+    T_Identifier                                        { addCmd1(FAROperCreateNewEnv,$1); }
 ;
 
 ObjCallExpr:

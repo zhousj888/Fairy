@@ -43,6 +43,8 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperCmdNot:{return @"not";}
         case FAROperCmdRet:{return @"ret";}
         case FAROperSaveIfNil:{return @"saveIfNil";}
+        case FAROperCreateNewEnv:{return @"createNewEnv";}
+        case FAROperSave:{return @"save";}
     }
     return @"unknow";
 }
