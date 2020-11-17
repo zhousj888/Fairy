@@ -1,5 +1,5 @@
-// //Expr
-// a + b
+//Expr
+a + b
 // a - b
 // a * b
 // a / b
@@ -77,28 +77,28 @@
 //     break
 // }
 
-//ClassDecl    
-var a = 1    
-func test3() {
+// ClassDecl    
+// var a = 1    
+// func test3() {
     
-}           
-class Son:Father
-{
-    var a = 1
-    func init() {
+// }           
+// class Son:Father
+// {
+//     var a = 1
+//     func init() {
 
-    }
-    func init(a,b,c){
+//     }
+//     func init(a,b,c){
 
-    }
-    func test(a,b,c) {
+//     }
+//     func test(a,b,c) {
 
-    }
-}
+//     }
+// }
 
-func test2() {
+// func test2() {
 
-}
+// }
 
 // a = Students()
 

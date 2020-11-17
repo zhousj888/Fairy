@@ -7,9 +7,18 @@
 
 #import "FARParser.h"
 #include "y.tab.h"
+#include "FAROperCmd.h"
 
 int yyparse (void);
 void* yy_scan_string (const char * yystr);
+
+void addCmd0(int cmd) {
+    NSLog(@">>>>>>>>add cmd = %@",@(FAROperCmdAdd));
+}
+
+void addCmd1(int cmd, char *oper1) {
+    NSLog(@">>>>>>>>add cmd = %@,%s",@(cmd),oper1);
+}
 
 @implementation FARParser
 

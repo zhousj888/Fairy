@@ -1,8 +1,11 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
+#include "FAROperCmd.h"
 void yyerror(const char*);
 int yylex(void);
+void addCmd0(int cmd);
+void addCmd1(int cmd, char *oper1);
 #define YYSTYPE char *
 
 int ifStmtId = 0, ifThenId = 0, ifTop = -1, ifThenStatckTop = -1, ifStack[100][100];
@@ -271,7 +274,7 @@ DictionExpr:
 ;
 
 Expr:
-    Expr '+' Expr           { printf("\tadd\n"); }
+    Expr '+' Expr           { printf("\tadd\n");addCmd0(111); }
 |   Expr '-' Expr           { printf("\tsub\n"); }
 |   Expr '*' Expr           { printf("\tmul\n"); }
 |   Expr '/' Expr           { printf("\tdiv\n"); }
@@ -287,9 +290,9 @@ Expr:
 |   '-' Expr %prec '!'      { printf("\tneg\n"); }
 |   '+' Expr %prec '!'      { /* empty */ }
 |   '!' Expr                { printf("\tnot\n"); }
-|   T_IntConstant           { printf("\tpush %s\n", $1); }
-|   T_DecimalConstant       { printf("\tpush %s\n", $1); }
-|   T_Identifier            { printf("\tpush %s\n", $1); }
+|   T_IntConstant           { printf("\tpush %s\n", $1);addCmd1(FAROperCmdPush,$1); }
+|   T_DecimalConstant       { printf("\tpush %s\n", $1);addCmd1(FAROperCmdPush,$1); }
+|   T_Identifier            { printf("\tpush %s\n", $1);addCmd1(FAROperCmdPush,$1); }
 |   CallExpr                
 |   '(' Expr ')'
 |   IntervalExpr            
