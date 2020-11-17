@@ -42,24 +42,24 @@
 // a = 1
 
 //IfStmt   
-if a {
-    if a {
-    }else if a {
-    }else {
-    }
-}else if a{
-}else {
-}
+// if a {
+//     if a {
+//     }else if a {
+//     }else {
+//     }
+// }else if a{
+// }else {
+// }
 
 // // WhileStmt  
-// while a {
-//     repeat {
-//         continue
-//         break
-//     } while a
-//     continue
-//     break
-// }
+while a {
+    repeat {
+        continue
+        break
+    } while a
+    continue
+    break
+}
 
 // // jz endWhile
 // // beginWhile:

@@ -181,11 +181,11 @@ SuperClassName:
 ;
 
 BreakStmt:
-    T_Break                             { printf("\tjmp _endWhile_%d\n", _WHILE_ID); }
+    T_Break                             { addCmd2(FAROperCmdJmp,generString(15,"_endWhile_%d", _WHILE_ID)); }
 ;
 
 ContinueStmt:
-    T_Continue                          { printf("\tjmp _continuePoint_%d\n", _WHILE_ID); }
+    T_Continue                          { addCmd2(FAROperCmdJmp,generString(18,"_continuePoint_%d", _WHILE_ID)); }
 ;
 
 WhileStmt:
@@ -193,15 +193,15 @@ WhileStmt:
 ;
 
 WhileBeginTag:
-    /* empty */      { printf("\t_begWhile_%d:\n", _WHILE_ID); }
+    /* empty */      { addTag("_begWhile_%d", _WHILE_ID);  }
 ;
 
 BeginJzEndWhile:
-    /* empty */     { _BEG_WHILE; printf("\tjz _endWhile_%d\n", _WHILE_ID); }
+    /* empty */     { _BEG_WHILE; addCmd2(FAROperCmdJz, generString(13,"_endWhile_%d",_WHILE_ID)); }
 ;
 
 EndWhile:
-    /* empty */     { printf("\t_continuePoint_%d\n", _WHILE_ID); printf("\tjnz _begWhile_%d\n", _WHILE_ID); printf("\t_endWhile_%d:\n\n", _WHILE_ID); _END_WHILE; }
+    /* empty */     { addTag("_continuePoint_%d", _WHILE_ID); printf("\tjnz _begWhile_%d\n", _WHILE_ID);addCmd2(FAROperCmdJnz,generString(18,"_begWhile_%d", _WHILE_ID)); addTag("\t_endWhile_%d:\n\n", _WHILE_ID); _END_WHILE; }
 ;
 
 RepeatWileStmt:
@@ -209,11 +209,11 @@ RepeatWileStmt:
 ;
 
 EndRepeat:
-    /* empty */     { printf("\t_continuePoint_%d\n", _WHILE_ID);printf("\tjnz _begWhile_%d\n", _WHILE_ID); printf("\t_endWhile_%d\n", _WHILE_ID); _END_WHILE}
+    /* empty */     { addTag("_continuePoint_%d", _WHILE_ID);addCmd2(FAROperCmdJnz,generString(18,"_begWhile_%d", _WHILE_ID)); addTag("_endWhile_%d", _WHILE_ID); _END_WHILE}
 ;
 
 RepeatBegin:
-    T_Repeat                        { _BEG_WHILE; printf("\t_begWhile_%d\n", _WHILE_ID); }
+    T_Repeat                        { _BEG_WHILE; addTag("_begWhile_%d", _WHILE_ID); }
 ;
 
 WholeIfStmt:
