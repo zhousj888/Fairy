@@ -9,11 +9,13 @@
 #include "y.tab.h"
 #include "FAROperCmd.h"
 #import "FARCommand.h"
+#import "FARCommandTag.h"
 
 int yyparse (void);
 void* yy_scan_string (const char * yystr);
 
 static NSMutableArray<FARCommand *> *commandArr;
+static NSMutableArray<FARCommandTag *> *tagArr;
 
 NSString *transCmdToDescription(int cmd) {
     switch (cmd) {
@@ -64,12 +66,32 @@ void addCmd2(int cmd, char *oper1, char *oper2) {
     [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2)]];
 }
 
+void tagFuncStart(char *prefix, char *tag) {
+    NSString *funcName = [NSString stringWithFormat:@"%s_%s",prefix,tag];
+    NSLog(@"FUNC START:%@",funcName);
+    [tagArr addObject:[FARCommandTag funcTagWithName:funcName isStart:YES]];
+}
+
+void tagFuncEnd() {
+    NSLog(@"FUNC END!");
+    [tagArr addObject:[FARCommandTag funcTagWithName:nil isStart:NO]];
+}
+
+void tagClassStart(char *className,char *superClassName) {
+    [tagArr addObject:[FARCommandTag classTagWithName:transCharsToNSString(className) superClassName:transCharsToNSString(superClassName) isStart:YES]];
+}
+
+void tagClassEnd() {
+    [tagArr addObject:[FARCommandTag classTagWithName:nil superClassName:nil isStart:NO]];
+}
+
 
 @implementation FARParser
 
 - (void)parse:(NSString *)code {
-    yy_scan_string(code.UTF8String);
     commandArr = [NSMutableArray array];
+    tagArr = [NSMutableArray array];
+    yy_scan_string(code.UTF8String);
     yyparse();
     NSLog(@"cmd sum = %@",@(commandArr.count));
 }

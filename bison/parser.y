@@ -2,10 +2,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "FAROperCmd.h"
+
 void yyerror(const char*);
 int yylex(void);
 void addCmd0(int cmd);
 void addCmd1(int cmd, char *oper1);
+void addCmd2(int cmd, char *oper1, char *oper2);
+void tagFuncStart(char *prefix, char *tag);
+void tagFuncEnd();
+void tagClassStart(char *className,char *superClassName);
+void tagClassEnd();
+
 #define YYSTYPE char *
 
 int ifStmtId = 0, ifThenId = 0, ifTop = -1, ifThenStatckTop = -1, ifStack[100][100];
@@ -155,11 +162,11 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func FuncName '(' Args ')' ClosureOrNextLine        { printf("\tENDFUNC\n\n"); }
+    T_Func FuncName '(' Args ')' ClosureOrNextLine        { tagFuncEnd(); }
 ;
 
 FuncName:
-    T_Identifier                                          { if(currentClassName){printf("\tFUNC @%s %s:\n",currentClassName, $1);} else {printf("\tFUNC @%s:\n", $1);}  }
+    T_Identifier                                          { if(currentClassName){tagFuncStart(currentClassName,$1);} else {tagFuncStart("",$1);}  }
 ;
 
 ClassDecl:
