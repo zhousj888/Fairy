@@ -5,9 +5,9 @@
 
 void yyerror(const char*);
 int yylex(void);
-void addCmd0(int cmd);
-void addCmd1(int cmd, char *oper1);
-void addCmd2(int cmd, char *oper1, char *oper2);
+void addCmd1(int cmd);
+void addCmd2(int cmd, char *oper1);
+void addCmd3(int cmd, char *oper1, char *oper2);
 void tagFuncStart(char *prefix, char *tag);
 void tagFuncEnd();
 void tagClassStart(char *className,char *superClassName);
@@ -124,16 +124,16 @@ ActualParams:
 ;
 
 ActualParam:
-    T_Identifier ':' Expr                               { addCmd1(FAROperSave,$1); } 
+    T_Identifier ':' Expr                               { addCmd2(FAROperSave,$1); } 
 ;
 
 CallExpr:
-    CallFuncName '(' ActualParams ')'                   { addCmd2(FAROperCmdJmp, currentClassName, $1); }
-|   CallFuncName '(' ActualParams ')' Closure           { printf("\t记录闭包参数 -> %s \n",$1);addCmd2(FAROperCmdJmp, currentClassName, $1); }
+    CallFuncName '(' ActualParams ')'                   { addCmd3(FAROperCmdJmp, currentClassName, $1); }
+|   CallFuncName '(' ActualParams ')' Closure           { printf("\t记录闭包参数 -> %s \n",$1);addCmd3(FAROperCmdJmp, currentClassName, $1); }
 ;
 
 CallFuncName:
-    T_Identifier                                        { addCmd1(FAROperCreateNewEnv,$1); }
+    T_Identifier                                        { addCmd2(FAROperCreateNewEnv,$1); }
 ;
 
 ObjCallExpr:
@@ -141,8 +141,8 @@ ObjCallExpr:
 ;
 
 ReturnStmt:
-    T_Return Expr                                       { printf("\tret ~\n\n");addCmd1(FAROperCmdRet,"~"); }
-|   T_Return                                            { printf("\tret\n\n");addCmd0(FAROperCmdRet);}
+    T_Return Expr                                       { printf("\tret ~\n\n");addCmd2(FAROperCmdRet,"~"); }
+|   T_Return                                            { printf("\tret\n\n");addCmd1(FAROperCmdRet);}
 ;
 
 ForStmt:
@@ -158,7 +158,7 @@ Args:
 
 Arg:
     T_Identifier
-|   Arg '=' Expr                                          { addCmd1(FAROperSaveIfNil,$1); }
+|   Arg '=' Expr                                          { addCmd2(FAROperSaveIfNil,$1); }
 ;
 
 FuncDecl:
@@ -249,14 +249,14 @@ EndIf:
 ;
 
 VarDecl:
-    T_Var T_Identifier                              { addCmd1(FAROperCmdVar, $2); }
-|   T_Let T_Identifier                              { addCmd1(FAROperCmdLet, $2); }
-|   T_Var T_Identifier '=' Expr                     { addCmd1(FAROperCmdPop, $2); }
-|   T_Let T_Identifier '=' Expr                     { addCmd1(FAROperCmdPop, $2); }
+    T_Var T_Identifier                              { addCmd2(FAROperCmdVar, $2); }
+|   T_Let T_Identifier                              { addCmd2(FAROperCmdLet, $2); }
+|   T_Var T_Identifier '=' Expr                     { addCmd2(FAROperCmdPop, $2); }
+|   T_Let T_Identifier '=' Expr                     { addCmd2(FAROperCmdPop, $2); }
 ;
 
 AssignStmt:
-    T_Identifier '=' Expr                           { addCmd1(FAROperCmdPop, $1); }
+    T_Identifier '=' Expr                           { addCmd2(FAROperCmdPop, $1); }
 ;
 
 IntervalExpr:
@@ -281,25 +281,25 @@ DictionExpr:
 ;
 
 Expr:
-    Expr '+' Expr           { addCmd0(FAROperCmdAdd); }
-|   Expr '-' Expr           { addCmd0(FAROperCmdSub); }
-|   Expr '*' Expr           { addCmd0(FAROperCmdMul); }
-|   Expr '/' Expr           { addCmd0(FAROperCmdDiv); }
-|   Expr '%' Expr           { addCmd0(FAROperCmdMod); }
-|   Expr '>' Expr           { addCmd0(FAROperCmdCmpgt); }
-|   Expr '<' Expr           { addCmd0(FAROperCmdCmplt); }
-|   Expr T_Ge Expr          { addCmd0(FAROperCmdCmpge); }
-|   Expr T_Le Expr          { addCmd0(FAROperCmdCmple); }
-|   Expr T_Eq Expr          { addCmd0(FAROperCmdCmpeq); }
-|   Expr T_Ne Expr          { addCmd0(FAROperCmdCmpne); }
-|   Expr T_Or Expr          { addCmd0(FAROperCmdOr); }
-|   Expr T_And Expr         { addCmd0(FAROperCmdAnd); }
-|   '-' Expr %prec '!'      { addCmd0(FAROperCmdNeg); }
+    Expr '+' Expr           { addCmd1(FAROperCmdAdd); }
+|   Expr '-' Expr           { addCmd1(FAROperCmdSub); }
+|   Expr '*' Expr           { addCmd1(FAROperCmdMul); }
+|   Expr '/' Expr           { addCmd1(FAROperCmdDiv); }
+|   Expr '%' Expr           { addCmd1(FAROperCmdMod); }
+|   Expr '>' Expr           { addCmd1(FAROperCmdCmpgt); }
+|   Expr '<' Expr           { addCmd1(FAROperCmdCmplt); }
+|   Expr T_Ge Expr          { addCmd1(FAROperCmdCmpge); }
+|   Expr T_Le Expr          { addCmd1(FAROperCmdCmple); }
+|   Expr T_Eq Expr          { addCmd1(FAROperCmdCmpeq); }
+|   Expr T_Ne Expr          { addCmd1(FAROperCmdCmpne); }
+|   Expr T_Or Expr          { addCmd1(FAROperCmdOr); }
+|   Expr T_And Expr         { addCmd1(FAROperCmdAnd); }
+|   '-' Expr %prec '!'      { addCmd1(FAROperCmdNeg); }
 |   '+' Expr %prec '!'      { /* empty */ }
-|   '!' Expr                { addCmd0(FAROperCmdNot); }
-|   T_IntConstant           { addCmd1(FAROperCmdPush,$1); }
-|   T_DecimalConstant       { addCmd1(FAROperCmdPush,$1); }
-|   T_Identifier            { addCmd1(FAROperCmdPush,$1); }
+|   '!' Expr                { addCmd1(FAROperCmdNot); }
+|   T_IntConstant           { addCmd2(FAROperCmdPush,$1); }
+|   T_DecimalConstant       { addCmd2(FAROperCmdPush,$1); }
+|   T_Identifier            { addCmd2(FAROperCmdPush,$1); }
 |   CallExpr                
 |   '(' Expr ')'
 |   IntervalExpr            

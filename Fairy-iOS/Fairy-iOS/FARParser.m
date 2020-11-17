@@ -57,17 +57,17 @@ NSString *transCharsToNSString(char *chars) {
 }
 
 
-void addCmd0(int cmd) {
+void addCmd1(int cmd) {
     NSLog(@"%@",transCmdToDescription(cmd));
     [commandArr addObject:[FARCommand commandWithCmd:cmd]];
 }
 
-void addCmd1(int cmd, char *oper1) {
+void addCmd2(int cmd, char *oper1) {
     NSLog(@"%@,%s",transCmdToDescription(cmd),oper1);
     [commandArr addObject:[FARCommand commandWithCmd:cmd oper:transCharsToNSString(oper1)]];
 }
 
-void addCmd2(int cmd, char *oper1, char *oper2) {
+void addCmd3(int cmd, char *oper1, char *oper2) {
     NSLog(@"%@,%s,%s",transCmdToDescription(cmd),oper1,oper2);
     [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2)]];
 }
