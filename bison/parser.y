@@ -256,7 +256,7 @@ VarDecl:
 ;
 
 AssignStmt:
-    T_Identifier '=' Expr                           { printf("oper->pop %s \n", $1); }
+    T_Identifier '=' Expr                           { addCmd1(FAROperCmdPop, $1); }
 ;
 
 IntervalExpr:

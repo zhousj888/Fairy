@@ -36,10 +36,10 @@
 // }
 
 // //call
-test(a:1)
+// test(a:1)
 
 // //AssignStmt StmtSeparator    
-// a = 1
+a = 1
 
 // //IfStmt   
 // if a {
