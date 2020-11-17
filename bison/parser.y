@@ -274,7 +274,7 @@ DictionExpr:
 ;
 
 Expr:
-    Expr '+' Expr           { printf("\tadd\n");addCmd0(111); }
+    Expr '+' Expr           { addCmd0(FAROperCmdAdd); }
 |   Expr '-' Expr           { printf("\tsub\n"); }
 |   Expr '*' Expr           { printf("\tmul\n"); }
 |   Expr '/' Expr           { printf("\tdiv\n"); }
@@ -290,9 +290,9 @@ Expr:
 |   '-' Expr %prec '!'      { printf("\tneg\n"); }
 |   '+' Expr %prec '!'      { /* empty */ }
 |   '!' Expr                { printf("\tnot\n"); }
-|   T_IntConstant           { printf("\tpush %s\n", $1);addCmd1(FAROperCmdPush,$1); }
-|   T_DecimalConstant       { printf("\tpush %s\n", $1);addCmd1(FAROperCmdPush,$1); }
-|   T_Identifier            { printf("\tpush %s\n", $1);addCmd1(FAROperCmdPush,$1); }
+|   T_IntConstant           { addCmd1(FAROperCmdPush,$1); }
+|   T_DecimalConstant       { addCmd1(FAROperCmdPush,$1); }
+|   T_Identifier            { addCmd1(FAROperCmdPush,$1); }
 |   CallExpr                
 |   '(' Expr ')'
 |   IntervalExpr            
