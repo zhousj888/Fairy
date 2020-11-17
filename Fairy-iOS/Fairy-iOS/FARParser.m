@@ -8,9 +8,12 @@
 #import "FARParser.h"
 #include "y.tab.h"
 #include "FAROperCmd.h"
+#import "FARCommand.h"
 
 int yyparse (void);
 void* yy_scan_string (const char * yystr);
+
+static NSMutableArray<FARCommand *> *commandArr;
 
 NSString *transCmdToDescription(int cmd) {
     switch (cmd) {
@@ -41,26 +44,34 @@ NSString *transCmdToDescription(int cmd) {
     return @"unknow";
 }
 
+NSString *transCharsToNSString(char *chars) {
+    return [NSString stringWithUTF8String:chars];
+}
+
 
 void addCmd0(int cmd) {
     NSLog(@"%@",transCmdToDescription(cmd));
+    [commandArr addObject:[FARCommand commandWithCmd:cmd]];
 }
 
 void addCmd1(int cmd, char *oper1) {
     NSLog(@"%@,%s",transCmdToDescription(cmd),oper1);
+    [commandArr addObject:[FARCommand commandWithCmd:cmd oper:transCharsToNSString(oper1)]];
 }
 
 void addCmd2(int cmd, char *oper1, char *oper2) {
     NSLog(@"%@,%s,%s",transCmdToDescription(cmd),oper1,oper2);
+    [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2)]];
 }
 
 
 @implementation FARParser
 
-
 - (void)parse:(NSString *)code {
     yy_scan_string(code.UTF8String);
+    commandArr = [NSMutableArray array];
     yyparse();
+    NSLog(@"cmd sum = %@",@(commandArr.count));
 }
 
 
