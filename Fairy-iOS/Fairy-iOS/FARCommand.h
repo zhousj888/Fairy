@@ -13,16 +13,16 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FARCommand : NSObject
 
 @property (nonatomic, assign) NSInteger operCmd;
-@property (nonatomic, strong) id oper1;
-@property (nonatomic, strong) id oper2;
-@property (nonatomic, strong) id oper3;
-@property (nonatomic, strong) id oper4;
-@property (nonatomic, strong) id oper5;
+@property (nonatomic, strong) NSString *oper1;
+@property (nonatomic, strong) NSString *oper2;
+@property (nonatomic, strong) NSString *oper3;
+@property (nonatomic, strong) NSString *oper4;
+@property (nonatomic, strong) NSString *oper5;
 
 + (instancetype)commandWithCmd:(NSInteger)cmd;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper:(id)oper;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(id)oper1 oper2:(id)oper2;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(id)oper1 oper2:(id)oper2 oper3:(id)oper3;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper:(NSString *)oper;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(NSString *)oper1 oper2:(NSString *)oper2;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(NSString *)oper1 oper2:(NSString *)oper2 oper3:(NSString *)oper3;
 
 
 @end

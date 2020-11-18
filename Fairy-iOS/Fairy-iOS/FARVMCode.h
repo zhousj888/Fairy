@@ -14,7 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FARVMCode : NSObject
 
 @property (nonatomic, strong) NSMutableArray<FARCommand *> *commandArr;
-@property (nonatomic, strong) NSMutableArray<FARCommandTag *> *tagArr;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, FARCommandTag *> *tagDic;
 
 @end
 

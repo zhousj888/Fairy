@@ -126,7 +126,7 @@ ActualParam:
 ;
 
 CallExpr:
-    CallFuncName '(' ActualParams ')'                   { addCmd3(FAROperCmdJmp, currentClassName, $1); }
+    CallFuncName '(' ActualParams ')'                   { addCmd3(FAROperCallFunc, currentClassName, $1); }
 |   CallFuncName '(' ActualParams ')' Closure           { printf("\t记录闭包参数 -> %s \n",$1);addCmd3(FAROperCmdJmp, currentClassName, $1); }
 ;
 

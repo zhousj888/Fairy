@@ -34,12 +34,13 @@ enum {
     FAROperCmdAnd,
     FAROperCmdNeg,
     FAROperCmdNot,
-    FAROperCmdRet,
     
     FAROperSave,
     FAROperSaveIfNil,
     FAROperCreateNewEnv,
     
+    FAROperCallFunc,
+    FAROperCmdRet,
     FAROperExit,
 };
 

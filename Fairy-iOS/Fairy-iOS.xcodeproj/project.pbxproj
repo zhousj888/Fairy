@@ -19,6 +19,10 @@
 		65EF909F2564003400A98D1C /* FARVirtualMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF909D2564003300A98D1C /* FARVirtualMachine.m */; };
 		65EF90A32564012400A98D1C /* FARVMCode.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF90A12564012400A98D1C /* FARVMCode.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65EF90A42564012400A98D1C /* FARVMCode.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF90A22564012400A98D1C /* FARVMCode.m */; };
+		65EF913F2565478600A98D1C /* FARVMEnvironment.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF913D2565478600A98D1C /* FARVMEnvironment.h */; };
+		65EF91402565478600A98D1C /* FARVMEnvironment.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF913E2565478600A98D1C /* FARVMEnvironment.m */; };
+		65EF914425654D4700A98D1C /* FARNull.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF914225654D4700A98D1C /* FARNull.h */; };
+		65EF914525654D4700A98D1C /* FARNull.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF914325654D4700A98D1C /* FARNull.m */; };
 		65F6C3F225626B6200C8B94C /* Fairy_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F6C3F025626B6200C8B94C /* Fairy_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65F6C42425626BE200C8B94C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6C42325626BE200C8B94C /* AppDelegate.m */; };
 		65F6C42725626BE200C8B94C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6C42625626BE200C8B94C /* SceneDelegate.m */; };
@@ -70,6 +74,10 @@
 		65EF909D2564003300A98D1C /* FARVirtualMachine.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARVirtualMachine.m; sourceTree = "<group>"; };
 		65EF90A12564012400A98D1C /* FARVMCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARVMCode.h; sourceTree = "<group>"; };
 		65EF90A22564012400A98D1C /* FARVMCode.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARVMCode.m; sourceTree = "<group>"; };
+		65EF913D2565478600A98D1C /* FARVMEnvironment.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARVMEnvironment.h; sourceTree = "<group>"; };
+		65EF913E2565478600A98D1C /* FARVMEnvironment.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARVMEnvironment.m; sourceTree = "<group>"; };
+		65EF914225654D4700A98D1C /* FARNull.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARNull.h; sourceTree = "<group>"; };
+		65EF914325654D4700A98D1C /* FARNull.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARNull.m; sourceTree = "<group>"; };
 		65F6C3ED25626B6200C8B94C /* Fairy_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fairy_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F6C3F025626B6200C8B94C /* Fairy_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Fairy_iOS.h; sourceTree = "<group>"; };
 		65F6C3F125626B6200C8B94C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -155,6 +163,10 @@
 				65EF90A22564012400A98D1C /* FARVMCode.m */,
 				65EF909C2564003300A98D1C /* FARVirtualMachine.h */,
 				65EF909D2564003300A98D1C /* FARVirtualMachine.m */,
+				65EF914225654D4700A98D1C /* FARNull.h */,
+				65EF914325654D4700A98D1C /* FARNull.m */,
+				65EF913D2565478600A98D1C /* FARVMEnvironment.h */,
+				65EF913E2565478600A98D1C /* FARVMEnvironment.m */,
 				65EF908D25637F0000A98D1C /* FARCommandTag.h */,
 				65EF908E25637F0000A98D1C /* FARCommandTag.m */,
 				65F6C44925626F8200C8B94C /* FARCommand.h */,
@@ -199,12 +211,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EF908F25637F0000A98D1C /* FARCommandTag.h in Headers */,
+				65EF913F2565478600A98D1C /* FARVMEnvironment.h in Headers */,
 				65BD65112562961B007AF316 /* FAROperCmd.h in Headers */,
 				65BD652125629B7D007AF316 /* FARParser.h in Headers */,
 				65EF90A32564012400A98D1C /* FARVMCode.h in Headers */,
 				65F6C3F225626B6200C8B94C /* Fairy_iOS.h in Headers */,
 				65EF909E2564003400A98D1C /* FARVirtualMachine.h in Headers */,
 				65F6C44B25626F8200C8B94C /* FARCommand.h in Headers */,
+				65EF914425654D4700A98D1C /* FARNull.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,7 +330,9 @@
 				65BD652225629B7D007AF316 /* FARParser.m in Sources */,
 				65EF90842562A97900A98D1C /* scanner.l in Sources */,
 				65EF90812562A96E00A98D1C /* parser.y in Sources */,
+				65EF91402565478600A98D1C /* FARVMEnvironment.m in Sources */,
 				65F6C44C25626F8200C8B94C /* FARCommand.m in Sources */,
+				65EF914525654D4700A98D1C /* FARNull.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

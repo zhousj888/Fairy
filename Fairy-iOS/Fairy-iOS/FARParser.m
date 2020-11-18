@@ -15,7 +15,7 @@ int yyparse (void);
 void* yy_scan_string (const char * yystr);
 
 static NSMutableArray<FARCommand *> *commandArr;
-static NSMutableArray<FARCommandTag *> *tagArr;
+static NSMutableDictionary<NSString *, FARCommandTag *> *tagDic;
 
 
 char *generString(int stringLength,char *fmt,...) {
@@ -55,6 +55,7 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperSaveIfNil:{return @"saveIfNil";}
         case FAROperCreateNewEnv:{return @"createNewEnv";}
         case FAROperSave:{return @"save";}
+        case FAROperCallFunc:{return @"callFunc";}
     }
     return @"unknow";
 }
@@ -88,7 +89,8 @@ void addTag(char *format,...) {
     va_start(argList, format);
     NSString *tag = [[NSString alloc] initWithFormat:transCharsToNSString(format) arguments:argList];
     NSLog(@"TAG: %@",tag);
-    [tagArr addObject:[FARCommandTag tagWithName:tag codeIndex:commandArr.count]];
+    FARCommandTag *tagObj = [FARCommandTag tagWithName:tag codeIndex:commandArr.count];
+    tagDic[tag] = tagObj;
     va_end(argList);
 }
 
@@ -96,16 +98,17 @@ void addTag(char *format,...) {
 
 - (FARVMCode *)parse:(NSString *)code {
     commandArr = [NSMutableArray array];
-    tagArr = [NSMutableArray array];
+    tagDic = [NSMutableDictionary dictionary];
+    
     yy_scan_string(code.UTF8String);
     yyparse();
     NSLog(@"cmd sum = %@",@(commandArr.count));
     
     FARVMCode *vmCode = [[FARVMCode alloc] init];
     vmCode.commandArr = commandArr;
-    vmCode.tagArr = tagArr;
+    vmCode.tagDic = tagDic;
     commandArr = nil;
-    tagArr = nil;
+    tagDic = nil;
     return vmCode;
 }
 
