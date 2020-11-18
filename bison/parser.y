@@ -227,7 +227,7 @@ IfStmt:
 ;
 
 JmpEndIf:
-    /* empty */                                     { char *text = generString(11,"_endif_%d",_IF_ID);addCmd2(FAROperCmdJmp,text); }
+    /* empty */                                     { char *text = generString(11,"_endIf_%d",_IF_ID);addCmd2(FAROperCmdJmp,text); }
 ;
 
 IfThen:
@@ -301,7 +301,7 @@ Expr:
 |   CallExpr                
 |   '(' Expr ')'
 |   IntervalExpr            
-|   T_StringConstant        
+|   T_StringConstant        { addCmd2(FAROperCmdPush,$1); }
 |   ArrayExpr               
 |   DictionExpr             
 |   ObjCallExpr             

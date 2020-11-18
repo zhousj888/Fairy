@@ -1,4 +1,12 @@
 //Expr
+// __log(text: 1 * 2 + 3)
+
+var a = 7
+if a > 6 {
+    __log(text: "大于6")
+}else {
+    __log(text: "小于6")
+}
 // a+ b *c
 // a - b
 // a * b
@@ -36,7 +44,7 @@
 // }
 
 // //call
-test(a:1)
+// __log(text:"asdfasdf")
 
 // //AssignStmt StmtSeparator    
 // a = 1

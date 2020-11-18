@@ -21,7 +21,7 @@ static NSString *const kRetSp = @"__retSp";
 @property (nonatomic, strong) FARVMEnvironment *currentEnv;
 @property (nonatomic, assign) NSInteger pc;
 @property (nonatomic, assign) NSInteger sp;
-@property (nonatomic, assign) BOOL isFinish;
+@property (nonatomic, assign) BOOL isExit;
 
 @end
 
@@ -42,11 +42,11 @@ static NSString *const kRetSp = @"__retSp";
     self.currentEnv = self.mainEnv;
     self.pc = 0;
     self.sp = 0;
-    self.isFinish = NO;
+    self.isExit = NO;
 }
 
 - (void)run {
-    while (self.isFinish) {
+    while (!self.isExit) {
         FARCommand *cmd = self.vmCode.commandArr[self.pc];
         if ([self executeCmd:cmd]) {
             self.pc++;
@@ -67,10 +67,17 @@ static NSString *const kRetSp = @"__retSp";
 }
 
 - (BOOL)isNumber:(NSString *)str {
-    if ([str integerValue] || [str doubleValue]) {
-        return NO;
+    if ([str integerValue] || [str doubleValue] || [str isEqualToString:@"0"]) {
+        return YES;
     }
-    return YES;
+    return NO;
+}
+
+- (BOOL)isStringConst:(NSString *)str {
+    if ([str hasPrefix:@"\""]) {
+        return YES;
+    }
+    return NO;
 }
 
 - (BOOL)isZero:(id)value {
@@ -81,7 +88,16 @@ static NSString *const kRetSp = @"__retSp";
 }
 
 - (void)jmp:(NSString *)tag {
-    self.pc = self.vmCode.tagDic[tag].codeIndex;
+    NSInteger index = self.vmCode.tagDic[tag].codeIndex;
+    if (index) {
+        self.pc = index;
+    }else if([tag isEqualToString:@"__log"]){
+        NSLog(@"__log: ------------------------>%@",[self.currentEnv findVarForKey:@"text"]);
+        self.pc++;
+    }else {
+        self.isExit = YES;
+        NSLog(@"jmp to %@ failed",tag);
+    }
 }
 
 
@@ -89,7 +105,7 @@ static NSString *const kRetSp = @"__retSp";
 - (BOOL)executeCmd:(FARCommand *)cmd {
     switch (cmd.operCmd) {
         case FAROperCmdPush:{
-            if ([self isNumber:cmd.oper1]) {
+            if ([self isNumber:cmd.oper1] || [self isStringConst:cmd.oper1]) {
                 [self push:cmd.oper1];
             }else {
                 [self push:[self.currentEnv findVarForKey:cmd.oper1]];
@@ -110,14 +126,16 @@ static NSString *const kRetSp = @"__retSp";
         case FAROperCmdJz:{
             if ([self isZero:[self pop]]) {
                 [self jmp:cmd.oper1];
+                return NO;
             }
-            return NO;
+            return YES;
         }
         case FAROperCmdJnz:{
             if (![self isZero:[self pop]]) {
                 [self jmp:cmd.oper1];
+                return NO;
             }
-            return NO;
+            return YES;
         }
         case FAROperCmdVar:{
             [self.currentEnv declareVar:cmd.oper1];
@@ -128,39 +146,39 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCmdAdd:{
-            id oper1 = [self pop];
             id oper2 = [self pop];
+            id oper1 = [self pop];
             [self push:@([oper1 integerValue] + [oper2 integerValue])];
             return YES;
         }
         case FAROperCmdSub:{
-            id oper1 = [self pop];
             id oper2 = [self pop];
+            id oper1 = [self pop];
             [self push:@([oper1 integerValue] - [oper2 integerValue])];
             return YES;
         }
         case FAROperCmdMul:{
-            id oper1 = [self pop];
             id oper2 = [self pop];
+            id oper1 = [self pop];
             [self push:@([oper1 integerValue] * [oper2 integerValue])];
             return YES;
         }
         case FAROperCmdDiv:{
-            id oper1 = [self pop];
             id oper2 = [self pop];
+            id oper1 = [self pop];
             [self push:@([oper1 integerValue] / [oper2 integerValue])];
             return YES;
         }
             
         case FAROperCmdMod:{
-            id oper1 = [self pop];
             id oper2 = [self pop];
+            id oper1 = [self pop];
             [self push:@([oper1 integerValue] % [oper2 integerValue])];
             return YES;
         }
         case FAROperCmdCmpgt:{
-            NSInteger oper1 = [[self pop] integerValue];
             NSInteger oper2 = [[self pop] integerValue];
+            NSInteger oper1 = [[self pop] integerValue];
             if (oper1 > oper2) {
                 [self push:@(1)];
             }else {
@@ -169,8 +187,8 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCmdCmplt:{
-            NSInteger oper1 = [[self pop] integerValue];
             NSInteger oper2 = [[self pop] integerValue];
+            NSInteger oper1 = [[self pop] integerValue];
             if (oper1 < oper2) {
                 [self push:@(1)];
             }else {
@@ -179,8 +197,8 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCmdCmpge:{
-            NSInteger oper1 = [[self pop] integerValue];
             NSInteger oper2 = [[self pop] integerValue];
+            NSInteger oper1 = [[self pop] integerValue];
             if (oper1 >= oper2) {
                 [self push:@(1)];
             }else {
@@ -189,8 +207,8 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCmdCmple:{
-            NSInteger oper1 = [[self pop] integerValue];
             NSInteger oper2 = [[self pop] integerValue];
+            NSInteger oper1 = [[self pop] integerValue];
             if (oper1 <= oper2) {
                 [self push:@(1)];
             }else {
@@ -199,8 +217,8 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCmdCmpeq:{
-            NSInteger oper1 = [[self pop] integerValue];
             NSInteger oper2 = [[self pop] integerValue];
+            NSInteger oper1 = [[self pop] integerValue];
             if (oper1 == oper2) {
                 [self push:@(1)];
             }else {
@@ -209,8 +227,8 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCmdCmpne:{
-            NSInteger oper1 = [[self pop] integerValue];
             NSInteger oper2 = [[self pop] integerValue];
+            NSInteger oper1 = [[self pop] integerValue];
             if (oper1 != oper2) {
                 [self push:@(1)];
             }else {
@@ -219,8 +237,8 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCmdOr:{
-            NSInteger oper1 = [[self pop] integerValue];
             NSInteger oper2 = [[self pop] integerValue];
+            NSInteger oper1 = [[self pop] integerValue];
             if (oper1 || oper2) {
                 [self push:@(1)];
             }else {
@@ -229,8 +247,8 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCmdAnd:{
-            NSInteger oper1 = [[self pop] integerValue];
             NSInteger oper2 = [[self pop] integerValue];
+            NSInteger oper1 = [[self pop] integerValue];
             if (oper1 && oper2) {
                 [self push:@(1)];
             }else {
@@ -252,7 +270,7 @@ static NSString *const kRetSp = @"__retSp";
             [self.currentEnv setVar:@(self.pc + 1) key:kRetPc];
             [self.currentEnv setVar:@(self.sp) key:kRetSp];
             NSString *funcName = cmd.oper1.length ? [NSString stringWithFormat:@"%@_%@",cmd.oper1,cmd.oper2] : cmd.oper2;
-            [self jmp:cmd.oper2];
+            [self jmp:funcName];
             return NO;
         }
         case FAROperCmdRet:{
@@ -280,7 +298,8 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperExit:{
-            self.isFinish = YES;
+            NSLog(@"exit");
+            self.isExit = YES;
         }
     }
     return YES;
