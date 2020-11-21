@@ -252,27 +252,31 @@ ContinueStmt:
 ;
 
 WhileStmt:
-    T_While Expr BeginJzEndWhile WhileBeginTag IfWhileStmtsBlock EndWhile
+    T_While WhileBeginTag ContinueTag Expr BeginJzEndWhile IfWhileStmtsBlock EndWhile
 ;
 
 WhileBeginTag:
-    /* empty */      { addTag("%s%d",TAG_WHILE_BEGIN, _WHILE_ID);  }
+    /* empty */      { _BEG_WHILE;addTag("%s%d",TAG_WHILE_BEGIN, _WHILE_ID);}
 ;
 
 BeginJzEndWhile:
-    /* empty */     { _BEG_WHILE; addCmd2(FAROperCmdJz, generString(13,"%s%d",TAG_WHILE_END,_WHILE_ID)); }
+    /* empty */     { addCmd2(FAROperCmdJz, generString(13,"%s%d",TAG_WHILE_END,_WHILE_ID)); }
 ;
 
 EndWhile:
-    /* empty */     { addTag("%s%d",TAG_CONTINUE, _WHILE_ID); addCmd2(FAROperCmdJnz,generString(18,"%s%d",TAG_WHILE_BEGIN, _WHILE_ID)); addTag("%s%d:\n\n",TAG_WHILE_END, _WHILE_ID); _END_WHILE; }
+    /* empty */     {  addTag("%s%d",TAG_WHILE_END, _WHILE_ID); _END_WHILE; }
 ;
 
 RepeatWileStmt:
-    RepeatBegin IfWhileStmtsBlock T_While Expr EndRepeat
+    RepeatBegin IfWhileStmtsBlock T_While ContinueTag Expr EndRepeat
+;
+
+ContinueTag:
+    /* empty */      { addTag("%s%d",TAG_CONTINUE, _WHILE_ID);  }
 ;
 
 EndRepeat:
-    /* empty */     { addTag("%s%d",TAG_CONTINUE, _WHILE_ID);addCmd2(FAROperCmdJnz,generString(18,"%s%d",TAG_WHILE_BEGIN, _WHILE_ID)); addTag("%s%d",TAG_WHILE_END, _WHILE_ID); _END_WHILE}
+    /* empty */     { addCmd2(FAROperCmdJnz,generString(18,"%s%d",TAG_WHILE_BEGIN, _WHILE_ID)); addTag("%s%d",TAG_WHILE_END, _WHILE_ID); _END_WHILE}
 ;
 
 RepeatBegin:
