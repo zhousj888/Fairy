@@ -178,7 +178,7 @@ ClosureStmt:
 ;
 
 ClosureStart:
-    /* empty */             { _BEG_CLOSURE; addTag("%s%d",TAG_CLOSURE_BEGIN,_CLOSURE_ID); }
+    /* empty */             { _BEG_CLOSURE; addCmd2(FAROperCmdPush, generString("20","%s%d",TAG_CLOSURE_BEGIN,_CLOSURE_ID)); addTag("%s%d",TAG_CLOSURE_BEGIN,_CLOSURE_ID); }
 ;
 
 ActualParams:
@@ -375,7 +375,7 @@ Primary:
 ;
 
 CallFuncWithClosure:
-    Primary CallFuncSuffix Closure  { printf("\t匹配了方法调用尾随闭包\n"); }
+    Primary CallFuncSuffix Closure  { addCmd1(FAROperCmdCreateSaveTopClosure); addCmd1(FAROperCallFunc); }
 ;
 
 %%
