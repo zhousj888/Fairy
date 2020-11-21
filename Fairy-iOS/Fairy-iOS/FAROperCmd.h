@@ -44,6 +44,7 @@ enum {
     FAROperExit,
     
     FAROperFuncFinish,
+    FAROperCmdCreateSaveTopClosure,
 };
 
 #endif /* FAROperCmd_h */

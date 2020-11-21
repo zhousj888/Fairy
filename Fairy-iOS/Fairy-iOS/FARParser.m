@@ -57,6 +57,7 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperSave:{return @"save";}
         case FAROperCallFunc:{return @"callStackTopFunc";}
         case FAROperFuncFinish:{return @"funcFinish";}
+        case FAROperCmdCreateSaveTopClosure:{return @"createSaveTopClosure";}
     }
     return @"unknow";
 }
