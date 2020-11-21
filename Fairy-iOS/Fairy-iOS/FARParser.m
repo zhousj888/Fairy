@@ -31,11 +31,14 @@ NSString *transCmdToDescription(int cmd) {
     switch (cmd) {
         case FAROperCmdPush:{return @"push";}
         case FAROperCmdPop:{return @"pop";}
+            
         case FAROperCmdJmp:{return @"jmp";}
         case FAROperCmdJz:{return @"jz";}
         case FAROperCmdJnz:{return @"jnz";}
+            
         case FAROperCmdVar:{return @"var";}
         case FAROperCmdLet:{return @"let";}
+            
         case FAROperCmdAdd:{return @"add";}
         case FAROperCmdSub:{return @"sub";}
         case FAROperCmdMul:{return @"mul";}
@@ -51,11 +54,15 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperCmdAnd:{return @"and";}
         case FAROperCmdNeg:{return @"neg";}
         case FAROperCmdNot:{return @"not";}
-        case FAROperCmdRet:{return @"ret";}
+            
+        case FAROperSave:{return @"save";}
         case FAROperSaveIfNil:{return @"saveIfNil";}
         case FAROperCreateNewEnv:{return @"createNewEnv";}
-        case FAROperSave:{return @"save";}
-        case FAROperCallFunc:{return @"callStackTopFunc";}
+            
+        case FAROperCallFunc:{return @"callFunc";}
+        case FAROperCmdRet:{return @"ret";}
+        case FAROperExit:{return @"exit";}
+            
         case FAROperFuncFinish:{return @"funcFinish";}
         case FAROperCmdCreateSaveTopClosure:{return @"createSaveTopClosure";}
         case FAROperGetObjProperty:{return @"getObjProperty";}

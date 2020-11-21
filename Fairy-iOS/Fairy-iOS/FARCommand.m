@@ -6,6 +6,7 @@
 //
 
 #import "FARCommand.h"
+NSString *transCmdToDescription(int cmd);
 
 @implementation FARCommand
 
@@ -37,6 +38,11 @@
     command.oper2 = oper2;
     command.oper3 = oper3;
     return command;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"(cmd=%@,oper1=%@,oper2=%@,oper3=%@", transCmdToDescription((int)self.operCmd),self.oper1,self.oper2,self.oper3];
 }
 
 

@@ -1,12 +1,21 @@
-//Expr
+// Expr
 // __log(text: 1 * 2 + 3)
 
-var a = 7
-if a > 6 {
-    __log(text: "大于6")
-}else {
-    __log(text: "小于6")
-}
+// var a = 7
+// if a > 6 {
+//     __log(text: "大于6")
+// }else {
+//     __log(text: "小于6")
+// }
+
+
+var a = 0
+
+repeat {
+    __log(text: "xixixi")
+    a = a + 1
+} while a < 5
+
 // a+ b *c
 // a - b
 // a * b
@@ -38,10 +47,16 @@ if a > 6 {
 // var a
 // let a
 
-// FuncDecl
-// func test(a = 1,b,c) {
-//     return a + b + c
+// // FuncDecl
+
+// func test(a,b) {
 // }
+
+// test(){ (a,b) in
+//     return a + b
+// }
+
+// testObj.test()
 
 // //call
 // __log(text:"asdfasdf")
@@ -49,7 +64,7 @@ if a > 6 {
 // //AssignStmt StmtSeparator    
 // a = 1
 
-//IfStmt   
+// // IfStmt   
 // if a {
 //     if a {
 //     }else if a {
@@ -61,10 +76,10 @@ if a > 6 {
 
 // // WhileStmt  
 // while a {
-//     repeat {
-//         continue
-//         break
-//     } while a
+    // repeat {
+    //     continue
+    //     break
+    // } while a < 0
 //     continue
 //     break
 // }
@@ -85,7 +100,7 @@ if a > 6 {
 //     break
 // }
 
-// ClassDecl    
+// // ClassDecl    
 // var a = 1    
 // func test3() {
     
@@ -94,12 +109,6 @@ if a > 6 {
 // {
 //     var a = 1
 //     func init() {
-
-//     }
-//     func init(a,b,c){
-
-//     }
-//     func test(a,b,c) {
 
 //     }
 // }

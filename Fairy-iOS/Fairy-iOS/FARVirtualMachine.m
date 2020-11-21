@@ -8,6 +8,7 @@
 #import "FARVirtualMachine.h"
 #import "FARParser.h"
 #import "FARVMEnvironment.h"
+#import "FARVMCodeEnv.h"
 
 
 static NSString *const kRetPc = @"__retPc";
@@ -17,6 +18,7 @@ static NSString *const kRetSp = @"__retSp";
 
 @property (nonatomic, strong) FARVMCode *vmCode;
 @property (nonatomic, strong) NSMutableArray *stack;
+@property (nonatomic, strong) FARVMEnvironment *codeEnv;
 @property (nonatomic, strong) FARVMEnvironment *mainEnv;
 @property (nonatomic, strong) FARVMEnvironment *currentEnv;
 @property (nonatomic, assign) NSInteger pc;
@@ -31,13 +33,17 @@ static NSString *const kRetSp = @"__retSp";
     FARParser *parser = [[FARParser alloc] init];
     FARVMCode *vmCode = [parser parse:code];
     [vmCode.commandArr addObject:[FARCommand commandWithCmd:FAROperExit]];
+    vmCode.tagDic[@"__log"] = [FARCommandTag tagWithName:@"__log" codeIndex:-110];
+    
+    
     self.vmCode = vmCode;
     [self prepare];
     [self run];
 }
 
 - (void)prepare {
-    self.mainEnv = [[FARVMEnvironment alloc] init];
+    self.codeEnv = [[FARVMCodeEnv alloc] initWithVMCode:self.vmCode];
+    self.mainEnv = [[FARVMEnvironment alloc] initWithOuter:self.codeEnv];
     self.stack = [NSMutableArray array];
     self.currentEnv = self.mainEnv;
     self.pc = 0;
@@ -48,9 +54,12 @@ static NSString *const kRetSp = @"__retSp";
 - (void)run {
     while (!self.isExit) {
         FARCommand *cmd = self.vmCode.commandArr[self.pc];
+        NSLog(@"pc = %@",@(self.pc));
+        NSLog(@"excute cmd: %@",cmd);
         if ([self executeCmd:cmd]) {
             self.pc++;
         }
+        [self printStack];
     }
 }
 
@@ -88,17 +97,31 @@ static NSString *const kRetSp = @"__retSp";
 }
 
 - (void)jmp:(NSString *)tag {
-    NSInteger index = self.vmCode.tagDic[tag].codeIndex;
-    if (index) {
+    NSInteger index = [[self.currentEnv findVarForKey:tag] integerValue];
+    [self jmpToIndex:index];
+}
+
+- (void)jmpToIndex:(NSInteger)index {
+    if (index >= 0) {
         self.pc = index;
-    }else if([tag isEqualToString:@"__log"]){
+    }else if(index == -110){
         NSLog(@"__log: ------------------------>%@",[self.currentEnv findVarForKey:@"text"]);
         self.pc++;
     }else {
         self.isExit = YES;
-        NSLog(@"jmp to %@ failed",tag);
+        NSLog(@"jmp to %@ failed",@(index));
     }
 }
+
+- (void)printStack {
+    NSMutableString *mutStr = [NSMutableString string];
+    for(id stackEle in self.stack) {
+        [mutStr appendFormat:@"%@,",stackEle];
+    }
+    NSLog(@"%@",mutStr);
+}
+
+
 
 
 //返回是否pc++
@@ -266,11 +289,27 @@ static NSString *const kRetSp = @"__retSp";
             [self push:@(!oper1)];
             return YES;
         }
+        case FAROperSave:{
+            [self.currentEnv setVar:[self pop] key:cmd.oper1];
+            return YES;
+        }
+        case FAROperSaveIfNil:{
+            NSString *varName = cmd.oper1;
+            id obj = [self pop];
+            if (![self.currentEnv findVarForKey:varName]) {
+                [self.currentEnv setVar:obj key:varName];
+            }
+            return YES;
+        }
+        case FAROperCreateNewEnv:{
+            self.currentEnv = [[FARVMEnvironment alloc] initWithOuter:self.currentEnv];
+            return YES;
+        }
         case FAROperCallFunc:{
             [self.currentEnv setVar:@(self.pc + 1) key:kRetPc];
             [self.currentEnv setVar:@(self.sp) key:kRetSp];
-            NSString *funcName = cmd.oper1.length ? [NSString stringWithFormat:@"%@_%@",cmd.oper1,cmd.oper2] : cmd.oper2;
-            [self jmp:funcName];
+            NSInteger funcCodeIndex = [[self pop] integerValue];
+            [self jmpToIndex:funcCodeIndex];
             return NO;
         }
         case FAROperCmdRet:{
@@ -281,25 +320,22 @@ static NSString *const kRetSp = @"__retSp";
             self.currentEnv = self.currentEnv.outer;
             return NO;
         }
-        case FAROperSaveIfNil:{
-            NSString *varName = cmd.oper1;
-            id obj = [self pop];
-            if (![self.currentEnv findVarForKey:varName]) {
-                [self.currentEnv setVar:obj key:varName];
-            }
-            return YES;
-        }
-        case FAROperSave:{
-            [self.currentEnv setVar:[self pop] key:cmd.oper1];
-            return YES;
-        }
-        case FAROperCreateNewEnv:{
-            self.currentEnv = [[FARVMEnvironment alloc] initWithOuter:self.currentEnv];
-            return YES;
-        }
         case FAROperExit:{
             NSLog(@"exit");
             self.isExit = YES;
+            return NO;
+        }
+        case FAROperFuncFinish:{
+            
+            return NO;
+        }
+        case FAROperCmdCreateSaveTopClosure:{
+            
+            return NO;
+        }
+        case FAROperGetObjProperty:{
+            
+            return NO;
         }
     }
     return YES;

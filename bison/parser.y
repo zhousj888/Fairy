@@ -264,7 +264,7 @@ BeginJzEndWhile:
 ;
 
 EndWhile:
-    /* empty */     {  addTag("%s%d",TAG_WHILE_END, _WHILE_ID); _END_WHILE; }
+    /* empty */     {  addCmd2(FAROperCmdJmp,generString(20,"%s%d",TAG_WHILE_BEGIN, _WHILE_ID)); addTag("%s%d",TAG_WHILE_END, _WHILE_ID); _END_WHILE; }
 ;
 
 RepeatWileStmt:
