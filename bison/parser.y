@@ -172,12 +172,6 @@ ActualParam:
     T_Identifier ':' Expr                               { addCmd2(FAROperSave,$1); } 
 ;
 
-CallExpr:
-    CallFuncName '(' ActualParams ')'                   { addCmd3(FAROperCallFunc, currentClassName, $1); }
-|   CallFuncName '(' ActualParams ')' Closure           { printf("\t记录闭包参数 -> %s \n",$1);addCmd3(FAROperCmdJmp, currentClassName, $1); }
-;
-
-
 CallFuncSuffix:
     CallFuncStart '(' ActualParams ')'
 ;
@@ -361,7 +355,7 @@ Primary:
 |   T_StringConstant        { addCmd2(FAROperCmdPush,$1); }
 |   ArrayExpr               
 |   DictionExpr
-|   Primary CallFuncSuffix  { addCmd3(FAROperCallFunc, currentClassName, $1); }
+|   Primary CallFuncSuffix  { addCmd1(FAROperCallFunc); }
 ;
 
 CallFuncWithClosure:
