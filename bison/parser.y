@@ -372,7 +372,13 @@ Primary:
 |   ArrayExpr               
 |   DictionExpr
 |   Primary CallFuncSuffix  { addCmd1(FAROperCallFunc); }
+|   Primary ObjSuffix       { addCmd1(FAROperGetObjProperty); }
 ;
+
+ObjSuffix:
+    '.' T_Identifier        { addCmd2(FAROperCmdPush,$2); }
+;
+
 
 CallFuncWithClosure:
     Primary CallFuncSuffix Closure  { addCmd1(FAROperCmdCreateSaveTopClosure); addCmd1(FAROperCallFunc); }
