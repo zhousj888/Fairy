@@ -9,12 +9,12 @@
 // }
 
 
-var a = 0
+// var a = 0
 
-repeat {
-    __log(text: "xixixi")
-    a = a + 1
-} while a < 5
+// repeat {
+//     __log(text: "xixixi")
+//     a = a + 1
+// } while a < 5
 
 // a+ b *c
 // a - b
@@ -105,6 +105,10 @@ repeat {
 // func test3() {
     
 // } 
+
+// a.test.test.test()()
+1 + 1
+1.add(p:1)
 // class Son:Father
 // {
 //     var a = 1
@@ -112,6 +116,7 @@ repeat {
 
 //     }
 // }
+
 
 // func test2() {
 

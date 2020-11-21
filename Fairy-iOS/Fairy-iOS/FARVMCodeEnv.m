@@ -24,7 +24,10 @@
 }
 
 - (id)findVarForKey:(NSString *)key {
-    return @(self.vmCode.tagDic[key].codeIndex);
+    if (self.vmCode.tagDic[key]) {
+        return @(self.vmCode.tagDic[key].codeIndex);
+    }
+    return nil;
     
 }
 - (void)setVar:(id)value key:(NSString *)key {

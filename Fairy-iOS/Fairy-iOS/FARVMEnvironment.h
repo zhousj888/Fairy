@@ -6,6 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FARBaseObj.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,8 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init;
 - (instancetype)initWithOuter:(FARVMEnvironment * _Nullable )outer;
 
-- (id)findVarForKey:(NSString *)key;
-- (void)setVar:(id)value key:(NSString *)key;
+- (FARBaseObj *)findVarForKey:(NSString *)key;
+- (void)setVar:(FARBaseObj *)value key:(NSString *)key;
 - (void)declareVar:(NSString *)key;
 - (void)declareLet:(NSString *)key;
 

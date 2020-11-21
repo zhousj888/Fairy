@@ -6,10 +6,11 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FARBaseObj.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FARNull : NSObject
+@interface FARNull : FARBaseObj
 
 + (instancetype)null;
 

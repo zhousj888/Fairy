@@ -10,7 +10,7 @@
 
 @interface FARVMEnvironment()
 
-@property (nonatomic, strong) NSMutableDictionary *envDic;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, FARBaseObj *> *envDic;
 
 @end
 
@@ -30,14 +30,14 @@
 }
 
 
-- (id)findVarForKey:(NSString *)key {
+- (FARBaseObj *)findVarForKey:(NSString *)key {
     if (self.envDic[key]) {
         return self.envDic[key];
     }
     return [self.outer findVarForKey:key];
 }
 
-- (void)setVar:(id)value key:(NSString *)key {
+- (void)setVar:(FARBaseObj *)value key:(NSString *)key {
     self.envDic[key] = value;
 }
 

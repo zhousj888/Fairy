@@ -9,6 +9,7 @@
 #import "FARParser.h"
 #import "FARVMEnvironment.h"
 #import "FARVMCodeEnv.h"
+#import "FARCodeObj.h"
 
 
 static NSString *const kRetPc = @"__retPc";
@@ -38,7 +39,7 @@ static NSString *const kRetSp = @"__retSp";
     
     self.vmCode = vmCode;
     [self prepare];
-    [self run];
+//    [self run];
 }
 
 - (void)prepare {
@@ -97,8 +98,8 @@ static NSString *const kRetSp = @"__retSp";
 }
 
 - (void)jmp:(NSString *)tag {
-    NSInteger index = [[self.currentEnv findVarForKey:tag] integerValue];
-    [self jmpToIndex:index];
+    FARCodeObj *codeObj = (FARCodeObj *)[self.currentEnv findVarForKey:tag];
+    [self jmpToIndex:[codeObj codeIndex]];
 }
 
 - (void)jmpToIndex:(NSInteger)index {
@@ -118,7 +119,7 @@ static NSString *const kRetSp = @"__retSp";
     for(id stackEle in self.stack) {
         [mutStr appendFormat:@"%@,",stackEle];
     }
-    NSLog(@"%@",mutStr);
+    NSLog(@"stack:%@",mutStr);
 }
 
 
@@ -130,8 +131,11 @@ static NSString *const kRetSp = @"__retSp";
         case FAROperCmdPush:{
             if ([self isNumber:cmd.oper1] || [self isStringConst:cmd.oper1]) {
                 [self push:cmd.oper1];
-            }else {
+            }else if([self.currentEnv findVarForKey:cmd.oper1]){
                 [self push:[self.currentEnv findVarForKey:cmd.oper1]];
+            }else {
+                NSLog(@"找不到变量:%@",cmd.oper1);
+                self.isExit = YES;
             }
             return YES;
         }
@@ -306,16 +310,16 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCallFunc:{
-            [self.currentEnv setVar:@(self.pc + 1) key:kRetPc];
-            [self.currentEnv setVar:@(self.sp) key:kRetSp];
+            [self.currentEnv setVar:[FARCodeObj codeObjWithCodeIndex:self.pc + 1] key:kRetPc];
+            [self.currentEnv setVar:[FARCodeObj codeObjWithCodeIndex:self.sp] key:kRetSp];
             NSInteger funcCodeIndex = [[self pop] integerValue];
             [self jmpToIndex:funcCodeIndex];
             return NO;
         }
         case FAROperCmdRet:{
             id lastObj = [self pop];
-            self.pc = [[self.currentEnv findVarForKey:kRetPc] integerValue];
-            self.sp = [[self.currentEnv findVarForKey:kRetSp] integerValue];
+            self.pc = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetPc] codeIndex];
+            self.sp = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetSp] codeIndex];
             [self push:lastObj];
             self.currentEnv = self.currentEnv.outer;
             return NO;
@@ -326,7 +330,11 @@ static NSString *const kRetSp = @"__retSp";
             return NO;
         }
         case FAROperFuncFinish:{
-            
+            id lastObj = [self pop];
+            self.pc = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetPc] codeIndex];
+            self.sp = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetSp] codeIndex];
+            [self push:lastObj];
+            self.currentEnv = self.currentEnv.outer;
             return NO;
         }
         case FAROperCmdCreateSaveTopClosure:{
