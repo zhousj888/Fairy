@@ -66,6 +66,7 @@ Stmt:
 |   ReturnStmt                                  
 |   RepeatWileStmt
 |   Expr
+|   CallFuncWithClosure
 ;
 
 StmtSeparator:
@@ -112,6 +113,7 @@ IfWhileStmt:
 |   ReturnStmt                                  
 |   RepeatWileStmt
 |   Expr
+|   CallFuncWithClosure
 ;
 
 
@@ -133,8 +135,27 @@ ClassDefStmt:
 ;
 
 Closure:
-    ClosureStart '{' Program '}'                                    { printf("\t闭包结束\n"); }
-|   ClosureStart '{' '(' ExprsByComma ')' T_In Program '}'
+    ClosureStart '{' ClosureStmt '}'                                    { printf("\t闭包结束\n"); }
+|   ClosureStart '{' '(' ExprsByComma ')' T_In ClosureStmt '}'
+;
+
+ClosureStmts:
+    /* empty */
+|   ClosureStmt
+|   ClosureStmts ClosureStmt
+;
+
+ClosureStmt:
+    NewLines
+|   VarDecl StmtSeparator                       
+|   AssignStmt StmtSeparator                                                           
+|   WholeIfStmt                                      
+|   WhileStmt                                   
+|   ForStmt
+|   ReturnStmt
+|   RepeatWileStmt
+|   Expr
+|   CallFuncWithClosure
 ;
 
 ClosureStart:
@@ -341,6 +362,10 @@ Primary:
 |   ArrayExpr               
 |   DictionExpr
 |   Primary CallFuncSuffix  { addCmd3(FAROperCallFunc, currentClassName, $1); }
+;
+
+CallFuncWithClosure:
+    Primary CallFuncSuffix Closure  { printf("\t匹配了方法调用尾随闭包\n"); }
 ;
 
 %%
