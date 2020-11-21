@@ -192,7 +192,7 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func FuncName '(' Args ')' IfWhileStmtsBlock        { addTag("FUNC_END"); }
+    T_Func FuncName '(' Args ')' IfWhileStmtsBlock        { addCmd1(FAROperFuncFinish); addTag("FUNC_END"); }
 ;
 
 FuncName:
