@@ -15,6 +15,7 @@ char *generString(int stringLength,char *fmt,...);
 
 int ifStmtId = 0, ifThenId = 0, ifTop = -1, ifThenStatckTop = -1, ifStack[100][100];
 int whileStmtId = 0, whileTop = -1, whileStack[100];
+int closureId = 0, closureTop = -1, closureStack[100];
 char *currentClassName = NULL;
 
 #define _BEG_IF             {ifStack[++ifTop][0] = ++ifStmtId;}
@@ -27,11 +28,15 @@ char *currentClassName = NULL;
 #define _END_WHILE          {whileTop--;}
 #define _WHILE_ID           (whileStack[whileTop])
 
+#define _BEG_CLOSURE          {closureStack[++closureTop] = ++closureId;}
+#define _END_CLOSURE          {closureTop--;}
+#define _CLOSURE_ID           (closureStack[closureTop])
+
 
 #define TAG_CLASS_BEGIN             "CLASS_BEGIN:"
 #define TAG_CLASS_END               "CLASS_END"
-#define TAG_CLOSURE_BEGIN           "CLOSURE_BEGIN:"
-#define TAG_CLOSURE_END             "CLOSURE_END:"
+#define TAG_CLOSURE_BEGIN           "CLOSURE_BEGIN_"
+#define TAG_CLOSURE_END             "CLOSURE_END"
 #define TAG_FUNC_START              "FUNC:"
 #define TAG_FUNC_END                "FUNC_END"
 #define TAG_WHILE_BEGIN             "WHILE_BEGIN_"
@@ -149,8 +154,8 @@ ClassDefStmt:
 ;
 
 Closure:
-    ClosureStart '{' ClosureStmt '}'                                    { printf("\t闭包结束\n"); }
-|   ClosureStart '{' '(' ExprsByComma ')' T_In ClosureStmt '}'
+    ClosureStart '{' ClosureStmts '}'                                    { addTag("%s",TAG_CLOSURE_END);_END_CLOSURE; }
+|   ClosureStart '{' '(' ExprsByComma ')' T_In ClosureStmts '}'
 ;
 
 ClosureStmts:
@@ -173,7 +178,7 @@ ClosureStmt:
 ;
 
 ClosureStart:
-    /* empty */             { printf("\t闭包开始\n"); }
+    /* empty */             { _BEG_CLOSURE; addTag("%s%d",TAG_CLOSURE_BEGIN,_CLOSURE_ID); }
 ;
 
 ActualParams:
