@@ -156,17 +156,23 @@ CallExpr:
 |   CallFuncName '(' ActualParams ')' Closure           { printf("\t记录闭包参数 -> %s \n",$1);addCmd3(FAROperCmdJmp, currentClassName, $1); }
 ;
 
+
+CallFuncSuffix:
+    CallFuncStart '(' ActualParams ')'
+;
+
+CallFuncStart:
+    /* empty */                                        { addCmd1(FAROperCreateNewEnv); }
+;
+
+
 CallFuncName:
     T_Identifier                                        { addCmd2(FAROperCreateNewEnv,$1); }
 ;
 
-ObjCallExpr:
-    Expr '.' CallExpr
-;
-
 ReturnStmt:
-    T_Return Expr                                       { printf("\tret ~\n\n");addCmd2(FAROperCmdRet,"~"); }
-|   T_Return                                            { printf("\tret\n\n");addCmd1(FAROperCmdRet);}
+    T_Return Expr                                       { addCmd2(FAROperCmdRet,"~"); }
+|   T_Return                                            { addCmd1(FAROperCmdRet);}
 ;
 
 ForStmt:
@@ -323,8 +329,6 @@ Expr:
 |   '+' Expr %prec '!'      { /* empty */ }
 |   '!' Expr                { addCmd1(FAROperCmdNot); }
 |   Expr '?' Expr ':' Expr
-|   CallExpr 
-|   ObjCallExpr
 ;
 
 Primary:
@@ -336,6 +340,7 @@ Primary:
 |   T_StringConstant        { addCmd2(FAROperCmdPush,$1); }
 |   ArrayExpr               
 |   DictionExpr
+|   Primary CallFuncSuffix  { addCmd3(FAROperCallFunc, currentClassName, $1); }
 ;
 
 %%
