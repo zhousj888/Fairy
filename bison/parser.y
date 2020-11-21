@@ -305,7 +305,8 @@ DictionExpr:
 ;
 
 Expr:
-    Expr '+' Expr           { addCmd1(FAROperCmdAdd); }
+    Primary
+|   Expr '+' Expr           { addCmd1(FAROperCmdAdd); }
 |   Expr '-' Expr           { addCmd1(FAROperCmdSub); }
 |   Expr '*' Expr           { addCmd1(FAROperCmdMul); }
 |   Expr '/' Expr           { addCmd1(FAROperCmdDiv); }
@@ -321,17 +322,20 @@ Expr:
 |   '-' Expr %prec '!'      { addCmd1(FAROperCmdNeg); }
 |   '+' Expr %prec '!'      { /* empty */ }
 |   '!' Expr                { addCmd1(FAROperCmdNot); }
+|   Expr '?' Expr ':' Expr
+|   CallExpr 
+|   ObjCallExpr
+;
+
+Primary:
+    '(' Expr ')'
 |   T_IntConstant           { addCmd2(FAROperCmdPush,$1); }
 |   T_DecimalConstant       { addCmd2(FAROperCmdPush,$1); }
 |   T_Identifier            { addCmd2(FAROperCmdPush,$1); }
-|   CallExpr                
-|   '(' Expr ')'
-|   IntervalExpr            
+|   IntervalExpr
 |   T_StringConstant        { addCmd2(FAROperCmdPush,$1); }
 |   ArrayExpr               
-|   DictionExpr             
-|   ObjCallExpr             
-|   Expr '?' Expr ':' Expr  
+|   DictionExpr
 ;
 
 %%
