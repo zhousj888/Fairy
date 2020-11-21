@@ -154,8 +154,8 @@ ClassDefStmt:
 ;
 
 Closure:
-    ClosureStart '{' ClosureStmts '}'                                    { addTag("%s",TAG_CLOSURE_END);_END_CLOSURE; }
-|   ClosureStart '{' '(' ExprsByComma ')' T_In ClosureStmts '}'
+    ClosureStart '{' ClosureStmts '}'                                   { addTag("%s",TAG_CLOSURE_END);_END_CLOSURE; }
+|   ClosureStart '{' '(' Args ')' T_In ClosureStmts '}'         { addTag("%s",TAG_CLOSURE_END);_END_CLOSURE; }
 ;
 
 ClosureStmts:
