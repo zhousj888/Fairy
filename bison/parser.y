@@ -28,6 +28,10 @@ char *currentClassName = NULL;
 #define _WHILE_ID           (whileStack[whileTop])
 
 
+#define TAG_CLASS_BEGIN             "CLASS_BEGIN:"
+#define TAG_CLASS_END               "CLASS_END"
+#define TAG_CLOSURE_BEGIN           "CLOSURE_BEGIN:"
+#define TAG_CLOSURE_END             "CLOSURE_END:"
 #define TAG_FUNC_START              "FUNC:"
 #define TAG_FUNC_END                "FUNC_END"
 #define TAG_WHILE_BEGIN             "WHILE_BEGIN_"
@@ -35,7 +39,7 @@ char *currentClassName = NULL;
 #define TAG_CONTINUE                "CONTINUE_POINT_"
 #define TAG_IF_BEGIN                "IF_BEGIN_"
 #define TAG_IF_END                  "IF_END_"
-#define TAG_IF_THEN                 "IF_THEN_" 
+#define TAG_IF_THEN                 "IF_THEN_"
 
 %}
 
@@ -225,16 +229,13 @@ FuncName:
 ;
 
 ClassDecl:
-    T_Class ClassName ClassDefBlock                       { printf("\tENDCLASS\n\n");currentClassName = NULL;}
-|   T_Class ClassName ':' SuperClassName ClassDefBlock    { printf("\tENDCLASS\n\n");currentClassName = NULL; }
+    T_Class ClassID ClassDefBlock                       { addTag(TAG_CLASS_END);currentClassName = NULL;}
+|   T_Class ClassID ClassDefBlock    { addTag(TAG_CLASS_END);currentClassName = NULL; }
 ;
 
-ClassName:
-    T_Identifier                        { printf("\tCLASS_BEGIN:%s\n",$1); currentClassName = $1; }
-;
-
-SuperClassName:
-    T_Identifier                        { printf("\tSuperClass:%s\n",$1); }
+ClassID:
+    T_Identifier                        { addTag("%s%s",TAG_CLASS_BEGIN,$1); currentClassName = $1; }
+|   T_Identifier ':' T_Identifier       { addTag("%s%s:%s",TAG_CLASS_BEGIN,$1,$3); currentClassName = $1; }
 ;
 
 BreakStmt:
