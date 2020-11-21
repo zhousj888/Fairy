@@ -42,6 +42,8 @@ enum {
     FAROperCallFunc,
     FAROperCmdRet,
     FAROperExit,
+    
+    FAROperFuncFinish,
 };
 
 #endif /* FAROperCmd_h */

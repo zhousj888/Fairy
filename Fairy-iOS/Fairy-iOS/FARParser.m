@@ -56,6 +56,7 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperCreateNewEnv:{return @"createNewEnv";}
         case FAROperSave:{return @"save";}
         case FAROperCallFunc:{return @"callFunc";}
+        case FAROperFuncFinish:{return @"funcFinish";}
     }
     return @"unknow";
 }
