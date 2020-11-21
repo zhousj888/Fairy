@@ -27,6 +27,16 @@ char *currentClassName = NULL;
 #define _END_WHILE          {whileTop--;}
 #define _WHILE_ID           (whileStack[whileTop])
 
+
+#define TAG_FUNC_START              "FUNC:"
+#define TAG_FUNC_END                "FUNC_END"
+#define TAG_WHILE_BEGIN             "WHILE_BEGIN_"
+#define TAG_WHILE_END               "WHILE_END_"
+#define TAG_CONTINUE                "CONTINUE_POINT_"
+#define TAG_IF_BEGIN                "IF_BEGIN_"
+#define TAG_IF_END                  "IF_END_"
+#define TAG_IF_THEN                 "IF_THEN_" 
+
 %}
 
 %token T_Int T_Var T_Void T_Return T_ReadInt T_While T_Repeat T_EOL T_Let T_Func T_For T_In T_Class
@@ -207,11 +217,11 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func FuncName '(' Args ')' IfWhileStmtsBlock        { addCmd1(FAROperFuncFinish); addTag("FUNC_END"); }
+    T_Func FuncName '(' Args ')' IfWhileStmtsBlock        { addCmd1(FAROperFuncFinish); addTag(TAG_FUNC_END); }
 ;
 
 FuncName:
-    T_Identifier                                          { if(currentClassName){addTag("FUNC:%s_%s",currentClassName,$1);} else {addTag("FUNC:%s",$1);}  }
+    T_Identifier                                          { if(currentClassName){addTag("%s%s_%s",TAG_FUNC_START,currentClassName,$1);} else {addTag("%s%s",TAG_FUNC_START,$1);}  }
 ;
 
 ClassDecl:
@@ -228,11 +238,11 @@ SuperClassName:
 ;
 
 BreakStmt:
-    T_Break                             { addCmd2(FAROperCmdJmp,generString(15,"_endWhile_%d", _WHILE_ID)); }
+    T_Break                             { addCmd2(FAROperCmdJmp,generString(15,"%s%d",TAG_WHILE_END, _WHILE_ID)); }
 ;
 
 ContinueStmt:
-    T_Continue                          { addCmd2(FAROperCmdJmp,generString(18,"_continuePoint_%d", _WHILE_ID)); }
+    T_Continue                          { addCmd2(FAROperCmdJmp,generString(18,"%s%d",TAG_CONTINUE, _WHILE_ID)); }
 ;
 
 WhileStmt:
@@ -240,15 +250,15 @@ WhileStmt:
 ;
 
 WhileBeginTag:
-    /* empty */      { addTag("_begWhile_%d", _WHILE_ID);  }
+    /* empty */      { addTag("%s%d",TAG_WHILE_BEGIN, _WHILE_ID);  }
 ;
 
 BeginJzEndWhile:
-    /* empty */     { _BEG_WHILE; addCmd2(FAROperCmdJz, generString(13,"_endWhile_%d",_WHILE_ID)); }
+    /* empty */     { _BEG_WHILE; addCmd2(FAROperCmdJz, generString(13,"%s%d",TAG_WHILE_END,_WHILE_ID)); }
 ;
 
 EndWhile:
-    /* empty */     { addTag("_continuePoint_%d", _WHILE_ID); printf("\tjnz _begWhile_%d\n", _WHILE_ID);addCmd2(FAROperCmdJnz,generString(18,"_begWhile_%d", _WHILE_ID)); addTag("\t_endWhile_%d:\n\n", _WHILE_ID); _END_WHILE; }
+    /* empty */     { addTag("%s%d",TAG_CONTINUE, _WHILE_ID); addCmd2(FAROperCmdJnz,generString(18,"%s%d",TAG_WHILE_BEGIN, _WHILE_ID)); addTag("%s%d:\n\n",TAG_WHILE_END, _WHILE_ID); _END_WHILE; }
 ;
 
 RepeatWileStmt:
@@ -256,11 +266,11 @@ RepeatWileStmt:
 ;
 
 EndRepeat:
-    /* empty */     { addTag("_continuePoint_%d", _WHILE_ID);addCmd2(FAROperCmdJnz,generString(18,"_begWhile_%d", _WHILE_ID)); addTag("_endWhile_%d", _WHILE_ID); _END_WHILE}
+    /* empty */     { addTag("%s%d",TAG_CONTINUE, _WHILE_ID);addCmd2(FAROperCmdJnz,generString(18,"%s%d",TAG_WHILE_BEGIN, _WHILE_ID)); addTag("%s%d",TAG_WHILE_END, _WHILE_ID); _END_WHILE}
 ;
 
 RepeatBegin:
-    T_Repeat                        { _BEG_WHILE; addTag("_begWhile_%d", _WHILE_ID); }
+    T_Repeat                        { _BEG_WHILE; addTag("%s%d",TAG_WHILE_BEGIN, _WHILE_ID); }
 ;
 
 WholeIfStmt:
@@ -274,23 +284,23 @@ IfStmt:
 ;
 
 JmpEndIf:
-    /* empty */                                     { char *text = generString(11,"_endIf_%d",_IF_ID);addCmd2(FAROperCmdJmp,text); }
+    /* empty */                                     { char *text = generString(11,"%s%d",TAG_IF_END,_IF_ID);addCmd2(FAROperCmdJmp,text); }
 ;
 
 IfThen:
-    /* empty */                                     { addTag("_ifThen_%d_%d", _IF_ID, _IF_THEN_ID);  _IF_THEN_ID_PLUS;}
+    /* empty */                                     { addTag("%s%d_%d",TAG_IF_THEN, _IF_ID, _IF_THEN_ID);  _IF_THEN_ID_PLUS;}
 ;
 
 JzIfThen:
-    /* empty */                                     { addCmd2(FAROperCmdJz,generString(15,"_ifThen_%d_%d",_IF_ID,_IF_THEN_ID)); }
+    /* empty */                                     { addCmd2(FAROperCmdJz,generString(15,"%s%d_%d",TAG_IF_THEN,_IF_ID,_IF_THEN_ID)); }
 ;
 
 BeginIf:
-    /* empty */                                      { _BEG_IF; addTag("_begIf_%d",_IF_ID);}
+    /* empty */                                      { _BEG_IF; addTag("%s%d",TAG_IF_BEGIN,_IF_ID);}
 ;
 
 EndIf:
-    /* empty */                                     { addTag("_endIf_%d",_IF_ID);  _END_IF; }
+    /* empty */                                     { addTag("%s%d",TAG_IF_END,_IF_ID);  _END_IF; }
 ;
 
 VarDecl:
