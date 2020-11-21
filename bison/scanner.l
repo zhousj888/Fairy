@@ -26,38 +26,38 @@ STRING              (\042[^\042\n]*\042)
 {SINGLE_COMMENT1}   { /* skip for single line comment */    }
 {SINGLE_COMMENT2}   { /* skip for single line comment */    }
 
-{OPERATOR}          { printf("token: %s \n",yytext); return yytext[0]; }
-"func"              { printf("token: %s \n",yytext); return T_Func; }
-"var"               { printf("token: %s \n",yytext); return T_Var; } 
-"let"               { printf("token: %s \n",yytext); return T_Let; } 
-"int"               { printf("token: %s \n",yytext); return T_Int; }
-"void"              { printf("token: %s \n",yytext); return T_Void; }
-"return"            { printf("token: %s \n",yytext); return T_Return; }
-"readint"           { printf("token: %s \n",yytext); return T_ReadInt; }
-"while"             { printf("token: %s \n",yytext); return T_While; }
-"if"                { printf("token: %s \n",yytext); return T_If; }
-"else"              { printf("token: %s \n",yytext); return T_Else; }
-"break"             { printf("token: %s \n",yytext); return T_Break; }
-"continue"          { printf("token: %s \n",yytext); return T_Continue; }
-"<="                { printf("token: %s \n",yytext); return T_Le; }
-">="                { printf("token: %s \n",yytext); return T_Ge; }
-"=="                { printf("token: %s \n",yytext); return T_Eq; }
-"!="                { printf("token: %s \n",yytext); return T_Ne; }
-"&&"                { printf("token: %s \n",yytext); return T_And; }
-"||"                { printf("token: %s \n",yytext); return T_Or; }
-"..."               { printf("token: %s \n",yytext); return T_IntervalTo; }
-"..<"               { printf("token: %s \n",yytext); return T_IntervalLess; }
-"for"               { printf("token: %s \n",yytext); return T_For; }
-"in"                { printf("token: %s \n",yytext); return T_In; }
-"class"             { printf("token: %s \n",yytext); return T_Class; }
-"repeat"            { printf("token: %s \n",yytext); return T_Repeat; }
+{OPERATOR}          { return yytext[0]; }
+"func"              { return T_Func; }
+"var"               { return T_Var; } 
+"let"               { return T_Let; } 
+"int"               { return T_Int; }
+"void"              { return T_Void; }
+"return"            { return T_Return; }
+"readint"           { return T_ReadInt; }
+"while"             { return T_While; }
+"if"                { return T_If; }
+"else"              { return T_Else; }
+"break"             { return T_Break; }
+"continue"          { return T_Continue; }
+"<="                { return T_Le; }
+">="                { return T_Ge; }
+"=="                { return T_Eq; }
+"!="                { return T_Ne; }
+"&&"                { return T_And; }
+"||"                { return T_Or; }
+"..."               { return T_IntervalTo; }
+"..<"               { return T_IntervalLess; }
+"for"               { return T_For; }
+"in"                { return T_In; }
+"class"             { return T_Class; }
+"repeat"            { return T_Repeat; }
 
-{INTEGER}           { printf("token: %s \n",yytext); _DUPTEXT return T_IntConstant; }
-{HEXINTEGER}        { printf("token: %s \n",yytext); _DUPTEXT return T_IntConstant; }
-{DECIMAL}           { printf("token: %s \n",yytext); _DUPTEXT return T_DecimalConstant; }
+{INTEGER}           { _DUPTEXT return T_IntConstant; }
+{HEXINTEGER}        { _DUPTEXT return T_IntConstant; }
+{DECIMAL}           { _DUPTEXT return T_DecimalConstant; }
 
-{STRING}            { printf("token: %s \n",yytext); _DUPTEXT return T_StringConstant; }
-{IDENTIFIER}        { printf("token: %s \n",yytext); _DUPTEXT return T_Identifier; }
+{STRING}            { _DUPTEXT return T_StringConstant; }
+{IDENTIFIER}        { _DUPTEXT return T_Identifier; }
 
 {UNTERM_STRING}     { unterminate_string(); }
 .                   { unrecognized_char(yytext[0]); }
