@@ -84,6 +84,37 @@ ExprsByComma:
 |   ExprsByComma ',' Expr
 ;
 
+
+IfWhileStmtsBlock:
+    IfWhileBlockStart '{' IfWhileStmts '}'          { printf("\tBlock结束\n"); }
+|   T_EOL IfWhileStmtsBlock
+;
+
+IfWhileBlockStart:
+    /* empty */           { printf("\tBlock开始\n"); }
+;
+
+IfWhileStmts:
+    /* empty */
+|   IfWhileStmt
+|   IfWhileStmts IfWhileStmt
+;
+
+IfWhileStmt:
+    NewLines
+|   VarDecl StmtSeparator                       
+|   AssignStmt StmtSeparator                                                           
+|   WholeIfStmt                                      
+|   WhileStmt                                   
+|   BreakStmt StmtSeparator                     
+|   ContinueStmt StmtSeparator                  
+|   ForStmt                                     
+|   ReturnStmt                                  
+|   RepeatWileStmt
+|   Expr
+;
+
+
 ClassDefBlock:
     '{' ClassDefStmts '}'
 |   T_EOL ClassDefBlock
@@ -108,11 +139,6 @@ Closure:
 
 ClosureStart:
     /* empty */             { printf("\t闭包开始\n"); }
-;
-
-ClosureOrNextLine:
-    Closure
-|   T_EOL Closure
 ;
 
 ActualParams:
@@ -144,7 +170,7 @@ ReturnStmt:
 ;
 
 ForStmt:
-    T_For Expr T_In Expr ClosureOrNextLine
+    T_For Expr T_In Expr IfWhileStmtsBlock
 ;
 
 
@@ -160,7 +186,7 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func FuncName '(' Args ')' ClosureOrNextLine        { addTag("FUNC_END"); }
+    T_Func FuncName '(' Args ')' IfWhileStmtsBlock        { addTag("FUNC_END"); }
 ;
 
 FuncName:
@@ -189,7 +215,7 @@ ContinueStmt:
 ;
 
 WhileStmt:
-    T_While Expr BeginJzEndWhile WhileBeginTag ClosureOrNextLine EndWhile
+    T_While Expr BeginJzEndWhile WhileBeginTag IfWhileStmtsBlock EndWhile
 ;
 
 WhileBeginTag:
@@ -205,7 +231,7 @@ EndWhile:
 ;
 
 RepeatWileStmt:
-    RepeatBegin ClosureOrNextLine T_While Expr EndRepeat
+    RepeatBegin IfWhileStmtsBlock T_While Expr EndRepeat
 ;
 
 EndRepeat:
@@ -221,8 +247,8 @@ WholeIfStmt:
 ;
 
 IfStmt:
-    T_If Expr JzIfThen ClosureOrNextLine JmpEndIf IfThen
-|   IfStmt T_Else ClosureOrNextLine
+    T_If Expr JzIfThen IfWhileStmtsBlock JmpEndIf IfThen
+|   IfStmt T_Else IfWhileStmtsBlock
 |   IfStmt T_Else IfStmt
 ;
 
