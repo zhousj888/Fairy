@@ -98,3 +98,7 @@ create mainEnv
 get MainCodeObj
 mainCodeInstance = MainCodeObj.newRunInstanceWithEnv(mainEnv)
 mainCodeInstance.runWithParams(currentEnv)
+
+
+12、方法重载：🈚️
+13、方法覆写：self -> super
