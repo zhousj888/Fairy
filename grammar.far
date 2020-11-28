@@ -8,7 +8,6 @@ class Son: Father {
     func init() {
         height = 180
         self.run(target: "home")
-        //有名字的参数先匹配，然后依此匹配没有名字的参数，剩下的参数为null
         testFunc(param1: 1) { (p1,p2) in
             //xxx
         }

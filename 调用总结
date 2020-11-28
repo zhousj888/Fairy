@@ -61,3 +61,40 @@ return self
 find currentEnv[funcName]
 find isa class
 find super.getProperty
+
+
+8、funcFinish
+array = pop() to callerInstance.stackPoint
+vm.stackPoint = self.callerInstance.stackPoint
+push array
+self.callerInstance.resume
+
+
+9、arrayConst
+save stack stackPoint as arrayStart
+push
+push
+push
+push stackObj from arrayStart to arrayEnd
+
+
+10、dicConst
+createNewEnv
+push save
+push save
+push save
+push dic with currentEnv
+currentEnv = currentEnv.outer
+
+
+11、vmControllRegular
+
+codeExcutor:
+stack
+runCommandWithEnv(env)
+
+create mainEnv
+
+get MainCodeObj
+mainCodeInstance = MainCodeObj.newRunInstanceWithEnv(mainEnv)
+mainCodeInstance.runWithParams(currentEnv)
