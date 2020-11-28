@@ -17,10 +17,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)init;
 - (instancetype)initWithOuter:(FARVMEnvironment * _Nullable )outer;
 
-- (FARBaseObj *)findVarForKey:(NSString *)key;
+- (nullable FARBaseObj *)findVarForKey:(NSString *)key;
 - (void)setVar:(FARBaseObj *)value key:(NSString *)key;
 - (void)declareVar:(NSString *)key;
 - (void)declareLet:(NSString *)key;
+- (NSDictionary *)asParams;
 
 @end
 

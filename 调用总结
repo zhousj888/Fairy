@@ -101,3 +101,5 @@ mainCodeInstance.runWithParams(currentEnv)
 
 14、jmp和call兼容
 直接instanceRunCode,没有codeExcutor
+
+15、直接生成方法实例

@@ -10,8 +10,6 @@
 
 @interface FARBaseObj()
 
-@property (nonatomic, readwrite) FARVMEnvironment *env;
-
 @end
 
 @implementation FARBaseObj
@@ -25,6 +23,10 @@
 
 - (FARBaseObj *)propertyWithId:(NSString *)name {
     return [self.env findVarForKey:name];
+}
+
+- (BOOL)isEqualFalse {
+    return NO;
 }
 
 @end

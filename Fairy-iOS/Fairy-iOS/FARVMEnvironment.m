@@ -49,5 +49,9 @@
     [self setVar:[FARNull null] key:key];
 }
 
+- (NSDictionary *)asParams {
+    return self.envDic;
+}
+
 
 @end

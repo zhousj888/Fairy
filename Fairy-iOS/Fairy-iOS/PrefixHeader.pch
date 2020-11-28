@@ -1,0 +1,18 @@
+//
+//  PrefixHeader.pch
+//  Fairy-iOS
+//
+//  Created by 周孙静 on 2020/11/28.
+//
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+
+#ifdef __OBJC__
+
+#import "FARGlobalConst.h"
+
+#endif
+
+#endif /* PrefixHeader_pch */
