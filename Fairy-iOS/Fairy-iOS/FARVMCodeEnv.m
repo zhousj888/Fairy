@@ -28,7 +28,6 @@
         return @(self.vmCode.tagDic[key].codeIndex);
     }
     return nil;
-    
 }
 - (void)setVar:(id)value key:(NSString *)key {
     

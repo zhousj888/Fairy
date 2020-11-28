@@ -107,8 +107,9 @@
 // } 
 
 // a.test.test.test()()
-1 + 1
-1.add(p:1)
+// 1 + 1
+test(a: 1){
+}
 // class Son:Father
 // {
 //     var a = 1

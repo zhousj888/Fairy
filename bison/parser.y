@@ -199,11 +199,6 @@ CallFuncStart:
     /* empty */                                        { addCmd1(FAROperCreateNewEnv); }
 ;
 
-
-CallFuncName:
-    T_Identifier                                        { addCmd2(FAROperCreateNewEnv,$1); }
-;
-
 ReturnStmt:
     T_Return Expr                                       { addCmd2(FAROperCmdRet,"~"); }
 |   T_Return                                            { addCmd1(FAROperCmdRet);}
@@ -376,11 +371,11 @@ Primary:
 |   ArrayExpr               
 |   DictionExpr
 |   Primary CallFuncSuffix  { addCmd1(FAROperCallFunc); }
-|   Primary ObjSuffix       { addCmd1(FAROperGetObjProperty); }
+|   Primary ObjSuffix       {  }
 ;
 
 ObjSuffix:
-    '.' T_Identifier        { addCmd2(FAROperCmdPush,$2); }
+    '.' T_Identifier        { addCmd2(FAROperGetObjProperty,$2); }
 ;
 
 

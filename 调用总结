@@ -1,0 +1,63 @@
+1、CallFunc：
+push FuncCodeObj
+createNewEnv
+save params to currentEnv
+funcRunInstance = FuncCodeObj.newRunInstanceWithEnv(mainEnv)
+funcRunInstance.callerInstance = self
+funcRunInstance.runWithParams(currentEnv)
+currentEnv = currentEnv.outer
+retValue = pop()
+
+2、return
+vm.stackPoint = self.callerInstance.stackPoint
+push result
+self.callerInstance.resume
+
+
+3、newInstance
+push ClassCodeObj
+createNewEnv
+save params to currentEnv
+funcRunInstance = ClassCodeObj.newRunInstanceWithEnv(mainEnv)
+funcRunInstance.callerInstance = self
+funcRunInstance.runWithParams(currentEnv)
+currentEnv = currentEnv.outer
+retValue = pop()
+
+
+4、callInstanceFunc
+push obj
+getProperty funcName and push
+createNewEnv
+save params to currentEnv
+funcRunInstance = ClassCodeObj.newRunInstanceWithEnv(mainEnv)
+funcRunInstance.callerInstance = self
+funcRunInstance.runWithParams(currentEnv)
+currentEnv = currentEnv.outer
+retValue = pop()
+
+
+5、callFuncWithClosure
+push funcName
+createNewEnv
+save params to currentEnv
+
+push ClosureCodeObj
+save ClosureCodeObj.newRunInstanceWithEnv(currentEnv) -> closureParma
+
+funcRunInstance = ClassCodeObj.newRunInstanceWithEnv(mainEnv)
+funcRunInstance.callerInstance = self
+funcRunInstance.runWithParams(currentEnv)
+currentEnv = currentEnv.outer
+retValue = pop()
+
+6、initInstanceProcess
+isa = ClassCodeObj
+super = call superClass init
+init member variable
+return self
+
+7、getPropertyProcess
+find currentEnv[funcName]
+find isa class
+find super.getProperty
