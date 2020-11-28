@@ -5,11 +5,11 @@
 //  Created by 周孙静 on 2020/11/28.
 //
 
-#import "FARCodeRunInstance.h"
+#import "FARBaseCodeRunInstance.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FARClassRunInstance : FARCodeRunInstance
+@interface FARClassRunInstance : FARBaseCodeRunInstance
 
 @end
 

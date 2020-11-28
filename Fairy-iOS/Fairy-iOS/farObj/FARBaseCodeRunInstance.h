@@ -9,9 +9,9 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FARCodeRunInstance : FARBaseObj
+@interface FARBaseCodeRunInstance : FARBaseObj
 
-@property (nonatomic, weak) FARCodeRunInstance *callerInstance;
+@property (nonatomic, weak) FARBaseCodeRunInstance *callerInstance;
 @property (nonatomic, readonly) NSInteger currentSp;
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params;

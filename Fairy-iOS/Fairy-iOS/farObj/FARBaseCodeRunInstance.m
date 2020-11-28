@@ -5,8 +5,8 @@
 //  Created by 周孙静 on 2020/11/28.
 //
 
-#import "FARCodeRunInstance.h"
+#import "FARBaseCodeRunInstance.h"
 
-@implementation FARCodeRunInstance
+@implementation FARBaseCodeRunInstance
 
 @end
