@@ -37,10 +37,10 @@
 		65EF92C4256914FF00A98D1C /* FARVMCodeEnv.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92C2256914FF00A98D1C /* FARVMCodeEnv.m */; };
 		65EF92C92569244500A98D1C /* FARBaseObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF92C72569244500A98D1C /* FARBaseObj.h */; };
 		65EF92CA2569244500A98D1C /* FARBaseObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92C82569244500A98D1C /* FARBaseObj.m */; };
-		65EF92CF2569246100A98D1C /* FARClassObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF92CD2569246100A98D1C /* FARClassObj.h */; };
-		65EF92D02569246100A98D1C /* FARClassObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92CE2569246100A98D1C /* FARClassObj.m */; };
-		65EF92D42569246E00A98D1C /* FARFuncObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF92D22569246E00A98D1C /* FARFuncObj.h */; };
-		65EF92D52569246E00A98D1C /* FARFuncObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92D32569246E00A98D1C /* FARFuncObj.m */; };
+		65EF92CF2569246100A98D1C /* FARClassCodeObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF92CD2569246100A98D1C /* FARClassCodeObj.h */; };
+		65EF92D02569246100A98D1C /* FARClassCodeObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92CE2569246100A98D1C /* FARClassCodeObj.m */; };
+		65EF92D42569246E00A98D1C /* FARFuncCodeObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF92D22569246E00A98D1C /* FARFuncCodeObj.h */; };
+		65EF92D52569246E00A98D1C /* FARFuncCodeObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92D32569246E00A98D1C /* FARFuncCodeObj.m */; };
 		65EF92DB2569258E00A98D1C /* FARCodeObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF92D92569258E00A98D1C /* FARCodeObj.h */; };
 		65EF92DC2569258E00A98D1C /* FARCodeObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92DA2569258E00A98D1C /* FARCodeObj.m */; };
 		65F6C3F225626B6200C8B94C /* Fairy_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F6C3F025626B6200C8B94C /* Fairy_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -112,10 +112,10 @@
 		65EF92C2256914FF00A98D1C /* FARVMCodeEnv.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARVMCodeEnv.m; sourceTree = "<group>"; };
 		65EF92C72569244500A98D1C /* FARBaseObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARBaseObj.h; sourceTree = "<group>"; };
 		65EF92C82569244500A98D1C /* FARBaseObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARBaseObj.m; sourceTree = "<group>"; };
-		65EF92CD2569246100A98D1C /* FARClassObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARClassObj.h; sourceTree = "<group>"; };
-		65EF92CE2569246100A98D1C /* FARClassObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARClassObj.m; sourceTree = "<group>"; };
-		65EF92D22569246E00A98D1C /* FARFuncObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARFuncObj.h; sourceTree = "<group>"; };
-		65EF92D32569246E00A98D1C /* FARFuncObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARFuncObj.m; sourceTree = "<group>"; };
+		65EF92CD2569246100A98D1C /* FARClassCodeObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARClassCodeObj.h; sourceTree = "<group>"; };
+		65EF92CE2569246100A98D1C /* FARClassCodeObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARClassCodeObj.m; sourceTree = "<group>"; };
+		65EF92D22569246E00A98D1C /* FARFuncCodeObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARFuncCodeObj.h; sourceTree = "<group>"; };
+		65EF92D32569246E00A98D1C /* FARFuncCodeObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARFuncCodeObj.m; sourceTree = "<group>"; };
 		65EF92D92569258E00A98D1C /* FARCodeObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARCodeObj.h; sourceTree = "<group>"; };
 		65EF92DA2569258E00A98D1C /* FARCodeObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARCodeObj.m; sourceTree = "<group>"; };
 		65F6C3ED25626B6200C8B94C /* Fairy_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Fairy_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -182,10 +182,10 @@
 				65EF914325654D4700A98D1C /* FARNull.m */,
 				65EF92D92569258E00A98D1C /* FARCodeObj.h */,
 				65EF92DA2569258E00A98D1C /* FARCodeObj.m */,
-				65EF92CD2569246100A98D1C /* FARClassObj.h */,
-				65EF92CE2569246100A98D1C /* FARClassObj.m */,
-				65EF92D22569246E00A98D1C /* FARFuncObj.h */,
-				65EF92D32569246E00A98D1C /* FARFuncObj.m */,
+				65EF92CD2569246100A98D1C /* FARClassCodeObj.h */,
+				65EF92CE2569246100A98D1C /* FARClassCodeObj.m */,
+				65EF92D22569246E00A98D1C /* FARFuncCodeObj.h */,
+				65EF92D32569246E00A98D1C /* FARFuncCodeObj.m */,
 				6560C07F2572509C00A3AEB5 /* FARClosureCodeObj.h */,
 				6560C0802572509C00A3AEB5 /* FARClosureCodeObj.m */,
 				6560C06A25724A6800A3AEB5 /* FARBaseCodeRunInstance.h */,
@@ -279,9 +279,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				65EF92C3256914FF00A98D1C /* FARVMCodeEnv.h in Headers */,
-				65EF92CF2569246100A98D1C /* FARClassObj.h in Headers */,
+				65EF92CF2569246100A98D1C /* FARClassCodeObj.h in Headers */,
 				65EF908F25637F0000A98D1C /* FARCommandTag.h in Headers */,
-				65EF92D42569246E00A98D1C /* FARFuncObj.h in Headers */,
+				65EF92D42569246E00A98D1C /* FARFuncCodeObj.h in Headers */,
 				6560C07625724C4000A3AEB5 /* FARClassRunInstance.h in Headers */,
 				65EF913F2565478600A98D1C /* FARVMEnvironment.h in Headers */,
 				6560C07125724C3000A3AEB5 /* FARFunRunInstance.h in Headers */,
@@ -402,7 +402,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65EF92D52569246E00A98D1C /* FARFuncObj.m in Sources */,
+				65EF92D52569246E00A98D1C /* FARFuncCodeObj.m in Sources */,
 				65EF92CA2569244500A98D1C /* FARBaseObj.m in Sources */,
 				65EF90A42564012400A98D1C /* FARVMCode.m in Sources */,
 				65EF909025637F0000A98D1C /* FARCommandTag.m in Sources */,
@@ -417,7 +417,7 @@
 				65EF91402565478600A98D1C /* FARVMEnvironment.m in Sources */,
 				6560C07C25724C5000A3AEB5 /* FARClosureRunInstance.m in Sources */,
 				65F6C44C25626F8200C8B94C /* FARCommand.m in Sources */,
-				65EF92D02569246100A98D1C /* FARClassObj.m in Sources */,
+				65EF92D02569246100A98D1C /* FARClassCodeObj.m in Sources */,
 				65EF92DC2569258E00A98D1C /* FARCodeObj.m in Sources */,
 				65EF914525654D4700A98D1C /* FARNull.m in Sources */,
 				6560C07725724C4000A3AEB5 /* FARClassRunInstance.m in Sources */,

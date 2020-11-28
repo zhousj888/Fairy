@@ -1,5 +1,5 @@
 //
-//  FARClassObj.h
+//  FARFuncCodeObj.h
 //  Fairy-iOS
 //
 //  Created by 周孙静 on 2020/11/21.
@@ -9,8 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FARClassObj : FARCodeObj
-
+@interface FARFuncCodeObj : FARCodeObj
 
 @end
 

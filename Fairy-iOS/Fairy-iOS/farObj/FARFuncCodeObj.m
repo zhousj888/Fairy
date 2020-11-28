@@ -1,14 +1,14 @@
 //
-//  FARFuncObj.m
+//  FARFuncCodeObj.m
 //  Fairy-iOS
 //
 //  Created by 周孙静 on 2020/11/21.
 //
 
-#import "FARFuncObj.h"
+#import "FARFuncCodeObj.h"
 #import "FARFunRunInstance.h"
 
-@implementation FARFuncObj
+@implementation FARFuncCodeObj
 
 + (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env {
     return [[FARFunRunInstance alloc] initWithEnv:env];
