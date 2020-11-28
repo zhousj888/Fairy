@@ -99,7 +99,7 @@ static NSString *const kRetSp = @"__retSp";
 
 - (void)jmp:(NSString *)tag {
     FARCodeObj *codeObj = (FARCodeObj *)[self.currentEnv findVarForKey:tag];
-    [self jmpToIndex:[codeObj codeIndex]];
+//    [self jmpToIndex:[codeObj codeIndex]];
 }
 
 - (void)jmpToIndex:(NSInteger)index {
@@ -320,16 +320,16 @@ static NSString *const kRetSp = @"__retSp";
             return YES;
         }
         case FAROperCallFunc:{
-            [self.currentEnv setVar:[FARCodeObj codeObjWithCodeIndex:self.pc + 1] key:kRetPc];
-            [self.currentEnv setVar:[FARCodeObj codeObjWithCodeIndex:self.sp] key:kRetSp];
+//            [self.currentEnv setVar:[FARCodeObj codeObjWithCodeIndex:self.pc + 1] key:kRetPc];
+//            [self.currentEnv setVar:[FARCodeObj codeObjWithCodeIndex:self.sp] key:kRetSp];
             NSInteger funcCodeIndex = [[self pop] integerValue];
             [self jmpToIndex:funcCodeIndex];
             return NO;
         }
         case FAROperCmdRet:{
             id lastObj = [self pop];
-            self.pc = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetPc] codeIndex];
-            self.sp = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetSp] codeIndex];
+//            self.pc = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetPc] codeIndex];
+//            self.sp = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetSp] codeIndex];
             [self push:lastObj];
             self.currentEnv = self.currentEnv.outer;
             return NO;
@@ -341,8 +341,8 @@ static NSString *const kRetSp = @"__retSp";
         }
         case FAROperFuncFinish:{
             id lastObj = [self pop];
-            self.pc = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetPc] codeIndex];
-            self.sp = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetSp] codeIndex];
+//            self.pc = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetPc] codeIndex];
+//            self.sp = [(FARCodeObj *)[self.currentEnv findVarForKey:kRetSp] codeIndex];
             [self push:lastObj];
             self.currentEnv = self.currentEnv.outer;
             return NO;

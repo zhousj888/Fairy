@@ -6,11 +6,12 @@
 //
 
 #import "FARNull.h"
+#import "FARVMEnvironment.h"
 
 @implementation FARNull
 
 + (instancetype)null {
-    return [[FARNull alloc] init];
+    return [[FARNull alloc] initWithEnv:[[FARVMEnvironment alloc] init]];
 }
 
 @end
