@@ -178,7 +178,7 @@ ClosureStmt:
 ;
 
 ClosureStart:
-    /* empty */             { _BEG_CLOSURE; addCmd2(FAROperCmdPush, generString("20","%s%d",TAG_CLOSURE_BEGIN,_CLOSURE_ID)); addTag("%s%d",TAG_CLOSURE_BEGIN,_CLOSURE_ID); }
+    /* empty */             { _BEG_CLOSURE; addCmd2(FAROperCmdPushIdentifier, generString("20","%s%d",TAG_CLOSURE_BEGIN,_CLOSURE_ID)); addTag("%s%d",TAG_CLOSURE_BEGIN,_CLOSURE_ID); }
 ;
 
 ActualParams:
@@ -363,11 +363,11 @@ Expr:
 
 Primary:
     '(' Expr ')'
-|   T_IntConstant           { addCmd2(FAROperCmdPush,$1); }
-|   T_DecimalConstant       { addCmd2(FAROperCmdPush,$1); }
-|   T_Identifier            { addCmd2(FAROperCmdPush,$1); }
+|   T_IntConstant           { addCmd2(FAROperCmdPushInt,$1); }
+|   T_DecimalConstant       { addCmd2(FAROperCmdPushDouble,$1); }
+|   T_Identifier            { addCmd2(FAROperCmdPushIdentifier,$1); }
 |   IntervalExpr
-|   T_StringConstant        { addCmd2(FAROperCmdPush,$1); }
+|   T_StringConstant        { addCmd2(FAROperCmdPushString,$1); }
 |   ArrayExpr               
 |   DictionExpr
 |   Primary CallFuncSuffix  { addCmd1(FAROperCallFunc); }

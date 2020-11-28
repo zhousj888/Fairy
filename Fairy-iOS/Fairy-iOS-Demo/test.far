@@ -108,8 +108,10 @@
 
 // a.test.test.test()()
 // 1 + 1
-test(a: 1){
-}
+
+
+a + "" + 1 + 1.123
+
 // class Son:Father
 // {
 //     var a = 1

@@ -29,7 +29,10 @@ char *generString(int stringLength,char *fmt,...) {
 
 NSString *transCmdToDescription(int cmd) {
     switch (cmd) {
-        case FAROperCmdPush:{return @"push";}
+        case FAROperCmdPushInt:{return @"pushInt";}
+        case FAROperCmdPushDouble:{return @"pushDouble";}
+        case FAROperCmdPushIdentifier:{return @"pushID";}
+        case FAROperCmdPushString:{return @"pushString";}
         case FAROperCmdPop:{return @"pop";}
             
         case FAROperCmdJmp:{return @"jmp";}

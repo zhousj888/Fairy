@@ -6,6 +6,7 @@ funcRunInstance = FuncCodeObj.newRunInstanceWithEnv(mainEnv)
 funcRunInstance.callerInstance = self
 funcRunInstance.runWithParams(currentEnv)
 currentEnv = currentEnv.outer
+
 retValue = pop()
 
 2、return
@@ -89,16 +90,14 @@ currentEnv = currentEnv.outer
 
 11、vmControllRegular
 
-codeExcutor:
-stack
-runCommandWithEnv(env)
-
 create mainEnv
-
-get MainCodeObj
+push MainCodeObj
 mainCodeInstance = MainCodeObj.newRunInstanceWithEnv(mainEnv)
 mainCodeInstance.runWithParams(currentEnv)
 
 
 12、方法重载：🈚️
 13、方法覆写：self -> super
+
+14、jmp和call兼容
+直接instanceRunCode,没有codeExcutor

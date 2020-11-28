@@ -128,7 +128,16 @@ static NSString *const kRetSp = @"__retSp";
 //返回是否pc++
 - (BOOL)executeCmd:(FARCommand *)cmd {
     switch (cmd.operCmd) {
-        case FAROperCmdPush:{
+        case FAROperCmdPushInt: {
+            return YES;
+        }
+        case FAROperCmdPushDouble: {
+            return YES;
+        }
+        case FAROperCmdPushString: {
+            return YES;
+        }
+        case FAROperCmdPushIdentifier: {
             if ([self isNumber:cmd.oper1] || [self isStringConst:cmd.oper1]) {
                 [self push:cmd.oper1];
             }else if([self.currentEnv findVarForKey:cmd.oper1]){
@@ -137,6 +146,7 @@ static NSString *const kRetSp = @"__retSp";
                 NSLog(@"找不到变量:%@",cmd.oper1);
                 self.isExit = YES;
             }
+            return YES;
             return YES;
         }
         case FAROperCmdPop:{

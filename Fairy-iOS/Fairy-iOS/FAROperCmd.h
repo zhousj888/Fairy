@@ -9,7 +9,10 @@
 #define FAROperCmd_h
 
 enum {
-    FAROperCmdPush = 1,
+    FAROperCmdPushInt = 1,
+    FAROperCmdPushDouble,
+    FAROperCmdPushIdentifier,
+    FAROperCmdPushString,
     FAROperCmdPop,
     
     FAROperCmdJmp,
