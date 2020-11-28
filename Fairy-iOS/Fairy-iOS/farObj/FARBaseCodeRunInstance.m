@@ -7,6 +7,22 @@
 
 #import "FARBaseCodeRunInstance.h"
 
+@interface FARBaseCodeRunInstance()
+
+@property (nonatomic, readwrite) NSInteger currentSp;
+
+@end
+
+
 @implementation FARBaseCodeRunInstance
+
+- (FARBaseObj *)runWithParams:(NSDictionary *)params {
+    return nil;
+}
+
+
+- (void)resume {
+    
+}
 
 @end

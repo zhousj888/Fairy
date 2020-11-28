@@ -6,7 +6,12 @@
 //
 
 #import "FARClassObj.h"
+#import "FARClassRunInstance.h"
 
 @implementation FARClassObj
+
++ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env {
+    return [[FARClassRunInstance alloc] initWithEnv:env];
+}
 
 @end

@@ -6,13 +6,14 @@
 //
 
 #import "FARBaseObj.h"
+#import "FARBaseCodeRunInstance.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FARCodeObj : FARBaseObj
 
-- (void)addCodeIndex:(NSInteger *)codeIndex;
-+ (instancetype)newRunInstanceWithEnv:(FARVMEnvironment *)env;
+- (void)addCodeIndex:(NSInteger)codeIndex;
++ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env;
 
 @end
 

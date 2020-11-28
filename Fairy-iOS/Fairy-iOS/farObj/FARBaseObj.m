@@ -6,7 +6,25 @@
 //
 
 #import "FARBaseObj.h"
+#import "FARVMEnvironment.h"
+
+@interface FARBaseObj()
+
+@property (nonatomic, readwrite) FARVMEnvironment *env;
+
+@end
 
 @implementation FARBaseObj
+
+- (instancetype)initWithEnv:(FARVMEnvironment *)env {
+    if (self = [super init]) {
+        _env = env;
+    }
+    return self;
+}
+
+- (FARBaseObj *)propertyWithId:(NSString *)name {
+    return [self.env findVarForKey:name];
+}
 
 @end
