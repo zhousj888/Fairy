@@ -17,6 +17,7 @@ int ifStmtId = 0, ifThenId = 0, ifTop = -1, ifThenStatckTop = -1, ifStack[100][1
 int whileStmtId = 0, whileTop = -1, whileStack[100];
 int closureId = 0, closureTop = -1, closureStack[100];
 char *currentClassName = NULL;
+char *currentFuncName = NULL;
 
 #define _BEG_IF             {ifStack[++ifTop][0] = ++ifStmtId;}
 #define _END_IF             {ifTop--;}
@@ -143,8 +144,8 @@ ClassDefStmt:
 ;
 
 Closure:
-    ClosureStart '{' ClosureStmts '}'                                   { addTag("%s",TAG_CLOSURE_END);_END_CLOSURE; }
-|   ClosureStart '{' '(' Args ')' T_In ClosureStmts '}'         { addTag("%s",TAG_CLOSURE_END);_END_CLOSURE; }
+    ClosureStart '{' ClosureStmts '}'                                   { addTag("%s%d",TAG_CLOSURE_END,_CLOSURE_ID);_END_CLOSURE; }
+|   ClosureStart '{' '(' Args ')' T_In ClosureStmts '}'         { addTag("%s%d",TAG_CLOSURE_END,_CLOSURE_ID);_END_CLOSURE; }
 ;
 
 ClosureStmts:
@@ -210,16 +211,16 @@ Arg:
 ;
 
 FuncDecl:
-    T_Func FuncName '(' Args ')' IfWhileStmtsBlock        { addCmd1(FAROperFuncFinish); addTag(TAG_FUNC_END); }
+    T_Func FuncName '(' Args ')' IfWhileStmtsBlock        { addCmd1(FAROperFuncFinish); addTag("%s%s",TAG_FUNC_END,currentFuncName);currentFuncName = NULL; }
 ;
 
 FuncName:
-    T_Identifier                                          { if(currentClassName){addTag("%s%s_%s",TAG_FUNC_START,currentClassName,$1);} else {addTag("%s%s",TAG_FUNC_START,$1);}  }
+    T_Identifier                                          { if(currentClassName){currentFuncName = generString(50,"%s_%s",currentClassName,$1);} else {currentFuncName = $1;} addTag("%s%s",TAG_FUNC_START, currentFuncName); }
 ;
 
 ClassDecl:
-    T_Class ClassID ClassDefBlock                       { addTag(TAG_CLASS_END);currentClassName = NULL;}
-|   T_Class ClassID ClassDefBlock    { addTag(TAG_CLASS_END);currentClassName = NULL; }
+    T_Class ClassID ClassDefBlock                       { addTag("%s%s",TAG_CLASS_END,currentClassName);currentClassName = NULL;}
+|   T_Class ClassID ClassDefBlock    { addTag("%s%s",TAG_CLASS_END,currentClassName);currentClassName = NULL; }
 ;
 
 ClassID:

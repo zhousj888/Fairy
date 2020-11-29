@@ -10,11 +10,11 @@
 
 
 #define TAG_CLASS_BEGIN             "CLASS_BEGIN_"
-#define TAG_CLASS_END               "CLASS_END"
+#define TAG_CLASS_END               "CLASS_END_"
 #define TAG_CLOSURE_BEGIN           "CLOSURE_BEGIN_"
-#define TAG_CLOSURE_END             "CLOSURE_END"
-#define TAG_FUNC_START              "FUNC_"
-#define TAG_FUNC_END                "FUNC_END"
+#define TAG_CLOSURE_END             "CLOSURE_END_"
+#define TAG_FUNC_START              "FUNC_BEGIN_"
+#define TAG_FUNC_END                "FUNC_END_"
 #define TAG_WHILE_BEGIN             "WHILE_BEGIN_"
 #define TAG_WHILE_END               "WHILE_END_"
 #define TAG_CONTINUE                "CONTINUE_POINT_"
