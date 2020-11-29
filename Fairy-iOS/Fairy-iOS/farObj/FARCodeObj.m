@@ -7,21 +7,15 @@
 
 #import "FARCodeObj.h"
 
-@interface FARCodeObj()
-
-@property (nonatomic, strong) NSMutableArray<NSNumber*> *codeIndexArr;
-@property (nonatomic, strong) NSMutableArray<FARCodeObj *> *codeObjArr;
-
-@end
-
 @implementation FARCodeObj
 
 - (void)addCodeIndex:(NSInteger)codeIndex {
     [self.codeIndexArr addObject:@(codeIndex)];
 }
 
-+ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env {
-    @throw [NSException exceptionWithName:@"需要子类实现" reason:nil userInfo:nil];
+- (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode {
+    FARBaseCodeRunInstance *runInstance = [[FARBaseCodeRunInstance alloc] initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode];
+    return runInstance;
 }
 
 - (void)addSubCodeObj:(FARCodeObj *)subCodeObj {

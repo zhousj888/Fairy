@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)declareVar:(NSString *)key;
 - (void)declareLet:(NSString *)key;
 - (NSDictionary *)asParams;
+- (void)addParams:(NSDictionary *)params;
 
 @end
 

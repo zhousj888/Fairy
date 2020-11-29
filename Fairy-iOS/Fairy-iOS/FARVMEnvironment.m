@@ -53,5 +53,9 @@
     return self.envDic;
 }
 
+- (void)addParams:(NSDictionary *)params {
+    [self.envDic addEntriesFromDictionary:params];
+}
+
 
 @end

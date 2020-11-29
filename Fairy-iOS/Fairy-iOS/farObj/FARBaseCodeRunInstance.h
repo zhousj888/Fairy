@@ -8,6 +8,9 @@
 #import "FARBaseObj.h"
 #import "FARCommand.h"
 #import "FARVMStack.h"
+#import "FARVMCode.h"
+
+@class FARCodeObj;
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -16,9 +19,9 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, weak) FARBaseCodeRunInstance *callerInstance;
 @property (nonatomic, readonly) NSInteger currentSp;
 
-- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack;
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode;
 
-- (FARBaseObj *)runWithParams:(NSDictionary *)params;
+- (nullable FARBaseObj *)runWithParams:(nullable NSDictionary *)params;
 - (void)resume;
 
 //以下方法只能子类调用

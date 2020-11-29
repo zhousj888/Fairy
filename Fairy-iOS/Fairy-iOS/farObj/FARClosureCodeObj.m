@@ -10,8 +10,4 @@
 
 @implementation FARClosureCodeObj
 
-+ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env {
-    return [[FARClosureRunInstance alloc] initWithEnv:env];
-}
-
 @end

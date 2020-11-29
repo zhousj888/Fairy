@@ -110,30 +110,30 @@
 // 1 + 1
 
 
-123
-123
-func test() {
+// 123
+// 123
+// func test() {
 
-}
-class Son:Father {
-    var a = 1
-    var b = 2
-    func Son() {
-        123
-        callTest(){
-            while a {
-                123
-            }
-        }
-    }
-}
-class Father: GrandFather {
-    func Father(){
+// }
+// class Son:Father {
+//     var a = 1
+//     var b = 2
+//     func Son() {
+//         123
+//         callTest(){
+//             while a {
+//                 123
+//             }
+//         }
+//     }
+// }
+// class Father: GrandFather {
+//     func Father(){
 
-    }
-}
-123
-123
+//     }
+// }
+// 123
+// 123
 
 // class Son:Father
 // {

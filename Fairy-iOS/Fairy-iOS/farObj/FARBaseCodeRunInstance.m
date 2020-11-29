@@ -14,11 +14,16 @@
 #import "FARNumberCodeObj.h"
 #import "FARFunRunInstance.h"
 #import "FARClosureRunInstance.h"
+#import "FARCodeObj.h"
 
 @interface FARBaseCodeRunInstance()
 
 @property (nonatomic, readwrite) NSInteger currentSp;
 @property (nonatomic, readwrite) FARVMStack *stack;
+@property (nonatomic, strong) FARCodeObj *codeObj;
+@property (nonatomic, assign) NSInteger pc;//指向codeObj.codeIndexArr.index
+@property (nonatomic, strong) FARVMCode *vmCode;
+@property (nonatomic, assign) BOOL isRet;
 
 @end
 
@@ -26,24 +31,56 @@
 @implementation FARBaseCodeRunInstance
 
 
-- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack {
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode{
     if (self = [super initWithEnv:env]) {
         _stack = stack;
+        _codeObj = codeObj;
+        _vmCode = vmCode;
     }
     return self;
 }
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
-    @throw [NSException exceptionWithName:@"需要子类实现" reason:nil userInfo:nil];
+    
+    self.env = [[FARVMEnvironment alloc] initWithOuter:self.env];
+    if (params) {
+        [self.env addParams:params];
+    }
+    
+    self.pc = 0;
+    
+    [self resume];
+    
+    return nil;
 }
 
 
 - (void)resume {
-    @throw [NSException exceptionWithName:@"需要子类实现" reason:nil userInfo:nil];
+    NSNumber *codeIndex = nil;
+    FARCommand *cmd = nil;
+    while (self.pc < self.codeObj.codeIndexArr.count && !self.isRet) {
+        codeIndex = self.codeObj.codeIndexArr[self.pc];
+        cmd = self.vmCode.commandArr[codeIndex.integerValue];
+        if ([self _executeCmd:cmd]) {
+            self.pc++;
+        }
+    }
 }
 
 - (void)jmpTag:(NSString *)tag {
-    @throw [NSException exceptionWithName:@"需要子类实现" reason:nil userInfo:nil];
+    
+    FARCommandTag *tagObj = self.vmCode.tagDic[tag];
+    
+    for (int i = 0; i < self.codeObj.codeIndexArr.count; i++) {
+        NSNumber *codeIndex = self.codeObj.codeIndexArr[i];
+        if (codeIndex.integerValue == tagObj.codeIndex) {
+            self.pc = i;
+            return;
+        }
+    }
+    
+    @throw [NSException exceptionWithName:@"跳转tag失败" reason:nil userInfo:nil];
+    
 }
 
 //返回是否pc++
@@ -180,27 +217,31 @@
             FARFunRunInstance *runInstance = (FARFunRunInstance *)[self.stack pop];
             [runInstance runWithParams:self.env.asParams];
             self.env = self.env.outer;
-            return NO;
+            return YES;
         }
         case FAROperCmdRet:{
+            self.isRet = YES;
             [self.callerInstance resume];
             return NO;
         }
         case FAROperExit:{
+            self.isRet = YES;
             return NO;
         }
         case FAROperFuncFinish:{
+            self.isRet = YES;
             [self.callerInstance resume];
             return NO;
         }
         case FAROperCmdCreateSaveTopClosure:{
             FARClosureRunInstance *closure = (FARClosureRunInstance *)[self.stack pop];
             [self.env setVar:closure key:FAR_TRAILING_CLOSURE];
-            return NO;
+            return YES;
         }
         case FAROperGetObjProperty:{
-            
-            return NO;
+            FARBaseObj *obj = [self.stack pop];
+            [self.stack push:[obj propertyWithId:cmd.oper1]];
+            return YES;
         }
     }
     return YES;

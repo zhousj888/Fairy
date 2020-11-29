@@ -10,8 +10,4 @@
 
 @implementation FARFuncCodeObj
 
-+ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env {
-    return [[FARFunRunInstance alloc] initWithEnv:env];
-}
-
 @end
