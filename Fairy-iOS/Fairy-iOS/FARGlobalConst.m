@@ -31,3 +31,5 @@ NSString *const FAR_CLASS_SELF = @"self";
 NSString *const FAR_CLASS_SUPER = @"super";
 
 NSString *const FAR_TRAILING_CLOSURE = @"__trailing_closure";
+
+NSString *const FAR_MAIN_CODE = @"__main";

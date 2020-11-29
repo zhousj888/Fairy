@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARCodeObj : FARBaseObj
 
+@property (nonatomic, copy) NSString *name;
+
 - (void)addCodeIndex:(NSInteger)codeIndex;
 - (void)addSubCodeObj:(FARCodeObj *)subCodeObj;
 - (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env;

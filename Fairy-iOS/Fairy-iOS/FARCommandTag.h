@@ -29,8 +29,9 @@ typedef NS_ENUM(NSInteger, FARCommandTagType) {
 @property (nonatomic, readonly) FARCommandTagType type;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger codeIndex;//指向这个tag的第一条指令
+@property (nonatomic, copy, readonly, nullable) NSString *pairsEndName;
+@property (nonatomic, copy, readonly) NSString *rawName;
 
-- (nullable NSString *)pairsEndName;
 + (instancetype)tagWithName:(NSString *)name codeIndex:(NSInteger)codeIndex;
 
 @end

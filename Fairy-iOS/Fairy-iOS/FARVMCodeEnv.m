@@ -15,6 +15,7 @@
 
 @property (nonatomic, strong) FARVMCode *vmCode;
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray<FARCommandTag *>*> *tagIndexDicCopy;
+@property (nonatomic, strong) NSMutableDictionary<NSString *, FARCodeObj *>* codeObjDic;
 
 @end
 
@@ -31,9 +32,9 @@
 }
 
 - (void)parseCode {
-    FARCodeObj *mainCode = [[FARCodeObj alloc] initWithEnv:self];
+    FARCodeObj *mainCode = [[FARFuncCodeObj alloc] initWithEnv:self];
     mainCode = [self parseObjWithStartIndex:0 endIndex:self.vmCode.commandArr.count - 1 rootObj:mainCode];
-    NSLog(@"~~~~~~~~~~");
+    self.codeObjDic[FAR_MAIN_CODE] = mainCode;
 }
 
 - (FARCodeObj *)parseObjWithStartIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex rootObj:(FARCodeObj *)root{
@@ -83,20 +84,32 @@
     return root;
 }
 
-- (id)findVarForKey:(NSString *)key {
+- (FARBaseObj *)findVarForKey:(NSString *)key {
     if (self.vmCode.tagDic[key]) {
         return @(self.vmCode.tagDic[key].codeIndex);
     }
     return nil;
 }
+
+- (NSMutableDictionary<NSString *,FARCodeObj *> *)codeObjDic {
+    if(!_codeObjDic) {
+        _codeObjDic = [NSMutableDictionary dictionary];
+    }
+    return _codeObjDic;
+
+}
+
+
 - (void)setVar:(id)value key:(NSString *)key {
-    
+    @throw [NSException exceptionWithName:@"代码表不能设置变量" reason:nil userInfo:nil];
 }
 - (void)declareVar:(NSString *)key {
-    
+    @throw [NSException exceptionWithName:@"代码表不能声明变量" reason:nil userInfo:nil];
 }
 - (void)declareLet:(NSString *)key {
-    
+    @throw [NSException exceptionWithName:@"代码表不能声明变量" reason:nil userInfo:nil];
 }
+
+
 
 @end

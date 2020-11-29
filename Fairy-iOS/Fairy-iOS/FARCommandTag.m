@@ -11,6 +11,8 @@
 @interface FARCommandTag()
 
 @property (nonatomic, readwrite) FARCommandTagType type;
+@property (nonatomic, copy, readwrite) NSString *pairsEndName;
+@property (nonatomic, copy, readwrite) NSString *rawName;
 
 @end
 
@@ -20,57 +22,69 @@
     FARCommandTag *tag = [[FARCommandTag alloc] init];
     tag.name = name;
     tag.codeIndex = codeIndex;
+    [tag parse];
     return tag;
 }
 
-- (FARCommandTagType)type {
-    if (_type == 0) {
-        [self parseType];
-    }
-    return _type;
-}
-
-- (NSString *)pairsEndName {
-    if (self.type == FARCommandTagTypeClassBegin) {
-        NSString *className = [self.name substringFromIndex:@TAG_CLASS_BEGIN.length];
-        return [NSString stringWithFormat:@"%@%@",@TAG_CLASS_END,className];
-    }else if (self.type == FARCommandTagTypeFuncBegin) {
-        NSString *funcName = [self.name substringFromIndex:@TAG_FUNC_START.length];
-        return [NSString stringWithFormat:@"%s%@",TAG_FUNC_END,funcName];
-    }else if (self.type == FARCommandTagTypeClosureStart) {
-        NSString *closureName = [self.name substringFromIndex:@TAG_CLOSURE_BEGIN.length];
-        return [NSString stringWithFormat:@"%s%@",TAG_CLOSURE_END,closureName];
-    }
-    //这里待补充其他情况
-    return nil;
-    
-}
-
-- (void)parseType {
+- (void)parse {
     if ([self.name hasPrefix:@TAG_CLASS_BEGIN]) {
-        self.type = FARCommandTagTypeClassBegin;
+        _type = FARCommandTagTypeClassBegin;
+        NSString *currentPrefix = @TAG_CLASS_BEGIN;
+        NSString *endPrefix = @TAG_CLASS_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
+        _pairsEndName = [NSString stringWithFormat:@"%@%@",endPrefix,_rawName];
     }else if ([self.name hasPrefix:@TAG_CLASS_END]) {
-        self.type = FARCommandTagTypeClassEnd;
+        _type = FARCommandTagTypeClassEnd;
+        NSString *currentPrefix = @TAG_CLASS_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
     }else if ([self.name hasPrefix:@TAG_FUNC_START]) {
-        self.type = FARCommandTagTypeFuncBegin;
+        _type = FARCommandTagTypeFuncBegin;
+        NSString *currentPrefix = @TAG_FUNC_START;
+        NSString *endPrefix = @TAG_FUNC_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
+        _pairsEndName = [NSString stringWithFormat:@"%@%@",endPrefix,_rawName];
     }else if ([self.name hasPrefix:@TAG_FUNC_END]) {
-        self.type = FARCommandTagTypeFuncEnd;
+        _type = FARCommandTagTypeFuncEnd;
+        NSString *currentPrefix = @TAG_FUNC_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
     }else if ([self.name hasPrefix:@TAG_CLOSURE_BEGIN]) {
-        self.type = FARCommandTagTypeClosureStart;
+        _type = FARCommandTagTypeClosureStart;
+        NSString *currentPrefix = @TAG_CLOSURE_BEGIN;
+        NSString *endPrefix = @TAG_CLOSURE_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
+        _pairsEndName = [NSString stringWithFormat:@"%@%@",endPrefix,_rawName];
     }else if ([self.name hasPrefix:@TAG_CLOSURE_END]) {
-        self.type = FARCommandTagTypeClosureEnd;
+        _type = FARCommandTagTypeClosureEnd;
+        NSString *currentPrefix = @TAG_CLOSURE_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
     }else if ([self.name hasPrefix:@TAG_WHILE_BEGIN]) {
-        self.type = FARCommandTagTypeWhileBegin;
+        _type = FARCommandTagTypeWhileBegin;
+        NSString *currentPrefix = @TAG_WHILE_BEGIN;
+        NSString *endPrefix = @TAG_WHILE_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
+        _pairsEndName = [NSString stringWithFormat:@"%@%@",endPrefix,_rawName];
     }else if ([self.name hasPrefix:@TAG_WHILE_END]) {
-        self.type = FARCommandTagTypeWhileEnd;
+        _type = FARCommandTagTypeWhileEnd;
+        NSString *currentPrefix = @TAG_WHILE_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
     }else if ([self.name hasPrefix:@TAG_CONTINUE]) {
-        self.type = FARCommandTagTypeContinuePoint;
+        _type = FARCommandTagTypeContinuePoint;
+        NSString *currentPrefix = @TAG_CONTINUE;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
     }else if ([self.name hasPrefix:@TAG_IF_BEGIN]) {
-        self.type = FARCommandTagTypeIfBegin;
+        _type = FARCommandTagTypeIfBegin;
+        NSString *currentPrefix = @TAG_IF_BEGIN;
+        NSString *endPrefix = @TAG_IF_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
+        _pairsEndName = [NSString stringWithFormat:@"%@%@",endPrefix,_rawName];
     }else if ([self.name hasPrefix:@TAG_IF_END]) {
-        self.type = FARCommandTagTypeIfEnd;
+        _type = FARCommandTagTypeIfEnd;
+        NSString *currentPrefix = @TAG_IF_END;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
     }else if ([self.name hasPrefix:@TAG_IF_THEN]) {
-        self.type = FARCommandTagTypeIfThen;
+        _type = FARCommandTagTypeIfThen;
+        NSString *currentPrefix = @TAG_IF_THEN;
+        _rawName = [self.name substringFromIndex:currentPrefix.length];
     }
 }
 
