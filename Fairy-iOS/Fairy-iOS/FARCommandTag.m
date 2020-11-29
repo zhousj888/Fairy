@@ -30,6 +30,22 @@
     return _type;
 }
 
+- (NSString *)pairsEndName {
+    if (self.type == FARCommandTagTypeClassBegin) {
+        NSString *className = [self.name substringFromIndex:@TAG_CLASS_BEGIN.length];
+        return [NSString stringWithFormat:@"%@%@",@TAG_CLASS_END,className];
+    }else if (self.type == FARCommandTagTypeFuncBegin) {
+        NSString *funcName = [self.name substringFromIndex:@TAG_FUNC_START.length];
+        return [NSString stringWithFormat:@"%s%@",TAG_FUNC_END,funcName];
+    }else if (self.type == FARCommandTagTypeClosureStart) {
+        NSString *closureName = [self.name substringFromIndex:@TAG_CLOSURE_BEGIN.length];
+        return [NSString stringWithFormat:@"%s%@",TAG_CLOSURE_END,closureName];
+    }
+    //这里待补充其他情况
+    return nil;
+    
+}
+
 - (void)parseType {
     if ([self.name hasPrefix:@TAG_CLASS_BEGIN]) {
         self.type = FARCommandTagTypeClassBegin;

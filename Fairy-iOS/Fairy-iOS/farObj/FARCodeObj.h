@@ -13,6 +13,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FARCodeObj : FARBaseObj
 
 - (void)addCodeIndex:(NSInteger)codeIndex;
+- (void)addSubCodeObj:(FARCodeObj *)subCodeObj;
 - (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env;
 
 @end

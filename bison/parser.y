@@ -18,6 +18,7 @@ int whileStmtId = 0, whileTop = -1, whileStack[100];
 int closureId = 0, closureTop = -1, closureStack[100];
 char *currentClassName = NULL;
 char *currentFuncName = NULL;
+int maxClassFuncLength = 50;
 
 #define _BEG_IF             {ifStack[++ifTop][0] = ++ifStmtId;}
 #define _END_IF             {ifTop--;}
@@ -215,7 +216,7 @@ FuncDecl:
 ;
 
 FuncName:
-    T_Identifier                                          { if(currentClassName){currentFuncName = generString(50,"%s_%s",currentClassName,$1);} else {currentFuncName = $1;} addTag("%s%s",TAG_FUNC_START, currentFuncName); }
+    T_Identifier                                          { if(currentClassName){currentFuncName = generString(maxClassFuncLength,"%s_%s",currentClassName,$1);} else {currentFuncName = $1;} addTag("%s%s",TAG_FUNC_START, currentFuncName); }
 ;
 
 ClassDecl:
@@ -225,7 +226,7 @@ ClassDecl:
 
 ClassID:
     T_Identifier                        { addTag("%s%s",TAG_CLASS_BEGIN,$1); currentClassName = $1; }
-|   T_Identifier ':' T_Identifier       { addTag("%s%s:%s",TAG_CLASS_BEGIN,$1,$3); currentClassName = $1; }
+|   T_Identifier ':' T_Identifier       { currentClassName = generString(maxClassFuncLength,"%s:%s",$1,$3);addTag("%s%s",TAG_CLASS_BEGIN,currentClassName);}
 ;
 
 BreakStmt:

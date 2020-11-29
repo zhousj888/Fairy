@@ -30,6 +30,7 @@ typedef NS_ENUM(NSInteger, FARCommandTagType) {
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger codeIndex;//指向这个tag的第一条指令
 
+- (nullable NSString *)pairsEndName;
 + (instancetype)tagWithName:(NSString *)name codeIndex:(NSInteger)codeIndex;
 
 @end

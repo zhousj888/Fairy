@@ -10,6 +10,7 @@
 @interface FARCodeObj()
 
 @property (nonatomic, strong) NSMutableArray<NSNumber*> *codeIndexArr;
+@property (nonatomic, strong) NSMutableArray<FARCodeObj *> *codeObjArr;
 
 @end
 
@@ -21,6 +22,18 @@
 
 + (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env {
     @throw [NSException exceptionWithName:@"需要子类实现" reason:nil userInfo:nil];
+}
+
+- (void)addSubCodeObj:(FARCodeObj *)subCodeObj {
+    [self.codeObjArr addObject:subCodeObj];
+}
+
+- (NSMutableArray<FARCodeObj *> *)codeObjArr {
+    if(!_codeObjArr) {
+        _codeObjArr = [NSMutableArray array];
+    }
+    return _codeObjArr;
+
 }
 
 - (NSMutableArray<NSNumber *> *)codeIndexArr {
