@@ -112,16 +112,24 @@
 
 123
 123
-class Test: Father {
+func test() {
+
+}
+class Son:Father {
     var a = 1
     var b = 2
-    func test() {
+    func Son() {
         123
         callTest(){
             while a {
                 123
             }
         }
+    }
+}
+class Father: GrandFather {
+    func Father(){
+
     }
 }
 123

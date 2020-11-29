@@ -11,6 +11,19 @@
 #import "FARFuncCodeObj.h"
 #import "FARClosureCodeObj.h"
 
+/**
+ codeObjDic's key regular:
+ 
+ class.name = className
+ class.superName = superClassName
+ 
+ func.name = className:superClassName_funcName = tag.rawName
+ 
+ closure.name = TAG_CLOSURE_BEGIN_closureID = tag.name
+ 
+ 
+ */
+
 @interface FARVMCodeEnv()
 
 @property (nonatomic, strong) FARVMCode *vmCode;
@@ -33,8 +46,27 @@
 
 - (void)parseCode {
     FARCodeObj *mainCode = [[FARFuncCodeObj alloc] initWithEnv:self];
+    mainCode.name = FAR_MAIN_CODE;
     mainCode = [self parseObjWithStartIndex:0 endIndex:self.vmCode.commandArr.count - 1 rootObj:mainCode];
     self.codeObjDic[FAR_MAIN_CODE] = mainCode;
+}
+
+- (void)_setClassName:(FARClassCodeObj *)classObj tag:(FARCommandTag *)tag{
+    NSString *classAndSuper = tag.rawName;
+    if ([classAndSuper containsString:@":"]) {
+        NSArray<NSString *> *strArr = [classAndSuper componentsSeparatedByString:@":"];
+        classObj.name = strArr[0];
+        classObj.superName = strArr[1];
+    }else {
+        classObj.name = tag.rawName;
+    }
+}
+
+- (void)_recordCodeObjForKey:(NSString *)key codeObj:(FARCodeObj *)codeObj {
+    if (self.codeObjDic[key]) {
+        @throw [NSException exceptionWithName:@"重名符号" reason:nil userInfo:nil];
+    }
+    self.codeObjDic[key] = codeObj;
 }
 
 - (FARCodeObj *)parseObjWithStartIndex:(NSInteger)startIndex endIndex:(NSInteger)endIndex rootObj:(FARCodeObj *)root{
@@ -52,6 +84,8 @@
             
             NSInteger classEndIndex = pairsTag.codeIndex - 1;
             classObj = (FARClassCodeObj *)[self parseObjWithStartIndex:i endIndex:classEndIndex rootObj:classObj];
+            [self _setClassName:classObj tag:tag];
+            [self _recordCodeObjForKey:classObj.name codeObj:classObj];
             [root addSubCodeObj:classObj];
             i = classEndIndex;
             continue;
@@ -62,6 +96,8 @@
             
             NSInteger funcEndIndex = pairsTag.codeIndex - 1;
             funcObj = (FARFuncCodeObj *)[self parseObjWithStartIndex:i endIndex:funcEndIndex rootObj:funcObj];
+            funcObj.name = tag.rawName;
+            [self _recordCodeObjForKey:funcObj.name codeObj:funcObj];
             [root addSubCodeObj:funcObj];
             i = funcEndIndex;
             continue;
@@ -71,6 +107,8 @@
             [self.tagIndexDicCopy[@(pairsTag.codeIndex)] removeObjectAtIndex:0];
             NSInteger closureEndIndex = pairsTag.codeIndex - 1;
             closureObj = (FARClosureCodeObj *)[self parseObjWithStartIndex:i endIndex:closureEndIndex rootObj:closureObj];
+            closureObj.name = tag.name;
+            [self _recordCodeObjForKey:closureObj.name codeObj:closureObj];
             [root addSubCodeObj:closureObj];
             i = closureEndIndex;
             continue;
@@ -85,10 +123,14 @@
 }
 
 - (FARBaseObj *)findVarForKey:(NSString *)key {
-    if (self.vmCode.tagDic[key]) {
-        return @(self.vmCode.tagDic[key].codeIndex);
+    //如果是类或者闭包可以直接找到
+    if (self.codeObjDic[key]) {
+        return self.codeObjDic[key];
     }
-    return nil;
+    //可能是类里面的方法
+    FARClassCodeObj *classCodeObj = nil;
+    NSString *funcKey = [NSString stringWithFormat:@"%@_%@",classCodeObj.name,key];
+    return self.codeObjDic[funcKey];
 }
 
 - (NSMutableDictionary<NSString *,FARCodeObj *> *)codeObjDic {
