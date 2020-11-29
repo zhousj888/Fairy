@@ -40,11 +40,9 @@
     
     for (NSInteger i = startIndex;i <= endIndex;i++) {
         FARCommandTag *tag = self.tagIndexDicCopy[@(i)].firstObject;
-        if (!tag) {
-            [root addCodeIndex:i];
-            continue;
+        if(tag) {
+            [self.tagIndexDicCopy[@(i)] removeObjectAtIndex:0];
         }
-        [self.tagIndexDicCopy[@(i)] removeObjectAtIndex:0];
         if (tag.type == FARCommandTagTypeClassBegin) {
             FARClassCodeObj *classObj = [[FARClassCodeObj alloc] initWithEnv:root.env];
             FARCommandTag *pairsTag = self.vmCode.tagDic[tag.pairsEndName];
@@ -56,8 +54,7 @@
             [root addSubCodeObj:classObj];
             i = classEndIndex;
             continue;
-        }
-        if (tag.type == FARCommandTagTypeFuncBegin) {
+        }else if (tag.type == FARCommandTagTypeFuncBegin) {
             FARFuncCodeObj *funcObj = [[FARFuncCodeObj alloc] initWithEnv:root.env];
             FARCommandTag *pairsTag = self.vmCode.tagDic[tag.pairsEndName];
             [self.tagIndexDicCopy[@(pairsTag.codeIndex)] removeObjectAtIndex:0];
@@ -67,7 +64,20 @@
             [root addSubCodeObj:funcObj];
             i = funcEndIndex;
             continue;
+        }else if (tag.type == FARCommandTagTypeClosureStart) {
+            FARClosureCodeObj *closureObj = [[FARClosureCodeObj alloc] initWithEnv:root.env];
+            FARCommandTag *pairsTag = self.vmCode.tagDic[tag.pairsEndName];
+            [self.tagIndexDicCopy[@(pairsTag.codeIndex)] removeObjectAtIndex:0];
+            NSInteger closureEndIndex = pairsTag.codeIndex - 1;
+            closureObj = (FARClosureCodeObj *)[self parseObjWithStartIndex:i endIndex:closureEndIndex rootObj:closureObj];
+            [root addSubCodeObj:closureObj];
+            i = closureEndIndex;
+            continue;
+        }else {
+            [root addCodeIndex:i];
+            continue;
         }
+        
     }
     
     return root;

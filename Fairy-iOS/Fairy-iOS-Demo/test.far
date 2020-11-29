@@ -115,21 +115,15 @@
 class Test: Father {
     var a = 1
     var b = 2
-
     func test() {
         123
-
-    }
-
-}
-
-class Test2 {
-    func test() {
-        2123
+        callTest(){
+            while a {
+                123
+            }
+        }
     }
 }
-
-
 123
 123
 
