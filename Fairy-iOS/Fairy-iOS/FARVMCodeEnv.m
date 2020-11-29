@@ -19,8 +19,14 @@
     self = [super init];
     if (self) {
         _vmCode = vmCode;
+        
+        [self parseCode];
     }
     return self;
+}
+
+- (void)parseCode {
+    
 }
 
 - (id)findVarForKey:(NSString *)key {

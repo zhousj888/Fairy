@@ -110,7 +110,20 @@
 // 1 + 1
 
 
-a + "" + 1 + 1.123
+123
+class Test {
+    var a = 123
+    func test(){
+        123
+    }
+}
+func test(){
+    123
+}
+class Test2 {
+    var a = 123
+}
+123
 
 // class Son:Father
 // {

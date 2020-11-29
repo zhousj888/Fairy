@@ -10,16 +10,23 @@
 NS_ASSUME_NONNULL_BEGIN
 
 typedef NS_ENUM(NSInteger, FARCommandTagType) {
-    FARCommandTagTypeFuncStart,
+    FARCommandTagTypeFuncBegin = 1,
     FARCommandTagTypeFuncEnd,
-    FARCommandTagTypeFuncClassStart,
-    FARCommandTagTypeFuncClassEnd,
-    FARCommandTagTypeFuncClosureStart,
-    FARCommandTagTypeFuncClosureEnd,
+    FARCommandTagTypeClassBegin,
+    FARCommandTagTypeClassEnd,
+    FARCommandTagTypeClosureStart,
+    FARCommandTagTypeClosureEnd,
+    FARCommandTagTypeWhileBegin,
+    FARCommandTagTypeWhileEnd,
+    FARCommandTagTypeContinuePoint,
+    FARCommandTagTypeIfBegin,
+    FARCommandTagTypeIfEnd,
+    FARCommandTagTypeIfThen,
 };
 
 @interface FARCommandTag : NSObject
 
+@property (nonatomic, readonly) FARCommandTagType type;
 @property (nonatomic, copy) NSString *name;
 @property (nonatomic, assign) NSInteger codeIndex;//指向这个tag的第一条指令
 

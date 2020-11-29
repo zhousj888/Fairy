@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSMutableArray<FARCommand *> *commandArr;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, FARCommandTag *> *tagDic;
+@property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray<FARCommandTag *>*> *tagIndexDic;
 
 @end
 

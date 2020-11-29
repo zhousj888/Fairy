@@ -16,6 +16,7 @@ void* yy_scan_string (const char * yystr);
 
 static NSMutableArray<FARCommand *> *commandArr;
 static NSMutableDictionary<NSString *, FARCommandTag *> *tagDic;
+static NSMutableDictionary<NSNumber *, NSMutableArray<FARCommandTag *>*> *tagIndexDic;
 
 
 char *generString(int stringLength,char *fmt,...) {
@@ -104,6 +105,14 @@ void addTag(char *format,...) {
     NSLog(@"TAG: %@",tag);
     FARCommandTag *tagObj = [FARCommandTag tagWithName:tag codeIndex:commandArr.count];
     tagDic[tag] = tagObj;
+    
+    if (!tagIndexDic[@(commandArr.count)]) {
+        tagIndexDic[@(commandArr.count)] = [NSMutableArray array];
+    }
+    
+    [tagIndexDic[@(commandArr.count)] addObject:tagObj];
+    
+    
     va_end(argList);
 }
 
@@ -112,6 +121,7 @@ void addTag(char *format,...) {
 - (FARVMCode *)parse:(NSString *)code {
     commandArr = [NSMutableArray array];
     tagDic = [NSMutableDictionary dictionary];
+    tagIndexDic = [NSMutableDictionary dictionary];
     
     yy_scan_string(code.UTF8String);
     yyparse();
@@ -120,8 +130,10 @@ void addTag(char *format,...) {
     FARVMCode *vmCode = [[FARVMCode alloc] init];
     vmCode.commandArr = commandArr;
     vmCode.tagDic = tagDic;
+    vmCode.tagIndexDic = tagIndexDic;
     commandArr = nil;
     tagDic = nil;
+    tagIndexDic = nil;
     return vmCode;
 }
 
