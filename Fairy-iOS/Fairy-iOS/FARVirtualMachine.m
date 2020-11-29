@@ -33,11 +33,10 @@ static NSString *const kRetSp = @"__retSp";
     FARParser *parser = [[FARParser alloc] init];
     FARVMCode *vmCode = [parser parse:code];
     [vmCode.commandArr addObject:[FARCommand commandWithCmd:FAROperExit]];
-    vmCode.tagDic[@"__log"] = [FARCommandTag tagWithName:@"__log" codeIndex:-110];
     
     self.vmCode = vmCode;
     [self prepare];
-//    [self run];
+    [self run];
 }
 
 - (void)prepare {
@@ -49,7 +48,7 @@ static NSString *const kRetSp = @"__retSp";
 
 - (void)run {
     FARFuncCodeObj *mainCode = (FARFuncCodeObj *)[self.mainEnv findVarForKey:FAR_MAIN_CODE];
-    FARBaseCodeRunInstance *mainRunInstance = [mainCode newRunInstanceWithEnv:self.mainEnv stack:self.stack codeObj:mainCode vmCode:self.vmCode];
+    FARBaseCodeRunInstance *mainRunInstance = [mainCode newRunInstanceWithEnv:self.mainEnv stack:self.stack vmCode:self.vmCode];
     [mainRunInstance runWithParams:nil];
     
     

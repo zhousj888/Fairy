@@ -109,6 +109,11 @@
             if (!obj) {
                 @throw [NSException exceptionWithName:[NSString stringWithFormat:@"找不到对象%@",cmd.oper1] reason:nil userInfo:nil];
             }
+            
+            if ([obj isKindOfClass:[FARCodeObj class]]) {
+                obj = [((FARCodeObj *)obj) newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode];
+            }
+            
             [self.stack push:obj];
             return YES;
         }

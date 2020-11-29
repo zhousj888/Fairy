@@ -9,6 +9,9 @@
 // }
 
 
+__log(text: 123)
+
+
 // var a = 0
 
 // repeat {

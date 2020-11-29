@@ -13,8 +13,8 @@
     [self.codeIndexArr addObject:@(codeIndex)];
 }
 
-- (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode {
-    FARBaseCodeRunInstance *runInstance = [[FARBaseCodeRunInstance alloc] initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode];
+- (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode {
+    FARBaseCodeRunInstance *runInstance = [[FARBaseCodeRunInstance alloc] initWithEnv:env stack:stack codeObj:self vmCode:vmCode];
     return runInstance;
 }
 

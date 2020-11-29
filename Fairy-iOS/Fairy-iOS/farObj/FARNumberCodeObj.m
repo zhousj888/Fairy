@@ -9,4 +9,10 @@
 
 @implementation FARNumberCodeObj
 
++ (FARNumberRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env integer:(NSInteger)number {
+    FARNumberRunInstance *runIns = [[FARNumberRunInstance alloc] initWithEnv:env];
+    runIns.number = @(number);
+    return runIns;
+}
+
 @end

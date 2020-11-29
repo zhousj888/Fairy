@@ -14,4 +14,8 @@
     return self.number.boolValue;
 }
 
+- (NSString *)description {
+    return [NSString stringWithFormat:@"%@", self.number];
+}
+
 @end

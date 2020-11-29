@@ -12,7 +12,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARNumberCodeObj : FARCodeObj
 
-
 + (FARNumberRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env integer:(NSInteger)number;
 
 

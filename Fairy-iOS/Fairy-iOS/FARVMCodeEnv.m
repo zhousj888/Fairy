@@ -10,6 +10,7 @@
 #import "FARClassCodeObj.h"
 #import "FARFuncCodeObj.h"
 #import "FARClosureCodeObj.h"
+#import "FARNativeCodeObj.h"
 
 /**
  codeObjDic's key regular:
@@ -49,6 +50,10 @@
     mainCode.name = FAR_MAIN_CODE;
     mainCode = [self parseObjWithStartIndex:0 endIndex:self.vmCode.commandArr.count - 1 rootObj:mainCode];
     self.codeObjDic[FAR_MAIN_CODE] = mainCode;
+    
+    
+    self.codeObjDic[@"__log"] = [[FARNativeCodeObj alloc] initWithEnv:self];
+    
 }
 
 - (void)_setClassName:(FARClassCodeObj *)classObj tag:(FARCommandTag *)tag{
