@@ -10,7 +10,7 @@
 @implementation FARNativeRunInstance
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
-    NSLog(@"%@",params[@"text"]);
+    NSLog(@"NativeLog----------%@",params[@"text"]);
     return nil;
 }
 

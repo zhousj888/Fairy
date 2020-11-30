@@ -9,7 +9,7 @@
 // }
 
 
-__log(text: 123)
+__log(text: 2 + 3 * 2)
 
 
 // var a = 0

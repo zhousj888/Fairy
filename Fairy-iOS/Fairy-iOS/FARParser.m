@@ -125,7 +125,7 @@ void addTag(char *format,...) {
     
     yy_scan_string(code.UTF8String);
     yyparse();
-    NSLog(@"cmd sum = %@",@(commandArr.count));
+    NSLog(@"----------------------------------------------------------cmd sum = %@-------------------------------------------------------------------",@(commandArr.count));
     
     FARVMCode *vmCode = [[FARVMCode alloc] init];
     vmCode.commandArr = commandArr;

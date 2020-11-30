@@ -12,6 +12,7 @@ NSString *const FAR_STACK_KEY = @"__stack";
 NSString *const FAR_ADD_FUNC = @"__add";
 NSString *const FAR_SUB_FUNC = @"__sub";
 NSString *const FAR_MUL_FUNC = @"__mul";
+NSString *const FAR_DIV_FUNC = @"__div";
 NSString *const FAR_MOD_FUNC = @"__mod";
 NSString *const FAR_CMPGT_FUNC = @"__cmpgt";
 NSString *const FAR_CMPLT_FUNC = @"__cmplt";

@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (void)push:(FARBaseObj *)obj;
 - (FARBaseObj *)pop;
+- (void)printStack;
 
 @end
 

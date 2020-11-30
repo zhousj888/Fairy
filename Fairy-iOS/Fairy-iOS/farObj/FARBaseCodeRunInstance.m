@@ -54,6 +54,14 @@
     return nil;
 }
 
+- (FARBaseObj *)propertyWithId:(NSString *)name {
+    FARBaseObj *baseObj = [super propertyWithId:name];
+    if ([baseObj isKindOfClass:[FARCodeObj class]]) {
+        baseObj = [((FARCodeObj *)baseObj) newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode];
+    }
+    return baseObj;
+}
+
 
 - (void)resume {
     NSNumber *codeIndex = nil;
@@ -61,7 +69,15 @@
     while (self.pc < self.codeObj.codeIndexArr.count && !self.isRet) {
         codeIndex = self.codeObj.codeIndexArr[self.pc];
         cmd = self.vmCode.commandArr[codeIndex.integerValue];
+        
+        //打印执行的命令
+//        NSLog(@"cmd:---> %@",cmd);
+        
         if ([self _executeCmd:cmd]) {
+            
+            //打印堆栈
+//            [self.stack printStack];
+            
             self.pc++;
         }
     }
@@ -109,11 +125,6 @@
             if (!obj) {
                 @throw [NSException exceptionWithName:[NSString stringWithFormat:@"找不到对象%@",cmd.oper1] reason:nil userInfo:nil];
             }
-            
-            if ([obj isKindOfClass:[FARCodeObj class]]) {
-                obj = [((FARCodeObj *)obj) newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode];
-            }
-            
             [self.stack push:obj];
             return YES;
         }
@@ -150,22 +161,36 @@
             return YES;
         }
         case FAROperCmdAdd:{
-            FARBaseObj *oper2 = [self.stack pop];
-            FARBaseObj *oper1 = [self.stack pop];
-            FARFunRunInstance *runInstance = (FARFunRunInstance *)[oper1 propertyWithId:FAR_ADD_FUNC];
-            if (!runInstance) {
-                @throw [NSException exceptionWithName:@"找不到方法" reason:@"" userInfo:nil];
-            }
-            [runInstance runWithParams:@{FAR_OPER_1: oper2}];
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 addOtherNumber:oper2];
+            [self.stack push:result];
+            
             return YES;
         }
         case FAROperCmdSub:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 subOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdMul:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 mulOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdDiv:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 divOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
 

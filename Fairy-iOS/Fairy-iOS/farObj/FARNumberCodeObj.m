@@ -10,8 +10,12 @@
 @implementation FARNumberCodeObj
 
 + (FARNumberRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env integer:(NSInteger)number {
-    FARNumberRunInstance *runIns = [[FARNumberRunInstance alloc] initWithEnv:env];
-    runIns.number = @(number);
+    FARNumberRunInstance *runIns = [[FARNumberRunInstance alloc] initWithEnv:env integer:number];
+    return runIns;
+}
+
++ (FARNumberRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env decimal:(double)decimal {
+    FARNumberRunInstance *runIns = [[FARNumberRunInstance alloc] initWithEnv:env decimal:decimal];
     return runIns;
 }
 
