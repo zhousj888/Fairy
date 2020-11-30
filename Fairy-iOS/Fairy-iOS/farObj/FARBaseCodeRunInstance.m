@@ -68,12 +68,12 @@
         cmd = self.vmCode.commandArr[codeIndex.integerValue];
         
         //打印执行的命令
-        NSLog(@"cmd:---> %@",cmd);
+//        NSLog(@"cmd:---> %@",cmd);
         
         if ([self _executeCmd:cmd]) {
             
             //打印堆栈
-            [self.stack printStack];
+//            [self.stack printStack];
             
             self.pc++;
         }

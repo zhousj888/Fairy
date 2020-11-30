@@ -15,11 +15,22 @@
 //     __Native.log(text: text)
 // }
 
-var a = 0
-repeat {
-    __Native.log(text: 123)
-    a = a+1
-} while a < 10
+func test() {
+    __Native.log(text: "test")
+    test2()
+}
+
+func test2() {
+    __Native.log(text: "test2")
+    test3()
+}
+
+func test3() {
+    __Native.log(text: "test3")
+}
+
+test()
+
 
 // if a > 1 {
 //     log(text: "yes!")
