@@ -9,11 +9,11 @@
 // }
 
 
-func test(text) {
-    __log(text: text)
+func log(logText) {
+    __Native.log(text: logText)
 }
 
-test(text: "xixi")
+log(logText: "xixi")
 
 
 

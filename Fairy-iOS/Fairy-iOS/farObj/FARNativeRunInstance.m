@@ -9,6 +9,10 @@
 
 @implementation FARNativeRunInstance
 
+- (FARBaseObj *)propertyWithId:(NSString *)name {
+    return self;
+}
+
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     NSLog(@"NativeLog----------%@",params[@"text"]);
     return nil;

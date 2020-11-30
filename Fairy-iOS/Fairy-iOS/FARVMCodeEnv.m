@@ -52,7 +52,7 @@
     self.codeObjDic[FAR_MAIN_CODE] = mainCode;
     
     
-    self.codeObjDic[@"__log"] = [[FARNativeCodeObj alloc] initWithEnv:self];
+    self.codeObjDic[FAR_NATIVE_OBJ] = [[FARNativeCodeObj alloc] initWithEnv:self];
     
 }
 

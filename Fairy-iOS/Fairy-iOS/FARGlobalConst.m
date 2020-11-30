@@ -34,3 +34,4 @@ NSString *const FAR_CLASS_SUPER = @"super";
 NSString *const FAR_TRAILING_CLOSURE = @"__trailing_closure";
 
 NSString *const FAR_MAIN_CODE = @"__main";
+NSString *const FAR_NATIVE_OBJ = @"__Native";
