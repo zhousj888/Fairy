@@ -9,14 +9,13 @@
 
 @implementation FARNumberCodeObj
 
-+ (FARNumberRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env integer:(NSInteger)number {
-    FARNumberRunInstance *runIns = [[FARNumberRunInstance alloc] initWithEnv:env integer:number];
-    return runIns;
++ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode decimal:(double)decimal {
+    return [[FARNumberRunInstance alloc] initWithEnv:env stack:stack codeObj:[self new] vmCode:vmCode decimal:decimal];
 }
 
-+ (FARNumberRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env decimal:(double)decimal {
-    FARNumberRunInstance *runIns = [[FARNumberRunInstance alloc] initWithEnv:env decimal:decimal];
-    return runIns;
++ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode integer:(NSInteger)number {
+    return [[FARNumberRunInstance alloc] initWithEnv:env stack:stack codeObj:[self new] vmCode:vmCode integer:number];
+    
 }
 
 @end

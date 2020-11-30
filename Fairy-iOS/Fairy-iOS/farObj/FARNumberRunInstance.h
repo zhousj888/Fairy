@@ -20,8 +20,8 @@ typedef NS_ENUM(NSInteger, FARNumberType) {
 @property (nonatomic, assign, readonly) double doubleValue;
 @property (nonatomic, assign, readonly) FARNumberType type;
 
-- (instancetype)initWithEnv:(FARVMEnvironment *)env integer:(NSInteger)integer;
-- (instancetype)initWithEnv:(FARVMEnvironment *)env decimal:(double)decimal;
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode integer:(NSInteger)integer;
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode decimal:(double)decimal;
 
 
 - (FARNumberRunInstance *)addOtherNumber:(FARNumberRunInstance *)otherNumber;

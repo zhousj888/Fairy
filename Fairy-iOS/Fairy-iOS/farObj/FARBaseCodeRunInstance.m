@@ -19,10 +19,7 @@
 @interface FARBaseCodeRunInstance()
 
 @property (nonatomic, readwrite) NSInteger currentSp;
-@property (nonatomic, readwrite) FARVMStack *stack;
-@property (nonatomic, strong) FARCodeObj *codeObj;
 @property (nonatomic, assign) NSInteger pc;//指向codeObj.codeIndexArr.index
-@property (nonatomic, strong) FARVMCode *vmCode;
 @property (nonatomic, assign) BOOL isRet;
 
 @end
@@ -71,12 +68,12 @@
         cmd = self.vmCode.commandArr[codeIndex.integerValue];
         
         //打印执行的命令
-//        NSLog(@"cmd:---> %@",cmd);
+        NSLog(@"cmd:---> %@",cmd);
         
         if ([self _executeCmd:cmd]) {
             
             //打印堆栈
-//            [self.stack printStack];
+            [self.stack printStack];
             
             self.pc++;
         }
@@ -103,12 +100,12 @@
 - (BOOL)_executeCmd:(FARCommand *)cmd {
     switch (cmd.operCmd) {
         case FAROperCmdPushInt: {
-            FARNumberRunInstance *obj = [FARNumberCodeObj newRunInstanceWithEnv:self.env integer:cmd.oper1.integerValue];
+            FARNumberRunInstance *obj = (FARNumberRunInstance *)[FARNumberCodeObj newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode integer:cmd.oper1.integerValue];
             [self.stack push:obj];
             return YES;
         }
         case FAROperCmdPushDouble: {
-            FARNumberRunInstance *obj = [FARNumberCodeObj newRunInstanceWithEnv:self.env decimal:cmd.oper1.doubleValue];
+            FARNumberRunInstance *obj = (FARNumberRunInstance *)[FARNumberCodeObj newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode decimal:cmd.oper1.doubleValue];
             [self.stack push:obj];
             return YES;
         }
@@ -164,33 +161,32 @@
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 addOtherNumber:oper2];
-            [self.stack push:result];
-            
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_ADD_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdSub:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 subOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_SUB_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdMul:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 mulOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_MUL_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdDiv:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 divOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_DIV_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
 
@@ -198,84 +194,86 @@
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 divOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_MOD_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdCmpgt:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 cmpgtOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_CMPGT_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdCmplt:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 cmpltOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_CMPLT_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdCmpge:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 cmpgeOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_CMPGE_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdCmple:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 cmpleOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_CMPLE_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdCmpeq:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 cmpeqOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_CMPEQ_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdCmpne:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 cmpneOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_CMPNE_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdOr:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 orOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_CMPOR_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdAnd:{
             FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
             
-            FARNumberRunInstance *result = [oper1 andOtherNumber:oper2];
-            [self.stack push:result];
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_AND_FUNC];
+            [obj runWithParams:@{FAR_OPER_1: oper2}];
             return YES;
         }
         case FAROperCmdNeg:{
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
-            FARNumberRunInstance *result = [oper1 neg];
-            [self.stack push:result];
+            
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_NEG_FUNC];
+            [obj runWithParams:nil];
             return YES;
         }
         case FAROperCmdNot:{
             FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
-            FARNumberRunInstance *result = [oper1 doNot];
-            [self.stack push:result];
+            
+            FARBaseCodeRunInstance *obj = (FARBaseCodeRunInstance *)[oper1 propertyWithId:FAR_NOT_FUNC];
+            [obj runWithParams:nil];
             return YES;
         }
         case FAROperSave:{

@@ -8,8 +8,8 @@
 //     __log(text: "小于6")
 // }
 
-var a = 1
- __log(text: 1 / 2.0)
+var a = 3
+ __log(text: a < 2)
 
 
 // var a = 0

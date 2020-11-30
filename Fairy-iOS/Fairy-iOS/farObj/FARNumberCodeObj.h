@@ -12,10 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARNumberCodeObj : FARCodeObj
 
-+ (FARNumberRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env integer:(NSInteger)number;
-
-
-+ (FARNumberRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env decimal:(double)decimal;
++ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode integer:(NSInteger)number;
++ (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode decimal:(double)decimal;
 
 @end
 

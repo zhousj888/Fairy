@@ -18,6 +18,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, weak) FARBaseCodeRunInstance *callerInstance;
 @property (nonatomic, readonly) NSInteger currentSp;
+@property (nonatomic, readwrite) FARVMStack *stack;
+@property (nonatomic, strong) FARCodeObj *codeObj;
+@property (nonatomic, strong) FARVMCode *vmCode;
 
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode;
 
