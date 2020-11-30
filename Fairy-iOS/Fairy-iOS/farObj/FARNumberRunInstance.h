@@ -28,6 +28,17 @@ typedef NS_ENUM(NSInteger, FARNumberType) {
 - (FARNumberRunInstance *)subOtherNumber:(FARNumberRunInstance *)otherNumber;
 - (FARNumberRunInstance *)mulOtherNumber:(FARNumberRunInstance *)otherNumber;
 - (FARNumberRunInstance *)divOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)modOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)cmpgtOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)cmpltOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)cmpgeOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)cmpleOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)cmpeqOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)cmpneOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)orOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)andOtherNumber:(FARNumberRunInstance *)otherNumber;
+- (FARNumberRunInstance *)neg;
+- (FARNumberRunInstance *)doNot;
 
 
 @end

@@ -72,6 +72,99 @@
     return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
 }
 
+- (FARNumberRunInstance *)modOtherNumber:(FARNumberRunInstance *)otherNumber {
+    NSInteger result = self.intergerValue % otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+- (FARNumberRunInstance *)cmpgtOtherNumber:(FARNumberRunInstance *)otherNumber {
+    
+    if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
+        double result = self.doubleValue > otherNumber.doubleValue;
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:result];
+    }
+    NSInteger result = self.intergerValue > otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+- (FARNumberRunInstance *)cmpltOtherNumber:(FARNumberRunInstance *)otherNumber {
+    
+    if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
+        double result = self.doubleValue < otherNumber.doubleValue;
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:result];
+    }
+    NSInteger result = self.intergerValue < otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+- (FARNumberRunInstance *)cmpgeOtherNumber:(FARNumberRunInstance *)otherNumber {
+    
+    if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
+        double result = self.doubleValue >= otherNumber.doubleValue;
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:result];
+    }
+    NSInteger result = self.intergerValue >= otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+
+
+- (FARNumberRunInstance *)cmpleOtherNumber:(FARNumberRunInstance *)otherNumber {
+    
+    if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
+        double result = self.doubleValue <= otherNumber.doubleValue;
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:result];
+    }
+    NSInteger result = self.intergerValue <= otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+
+- (FARNumberRunInstance *)cmpeqOtherNumber:(FARNumberRunInstance *)otherNumber {
+    
+    if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
+        double result = self.doubleValue == otherNumber.doubleValue;
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:result];
+    }
+    NSInteger result = self.intergerValue == otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+- (FARNumberRunInstance *)cmpneOtherNumber:(FARNumberRunInstance *)otherNumber {
+    
+    if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
+        double result = self.doubleValue != otherNumber.doubleValue;
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:result];
+    }
+    NSInteger result = self.intergerValue != otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+- (FARNumberRunInstance *)orOtherNumber:(FARNumberRunInstance *)otherNumber {
+    
+    if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
+        double result = self.doubleValue || otherNumber.doubleValue;
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:result];
+    }
+    NSInteger result = self.intergerValue || otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+- (FARNumberRunInstance *)andOtherNumber:(FARNumberRunInstance *)otherNumber {
+    
+    if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
+        double result = self.doubleValue && otherNumber.doubleValue;
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:result];
+    }
+    NSInteger result = self.intergerValue && otherNumber.intergerValue;
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:result];
+}
+
+- (FARNumberRunInstance *)neg {
+    if (self.type == FARNumberTypeInterger) {
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:-self.intergerValue];
+    }
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:-self.doubleValue];
+}
+- (FARNumberRunInstance *)doNot {
+    if (self.type == FARNumberTypeInterger) {
+        return [[FARNumberRunInstance alloc] initWithEnv:self.env decimal:!self.intergerValue];
+    }
+    return [[FARNumberRunInstance alloc] initWithEnv:self.env integer:!self.doubleValue];
+    
+}
 
 - (double)doubleValue {
     if (self.type == FARNumberTypeDouble) {

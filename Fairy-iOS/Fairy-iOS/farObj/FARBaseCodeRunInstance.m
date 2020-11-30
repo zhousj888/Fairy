@@ -195,36 +195,87 @@
         }
 
         case FAROperCmdMod:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 divOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdCmpgt:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 cmpgtOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdCmplt:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 cmpltOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdCmpge:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 cmpgeOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdCmple:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 cmpleOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdCmpeq:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 cmpeqOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdCmpne:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 cmpneOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdOr:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 orOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdAnd:{
+            FARNumberRunInstance *oper2 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            
+            FARNumberRunInstance *result = [oper1 andOtherNumber:oper2];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdNeg:{
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *result = [oper1 neg];
+            [self.stack push:result];
             return YES;
         }
         case FAROperCmdNot:{
+            FARNumberRunInstance *oper1 = (FARNumberRunInstance *)[self.stack pop];
+            FARNumberRunInstance *result = [oper1 doNot];
+            [self.stack push:result];
             return YES;
         }
         case FAROperSave:{
