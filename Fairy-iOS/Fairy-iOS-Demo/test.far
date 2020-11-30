@@ -8,8 +8,13 @@
 //     __log(text: "小于6")
 // }
 
-var a = 3
- __log(text: a < 2)
+
+func test(text) {
+    __log(text: text)
+}
+
+test(text: "xixi")
+
 
 
 // var a = 0

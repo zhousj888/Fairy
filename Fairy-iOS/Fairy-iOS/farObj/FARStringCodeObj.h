@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARStringCodeObj : FARCodeObj
 
-+ (FARStringRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env string:(NSString *)str;
++ (FARStringRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode string:(NSString *)str;
 
 @end
 

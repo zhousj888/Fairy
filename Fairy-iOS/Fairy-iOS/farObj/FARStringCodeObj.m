@@ -9,4 +9,8 @@
 
 @implementation FARStringCodeObj
 
++ (FARStringRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode string:(NSString *)str {
+    return [[FARStringRunInstance alloc] initWithEnv:env stack:stack codeObj:[self new] vmCode:vmCode str:str];
+}
+
 @end

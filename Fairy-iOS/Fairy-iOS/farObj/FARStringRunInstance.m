@@ -9,4 +9,16 @@
 
 @implementation FARStringRunInstance
 
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode str:(NSString *)str {
+    if (self = [super initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode]) {
+        _value = [str copy];
+    }
+    return self;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"%@", self.value];
+}
+
 @end

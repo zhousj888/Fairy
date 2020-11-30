@@ -113,7 +113,7 @@
             //去掉两边的双引号
             NSString *rawStr = [cmd.oper1 substringWithRange:NSMakeRange(1, cmd.oper1.length - 2)];
             
-            FARStringRunInstance *obj = [FARStringCodeObj newRunInstanceWithEnv:self.env string:rawStr];
+            FARStringRunInstance *obj = [FARStringCodeObj newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode string:rawStr];
             [self.stack push:obj];
             return YES;
         }
