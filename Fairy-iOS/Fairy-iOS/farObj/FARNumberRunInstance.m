@@ -287,7 +287,7 @@
 }
 
 - (BOOL)isEqualFalse {
-    return self.number.boolValue;
+    return !self.number.boolValue;
 }
 
 - (NSString *)description {

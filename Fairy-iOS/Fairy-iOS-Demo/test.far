@@ -9,13 +9,23 @@
 // }
 
 
-func log(logText) {
-    __Native.log(text: logText)
-}
+// var a = 1
 
-log(logText: "xixi")
+// func log(text) {
+//     __Native.log(text: text)
+// }
 
+var a = 0
+repeat {
+    __Native.log(text: 123)
+    a = a+1
+} while a < 10
 
+// if a > 1 {
+//     log(text: "yes!")
+// }else {
+//     log(text: "no!")
+// }
 
 // var a = 0
 

@@ -14,7 +14,7 @@
 }
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
-    NSLog(@"NativeLog----------%@",params[@"text"]);
+    NSLog(@"NativeLog---------->     %@",params[@"text"]);
     return nil;
 }
 
