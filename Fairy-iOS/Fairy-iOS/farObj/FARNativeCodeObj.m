@@ -10,7 +10,6 @@
 
 @implementation FARNativeCodeObj
 
-
 - (FARNativeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode {
     FARNativeRunInstance *runInstance = [[FARNativeRunInstance alloc] initWithEnv:env stack:stack codeObj:self vmCode:vmCode];
     return runInstance;

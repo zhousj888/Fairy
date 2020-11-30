@@ -9,4 +9,48 @@
 
 @implementation FARClassRunInstance
 
+
+- (FARBaseObj *)propertyWithId:(NSString *)name {
+    FARBaseObj *baseObj = [super propertyWithId:name];
+    
+    if (baseObj) {
+        return baseObj;
+    }
+    
+    //这里可能是找类里面的方法找不到
+    //func.name = className:superClassName_funcName = tag.rawName
+    NSMutableString *funcName = [NSMutableString string];
+    [funcName appendString:self.classCodeObj.name];
+    if (self.classCodeObj.superName) {
+        [funcName appendFormat:@":%@",self.classCodeObj.superName];
+    }
+    [funcName appendFormat:@"_%@",name];
+    
+    baseObj = [super propertyWithId:funcName];
+    
+    if (baseObj) {
+        return baseObj;
+    }
+    
+    //以上是在子类里面找，子类里面找不到从父类里面找
+    return [self.superInstance propertyWithId:name];
+    
+}
+
+
+- (FARBaseObj *)runWithParams:(NSDictionary *)params {
+    
+    if (self.classCodeObj.superName) {
+        self.superInstance = [self propertyWithId:self.classCodeObj.superName];
+        [self.superInstance runWithParams:params];
+        [self.stack pop];
+    }
+    
+    
+    [super runWithParams:params];
+    [self.stack push:self];
+    return nil;
+}
+
+
 @end

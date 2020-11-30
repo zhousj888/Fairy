@@ -9,4 +9,10 @@
 
 @implementation FARFunRunInstance
 
+
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode {
+    FARFunRunInstance *runIns = [super initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode];
+    return runIns;
+}
+
 @end

@@ -10,4 +10,8 @@
 
 @implementation FARClosureCodeObj
 
+- (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode {
+    return [[FARClosureRunInstance alloc] initWithEnv:env stack:stack codeObj:self vmCode:vmCode];
+}
+
 @end

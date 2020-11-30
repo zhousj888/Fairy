@@ -15,21 +15,20 @@
 //     __Native.log(text: text)
 // }
 
-func test() {
-    __Native.log(text: "test")
-    test2()
+
+class Father {
+    var b = 444
 }
 
-func test2() {
-    __Native.log(text: "test2")
-    test3()
+class Son: Father {
+    var a = 333
+    func test() {
+        __Native.log(text: b)
+    }
 }
 
-func test3() {
-    __Native.log(text: "test3")
-}
-
-test()
+var son = Son()
+son.test()
 
 
 // if a > 1 {

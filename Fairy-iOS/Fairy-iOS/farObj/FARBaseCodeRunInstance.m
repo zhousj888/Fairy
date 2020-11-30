@@ -39,6 +39,8 @@
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     
+    NSLog(@"runWithParams: self = %@, params = %@",self,params);
+    
     self.env = [[FARVMEnvironment alloc] initWithOuter:self.env];
     if (params) {
         [self.env addParams:params];
@@ -68,15 +70,15 @@
         cmd = self.vmCode.commandArr[codeIndex.integerValue];
         
         //打印执行的命令
-//        NSLog(@"cmd:---> %@",cmd);
+        NSLog(@"cmd:---> %@",cmd);
+        NSLog(@"currentObj: %@",self);
         
         if ([self _executeCmd:cmd]) {
-            
-            //打印堆栈
-//            [self.stack printStack];
-            
             self.pc++;
         }
+        //打印堆栈
+        [self.stack printStack];
+        NSLog(@"\n");
     }
 }
 

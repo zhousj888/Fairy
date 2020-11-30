@@ -10,4 +10,10 @@
 
 @implementation FARClassCodeObj
 
+- (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode {
+    FARClassRunInstance *runIns = [[FARClassRunInstance alloc] initWithEnv:env stack:stack codeObj:self vmCode:vmCode];
+    runIns.classCodeObj = self;
+    return runIns;
+}
+
 @end

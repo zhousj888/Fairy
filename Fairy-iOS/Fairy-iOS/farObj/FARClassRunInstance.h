@@ -6,10 +6,14 @@
 //
 
 #import "FARBaseCodeRunInstance.h"
+#import "FARClassCodeObj.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
 @interface FARClassRunInstance : FARBaseCodeRunInstance
+
+@property (nonatomic, strong) FARClassCodeObj *classCodeObj;
+@property (nonatomic, strong) FARClassRunInstance *superInstance;
 
 @end
 
