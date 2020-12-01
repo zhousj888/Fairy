@@ -203,15 +203,42 @@
 			path = bison;
 			sourceTree = "<group>";
 		};
-		65EF90872562ACC200A98D1C /* Resource */ = {
+		65D5B23C25760B4700B6DA85 /* native */ = {
 			isa = PBXGroup;
 			children = (
-				65EF90882562AD1000A98D1C /* test.far */,
+				65D5B21A2573E0A600B6DA85 /* FARNativeCodeObj.h */,
+				65D5B21B2573E0A600B6DA85 /* FARNativeCodeObj.m */,
+				65D5B21F2573E0D100B6DA85 /* FARNativeRunInstance.h */,
+				65D5B2202573E0D100B6DA85 /* FARNativeRunInstance.m */,
+				65D5B2362575E41200B6DA85 /* FARNativeFuncRunInstance.h */,
+				65D5B2372575E41200B6DA85 /* FARNativeFuncRunInstance.m */,
 			);
-			path = Resource;
+			path = native;
 			sourceTree = "<group>";
 		};
-		65EF92C62569242E00A98D1C /* farObj */ = {
+		65D5B23D25760B6000B6DA85 /* number */ = {
+			isa = PBXGroup;
+			children = (
+				6560C0A62572812000A3AEB5 /* FARNumberCodeObj.h */,
+				6560C0A72572812000A3AEB5 /* FARNumberCodeObj.m */,
+				6560C0AB2572840B00A3AEB5 /* FARNumberRunInstance.h */,
+				6560C0AC2572840B00A3AEB5 /* FARNumberRunInstance.m */,
+			);
+			path = number;
+			sourceTree = "<group>";
+		};
+		65D5B23E25760B7700B6DA85 /* string */ = {
+			isa = PBXGroup;
+			children = (
+				6560C09B2572804F00A3AEB5 /* FARStringCodeObj.h */,
+				6560C09C2572804F00A3AEB5 /* FARStringCodeObj.m */,
+				6560C0B0257286FD00A3AEB5 /* FARStringRunInstance.h */,
+				6560C0B1257286FD00A3AEB5 /* FARStringRunInstance.m */,
+			);
+			path = string;
+			sourceTree = "<group>";
+		};
+		65D5B23F25760B9200B6DA85 /* basic */ = {
 			isa = PBXGroup;
 			children = (
 				65EF92C72569244500A98D1C /* FARBaseObj.h */,
@@ -226,12 +253,6 @@
 				65EF92D32569246E00A98D1C /* FARFuncCodeObj.m */,
 				6560C07F2572509C00A3AEB5 /* FARClosureCodeObj.h */,
 				6560C0802572509C00A3AEB5 /* FARClosureCodeObj.m */,
-				6560C09B2572804F00A3AEB5 /* FARStringCodeObj.h */,
-				6560C09C2572804F00A3AEB5 /* FARStringCodeObj.m */,
-				6560C0A62572812000A3AEB5 /* FARNumberCodeObj.h */,
-				6560C0A72572812000A3AEB5 /* FARNumberCodeObj.m */,
-				65D5B21A2573E0A600B6DA85 /* FARNativeCodeObj.h */,
-				65D5B21B2573E0A600B6DA85 /* FARNativeCodeObj.m */,
 				6560C06A25724A6800A3AEB5 /* FARBaseCodeRunInstance.h */,
 				6560C06B25724A6800A3AEB5 /* FARBaseCodeRunInstance.m */,
 				6560C06F25724C3000A3AEB5 /* FARFuncRunInstance.h */,
@@ -240,16 +261,25 @@
 				6560C07525724C4000A3AEB5 /* FARClassRunInstance.m */,
 				6560C07925724C5000A3AEB5 /* FARClosureRunInstance.h */,
 				6560C07A25724C5000A3AEB5 /* FARClosureRunInstance.m */,
-				6560C0AB2572840B00A3AEB5 /* FARNumberRunInstance.h */,
-				6560C0AC2572840B00A3AEB5 /* FARNumberRunInstance.m */,
-				6560C0B0257286FD00A3AEB5 /* FARStringRunInstance.h */,
-				6560C0B1257286FD00A3AEB5 /* FARStringRunInstance.m */,
-				65D5B21F2573E0D100B6DA85 /* FARNativeRunInstance.h */,
-				65D5B2202573E0D100B6DA85 /* FARNativeRunInstance.m */,
-				65D5B2362575E41200B6DA85 /* FARNativeFuncRunInstance.h */,
-				65D5B2372575E41200B6DA85 /* FARNativeFuncRunInstance.m */,
-				6560C09625727CF100A3AEB5 /* FARVMStack.h */,
-				6560C09725727CF100A3AEB5 /* FARVMStack.m */,
+			);
+			path = basic;
+			sourceTree = "<group>";
+		};
+		65EF90872562ACC200A98D1C /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				65EF90882562AD1000A98D1C /* test.far */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		65EF92C62569242E00A98D1C /* farObj */ = {
+			isa = PBXGroup;
+			children = (
+				65D5B23F25760B9200B6DA85 /* basic */,
+				65D5B23E25760B7700B6DA85 /* string */,
+				65D5B23D25760B6000B6DA85 /* number */,
+				65D5B23C25760B4700B6DA85 /* native */,
 			);
 			path = farObj;
 			sourceTree = "<group>";
@@ -285,6 +315,8 @@
 				65EF90A22564012400A98D1C /* FARVMCode.m */,
 				65EF909C2564003300A98D1C /* FARVirtualMachine.h */,
 				65EF909D2564003300A98D1C /* FARVirtualMachine.m */,
+				6560C09625727CF100A3AEB5 /* FARVMStack.h */,
+				6560C09725727CF100A3AEB5 /* FARVMStack.m */,
 				65EF913D2565478600A98D1C /* FARVMEnvironment.h */,
 				65EF913E2565478600A98D1C /* FARVMEnvironment.m */,
 				65EF92C1256914FF00A98D1C /* FARVMCodeEnv.h */,
