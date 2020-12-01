@@ -16,8 +16,11 @@
     return self;
 }
 
-- (NSString *)description
-{
+- (NSString *)toNative {
+    return self.value;
+}
+
+- (NSString *)description {
     return [NSString stringWithFormat:@"%@", self.value];
 }
 

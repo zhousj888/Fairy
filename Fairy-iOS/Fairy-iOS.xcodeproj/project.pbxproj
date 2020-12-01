@@ -41,6 +41,8 @@
 		65D5B2392575E41200B6DA85 /* FARNativeFuncRunInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2372575E41200B6DA85 /* FARNativeFuncRunInstance.m */; };
 		65D5B24425760BF900B6DA85 /* FARNumberFuncRunInstance.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D5B24225760BF900B6DA85 /* FARNumberFuncRunInstance.h */; };
 		65D5B24525760BF900B6DA85 /* FARNumberFuncRunInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B24325760BF900B6DA85 /* FARNumberFuncRunInstance.m */; };
+		65D5B24E2576107600B6DA85 /* FARNativeObj.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D5B24C2576107600B6DA85 /* FARNativeObj.h */; };
+		65D5B24F2576107600B6DA85 /* FARNativeObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B24D2576107600B6DA85 /* FARNativeObj.m */; };
 		65EF90812562A96E00A98D1C /* parser.y in Sources */ = {isa = PBXBuildFile; fileRef = 65EF90802562A96E00A98D1C /* parser.y */; };
 		65EF90842562A97900A98D1C /* scanner.l in Sources */ = {isa = PBXBuildFile; fileRef = 65EF90832562A97900A98D1C /* scanner.l */; };
 		65EF90892562AD1000A98D1C /* test.far in Resources */ = {isa = PBXBuildFile; fileRef = 65EF90882562AD1000A98D1C /* test.far */; };
@@ -137,6 +139,8 @@
 		65D5B2372575E41200B6DA85 /* FARNativeFuncRunInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARNativeFuncRunInstance.m; sourceTree = "<group>"; };
 		65D5B24225760BF900B6DA85 /* FARNumberFuncRunInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARNumberFuncRunInstance.h; sourceTree = "<group>"; };
 		65D5B24325760BF900B6DA85 /* FARNumberFuncRunInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARNumberFuncRunInstance.m; sourceTree = "<group>"; };
+		65D5B24C2576107600B6DA85 /* FARNativeObj.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARNativeObj.h; sourceTree = "<group>"; };
+		65D5B24D2576107600B6DA85 /* FARNativeObj.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARNativeObj.m; sourceTree = "<group>"; };
 		65EF90802562A96E00A98D1C /* parser.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; name = parser.y; path = ../../../bison/parser.y; sourceTree = "<group>"; };
 		65EF90832562A97900A98D1C /* scanner.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; name = scanner.l; path = ../../../bison/scanner.l; sourceTree = "<group>"; };
 		65EF90882562AD1000A98D1C /* test.far */ = {isa = PBXFileReference; lastKnownFileType = text; name = test.far; path = "Fairy-iOS-Demo/test.far"; sourceTree = SOURCE_ROOT; };
@@ -216,6 +220,8 @@
 				65D5B2202573E0D100B6DA85 /* FARNativeRunInstance.m */,
 				65D5B2362575E41200B6DA85 /* FARNativeFuncRunInstance.h */,
 				65D5B2372575E41200B6DA85 /* FARNativeFuncRunInstance.m */,
+				65D5B24C2576107600B6DA85 /* FARNativeObj.h */,
+				65D5B24D2576107600B6DA85 /* FARNativeObj.m */,
 			);
 			path = native;
 			sourceTree = "<group>";
@@ -413,6 +419,7 @@
 				6560C09825727CF100A3AEB5 /* FARVMStack.h in Headers */,
 				65EF92C92569244500A98D1C /* FARBaseObj.h in Headers */,
 				65D5B21C2573E0A600B6DA85 /* FARNativeCodeObj.h in Headers */,
+				65D5B24E2576107600B6DA85 /* FARNativeObj.h in Headers */,
 				6560C09D2572804F00A3AEB5 /* FARStringCodeObj.h in Headers */,
 				65F6C44B25626F8200C8B94C /* FARCommand.h in Headers */,
 				65EF914425654D4700A98D1C /* FARNull.h in Headers */,
@@ -528,6 +535,7 @@
 				65D5B2222573E0D100B6DA85 /* FARNativeRunInstance.m in Sources */,
 				65EF92CA2569244500A98D1C /* FARBaseObj.m in Sources */,
 				65D5B2392575E41200B6DA85 /* FARNativeFuncRunInstance.m in Sources */,
+				65D5B24F2576107600B6DA85 /* FARNativeObj.m in Sources */,
 				65EF90A42564012400A98D1C /* FARVMCode.m in Sources */,
 				65EF909025637F0000A98D1C /* FARCommandTag.m in Sources */,
 				65D5B24525760BF900B6DA85 /* FARNumberFuncRunInstance.m in Sources */,
