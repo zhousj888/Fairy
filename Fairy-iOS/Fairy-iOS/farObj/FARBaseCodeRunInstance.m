@@ -58,7 +58,12 @@
     if ([baseObj isKindOfClass:[FARCodeObj class]]) {
         baseObj = [((FARCodeObj *)baseObj) newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode];
     }
-    return baseObj;
+    
+    if (baseObj) {
+        return baseObj;
+    }
+    //自己的环境找不到从捕获的环境宿主找
+    return [self.capturedEnvInstance propertyWithId:name];
 }
 
 

@@ -22,7 +22,8 @@
 }
 
 - (FARBaseObj *)propertyWithId:(NSString *)name {
-    return [self.env findVarForKey:name];
+    FARBaseObj *obj = [self.env findVarForKey:name];
+    return obj;
 }
 
 - (BOOL)isEqualFalse {

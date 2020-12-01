@@ -6,8 +6,10 @@
 //
 
 #import "FARClassRunInstance.h"
+#import "FARFunRunInstance.h"
 
 @implementation FARClassRunInstance
+
 
 
 - (FARBaseObj *)propertyWithId:(NSString *)name {
@@ -27,6 +29,10 @@
     [funcName appendFormat:@"_%@",name];
     
     baseObj = [super propertyWithId:funcName];
+    if ([baseObj isKindOfClass:[FARFunRunInstance class]]) {
+        //如果是从对象获取到方法对象，将自己作为环境宿主注入
+        ((FARFunRunInstance *)baseObj).capturedEnvInstance = self;
+    }
     
     if (baseObj) {
         return baseObj;

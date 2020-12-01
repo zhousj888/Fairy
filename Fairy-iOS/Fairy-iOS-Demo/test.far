@@ -19,7 +19,7 @@
 class Father {
     var b = 444
 }
-
+var c = 555
 class Son: Father {
     var a = 333
     func test() {

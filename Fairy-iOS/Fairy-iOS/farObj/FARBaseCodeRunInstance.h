@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FARBaseCodeRunInstance : FARBaseObj
 
 @property (nonatomic, weak) FARBaseCodeRunInstance *callerInstance;
+@property (nonatomic, weak) FARBaseCodeRunInstance *capturedEnvInstance;//被捕获的环境的宿主对象
 @property (nonatomic, readonly) NSInteger currentSp;
 @property (nonatomic, readwrite) FARVMStack *stack;
 @property (nonatomic, strong) FARCodeObj *codeObj;
