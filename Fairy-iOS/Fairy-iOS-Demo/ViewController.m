@@ -26,9 +26,9 @@
     FARVirtualMachine *vm = [[FARVirtualMachine alloc] init];
     [vm runWithCode:content];
     
-    UIView *view;
-    [view removeFromSuperview];
-    [view superview];
+    NSMutableArray *arr;
+    [arr objectAtIndex:1];
+    
 }
 
 

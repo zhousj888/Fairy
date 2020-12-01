@@ -55,7 +55,8 @@
        [name isEqualToString:FAR_CMPOR_FUNC] ||
        [name isEqualToString:FAR_AND_FUNC  ] ||
        [name isEqualToString:FAR_NEG_FUNC  ] ||
-       [name isEqualToString:FAR_NOT_FUNC  ]
+       [name isEqualToString:FAR_NOT_FUNC  ] ||
+       [name isEqualToString:FAR_TO_NATIVE_FUNC]
        ) {
         FARNumberFuncRunInstance *func = [[FARNumberFuncRunInstance alloc] initWithEnv:self.env stack:self.stack codeObj:self.codeObj vmCode:self.vmCode funcName:name];
         func.capturedEnvInstance = self;

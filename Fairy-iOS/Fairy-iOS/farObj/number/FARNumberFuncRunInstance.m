@@ -7,6 +7,7 @@
 
 #import "FARNumberFuncRunInstance.h"
 #import "FARNumberRunInstance.h"
+#import "FARNativeObj.h"
 
 @interface FARNumberFuncRunInstance()
 
@@ -91,6 +92,15 @@
     }else if ([self.funcName isEqualToString:FAR_NOT_FUNC  ]) {
         result = [self doNot];
         
+    }else if ([self.funcName isEqualToString:FAR_TO_NATIVE_FUNC]) {
+        if (self.type == FARNumberTypeInterger) {
+            FARBaseObj *ret = [[FARNativeObj alloc] initWithEnv:self.env value:@(self.intergerValue)];
+            [self.stack push:ret];
+        }else {
+            FARBaseObj *ret = [[FARNativeObj alloc] initWithEnv:self.env value:@(self.intergerValue)];
+            [self.stack push:ret];
+        }
+        return nil;
     }
     
     [self.stack push:result];
