@@ -271,6 +271,37 @@
 			path = basic;
 			sourceTree = "<group>";
 		};
+		65D5B24725760ED300B6DA85 /* parser */ = {
+			isa = PBXGroup;
+			children = (
+				65EF908D25637F0000A98D1C /* FARCommandTag.h */,
+				65EF908E25637F0000A98D1C /* FARCommandTag.m */,
+				65F6C44925626F8200C8B94C /* FARCommand.h */,
+				65F6C44A25626F8200C8B94C /* FARCommand.m */,
+				65BD65102562961B007AF316 /* FAROperCmd.h */,
+				65BD651F25629B7D007AF316 /* FARParser.h */,
+				65BD652025629B7D007AF316 /* FARParser.m */,
+			);
+			path = parser;
+			sourceTree = "<group>";
+		};
+		65D5B24825760EEC00B6DA85 /* virtualMachine */ = {
+			isa = PBXGroup;
+			children = (
+				65EF90A12564012400A98D1C /* FARVMCode.h */,
+				65EF90A22564012400A98D1C /* FARVMCode.m */,
+				65EF909C2564003300A98D1C /* FARVirtualMachine.h */,
+				65EF909D2564003300A98D1C /* FARVirtualMachine.m */,
+				6560C09625727CF100A3AEB5 /* FARVMStack.h */,
+				6560C09725727CF100A3AEB5 /* FARVMStack.m */,
+				65EF913D2565478600A98D1C /* FARVMEnvironment.h */,
+				65EF913E2565478600A98D1C /* FARVMEnvironment.m */,
+				65EF92C1256914FF00A98D1C /* FARVMCodeEnv.h */,
+				65EF92C2256914FF00A98D1C /* FARVMCodeEnv.m */,
+			);
+			path = virtualMachine;
+			sourceTree = "<group>";
+		};
 		65EF90872562ACC200A98D1C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -312,26 +343,11 @@
 		65F6C3EF25626B6200C8B94C /* Fairy-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				65EF92C62569242E00A98D1C /* farObj */,
 				65BD65152562979F007AF316 /* bison */,
+				65D5B24825760EEC00B6DA85 /* virtualMachine */,
+				65D5B24725760ED300B6DA85 /* parser */,
+				65EF92C62569242E00A98D1C /* farObj */,
 				65F6C3F025626B6200C8B94C /* Fairy_iOS.h */,
-				65BD651F25629B7D007AF316 /* FARParser.h */,
-				65BD652025629B7D007AF316 /* FARParser.m */,
-				65EF90A12564012400A98D1C /* FARVMCode.h */,
-				65EF90A22564012400A98D1C /* FARVMCode.m */,
-				65EF909C2564003300A98D1C /* FARVirtualMachine.h */,
-				65EF909D2564003300A98D1C /* FARVirtualMachine.m */,
-				6560C09625727CF100A3AEB5 /* FARVMStack.h */,
-				6560C09725727CF100A3AEB5 /* FARVMStack.m */,
-				65EF913D2565478600A98D1C /* FARVMEnvironment.h */,
-				65EF913E2565478600A98D1C /* FARVMEnvironment.m */,
-				65EF92C1256914FF00A98D1C /* FARVMCodeEnv.h */,
-				65EF92C2256914FF00A98D1C /* FARVMCodeEnv.m */,
-				65EF908D25637F0000A98D1C /* FARCommandTag.h */,
-				65EF908E25637F0000A98D1C /* FARCommandTag.m */,
-				65F6C44925626F8200C8B94C /* FARCommand.h */,
-				65F6C44A25626F8200C8B94C /* FARCommand.m */,
-				65BD65102562961B007AF316 /* FAROperCmd.h */,
 				65F6C3F125626B6200C8B94C /* Info.plist */,
 				6560C08D257254F600A3AEB5 /* FARGlobalConst.h */,
 				6560C08E257254F600A3AEB5 /* FARGlobalConst.m */,
