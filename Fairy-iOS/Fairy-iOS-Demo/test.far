@@ -31,8 +31,6 @@
 //         __Native.log(text: "asdfasdfasdf")
 //     }
 // }
-var c
-c.test()
 
 
 // if a > 1 {

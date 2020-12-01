@@ -9,7 +9,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FARFunRunInstance : FARBaseCodeRunInstance
+@interface FARFuncRunInstance : FARBaseCodeRunInstance
 
 @end
 

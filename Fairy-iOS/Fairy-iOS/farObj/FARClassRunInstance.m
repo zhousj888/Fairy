@@ -6,7 +6,7 @@
 //
 
 #import "FARClassRunInstance.h"
-#import "FARFunRunInstance.h"
+#import "FARFuncRunInstance.h"
 
 @implementation FARClassRunInstance
 
@@ -29,9 +29,9 @@
     [funcName appendFormat:@"_%@",name];
     
     baseObj = [super propertyWithId:funcName];
-    if ([baseObj isKindOfClass:[FARFunRunInstance class]]) {
+    if ([baseObj isKindOfClass:[FARFuncRunInstance class]]) {
         //如果是从对象获取到方法对象，将自己作为环境宿主注入
-        ((FARFunRunInstance *)baseObj).capturedEnvInstance = self;
+        ((FARFuncRunInstance *)baseObj).capturedEnvInstance = self;
     }
     
     if (baseObj) {

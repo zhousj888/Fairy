@@ -11,7 +11,7 @@
 #import "FARVMCodeEnv.h"
 #import "FARCodeObj.h"
 #import "FARFuncCodeObj.h"
-#import "FARFunRunInstance.h"
+#import "FARFuncRunInstance.h"
 
 
 static NSString *const kRetPc = @"__retPc";

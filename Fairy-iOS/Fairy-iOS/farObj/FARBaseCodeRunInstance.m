@@ -12,7 +12,7 @@
 #import "FARClosureCodeObj.h"
 #import "FARStringCodeObj.h"
 #import "FARNumberCodeObj.h"
-#import "FARFunRunInstance.h"
+#import "FARFuncRunInstance.h"
 #import "FARClosureRunInstance.h"
 #import "FARCodeObj.h"
 
@@ -300,7 +300,7 @@
             return YES;
         }
         case FAROperCallFunc:{
-            FARFunRunInstance *runInstance = (FARFunRunInstance *)[self.stack pop];
+            FARFuncRunInstance *runInstance = (FARFuncRunInstance *)[self.stack pop];
             [runInstance runWithParams:self.env.asParams];
             self.env = self.env.outer;
             return YES;

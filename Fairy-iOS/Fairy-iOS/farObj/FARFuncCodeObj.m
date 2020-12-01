@@ -6,12 +6,12 @@
 //
 
 #import "FARFuncCodeObj.h"
-#import "FARFunRunInstance.h"
+#import "FARFuncRunInstance.h"
 
 @implementation FARFuncCodeObj
 
 - (FARBaseCodeRunInstance *)newRunInstanceWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack vmCode:(FARVMCode *)vmCode {
-    return [[FARFunRunInstance alloc] initWithEnv:env stack:stack codeObj:self vmCode:vmCode];
+    return [[FARFuncRunInstance alloc] initWithEnv:env stack:stack codeObj:self vmCode:vmCode];
 }
 
 @end
