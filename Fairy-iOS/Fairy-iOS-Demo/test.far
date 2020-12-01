@@ -15,7 +15,7 @@
 //     __Native.log(text: text)
 // }
 
-__Native.log(text: "xixi")
+__Native.log(text: 1 + 2 * 3)
 
 
 // class Father {

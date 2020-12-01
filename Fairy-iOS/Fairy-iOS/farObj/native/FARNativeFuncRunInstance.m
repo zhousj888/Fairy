@@ -7,14 +7,14 @@
 
 #import "FARNativeFuncRunInstance.h"
 
+
+static NSString *const FAR_NATIVE_FUNC_LOG = @"log";
+
 @interface FARNativeFuncRunInstance()
 
 @property (nonatomic, copy) NSString *funcName;
 
 @end
-
-static NSString *const FAR_NATIVE_FUNC_LOG = @"log";
-
 
 @implementation FARNativeFuncRunInstance
 

@@ -19,26 +19,12 @@ typedef NS_ENUM(NSInteger, FARNumberType) {
 @property (nonatomic, assign, readonly) NSInteger intergerValue;
 @property (nonatomic, assign, readonly) double doubleValue;
 @property (nonatomic, assign, readonly) FARNumberType type;
+@property (nonatomic, strong, readonly) NSNumber *number;
 
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode integer:(NSInteger)integer;
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode decimal:(double)decimal;
 
 
-- (FARNumberRunInstance *)addOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)subOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)mulOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)divOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)modOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)cmpgtOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)cmpltOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)cmpgeOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)cmpleOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)cmpeqOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)cmpneOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)orOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)andOtherNumber:(FARNumberRunInstance *)otherNumber;
-- (FARNumberRunInstance *)neg;
-- (FARNumberRunInstance *)doNot;
 
 
 @end
