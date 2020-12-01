@@ -15,6 +15,8 @@
 //     __Native.log(text: text)
 // }
 
+__Native.log(text: "xixi")
+
 
 // class Father {
 //     var b = 444

@@ -6,15 +6,16 @@
 //
 
 #import "FARNativeRunInstance.h"
+#import "FARNativeFuncRunInstance.h"
 
 @implementation FARNativeRunInstance
 
 - (FARBaseObj *)propertyWithId:(NSString *)name {
+    return [[FARNativeFuncRunInstance alloc] initWithEnv:self.env stack:self.stack codeObj:self.codeObj vmCode:self.vmCode funcName:name];
     return self;
 }
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
-    NSLog(@"NativeLog---------->     %@",params[@"text"]);
     return nil;
 }
 

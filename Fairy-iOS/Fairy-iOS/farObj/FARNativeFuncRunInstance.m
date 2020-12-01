@@ -13,6 +13,8 @@
 
 @end
 
+static NSString *const FAR_NATIVE_FUNC_LOG = @"log";
+
 
 @implementation FARNativeFuncRunInstance
 
@@ -21,6 +23,14 @@
         _funcName = [funcName copy];
     }
     return self;
+}
+
+
+- (FARBaseObj *)runWithParams:(NSDictionary *)params {
+    if ([self.funcName isEqualToString:FAR_NATIVE_FUNC_LOG]) {
+        NSLog(@"NativeLog:-------------->   %@",params[@"text"]);
+    }
+    return nil;
 }
 
 
