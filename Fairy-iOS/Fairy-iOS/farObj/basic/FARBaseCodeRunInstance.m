@@ -75,15 +75,15 @@
         cmd = self.vmCode.commandArr[codeIndex.integerValue];
         
         //打印执行的命令
-        NSLog(@"cmd:---> %@",cmd);
-        NSLog(@"currentObj: %@",self);
+//        NSLog(@"cmd:---> %@",cmd);
+//        NSLog(@"currentObj: %@",self);
         
         if ([self _executeCmd:cmd]) {
             self.pc++;
         }
         //打印堆栈
-        [self.stack printStack];
-        NSLog(@"\n");
+//        [self.stack printStack];
+//        NSLog(@"\n");
     }
 }
 

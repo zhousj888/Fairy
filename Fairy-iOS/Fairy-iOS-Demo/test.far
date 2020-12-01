@@ -16,11 +16,11 @@
 // }
 
 //__Native.log(text: 1 + 2 * 3)
-var view1 = __Native.init(className: "UIView")
-var view2 = __Native.init(className: "UIView")
-__Native.log(text: view2)
-__Native.callFuncParam1(nativeObj: view1, funcName:"addSubview", param: view2)
-__Native.callFunc(nativeObj: view2, funcName:"removeFromSuperview")
+// var view1 = __Native.init(className: "UIView")
+// var view2 = __Native.init(className: "UIView")
+// __Native.log(text: view2)
+// __Native.callFuncParam1(nativeObj: view1, funcName:"addSubview", param: view2)
+// __Native.callFunc(nativeObj: view2, funcName:"removeFromSuperview")
 
 
 // class Father {

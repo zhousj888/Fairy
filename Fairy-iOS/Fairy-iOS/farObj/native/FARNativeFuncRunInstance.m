@@ -55,7 +55,6 @@ static NSString *const FAR_NATIVE_FUNC_CALL_FUNC_PARAM = @"param";
         IMP imp = [nativeObj.value methodForSelector:selector];
         void (*func)(id, SEL) = (void *)imp;
         func(nativeObj.value, selector);
-        NSLog(@"adsfasdf");
         
     }else if ([self.funcName isEqualToString:FAR_NATIVE_FUNC_CALL_FUNC_PARAM1]) {
         FARNativeObj *nativeObj = params[FAR_NATIVE_FUNC_CALL_FUNC_PARAM_NATIVE_OBJ];
@@ -68,7 +67,6 @@ static NSString *const FAR_NATIVE_FUNC_CALL_FUNC_PARAM = @"param";
         IMP imp = [nativeObj.value methodForSelector:selector];
         void (*func)(id, SEL, id) = (void *)imp;
         func(nativeObj.value, selector, param.value);
-        NSLog(@"adsfasdf");
     }
     return nil;
 }
