@@ -326,7 +326,12 @@
         }
         case FAROperGetObjProperty:{
             FARBaseObj *obj = [self.stack pop];
-            [self.stack push:[obj propertyWithId:cmd.oper1]];
+            FARBaseObj *property = [obj propertyWithId:cmd.oper1];
+            if (property) {
+                [self.stack push:property];
+            }else {
+                @throw [NSException exceptionWithName:@"getProperty失败，找不到对象" reason:nil userInfo:nil];
+            }
             return YES;
         }
     }

@@ -16,19 +16,23 @@
 // }
 
 
-class Father {
-    var b = 444
-}
-var c = 555
-class Son: Father {
-    var a = 333
-    func test() {
-        __Native.log(text: b)
-    }
-}
+// class Father {
+//     var b = 444
 
-var son = Son()
-son.test()
+//     func test() {
+//         __Native.log(text: b)
+//     }
+
+// }
+
+// class Son: Father {
+//     var a = 333
+//     func test() {
+//         __Native.log(text: "asdfasdfasdf")
+//     }
+// }
+var c
+c.test()
 
 
 // if a > 1 {
