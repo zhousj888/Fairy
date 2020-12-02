@@ -8,19 +8,22 @@
 //     __log(text: "小于6")
 // }
 
-class __Array {
-    var __nativeArray = __Native.init(className: "NSMutableArray")
-    func add(obj) {
-        __Native.callFuncParam1(nativeObj: __nativeArray, funcName:"addObject", param: obj)
-    }
-    func get(index) {
-        return __Native.callFuncParam1RetFarObj(nativeObj: __nativeArray, funcName:"objectAtIndex", param: index.__toNative())
-    }
-}
-var arr = __Array()
-arr.add(obj: "xixixi")
-var ret = arr.get(index: 0)
-__Native.log(text: ret)
+// class __Array {
+//     var __nativeArray = __Native.init(className: "NSMutableArray")
+//     func add(obj) {
+//         __Native.callFuncParam1(nativeObj: __nativeArray, funcName:"addObject", param: obj)
+//     }
+//     func get(index) {
+//         return __Native.callFuncParam1RetFarObj(nativeObj: __nativeArray, funcName:"objectAtIndex", param: index.__toNative())
+//     }
+// }
+// var arr = __Array()
+// arr.add(obj: "xixixi")
+// var ret = arr.get(index: 0)
+// __Native.log(text: ret)
+
+
+__Native.log(text: 1 + 1 + 1)
 
 
 // var a = 1

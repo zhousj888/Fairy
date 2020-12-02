@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithEnv:(FARVMEnvironment *)env;
 - (FARBaseObj *)propertyWithId:(NSString *)name;
 - (BOOL)isEqualFalse;
+- (id)toNativeObj;
 
 @end
 
