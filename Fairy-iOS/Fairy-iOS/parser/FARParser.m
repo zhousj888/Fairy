@@ -11,6 +11,7 @@
 #import "FARCommand.h"
 #import "FARCommandTag.h"
 
+extern int cur_line;
 int yyparse (void);
 void* yy_scan_string (const char * yystr);
 
@@ -85,17 +86,17 @@ NSString *transCharsToNSString(char *chars) {
 
 void addCmd1(int cmd) {
     NSLog(@"%@",transCmdToDescription(cmd));
-    [commandArr addObject:[FARCommand commandWithCmd:cmd]];
+    [commandArr addObject:[FARCommand commandWithCmd:cmd line:cur_line]];
 }
 
 void addCmd2(int cmd, char *oper1) {
     NSLog(@"%@,%s",transCmdToDescription(cmd),oper1);
-    [commandArr addObject:[FARCommand commandWithCmd:cmd oper:transCharsToNSString(oper1)]];
+    [commandArr addObject:[FARCommand commandWithCmd:cmd oper:transCharsToNSString(oper1) line:cur_line]];
 }
 
 void addCmd3(int cmd, char *oper1, char *oper2) {
     NSLog(@"%@,%s,%s",transCmdToDescription(cmd),oper1,oper2);
-    [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2)]];
+    [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2) line:cur_line]];
 }
 
 

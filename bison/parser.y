@@ -307,8 +307,12 @@ VarDecl:
 ;
 
 AssignStmt:
-    T_Identifier '=' Expr                             { addCmd2(FAROperCmdPop, $1); }
-|   Primary '.' T_Identifier '=' Expr                 { addCmd2(FAROperCmdSetProperty, $3); }
+    T_AssignStmtBegin '=' Expr                      { addCmd2(FAROperCmdSetProperty, $1); }
+|   Primary '.' T_Identifier '=' Expr               { addCmd2(FAROperCmdSetProperty, $3); }
+;
+
+T_AssignStmtBegin:
+    T_Identifier                                    { addCmd2(FAROperCmdPushIdentifier,"self"); }
 ;
 
 

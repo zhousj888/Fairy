@@ -32,7 +32,7 @@ static NSString *const kRetSp = @"__retSp";
 - (void)runWithCode:(NSString *)code {
     FARParser *parser = [[FARParser alloc] init];
     FARVMCode *vmCode = [parser parse:code];
-    [vmCode.commandArr addObject:[FARCommand commandWithCmd:FAROperExit]];
+    [vmCode.commandArr addObject:[FARCommand commandWithCmd:FAROperExit line:0]];
     
     self.vmCode = vmCode;
     [self prepare];

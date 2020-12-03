@@ -1,22 +1,88 @@
-// Expr
-// __log(text: 1 * 2 + 3)
 
-// var a = 7
-// if a > 6 {
-//     __log(text: "大于6")
+// class Son {
+//     var age = 10
+// }
+// var s = Son()
+// __Native.log(text: s.age)
+
+
+
+// if a > 0 {
+
+
 // }else {
-//     __log(text: "小于6")
+//     __Native.log(text: 345)
+
 // }
 
-// class __Array {
-//     var __nativeArray = __Native.init(className: "NSMutableArray")
-//     func add(obj) {
-//         __Native.callFuncParam1(nativeObj: __nativeArray, funcName:"addObject", param: obj)
-//     }
-//     func get(index) {
-//         return __Native.callFuncParam1RetFarObj(nativeObj: __nativeArray, funcName:"objectAtIndex", param: index.__toNative())
-//     }
-// }
+
+
+class __ArrayNode {
+    var value
+    var next
+    var previous
+    func init(value, previous) {
+        self.value = value
+        if previous {
+            self.previous = previous
+            previous.next = self
+        }
+    }
+}
+
+class __Array {
+    var head
+    var tail
+    var count = 0
+
+    func push(obj) {
+
+        if count == 0 {
+            head = __ArrayNode(value: obj, previous: nil)
+            tail = head
+        }else {
+            tail = __ArrayNode(value: obj, previous: tail)
+        }
+        count = count + 1
+    }
+
+    func get(index) {
+        if index >= count {
+            return
+        }
+        var currentIndex = 0
+        var currentNode = head
+        while currentIndex < index {
+            currentIndex = currentIndex + 1
+            currentNode = currentNode.next
+        }
+        return currentNode
+    }
+
+    func remove(index) {
+        var obj = self.get(index: index)
+        obj.previous = obj.next
+        count = count - 1
+    }
+    
+}
+
+var arr = __Array()
+arr.push(obj: 1)
+arr.push(obj: 1)
+arr.push(obj: 1)
+arr.push(obj: 1)
+__Native.log(text: arr.count)
+// __Native.log(text: arr.get(index: 0))
+
+// var arr = []
+// arr.push(1)
+// arr.get(2)
+// arr.remove(3)
+// arr.count
+// arr[1] = 123
+
+
 // var arr = __Array()
 // arr.add(obj: "xixixi")
 // var ret = arr.get(index: 0)
@@ -34,18 +100,6 @@
 // a = 1
 // var son = 123
 // son.a.b.c.d = 1 + 2 + 3
-
-class Father {
-    var a = 2
-}
-
-class Son: Father {
-    var a = 1
-    func init(a) {
-        __Native.log(text: super.a)
-    }
-}
-var s = Son()
 
 
 // var a = 1

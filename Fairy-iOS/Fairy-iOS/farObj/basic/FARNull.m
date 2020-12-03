@@ -11,7 +11,31 @@
 @implementation FARNull
 
 + (instancetype)null {
-    return [[FARNull alloc] initWithEnv:[[FARVMEnvironment alloc] init]];
+    
+    static FARNull *instance = nil;
+    static dispatch_once_t onceToken;
+
+    dispatch_once(&onceToken, ^{
+        instance = [[FARNull alloc] initWithEnv:[[FARVMEnvironment alloc] init]];
+    });
+    return instance;
+    
+}
+
+- (FARBaseObj *)propertyWithId:(NSString *)name {
+    @throw [NSException exceptionWithName:@"不能对null取变量" reason:nil userInfo:nil];
+}
+
+- (FARBaseObj *)runWithParams:(NSDictionary *)params {
+    @throw [NSException exceptionWithName:@"不能对null调用方法" reason:nil userInfo:nil];
+}
+
+- (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {
+    @throw [NSException exceptionWithName:@"不能对null设置变量" reason:nil userInfo:nil];
+}
+
+- (BOOL)isEqualFalse {
+    return YES;
 }
 
 @end

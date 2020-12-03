@@ -7,6 +7,7 @@
 
 #import "FARNumberFuncRunInstance.h"
 #import "FARNumberRunInstance.h"
+#import "FARVMEnvironment.h"
 
 @interface FARNumberFuncRunInstance()
 
@@ -99,10 +100,10 @@
 }
 
 - (FARNumberRunInstance *)_createNewNumberWithInteger:(NSInteger)number {
-    return [[FARNumberRunInstance alloc] initWithEnv:self.env stack:self.stack codeObj:self.codeObj vmCode:self.vmCode integer:number];
+    return [[FARNumberRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:self.codeObj vmCode:self.vmCode integer:number];
 }
 - (FARNumberRunInstance *)_createNewNumberWithDouble:(double)number {
-    return [[FARNumberRunInstance alloc] initWithEnv:self.env stack:self.stack codeObj:self.codeObj vmCode:self.vmCode decimal:number];
+    return [[FARNumberRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:self.codeObj vmCode:self.vmCode decimal:number];
 }
 
 

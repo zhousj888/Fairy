@@ -13,16 +13,17 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FARCommand : NSObject
 
 @property (nonatomic, assign) NSInteger operCmd;
-@property (nonatomic, strong) NSString *oper1;
-@property (nonatomic, strong) NSString *oper2;
-@property (nonatomic, strong) NSString *oper3;
-@property (nonatomic, strong) NSString *oper4;
-@property (nonatomic, strong) NSString *oper5;
+@property (nonatomic, copy) NSString *oper1;
+@property (nonatomic, copy) NSString *oper2;
+@property (nonatomic, copy) NSString *oper3;
+@property (nonatomic, copy) NSString *oper4;
+@property (nonatomic, copy) NSString *oper5;
+@property (nonatomic, assign) NSInteger line;
 
-+ (instancetype)commandWithCmd:(NSInteger)cmd;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper:(NSString *)oper;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(NSString *)oper1 oper2:(NSString *)oper2;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(NSString *)oper1 oper2:(NSString *)oper2 oper3:(NSString *)oper3;
++ (instancetype)commandWithCmd:(NSInteger)cmd line:(NSInteger)line;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper:(nullable NSString *)oper line:(NSInteger)line;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(nullable NSString *)oper1 oper2:(nullable NSString *)oper2 line:(NSInteger)line;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(nullable NSString *)oper1 oper2:(nullable NSString *)oper2 oper3:(nullable NSString *)oper3 line:(NSInteger)line;
 
 
 @end

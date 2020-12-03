@@ -26,7 +26,6 @@ NS_ASSUME_NONNULL_BEGIN
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode;
 
 - (nullable FARBaseObj *)runWithParams:(nullable NSDictionary *)params;
-- (void)resume;
 
 //以下方法只能子类调用
 - (BOOL)_executeCmd:(FARCommand *)cmd;

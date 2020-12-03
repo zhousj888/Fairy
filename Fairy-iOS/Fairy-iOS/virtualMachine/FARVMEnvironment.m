@@ -57,5 +57,10 @@
     [self.envDic addEntriesFromDictionary:params];
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<环境:%@>", self.envDic];
+}
+
 
 @end

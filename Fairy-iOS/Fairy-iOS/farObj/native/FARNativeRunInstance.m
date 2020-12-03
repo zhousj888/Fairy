@@ -7,11 +7,12 @@
 
 #import "FARNativeRunInstance.h"
 #import "FARNativeFuncRunInstance.h"
+#import "FARVMEnvironment.h"
 
 @implementation FARNativeRunInstance
 
 - (FARBaseObj *)propertyWithId:(NSString *)name {
-    return [[FARNativeFuncRunInstance alloc] initWithEnv:self.env stack:self.stack codeObj:self.codeObj vmCode:self.vmCode funcName:name];
+    return [[FARNativeFuncRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:self.codeObj vmCode:self.vmCode funcName:name];
     return self;
 }
 

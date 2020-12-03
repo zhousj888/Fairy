@@ -10,29 +10,21 @@ NSString *transCmdToDescription(int cmd);
 
 @implementation FARCommand
 
-+ (instancetype)commandWithCmd:(NSInteger)cmd {
-    FARCommand *command = [[FARCommand alloc] init];
-    command.operCmd = cmd;
-    return command;
++ (instancetype)commandWithCmd:(NSInteger)cmd line:(NSInteger)line{
+    return [self commandWithCmd:cmd oper:nil line:line];
 }
 
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper:(id)oper {
-    FARCommand *command = [[FARCommand alloc] init];
-    command.operCmd = cmd;
-    command.oper1 = oper;
-    return command;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper:(id)oper line:(NSInteger)line{
+    return [self commandWithCmd:cmd oper1:oper oper2:nil line:line];
 }
 
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(id)oper1 oper2:(id)oper2 {
-    FARCommand *command = [[FARCommand alloc] init];
-    command.operCmd = cmd;
-    command.oper1 = oper1;
-    command.oper2 = oper2;
-    return command;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(id)oper1 oper2:(id)oper2 line:(NSInteger)line{
+    return [self commandWithCmd:cmd oper1:oper1 oper2:oper2 oper3:nil line:line];
 }
 
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(id)oper1 oper2:(id)oper2 oper3:(id)oper3 {
++ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(id)oper1 oper2:(id)oper2 oper3:(id)oper3 line:(NSInteger)line{
     FARCommand *command = [[FARCommand alloc] init];
+    command.line = line;
     command.operCmd = cmd;
     command.oper1 = oper1;
     command.oper2 = oper2;

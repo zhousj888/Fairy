@@ -7,6 +7,7 @@
 
 #import "FARNumberRunInstance.h"
 #import "FARNumberFuncRunInstance.h"
+#import "FARVMEnvironment.h"
 
 @interface FARNumberRunInstance()
 
@@ -58,7 +59,7 @@
        [name isEqualToString:FAR_NOT_FUNC  ] ||
        [name isEqualToString:FAR_TO_NATIVE_FUNC]
        ) {
-        FARNumberFuncRunInstance *func = [[FARNumberFuncRunInstance alloc] initWithEnv:self.env stack:self.stack codeObj:self.codeObj vmCode:self.vmCode funcName:name];
+        FARNumberFuncRunInstance *func = [[FARNumberFuncRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:self.codeObj vmCode:self.vmCode funcName:name];
         func.capturedEnvInstance = self;
         return func;
     }

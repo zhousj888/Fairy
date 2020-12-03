@@ -7,6 +7,7 @@
 
 #import "FARClassRunInstance.h"
 #import "FARFuncRunInstance.h"
+#import "FARVMEnvironment.h"
 
 @implementation FARClassRunInstance
 
@@ -45,6 +46,9 @@
 
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
+    
+    NSLog(@"init start %@", self);
+    
     //先将父类初始化好
     if (self.classCodeObj.superName) {
         self.superInstance = (FARClassRunInstance *)[self propertyWithId:self.classCodeObj.superName];
@@ -63,13 +67,20 @@
     NSInteger origSp = self.currentSp;
     //调用init方法
     FARFuncRunInstance *initFunc = (FARFuncRunInstance *)[self propertyWithId:FAR_INIT_FUNC];
+    initFunc.capturedEnvInstance = self;
     if (initFunc) {
         [initFunc runWithParams:params];
         [self.stack popTo:origSp];
     }
     
     [self.stack push:self];
+    NSLog(@"init end %@", self);
     return nil;
+}
+
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<obj:%@,%p>", self.codeObj.name, self];
 }
 
 

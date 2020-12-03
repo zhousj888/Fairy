@@ -1,11 +1,11 @@
 %{
 #define YYSTYPE char *
 #include "y.tab.h"
-int cur_line = 1;
 void yyerror(const char *msg);
 void unrecognized_char(char c);
 void unterminate_string(void);
 #define _DUPTEXT {yylval = strdup(yytext);}
+int cur_line = 1;
 %}
 
 /* note \042 is '"' */

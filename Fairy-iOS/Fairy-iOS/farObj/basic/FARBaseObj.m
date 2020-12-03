@@ -16,7 +16,8 @@
 
 - (instancetype)initWithEnv:(FARVMEnvironment *)env {
     if (self = [super init]) {
-        _env = env;
+        _globalEnv = env;
+        _env = [[FARVMEnvironment alloc] initWithOuter:_globalEnv];
     }
     return self;
 }

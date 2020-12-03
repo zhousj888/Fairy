@@ -7,10 +7,11 @@
 
 #import <Foundation/Foundation.h>
 #import "FARBaseObj.h"
+#import "FARBaseCodeRunInstance.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FARNull : FARBaseObj
+@interface FARNull : FARBaseCodeRunInstance
 
 + (instancetype)null;
 

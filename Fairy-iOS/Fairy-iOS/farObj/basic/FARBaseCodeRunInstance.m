@@ -15,11 +15,13 @@
 #import "FARFuncRunInstance.h"
 #import "FARClosureRunInstance.h"
 #import "FARCodeObj.h"
+#import "FARNull.h"
 
 @interface FARBaseCodeRunInstance()
 
 @property (nonatomic, assign) NSInteger pc;//指向codeObj.codeIndexArr.index
 @property (nonatomic, assign) BOOL isRet;
+@property (nonatomic, assign) NSInteger currentExcuteLine;
 
 @end
 
@@ -38,16 +40,35 @@
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     
-    NSLog(@"runWithParams: self = %@, params = %@",self,params);
+    NSLog(@"runWithParams: code = %@, params = %@",self.codeObj.name ,params);
+    NSLog(@"current env = %@", self);
     
-    self.env = [[FARVMEnvironment alloc] initWithOuter:self.env];
     if (params) {
         [self.env addParams:params];
     }
     
     self.pc = 0;
     
-    [self resume];
+    
+    NSNumber *codeIndex = nil;
+    FARCommand *cmd = nil;
+    while (self.pc < self.codeObj.codeIndexArr.count && !self.isRet) {
+        codeIndex = self.codeObj.codeIndexArr[self.pc];
+        cmd = self.vmCode.commandArr[codeIndex.integerValue];
+        
+        //打印执行的命令
+        NSLog(@"cmd %@:---> %@", @(cmd.line),cmd);
+//        NSLog(@"currentObj: %@",self);
+        
+        if ([self _executeCmd:cmd]) {
+            self.pc++;
+        }
+        //打印堆栈
+        [self.stack printStack];
+        NSLog(@"\n");
+    }
+    
+    NSLog(@"runWithParams: code = %@ finish",self.codeObj.name);
     
     return nil;
 }
@@ -55,7 +76,7 @@
 - (FARBaseObj *)propertyWithId:(NSString *)name {
     FARBaseObj *baseObj = [super propertyWithId:name];
     if ([baseObj isKindOfClass:[FARCodeObj class]]) {
-        baseObj = [((FARCodeObj *)baseObj) newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode];
+        baseObj = [((FARCodeObj *)baseObj) newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode];
     }
     
     if (baseObj) {
@@ -66,25 +87,6 @@
 }
 
 
-- (void)resume {
-    NSNumber *codeIndex = nil;
-    FARCommand *cmd = nil;
-    while (self.pc < self.codeObj.codeIndexArr.count && !self.isRet) {
-        codeIndex = self.codeObj.codeIndexArr[self.pc];
-        cmd = self.vmCode.commandArr[codeIndex.integerValue];
-        
-        //打印执行的命令
-        NSLog(@"cmd:---> %@",cmd);
-//        NSLog(@"currentObj: %@",self);
-        
-        if ([self _executeCmd:cmd]) {
-            self.pc++;
-        }
-        //打印堆栈
-        [self.stack printStack];
-        NSLog(@"\n");
-    }
-}
 
 - (void)jmpTag:(NSString *)tag {
     
@@ -106,16 +108,23 @@
     return self.stack.currentSp;
 }
 
+- (void)setCurrentExcuteLine:(NSInteger)currentExcuteLine {
+    if (_currentExcuteLine != currentExcuteLine) {
+        _currentExcuteLine = currentExcuteLine;
+    }
+}
+
 //返回是否pc++
 - (BOOL)_executeCmd:(FARCommand *)cmd {
+    self.currentExcuteLine = cmd.line;
     switch (cmd.operCmd) {
         case FAROperCmdPushInt: {
-            FARNumberRunInstance *obj = (FARNumberRunInstance *)[FARNumberCodeObj newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode integer:cmd.oper1.integerValue];
+            FARNumberRunInstance *obj = (FARNumberRunInstance *)[FARNumberCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode integer:cmd.oper1.integerValue];
             [self.stack push:obj];
             return YES;
         }
         case FAROperCmdPushDouble: {
-            FARNumberRunInstance *obj = (FARNumberRunInstance *)[FARNumberCodeObj newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode decimal:cmd.oper1.doubleValue];
+            FARNumberRunInstance *obj = (FARNumberRunInstance *)[FARNumberCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode decimal:cmd.oper1.doubleValue];
             [self.stack push:obj];
             return YES;
         }
@@ -123,14 +132,18 @@
             //去掉两边的双引号
             NSString *rawStr = [cmd.oper1 substringWithRange:NSMakeRange(1, cmd.oper1.length - 2)];
             
-            FARStringRunInstance *obj = [FARStringCodeObj newRunInstanceWithEnv:self.env stack:self.stack vmCode:self.vmCode string:rawStr];
+            FARStringRunInstance *obj = [FARStringCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode string:rawStr];
             [self.stack push:obj];
             return YES;
         }
         case FAROperCmdPushIdentifier: {
             FARBaseObj *obj = [self propertyWithId:cmd.oper1];
             if (!obj) {
-                @throw [NSException exceptionWithName:[NSString stringWithFormat:@"找不到对象%@",cmd.oper1] reason:nil userInfo:nil];
+                if ([cmd.oper1 isEqualToString:FAR_NIL]) {
+                    obj = [FARNull null];
+                }else {
+                    @throw [NSException exceptionWithName:[NSString stringWithFormat:@"找不到对象%@",cmd.oper1] reason:nil userInfo:nil];
+                }
             }
             [self.stack push:obj];
             return YES;
@@ -310,7 +323,6 @@
         }
         case FAROperCmdRet:{
             self.isRet = YES;
-            [self.callerInstance resume];
             return NO;
         }
         case FAROperExit:{
@@ -319,7 +331,6 @@
         }
         case FAROperFuncFinish:{
             self.isRet = YES;
-            [self.callerInstance resume];
             return NO;
         }
         case FAROperCmdCreateSaveTopClosure:{

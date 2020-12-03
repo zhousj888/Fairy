@@ -42,6 +42,11 @@
     return nil;
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"<func: %@>", self.funcName];
+}
+
 
 
 @end

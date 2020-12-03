@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FARBaseObj : NSObject
 
 @property (nonatomic, readwrite) FARVMEnvironment *env;
+@property (nonatomic, readwrite) FARVMEnvironment *globalEnv;
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithEnv:(FARVMEnvironment *)env;

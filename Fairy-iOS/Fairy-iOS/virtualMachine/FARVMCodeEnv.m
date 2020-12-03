@@ -11,6 +11,7 @@
 #import "FARFuncCodeObj.h"
 #import "FARClosureCodeObj.h"
 #import "FARNativeCodeObj.h"
+#import "FARNull.h"
 
 /**
  codeObjDic's key regular:
