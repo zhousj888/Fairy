@@ -56,7 +56,7 @@ class __Array {
             currentIndex = currentIndex + 1
             currentNode = currentNode.next
         }
-        return currentNode
+        return currentNode.value
     }
 
     func remove(index) {
@@ -69,10 +69,12 @@ class __Array {
 
 var arr = __Array()
 arr.push(obj: 1)
-arr.push(obj: 1)
-arr.push(obj: 1)
-arr.push(obj: 1)
+arr.push(obj: 2)
+arr.push(obj: 3)
+arr.push(obj: 4)
 __Native.log(text: arr.count)
+__Native.log(text: 123123123)
+__Native.log(text: arr.get(index: 2))
 // __Native.log(text: arr.get(index: 0))
 
 // var arr = []

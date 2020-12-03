@@ -150,7 +150,8 @@
         }
         case FAROperCmdPop:{
             NSString *var = cmd.oper1;
-            [self.env setVar:self.stack.pop key:var];
+            [self declareVar:var];
+            [self setPropertyWithKey:var value:self.stack.pop];
             return YES;
         }
         case FAROperCmdJmp:{
@@ -306,8 +307,8 @@
         case FAROperSaveIfNil:{
             NSString *varName = cmd.oper1;
             FARBaseObj *obj = [self.stack pop];
-            if (![self.env findVarForKey:varName]) {
-                [self.env setVar:obj key:varName];
+            if (![self propertyWithId:varName]) {
+                [self setPropertyWithKey:varName value:obj];
             }
             return YES;
         }
@@ -352,6 +353,12 @@
             FARBaseObj *value = [self.stack pop];
             FARBaseObj *operObj = [self.stack pop];
             [operObj setPropertyWithKey:cmd.oper1 value:value];
+            return YES;
+        }
+        case FAROperCmdAssign: {
+            FARBaseObj *value = [self.stack pop];
+            NSString *varName = cmd.oper1;
+            [self setPropertyWithKey:varName value:value];
             return YES;
         }
     }

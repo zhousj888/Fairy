@@ -72,6 +72,7 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperCmdCreateSaveTopClosure:{return @"createSaveTopClosure";}
         case FAROperGetObjProperty:{return @"getObjProperty";}
         case FAROperCmdSetProperty:{return @"setProperty";}
+        case FAROperCmdAssign:{return @"assign";}
     }
     return @"unknow";
 }
