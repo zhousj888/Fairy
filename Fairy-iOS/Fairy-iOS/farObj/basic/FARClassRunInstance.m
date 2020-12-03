@@ -45,15 +45,29 @@
 
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
-    
+    //先将父类初始化好
     if (self.classCodeObj.superName) {
-        self.superInstance = [self propertyWithId:self.classCodeObj.superName];
+        self.superInstance = (FARClassRunInstance *)[self propertyWithId:self.classCodeObj.superName];
+        if (!self.superInstance) {
+            @throw [NSException exceptionWithName:@"父类找不到" reason:nil userInfo:nil];
+        }
         [self.superInstance runWithParams:params];
-        [self.stack pop];
+        FARBaseObj *superIns = [self.stack pop];
+        [self setPropertyWithKey:FAR_SUPER_INS value:superIns];
     }
     
+    [self setPropertyWithKey:FAR_SELF_INS value:self];
     
     [super runWithParams:params];
+    
+    NSInteger origSp = self.currentSp;
+    //调用init方法
+    FARFuncRunInstance *initFunc = (FARFuncRunInstance *)[self propertyWithId:FAR_INIT_FUNC];
+    if (initFunc) {
+        [initFunc runWithParams:params];
+        [self.stack popTo:origSp];
+    }
+    
     [self.stack push:self];
     return nil;
 }

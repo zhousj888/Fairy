@@ -35,6 +35,18 @@
 // var son = 123
 // son.a.b.c.d = 1 + 2 + 3
 
+class Father {
+    var a = 2
+}
+
+class Son: Father {
+    var a = 1
+    func init(a) {
+        __Native.log(text: super.a)
+    }
+}
+var s = Son()
+
 
 // var a = 1
 

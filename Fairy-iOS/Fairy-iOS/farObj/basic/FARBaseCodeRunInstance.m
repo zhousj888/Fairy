@@ -18,7 +18,6 @@
 
 @interface FARBaseCodeRunInstance()
 
-@property (nonatomic, readwrite) NSInteger currentSp;
 @property (nonatomic, assign) NSInteger pc;//指向codeObj.codeIndexArr.index
 @property (nonatomic, assign) BOOL isRet;
 
@@ -101,6 +100,10 @@
     
     @throw [NSException exceptionWithName:@"跳转tag失败" reason:nil userInfo:nil];
     
+}
+
+- (NSInteger)currentSp {
+    return self.stack.currentSp;
 }
 
 //返回是否pc++

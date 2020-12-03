@@ -23,6 +23,18 @@
     return self;
 }
 
+- (NSInteger)currentSp {
+    return self.stackArr.count;
+}
+
+- (void)popTo:(NSInteger)sp {
+    if (self.currentSp <= sp) {
+        return;
+    }
+    while (self.currentSp > sp) {
+        [self pop];
+    }
+}
 
 - (void)push:(FARBaseObj *)obj {
     [self.stackArr addObject:obj];

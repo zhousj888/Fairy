@@ -12,8 +12,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARVMStack : NSObject
 
+@property (nonatomic, readonly) NSInteger currentSp;//指向下一个存放的位置
+
 - (void)push:(FARBaseObj *)obj;
 - (FARBaseObj *)pop;
+- (void)popTo:(NSInteger)sp;
 - (void)printStack;
 
 @end
