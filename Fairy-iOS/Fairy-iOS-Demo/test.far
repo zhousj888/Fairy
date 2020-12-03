@@ -22,8 +22,18 @@
 // var ret = arr.get(index: 0)
 // __Native.log(text: ret)
 
-
-__Native.log(text: 1 + 1 + 1)
+// class Son {
+//     var a = 1
+//     func init(a) {
+//         self.a = a
+//     }
+// }
+// var s = Son()
+// __Native.log(text: s.a)
+// var a = 1
+// a = 1
+// var son = 123
+// son.a.b.c.d = 1 + 2 + 3
 
 
 // var a = 1

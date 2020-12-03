@@ -63,6 +63,7 @@ enum {
     FAROperFuncFinish,
     FAROperCmdCreateSaveTopClosure,
     FAROperGetObjProperty,
+    FAROperCmdSetProperty,
 };
 
 #endif /* FAROperCmd_h */

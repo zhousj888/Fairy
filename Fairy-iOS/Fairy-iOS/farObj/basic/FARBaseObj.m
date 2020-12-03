@@ -26,6 +26,10 @@
     return obj;
 }
 
+- (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {
+    [self.env setVar:value key:key];
+}
+
 - (BOOL)isEqualFalse {
     return NO;
 }

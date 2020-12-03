@@ -334,6 +334,12 @@
             }
             return YES;
         }
+        case FAROperCmdSetProperty: {
+            FARBaseObj *value = [self.stack pop];
+            FARBaseObj *operObj = [self.stack pop];
+            [operObj setPropertyWithKey:cmd.oper1 value:value];
+            return YES;
+        }
     }
     return YES;
 }

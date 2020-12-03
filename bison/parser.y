@@ -307,8 +307,10 @@ VarDecl:
 ;
 
 AssignStmt:
-    T_Identifier '=' Expr                           { addCmd2(FAROperCmdPop, $1); }
+    T_Identifier '=' Expr                             { addCmd2(FAROperCmdPop, $1); }
+|   Primary '.' T_Identifier '=' Expr                 { addCmd2(FAROperCmdSetProperty, $3); }
 ;
+
 
 IntervalExpr:
     Expr T_IntervalTo Expr                          
