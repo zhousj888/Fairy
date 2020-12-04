@@ -352,6 +352,13 @@
             [self.stack push:array];
             return YES;
         }
+        case FAROperCmdGetSubscript: {
+            FARBaseObj *value = [self.stack pop];
+            FARBaseObj *arrayOrDic = (FARArrayRunInstance *)[self.stack pop];
+            FARFuncRunInstance *func = (FARFuncRunInstance *)[arrayOrDic propertyWithId:FAR_ARRAY_GET];
+            [func runWithParams:@{FAR_ARRAY_INDEX: value}];
+            return YES;
+        }
     }
     return YES;
 }

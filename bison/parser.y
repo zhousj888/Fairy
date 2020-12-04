@@ -373,10 +373,15 @@ Primary:
 |   DictionExpr
 |   Primary CallFuncSuffix  { addCmd1(FAROperCallFunc); }
 |   Primary ObjSuffix       {  }
+|   Primary SubscriptSuffix
 ;
 
 ObjSuffix:
     '.' T_Identifier        { addCmd2(FAROperGetObjProperty,$2); }
+;
+
+SubscriptSuffix:
+    '[' Expr ']'            { addCmd1(FAROperCmdGetSubscript); }
 ;
 
 

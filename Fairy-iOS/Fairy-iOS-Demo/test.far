@@ -5,9 +5,9 @@
 // var s = Son()
 // __Native.log(text: s.age)
 
-var arr = [1,2,3]
+// var arr = [1,2,3]
 
-
+arr[0] = 12
 
 // if a > 0 {
 
