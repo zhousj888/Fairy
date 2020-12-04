@@ -359,6 +359,16 @@
             [func runWithParams:@{FAR_ARRAY_INDEX: value}];
             return YES;
         }
+        case FAROperCmdSetSubscript: {
+            FARBaseObj *value = [self.stack pop];
+            FARBaseObj *index = [self.stack pop];
+            FARBaseObj *arrayOrDic = [self.stack pop];
+            FARFuncRunInstance *func = (FARFuncRunInstance *)[arrayOrDic propertyWithId:FAR_ARRAY_SET];
+            
+            [func runWithParams:@{FAR_ARRAY_INDEX: index, FAR_ARRAY_VALUE: value}];
+            
+            return YES;
+        }
     }
     return YES;
 }

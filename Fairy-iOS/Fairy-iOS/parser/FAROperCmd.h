@@ -69,6 +69,7 @@ enum {
     FAROperCmdPushNewArr,
     FAROperCmdAddEleToArr,
     FAROperCmdGetSubscript,
+    FAROperCmdSetSubscript,
 };
 
 #endif /* FAROperCmd_h */
