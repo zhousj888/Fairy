@@ -6,9 +6,22 @@
 // __Native.log(text: s.age)
 
 // var arr = [1,2,3]
-var key = "123"
-var dic = {key:123123}
-__Native.log(text: dic[key])
+
+
+func test() {
+    var a = 34534534
+    test2(){
+        __Native.log(text: a)
+    }
+}
+
+func test2() {
+    __trailing_closure()
+}
+
+test()
+
+
 
 // if a > 0 {
 

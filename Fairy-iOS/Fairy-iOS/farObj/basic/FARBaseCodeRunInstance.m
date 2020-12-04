@@ -317,6 +317,7 @@
         }
         case FAROperCmdCreateSaveTopClosure:{
             FARClosureRunInstance *closure = (FARClosureRunInstance *)[self.stack pop];
+            closure.capturedEnvInstance = self;
             [self.env setVar:closure key:FAR_TRAILING_CLOSURE];
             return YES;
         }
