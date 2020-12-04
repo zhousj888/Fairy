@@ -63,8 +63,8 @@
 		65D5B2C4257A11A200B6DA85 /* FARDicFuncRunInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2C2257A11A200B6DA85 /* FARDicFuncRunInstance.m */; };
 		65D5B2C9257A30A300B6DA85 /* NSArray+Fairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D5B2C7257A30A300B6DA85 /* NSArray+Fairy.h */; };
 		65D5B2CA257A30A300B6DA85 /* NSArray+Fairy.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2C8257A30A300B6DA85 /* NSArray+Fairy.m */; };
-		65D5B2CE257A3A5000B6DA85 /* UIView+Fairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D5B2CC257A3A5000B6DA85 /* UIView+Fairy.h */; };
-		65D5B2CF257A3A5000B6DA85 /* UIView+Fairy.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2CD257A3A5000B6DA85 /* UIView+Fairy.m */; };
+		65D5B2CE257A3A5000B6DA85 /* NSObject+Fairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D5B2CC257A3A5000B6DA85 /* NSObject+Fairy.h */; };
+		65D5B2CF257A3A5000B6DA85 /* NSObject+Fairy.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2CD257A3A5000B6DA85 /* NSObject+Fairy.m */; };
 		65D5B2D3257A3ADC00B6DA85 /* FARNativeWrapperInstance.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D5B2D1257A3ADB00B6DA85 /* FARNativeWrapperInstance.h */; };
 		65D5B2D4257A3ADC00B6DA85 /* FARNativeWrapperInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2D2257A3ADB00B6DA85 /* FARNativeWrapperInstance.m */; };
 		65EF90892562AD1000A98D1C /* test.far in Resources */ = {isa = PBXBuildFile; fileRef = 65EF90882562AD1000A98D1C /* test.far */; };
@@ -183,8 +183,8 @@
 		65D5B2C2257A11A200B6DA85 /* FARDicFuncRunInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARDicFuncRunInstance.m; sourceTree = "<group>"; };
 		65D5B2C7257A30A300B6DA85 /* NSArray+Fairy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Fairy.h"; sourceTree = "<group>"; };
 		65D5B2C8257A30A300B6DA85 /* NSArray+Fairy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Fairy.m"; sourceTree = "<group>"; };
-		65D5B2CC257A3A5000B6DA85 /* UIView+Fairy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIView+Fairy.h"; sourceTree = "<group>"; };
-		65D5B2CD257A3A5000B6DA85 /* UIView+Fairy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIView+Fairy.m"; sourceTree = "<group>"; };
+		65D5B2CC257A3A5000B6DA85 /* NSObject+Fairy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSObject+Fairy.h"; sourceTree = "<group>"; };
+		65D5B2CD257A3A5000B6DA85 /* NSObject+Fairy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSObject+Fairy.m"; sourceTree = "<group>"; };
 		65D5B2D1257A3ADB00B6DA85 /* FARNativeWrapperInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARNativeWrapperInstance.h; sourceTree = "<group>"; };
 		65D5B2D2257A3ADB00B6DA85 /* FARNativeWrapperInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARNativeWrapperInstance.m; sourceTree = "<group>"; };
 		65EF90882562AD1000A98D1C /* test.far */ = {isa = PBXFileReference; lastKnownFileType = text; name = test.far; path = "Fairy-iOS-Demo/test.far"; sourceTree = SOURCE_ROOT; };
@@ -261,8 +261,8 @@
 				65D5B2602577337700B6DA85 /* NSDictionary+Fairy.m */,
 				65D5B2C7257A30A300B6DA85 /* NSArray+Fairy.h */,
 				65D5B2C8257A30A300B6DA85 /* NSArray+Fairy.m */,
-				65D5B2CC257A3A5000B6DA85 /* UIView+Fairy.h */,
-				65D5B2CD257A3A5000B6DA85 /* UIView+Fairy.m */,
+				65D5B2CC257A3A5000B6DA85 /* NSObject+Fairy.h */,
+				65D5B2CD257A3A5000B6DA85 /* NSObject+Fairy.m */,
 				65D5B2D1257A3ADB00B6DA85 /* FARNativeWrapperInstance.h */,
 				65D5B2D2257A3ADB00B6DA85 /* FARNativeWrapperInstance.m */,
 			);
@@ -507,7 +507,7 @@
 				65BD652125629B7D007AF316 /* FARParser.h in Headers */,
 				6560C07B25724C5000A3AEB5 /* FARClosureRunInstance.h in Headers */,
 				65EF90A32564012400A98D1C /* FARVMCode.h in Headers */,
-				65D5B2CE257A3A5000B6DA85 /* UIView+Fairy.h in Headers */,
+				65D5B2CE257A3A5000B6DA85 /* NSObject+Fairy.h in Headers */,
 				65D5B24425760BF900B6DA85 /* FARNumberFuncRunInstance.h in Headers */,
 				65F6C3F225626B6200C8B94C /* Fairy_iOS.h in Headers */,
 				65EF92DB2569258E00A98D1C /* FARCodeObj.h in Headers */,
@@ -640,7 +640,7 @@
 				65EF90A42564012400A98D1C /* FARVMCode.m in Sources */,
 				65D5B2982579D86E00B6DA85 /* FARBasicFuncRunInstance.m in Sources */,
 				65EF909025637F0000A98D1C /* FARCommandTag.m in Sources */,
-				65D5B2CF257A3A5000B6DA85 /* UIView+Fairy.m in Sources */,
+				65D5B2CF257A3A5000B6DA85 /* NSObject+Fairy.m in Sources */,
 				65D5B24525760BF900B6DA85 /* FARNumberFuncRunInstance.m in Sources */,
 				6560C090257254F600A3AEB5 /* FARGlobalConst.m in Sources */,
 				6560C0AE2572840B00A3AEB5 /* FARNumberRunInstance.m in Sources */,

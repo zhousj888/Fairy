@@ -1,17 +1,29 @@
+var red = Color(hex: "#ffffff")
+var blue = Color(hex: "#0004ff")
+var yellow = Color(hex: "#fbff00")
+
+class Color {
+    var __innerNativeObj
+    func init(hex) {
+        __innerNativeObj = __Native.createColor(hex: hex)
+    }
+}
 
 class View {
     var __innerNativeObj = __Native.createInstance(className: "UIView")
     var _width
     var _height
     var _backgroundColor
-    func init(width, height, bg) {
+    func init(width, height, backgroundColor) {
         self._width = width
         self._height = height
-        self._backgroundColor = bg
+        self._backgroundColor = backgroundColor
+
+        self.setColor(color: backgroundColor)
+
         if _trailing_closure {
             var subviewArr = _trailing_closure()
             var index = 0
-
             if subviewArr.count {
                 repeat {
                     self.addSubview(view: subviewArr[index])
@@ -22,13 +34,17 @@ class View {
         }
     }
 
+    func setColor(color) {
+        if color {
+            // __Native.setValue(obj: __innerNativeObj, key:"backgroundColor", value: color)
+        }
+    }
+
     func addSubview(view) {
         if view {
             __Native.addSubview(obj: __innerNativeObj, subview: view)
         }
     }
 }
-View(width: 100, height: 100) {
-    View(width: 100, height: 100)
-    View(width: 100, height: 100)
+View(width: 100, height: 100, backgroundColor: blue) {
 }
