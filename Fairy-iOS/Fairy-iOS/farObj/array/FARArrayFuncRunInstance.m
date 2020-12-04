@@ -26,7 +26,6 @@
 }
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
-    FARBaseObj *selfObj = [self propertyWithId:FAR_SELF_INS];
     FARNumberRunInstance *indexObj = params[FAR_ARRAY_INDEX];
     NSUInteger index = indexObj.intergerValue;
     FARBaseObj *value = params[FAR_ARRAY_VALUE];
