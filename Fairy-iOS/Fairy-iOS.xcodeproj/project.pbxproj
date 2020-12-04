@@ -345,6 +345,17 @@
 			path = array;
 			sourceTree = "<group>";
 		};
+		65D5B2B1257A111B00B6DA85 /* internalType */ = {
+			isa = PBXGroup;
+			children = (
+				65D5B2A02579E4FD00B6DA85 /* array */,
+				65D5B23F25760B9200B6DA85 /* basic */,
+				65D5B23E25760B7700B6DA85 /* string */,
+				65D5B23D25760B6000B6DA85 /* number */,
+			);
+			path = internalType;
+			sourceTree = "<group>";
+		};
 		65EF90872562ACC200A98D1C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
@@ -356,11 +367,8 @@
 		65EF92C62569242E00A98D1C /* farObj */ = {
 			isa = PBXGroup;
 			children = (
-				65D5B2A02579E4FD00B6DA85 /* array */,
-				65D5B23F25760B9200B6DA85 /* basic */,
-				65D5B23E25760B7700B6DA85 /* string */,
-				65D5B23D25760B6000B6DA85 /* number */,
 				65D5B23C25760B4700B6DA85 /* native */,
+				65D5B2B1257A111B00B6DA85 /* internalType */,
 			);
 			path = farObj;
 			sourceTree = "<group>";
