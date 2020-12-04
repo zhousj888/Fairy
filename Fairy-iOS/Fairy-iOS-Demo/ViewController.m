@@ -29,6 +29,9 @@
     NSMutableArray *arr;
     [arr objectAtIndex:1];
     
+    UIView *view;
+    [view setBackgroundColor:UIColor.blueColor];
+    
 }
 
 

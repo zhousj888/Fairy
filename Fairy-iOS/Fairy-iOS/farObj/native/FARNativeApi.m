@@ -6,6 +6,7 @@
 //
 
 #import "FARNativeApi.h"
+#import <UIKit/UIKit.h>
 
 @implementation FARNativeApi
 
@@ -24,6 +25,25 @@
 - (void)log:(NSDictionary *)params {
     NSString *text = params[@"text"];
     NSLog(@"NativeLog: ------------------>     %@",text);
+}
+
+- (id)createInstance:(NSDictionary *)params {
+    NSString *className = params[@"className"];
+    Class cls = NSClassFromString(className);
+    return [[cls alloc] init];
+}
+
+- (void)setValue:(NSDictionary *)params {
+    id obj = params[@"obj"];
+    NSString *key = params[@"key"];
+    id value = params[@"value"];
+    [obj setValue:value forKey:key];
+}
+
+- (void)addSubview:(NSDictionary *)params {
+    UIView *obj = params[@"obj"];
+    UIView *subview = params[@"subview"];
+    [obj addSubview:subview];
 }
 
 

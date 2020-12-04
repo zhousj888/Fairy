@@ -16,9 +16,10 @@
     return self;
 }
 
-- (NSString *)toNative {
+- (id)toNativeObj {
     return self.value;
 }
+
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     @throw [NSException exceptionWithName:@"方法找不到" reason:nil userInfo:nil];

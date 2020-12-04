@@ -168,11 +168,7 @@
         case FAROperCmdPushIdentifier: {
             FARBaseObj *obj = [self propertyWithId:cmd.oper1];
             if (!obj) {
-                if ([cmd.oper1 isEqualToString:FAR_NIL]) {
-                    obj = [FARNull null];
-                }else {
-                    @throw [NSException exceptionWithName:[NSString stringWithFormat:@"找不到对象%@",cmd.oper1] reason:nil userInfo:nil];
-                }
+                obj = [FARNull null];
             }
             [self.stack push:obj];
             return YES;

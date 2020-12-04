@@ -27,15 +27,25 @@
 }
 
 
-- (FARBaseObj *)runWithParams:(NSDictionary *)params {
+- (FARBaseObj *)runWithParams:(NSDictionary<NSString *, FARBaseObj *> *)params {
     NSString *funcSelStr = [NSString stringWithFormat:@"%@:",self.funcName];
     SEL selector = NSSelectorFromString(funcSelStr);
     IMP imp = [[FARNativeApi sharedInstance] methodForSelector:selector];
     if (imp) {
         id (*func)(id, SEL, id) = (void *)imp;
-        id ret = func([FARNativeApi sharedInstance], selector, params);
-        if (ret && [ret respondsToSelector:@selector(toFARObj)]) {
-            [self.stack push:[ret performSelector:@selector(toFARObj)]];
+        
+        NSMutableDictionary *mutaParams = [params mutableCopy];
+        for (NSString *key in params) {
+            mutaParams[key] = [params[key] toNativeObj];
+        }
+        
+        NSObject *ret = func([FARNativeApi sharedInstance], selector, mutaParams);
+        if (ret) {
+            SEL toFarSel = @selector(toFarObjWithEnv:stack:codeObj:vmCode:);
+            IMP imp = [ret methodForSelector:toFarSel];
+            FARBaseObj * (*toFar)(id, SEL, FARVMEnvironment*, FARVMStack *, FARCodeObj *, FARVMCode *) = (void *)imp;
+            FARBaseObj *baseObj = toFar(ret, toFarSel, self.env, self.stack, self.codeObj, self.vmCode);
+            [self.stack push:baseObj];
         }
     }else {
         @throw [NSException exceptionWithName:@"方法找不到" reason:nil userInfo:nil];

@@ -11,13 +11,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARStringRunInstance : FARBaseCodeRunInstance
 
-
 @property (nonatomic, copy) NSString *value;
-
 
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode str:(NSString *)str;
 
-- (NSString *)toNative;
 
 @end
 

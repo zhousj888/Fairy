@@ -1,10 +1,34 @@
-func test() {
-    var a = _trailing_closure()
-    __Native.log(text: a)
-}
 
-test() {
-    123
-    123
-    123
+class View {
+    var __innerNativeObj = __Native.createInstance(className: "UIView")
+    var _width
+    var _height
+    var _backgroundColor
+    func init(width, height, bg) {
+        self._width = width
+        self._height = height
+        self._backgroundColor = bg
+        if _trailing_closure {
+            var subviewArr = _trailing_closure()
+            var index = 0
+
+            if subviewArr.count {
+                repeat {
+                    self.addSubview(view: subviewArr[index])
+                    index = index + 1
+                } while index < subviewArr.count
+            }
+
+        }
+    }
+
+    func addSubview(view) {
+        if view {
+            __Native.addSubview(obj: __innerNativeObj, subview: view)
+        }
+    }
+}
+View(width: 100, height: 100) {
+    View(width: 100, height: 100)
+    View(width: 100, height: 100)
 }

@@ -92,6 +92,10 @@
     return !self.number.boolValue;
 }
 
+- (id)toNativeObj {
+    return self.number;
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@", self.number];
 }

@@ -28,8 +28,6 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable FARBaseObj *)runWithParams:(nullable NSDictionary *)params;
 
-//以下方法只能子类调用
-- (BOOL)_executeCmd:(FARCommand *)cmd;
 
 @end
 
