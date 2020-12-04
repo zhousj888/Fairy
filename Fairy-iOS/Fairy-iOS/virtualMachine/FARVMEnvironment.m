@@ -38,15 +38,23 @@
 }
 
 - (void)setVar:(FARBaseObj *)value key:(NSString *)key {
-    self.envDic[key] = value;
+    
+    if (self.envDic[key]) {
+        self.envDic[key] = value;
+    }else if(self.outer){
+        [self.outer setVar:value key:key];
+    }else {
+        @throw [NSException exceptionWithName:@"找不到对象" reason:nil userInfo:nil];
+    }
+    
 }
 
 - (void)declareVar:(NSString *)key {
-    [self setVar:[FARNull null] key:key];
+    self.envDic[key] = [FARNull null];
 }
 
 - (void)declareLet:(NSString *)key {
-    [self setVar:[FARNull null] key:key];
+    self.envDic[key] = [FARNull null];
 }
 
 - (NSDictionary *)asParams {

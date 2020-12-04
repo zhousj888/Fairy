@@ -7,16 +7,16 @@
 
 // var arr = [1,2,3]
 
-
+var a = 34534534
 func test() {
-    var a = 34534534
+    a = 123123123
     test2(){
         __Native.log(text: a)
     }
 }
 
 func test2() {
-    __trailing_closure()
+    _trailing_closure()
 }
 
 test()

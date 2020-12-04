@@ -278,6 +278,7 @@
             return YES;
         }
         case FAROperSave:{
+            [self.env declareVar:cmd.oper1];
             [self.env setVar:[self.stack pop] key:cmd.oper1];
             return YES;
         }
@@ -318,6 +319,7 @@
         case FAROperCmdCreateSaveTopClosure:{
             FARClosureRunInstance *closure = (FARClosureRunInstance *)[self.stack pop];
             closure.capturedEnvInstance = self;
+            [self.env declareVar:FAR_TRAILING_CLOSURE];
             [self.env setVar:closure key:FAR_TRAILING_CLOSURE];
             return YES;
         }

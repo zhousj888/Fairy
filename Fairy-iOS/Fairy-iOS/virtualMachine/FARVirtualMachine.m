@@ -49,6 +49,8 @@ static NSString *const kRetSp = @"__retSp";
 - (void)run {
     FARFuncCodeObj *mainCode = (FARFuncCodeObj *)[self.mainEnv findVarForKey:FAR_MAIN_CODE];
     FARBaseCodeRunInstance *mainRunInstance = [mainCode newRunInstanceWithEnv:self.mainEnv stack:self.stack vmCode:self.vmCode];
+    //这里做一个特殊逻辑，mainCode里面的env就是global
+    mainRunInstance.env = self.mainEnv;
     [mainRunInstance runWithParams:nil];
     
     

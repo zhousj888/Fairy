@@ -9,4 +9,14 @@
 
 @implementation FARClosureRunInstance
 
+
+- (FARBaseObj *)propertyWithId:(NSString *)name {
+    return [super propertyWithId:name];
+}
+
+- (FARBaseObj *)runWithParams:(NSDictionary *)params {
+    return [super runWithParams:params];
+}
+
+
 @end
