@@ -36,7 +36,6 @@ class __Array {
     var count = 0
 
     func push(obj) {
-
         if count == 0 {
             head = __ArrayNode(value: obj, previous: nil)
             tail = head
@@ -47,6 +46,13 @@ class __Array {
     }
 
     func get(index) {
+        var node = self._getNode(index: index)
+        if node {
+            return node.value
+        }
+    }
+
+    func _getNode(index) {
         if index >= count {
             return
         }
@@ -56,12 +62,31 @@ class __Array {
             currentIndex = currentIndex + 1
             currentNode = currentNode.next
         }
-        return currentNode.value
+        return currentNode
+    }
+
+    func printArr() {
+        var currentNode = head
+        __Native.log(text: self.count)
+        __Native.log(text: "------------------------------")
+        while currentNode {
+            __Native.log(text: currentNode.value)
+            currentNode = currentNode.next
+        }
     }
 
     func remove(index) {
-        var obj = self.get(index: index)
-        obj.previous = obj.next
+        if index >= count {
+            return
+        }
+        var node = self._getNode(index: index)
+        if node == head {
+            head = head.next
+        } else if node == tail {
+            tail = tail.previous
+        } else {
+            node.previous = node.next
+        }
         count = count - 1
     }
     
@@ -72,10 +97,10 @@ arr.push(obj: 1)
 arr.push(obj: 2)
 arr.push(obj: 3)
 arr.push(obj: 4)
-__Native.log(text: arr.count)
-__Native.log(text: 123123123)
-__Native.log(text: arr.get(index: 2))
-// __Native.log(text: arr.get(index: 0))
+arr.printArr()
+arr.remove(index: 0)
+arr.printArr()
+
 
 // var arr = []
 // arr.push(1)

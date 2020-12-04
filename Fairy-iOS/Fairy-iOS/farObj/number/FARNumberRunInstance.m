@@ -37,10 +37,6 @@
 }
 
 - (FARBaseObj *)propertyWithId:(NSString *)name {
-    FARBaseObj *obj = [super propertyWithId:name];
-    if (obj) {
-        return obj;
-    }
     if(
        [name isEqualToString:FAR_ADD_FUNC  ] ||
        [name isEqualToString:FAR_SUB_FUNC  ] ||

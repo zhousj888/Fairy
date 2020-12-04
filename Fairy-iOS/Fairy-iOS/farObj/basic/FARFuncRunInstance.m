@@ -17,6 +17,15 @@
     return runIns;
 }
 
+- (FARBaseObj *)runWithParams:(NSDictionary *)params {
+    NSInteger origSp = self.currentSp;
+    [super runWithParams:params];
+    FARBaseObj *ret = [self.stack pop];
+    [self.stack popTo:origSp];
+    [self.stack push:ret];
+    return nil;
+}
+
 - (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {
     if ([self.env findVarForKey:key]) {
         [self.env setVar:value key:key];

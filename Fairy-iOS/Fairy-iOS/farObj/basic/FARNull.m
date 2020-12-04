@@ -38,4 +38,9 @@
     return YES;
 }
 
+- (NSString *)description
+{
+    return [NSString stringWithFormat:@"nil"];
+}
+
 @end
