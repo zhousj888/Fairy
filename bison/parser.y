@@ -89,12 +89,6 @@ NewLines:
 |   NewLines T_EOL
 ;
 
-ExprsByComma:
-    /* empty */             { /* empty */ }
-|   Expr
-|   ExprsByComma ',' Expr
-;
-
 
 IfWhileStmtsBlock:
     IfWhileBlockStart '{' IfWhileStmts '}'          { printf("\tBlock结束\n"); }
@@ -323,7 +317,17 @@ IntervalExpr:
 
 
 ArrayExpr:
-    '[' ExprsByComma ']'
+    ArrayBegin ExprsByComma ']'                               
+;
+
+ArrayBegin:
+    '['                                             { addCmd1(FAROperCmdPushNewArr); }
+;
+
+ExprsByComma:
+    /* empty */             { /* empty */ }
+|   Expr                                            { addCmd1(FAROperCmdAddEleToArr); }
+|   ExprsByComma ',' Expr                           { addCmd1(FAROperCmdAddEleToArr); }
 ;
 
 DictionElement:

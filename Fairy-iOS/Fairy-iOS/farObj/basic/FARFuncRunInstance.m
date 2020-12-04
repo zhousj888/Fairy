@@ -20,9 +20,14 @@
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     NSInteger origSp = self.currentSp;
     [super runWithParams:params];
-    FARBaseObj *ret = [self.stack pop];
-    [self.stack popTo:origSp];
-    [self.stack push:ret];
+    if (origSp == self.currentSp) {
+        [self.stack pushNull];
+    }else {
+        FARBaseObj *ret = [self.stack pop];
+        [self.stack popTo:origSp];
+        [self.stack push:ret];
+    }
+    
     return nil;
 }
 

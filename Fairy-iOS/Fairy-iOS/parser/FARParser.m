@@ -73,6 +73,8 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperGetObjProperty:{return @"getObjProperty";}
         case FAROperCmdSetProperty:{return @"setProperty";}
         case FAROperCmdAssign:{return @"assign";}
+        case FAROperCmdPushNewArr:{return @"pushNewArr";}
+        case FAROperCmdAddEleToArr:{return @"addEleToArr";}
     }
     return @"unknow";
 }

@@ -65,6 +65,9 @@ enum {
     FAROperGetObjProperty,
     FAROperCmdSetProperty,
     FAROperCmdAssign,
+    
+    FAROperCmdPushNewArr,
+    FAROperCmdAddEleToArr,
 };
 
 #endif /* FAROperCmd_h */

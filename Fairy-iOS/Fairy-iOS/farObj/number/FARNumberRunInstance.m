@@ -58,6 +58,8 @@
         FARNumberFuncRunInstance *func = [[FARNumberFuncRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:self.codeObj vmCode:self.vmCode funcName:name];
         func.capturedEnvInstance = self;
         return func;
+    }else {
+        @throw [NSException exceptionWithName:@"方法找不到" reason:nil userInfo:nil];
     }
     return nil;
 }

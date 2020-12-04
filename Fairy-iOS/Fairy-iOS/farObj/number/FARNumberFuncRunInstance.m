@@ -91,6 +91,8 @@
         
     }else if ([self.funcName isEqualToString:FAR_NOT_FUNC  ]) {
         result = [self doNot];
+    }else {
+        @throw [NSException exceptionWithName:@"方法找不到" reason:nil userInfo:nil];
     }
     
     [self.stack push:result];

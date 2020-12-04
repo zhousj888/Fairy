@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readonly) NSInteger currentSp;//指向下一个存放的位置
 
 - (void)push:(FARBaseObj *)obj;
+- (void)pushNull;
 - (FARBaseObj *)pop;
 - (void)popTo:(NSInteger)sp;
 - (void)printStack;

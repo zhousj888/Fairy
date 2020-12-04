@@ -37,6 +37,8 @@
         if (ret && [ret respondsToSelector:@selector(toFARObj)]) {
             [self.stack push:[ret performSelector:@selector(toFARObj)]];
         }
+    }else {
+        @throw [NSException exceptionWithName:@"方法找不到" reason:nil userInfo:nil];
     }
     
     return nil;

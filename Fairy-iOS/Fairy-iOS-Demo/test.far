@@ -5,6 +5,8 @@
 // var s = Son()
 // __Native.log(text: s.age)
 
+var arr = [1,2,3]
+
 
 
 // if a > 0 {
@@ -16,90 +18,6 @@
 // }
 
 
-
-class __ArrayNode {
-    var value
-    var next
-    var previous
-    func init(value, previous) {
-        self.value = value
-        if previous {
-            self.previous = previous
-            previous.next = self
-        }
-    }
-}
-
-class __Array {
-    var head
-    var tail
-    var count = 0
-
-    func push(obj) {
-        if count == 0 {
-            head = __ArrayNode(value: obj, previous: nil)
-            tail = head
-        }else {
-            tail = __ArrayNode(value: obj, previous: tail)
-        }
-        count = count + 1
-    }
-
-    func get(index) {
-        var node = self._getNode(index: index)
-        if node {
-            return node.value
-        }
-    }
-
-    func _getNode(index) {
-        if index >= count {
-            return
-        }
-        var currentIndex = 0
-        var currentNode = head
-        while currentIndex < index {
-            currentIndex = currentIndex + 1
-            currentNode = currentNode.next
-        }
-        return currentNode
-    }
-
-    func printArr() {
-        var currentNode = head
-        __Native.log(text: self.count)
-        __Native.log(text: "------------------------------")
-        while currentNode {
-            __Native.log(text: currentNode.value)
-            currentNode = currentNode.next
-        }
-    }
-
-    func remove(index) {
-        if index >= count {
-            return
-        }
-        var node = self._getNode(index: index)
-        if node == head {
-            head = head.next
-        } else if node == tail {
-            tail = tail.previous
-        } else {
-            node.previous = node.next
-        }
-        count = count - 1
-    }
-    
-}
-
-var arr = __Array()
-arr.push(obj: 1)
-arr.push(obj: 2)
-arr.push(obj: 3)
-arr.push(obj: 4)
-arr.printArr()
-arr.remove(index: 0)
-arr.printArr()
 
 
 // var arr = []

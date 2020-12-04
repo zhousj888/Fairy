@@ -20,6 +20,10 @@
     return self.value;
 }
 
+- (FARBaseObj *)runWithParams:(NSDictionary *)params {
+    @throw [NSException exceptionWithName:@"方法找不到" reason:nil userInfo:nil];
+}
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@", self.value];
 }

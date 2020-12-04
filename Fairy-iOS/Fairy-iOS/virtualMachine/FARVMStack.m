@@ -6,6 +6,7 @@
 //
 
 #import "FARVMStack.h"
+#import "FARNull.h"
 
 @interface FARVMStack()
 
@@ -38,6 +39,10 @@
 
 - (void)push:(FARBaseObj *)obj {
     [self.stackArr addObject:obj];
+}
+
+- (void)pushNull {
+    [self.stackArr addObject:[FARNull null]];
 }
 
 

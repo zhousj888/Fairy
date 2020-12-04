@@ -17,6 +17,9 @@
 #import "FARCodeObj.h"
 #import "FARNull.h"
 #import "FARBasicFuncRunInstance.h"
+#import "FARArrayCodeObj.h"
+#import "FARArrayRunInstance.h"
+#import "FARArrayFuncRunInstance.h"
 
 @interface FARBaseCodeRunInstance()
 
@@ -334,6 +337,19 @@
             FARBaseObj *value = [self.stack pop];
             NSString *varName = cmd.oper1;
             [self setPropertyWithKey:varName value:value];
+            return YES;
+        }
+        case FAROperCmdPushNewArr: {
+            FARArrayRunInstance *array = (FARArrayRunInstance *)[FARArrayCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode];
+            [self.stack push:array];
+            return YES;
+        }
+        case FAROperCmdAddEleToArr: {
+            FARBaseObj *value = [self.stack pop];
+            FARArrayRunInstance *array = (FARArrayRunInstance *)[self.stack pop];
+            FARArrayFuncRunInstance *func = (FARArrayFuncRunInstance *)[array propertyWithId:FAR_ARRAY_PUSH];
+            [func runWithParams:@{FAR_ARRAY_VALUE: value}];
+            [self.stack push:array];
             return YES;
         }
     }
