@@ -39,6 +39,15 @@
     return [[cls alloc] init];
 }
 
+- (id)createVStack:(NSDictionary *)params {
+    UIStackView *stackView = [[UIStackView alloc] init];
+    stackView.axis = UILayoutConstraintAxisVertical;
+    stackView.distribution = UIStackViewDistributionFill;
+    stackView.alignment = UIStackViewAlignmentCenter;
+    
+    return stackView;
+}
+
 - (void)setValue:(NSDictionary *)params {
     id obj = params[@"obj"];
     NSString *key = params[@"key"];
@@ -46,10 +55,18 @@
     [obj setValue:value forKey:key];
 }
 
-- (void)addSubview:(NSDictionary *)params {
-    UIView *obj = params[@"obj"];
+- (void)addArrangedSubview:(NSDictionary *)params {
+    UIStackView *obj = params[@"obj"];
     UIView *subview = params[@"subview"];
-    [obj addSubview:subview];
+    [obj addArrangedSubview:subview];
+}
+
+- (void)setViewSize:(NSDictionary *)params {
+    NSNumber *width = params[@"width"];
+    NSNumber *height = params[@"height"];
+    UIView *obj = params[@"obj"];
+    [obj.widthAnchor constraintEqualToConstant:width.floatValue].active = YES;
+    [obj.heightAnchor constraintEqualToConstant:height.floatValue].active = YES;
 }
 
 - (UIColor *)createColor:(NSDictionary *)params {
