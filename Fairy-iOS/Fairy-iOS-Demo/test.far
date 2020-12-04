@@ -1,5 +1,5 @@
-var red = Color(hex: "#ffffff")
-var blue = Color(hex: "#0004ff")
+var red = Color(hex: "#ff0000")
+var blue = Color(hex: "#0000ff")
 var yellow = Color(hex: "#fbff00")
 
 class Color {
@@ -36,7 +36,7 @@ class View {
 
     func setColor(color) {
         if color {
-            // __Native.setValue(obj: __innerNativeObj, key:"backgroundColor", value: color)
+            __Native.setValue(obj: __innerNativeObj, key:"backgroundColor", value: color)
         }
     }
 
@@ -46,5 +46,4 @@ class View {
         }
     }
 }
-View(width: 100, height: 100, backgroundColor: blue) {
-}
+View(width: 100, height: 100, backgroundColor: red)

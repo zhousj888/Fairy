@@ -52,8 +52,14 @@ static NSString *const kRetSp = @"__retSp";
     //这里做一个特殊逻辑，mainCode里面的env就是global
     mainRunInstance.env = self.mainEnv;
     [mainRunInstance runWithParams:nil];
-    
-    
+}
+
+- (id)vmValueOfStackTop {
+    return self.stack.peek.toNativeObj;
+}
+
+- (id)vmValueForKey:(NSString *)key {
+    return [self.mainEnv findVarForKey:key].toNativeObj;
 }
 
 @end

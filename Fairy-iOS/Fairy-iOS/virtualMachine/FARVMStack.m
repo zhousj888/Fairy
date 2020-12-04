@@ -52,6 +52,10 @@
     return obj;
 }
 
+- (FARBaseObj *)peek {
+    return self.stackArr.lastObject;
+}
+
 
 - (void)printStack {
     NSMutableString *mutStr = [NSMutableString string];

@@ -12,6 +12,8 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FARVirtualMachine : NSObject
 
 - (void)runWithCode:(NSString *)code;
+- (id)vmValueOfStackTop;
+- (id)vmValueForKey:(NSString *)key;
 
 @end
 

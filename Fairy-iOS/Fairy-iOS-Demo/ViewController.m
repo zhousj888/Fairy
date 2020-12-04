@@ -10,6 +10,8 @@
 
 @interface ViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *Container;
+
 @end
 
 @implementation ViewController
@@ -26,11 +28,9 @@
     FARVirtualMachine *vm = [[FARVirtualMachine alloc] init];
     [vm runWithCode:content];
     
-    NSMutableArray *arr;
-    [arr objectAtIndex:1];
-    
-    UIView *view;
-    [view setBackgroundColor:UIColor.blueColor];
+    UIView *view = [vm vmValueOfStackTop];
+    [self.Container addSubview:view];
+    view.frame = self.Container.bounds;
     
 }
 

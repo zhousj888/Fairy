@@ -17,6 +17,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)push:(FARBaseObj *)obj;
 - (void)pushNull;
 - (FARBaseObj *)pop;
+- (FARBaseObj *)peek;
 - (void)popTo:(NSInteger)sp;
 - (void)printStack;
 
