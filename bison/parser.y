@@ -333,13 +333,16 @@ ExprsByComma:
 
 DictionElement:
     /* empty */             { /* empty */ }
-|   T_Identifier ':' Expr
-|   T_StringConstant ':' Expr
+|   Expr ':' Expr                                   { addCmd1(FAROperCmdAddEleToDic); }
 |   DictionElement ',' DictionElement
 ;
 
 DictionExpr:
-    '{' DictionElement '}'
+    DicBegin DictionElement '}'
+;
+
+DicBegin:
+    '{'                                             { addCmd1(FAROperCmdPushNewDic); }
 ;
 
 Expr:

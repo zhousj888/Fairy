@@ -20,6 +20,9 @@
 #import "FARArrayCodeObj.h"
 #import "FARArrayRunInstance.h"
 #import "FARArrayFuncRunInstance.h"
+#import "FARDicCodeObj.h"
+#import "FARDicRunInstance.h"
+#import "FARDicFuncRunInstance.h"
 
 @interface FARBaseCodeRunInstance()
 
@@ -367,6 +370,20 @@
             
             [func runWithParams:@{FAR_ARRAY_INDEX: index, FAR_ARRAY_DIC_VALUE: value, FAR_DIC_KEY: index}];
             
+            return YES;
+        }
+        case FAROperCmdAddEleToDic: {
+            FARBaseObj *value = [self.stack pop];
+            FARBaseObj *key = [self.stack pop];
+            FARDicRunInstance *dic = (FARDicRunInstance *)[self.stack pop];
+            FARDicFuncRunInstance *func = (FARDicFuncRunInstance *)[dic propertyWithId:FAR_ARRAY_DIC_SET];
+            [func runWithParams:@{FAR_DIC_KEY: key, FAR_ARRAY_DIC_VALUE: value}];
+            [self.stack push:dic];
+            return YES;
+        }
+        case FAROperCmdPushNewDic: {
+            FARBaseObj *dic = [FARDicCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode];
+            [self.stack push:dic];
             return YES;
         }
     }

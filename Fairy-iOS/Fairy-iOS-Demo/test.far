@@ -6,8 +6,9 @@
 // __Native.log(text: s.age)
 
 // var arr = [1,2,3]
-
-
+var key = "123"
+var dic = {key:123123}
+__Native.log(text: dic[key])
 
 // if a > 0 {
 

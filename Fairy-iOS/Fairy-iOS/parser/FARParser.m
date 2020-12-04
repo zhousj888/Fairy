@@ -77,6 +77,8 @@ NSString *transCmdToDescription(int cmd) {
         case FAROperCmdAddEleToArr:{return @"addEleToArr";}
         case FAROperCmdGetSubscript:{return @"getSubscript";}
         case FAROperCmdSetSubscript:{return @"setSubscript";}
+        case FAROperCmdAddEleToDic:{return @"addEleToDic";}
+        case FAROperCmdPushNewDic:{return @"pushNewDic";}
     }
     return @"unknow";
 }
