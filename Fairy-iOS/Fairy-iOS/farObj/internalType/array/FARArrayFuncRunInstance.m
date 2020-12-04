@@ -28,17 +28,17 @@
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     FARNumberRunInstance *indexObj = params[FAR_ARRAY_INDEX];
     NSUInteger index = indexObj.intergerValue;
-    FARBaseObj *value = params[FAR_ARRAY_VALUE];
+    FARBaseObj *value = params[FAR_ARRAY_DIC_VALUE];
     if ([self.funcName isEqualToString:FAR_ARRAY_PUSH]) {
         [self.array addObject:value];
         [self.stack pushNull];
     }else if ([self.funcName isEqualToString:FAR_ARRAY_REMOVE]) {
         [self.array removeObjectAtIndex:index];
         [self.stack pushNull];
-    }else if ([self.funcName isEqualToString:FAR_ARRAY_SET]) {
+    }else if ([self.funcName isEqualToString:FAR_ARRAY_DIC_SET]) {
         self.array[index] = value;
         [self.stack pushNull];
-    }else if ([self.funcName isEqualToString:FAR_ARRAY_GET]) {
+    }else if ([self.funcName isEqualToString:FAR_ARRAY_DIC_GET]) {
         FARBaseObj *value = self.array[index];
         [self.stack push:value];
     }else if([self.funcName isEqualToString:FAR_ARRAY_PUSH_AT_INDEX]){

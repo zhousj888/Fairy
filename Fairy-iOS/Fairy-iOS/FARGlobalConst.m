@@ -44,9 +44,10 @@ NSString *const FAR_NIL = @"nil";
 
 NSString *const FAR_ARRAY_PUSH = @"push";
 NSString *const FAR_ARRAY_REMOVE = @"remove";
-NSString *const FAR_ARRAY_SET = @"set";
-NSString *const FAR_ARRAY_GET = @"get";
 NSString *const FAR_ARRAY_COUNT = @"count";
-NSString *const FAR_ARRAY_VALUE = @"value";
 NSString *const FAR_ARRAY_INDEX = @"index";
 NSString *const FAR_ARRAY_PUSH_AT_INDEX = @"pushAtIndex";
+NSString *const FAR_ARRAY_DIC_SET = @"set";
+NSString *const FAR_ARRAY_DIC_GET = @"get";
+NSString *const FAR_ARRAY_DIC_VALUE = @"value";
+NSString *const FAR_DIC_KEY = @"key";

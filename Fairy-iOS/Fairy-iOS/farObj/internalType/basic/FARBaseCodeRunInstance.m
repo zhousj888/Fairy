@@ -348,24 +348,24 @@
             FARBaseObj *value = [self.stack pop];
             FARArrayRunInstance *array = (FARArrayRunInstance *)[self.stack pop];
             FARArrayFuncRunInstance *func = (FARArrayFuncRunInstance *)[array propertyWithId:FAR_ARRAY_PUSH];
-            [func runWithParams:@{FAR_ARRAY_VALUE: value}];
+            [func runWithParams:@{FAR_ARRAY_DIC_VALUE: value}];
             [self.stack push:array];
             return YES;
         }
         case FAROperCmdGetSubscript: {
-            FARBaseObj *value = [self.stack pop];
+            FARBaseObj *index = [self.stack pop];
             FARBaseObj *arrayOrDic = (FARArrayRunInstance *)[self.stack pop];
-            FARFuncRunInstance *func = (FARFuncRunInstance *)[arrayOrDic propertyWithId:FAR_ARRAY_GET];
-            [func runWithParams:@{FAR_ARRAY_INDEX: value}];
+            FARFuncRunInstance *func = (FARFuncRunInstance *)[arrayOrDic propertyWithId:FAR_ARRAY_DIC_GET];
+            [func runWithParams:@{FAR_ARRAY_INDEX: index, FAR_DIC_KEY: index}];
             return YES;
         }
         case FAROperCmdSetSubscript: {
             FARBaseObj *value = [self.stack pop];
             FARBaseObj *index = [self.stack pop];
             FARBaseObj *arrayOrDic = [self.stack pop];
-            FARFuncRunInstance *func = (FARFuncRunInstance *)[arrayOrDic propertyWithId:FAR_ARRAY_SET];
+            FARFuncRunInstance *func = (FARFuncRunInstance *)[arrayOrDic propertyWithId:FAR_ARRAY_DIC_SET];
             
-            [func runWithParams:@{FAR_ARRAY_INDEX: index, FAR_ARRAY_VALUE: value}];
+            [func runWithParams:@{FAR_ARRAY_INDEX: index, FAR_ARRAY_DIC_VALUE: value, FAR_DIC_KEY: index}];
             
             return YES;
         }

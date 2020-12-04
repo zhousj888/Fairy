@@ -9,9 +9,6 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-
-static NSString *const FARArrayInnerArray = @"innerArray";
-
 @interface FARArrayFuncRunInstance : FARFuncRunInstance
 
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode funcName:(NSString *)funcName array:(NSMutableArray *)array;

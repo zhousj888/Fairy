@@ -30,8 +30,8 @@
 - (FARBaseObj *)propertyWithId:(NSString *)name {
     if ([name isEqualToString:FAR_ARRAY_PUSH] ||
         [name isEqualToString:FAR_ARRAY_REMOVE] ||
-        [name isEqualToString:FAR_ARRAY_GET] ||
-        [name isEqualToString:FAR_ARRAY_SET] ||
+        [name isEqualToString:FAR_ARRAY_DIC_GET] ||
+        [name isEqualToString:FAR_ARRAY_DIC_SET] ||
         [name isEqualToString:FAR_ARRAY_PUSH_AT_INDEX]
         ) {
         FARArrayFuncRunInstance *funcIns = [[FARArrayFuncRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:self.codeObj vmCode:self.vmCode funcName:name array:self.array];
