@@ -22,6 +22,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, readwrite) FARVMStack *stack;
 @property (nonatomic, strong) FARCodeObj *codeObj;
 @property (nonatomic, strong) FARVMCode *vmCode;
+@property (nonatomic, assign) BOOL isFuncFinished;//是不是没有return的跑完了所有代码
 
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode;
 

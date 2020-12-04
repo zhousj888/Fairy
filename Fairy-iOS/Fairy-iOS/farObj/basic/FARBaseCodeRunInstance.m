@@ -314,6 +314,7 @@
         case FAROperFuncFinish:{
             [self.stack push:[FARNull null]];
             self.isRet = YES;
+            self.isFuncFinished = YES;
             return NO;
         }
         case FAROperCmdCreateSaveTopClosure:{

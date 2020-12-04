@@ -139,8 +139,8 @@ ClassDefStmt:
 ;
 
 Closure:
-    ClosureStart '{' ClosureStmts '}'                                   { addTag("%s%d",TAG_CLOSURE_END,_CLOSURE_ID);_END_CLOSURE; }
-|   ClosureStart '{' '(' Args ')' T_In ClosureStmts '}'         { addTag("%s%d",TAG_CLOSURE_END,_CLOSURE_ID);_END_CLOSURE; }
+    ClosureStart '{' ClosureStmts '}'                                   { addCmd1(FAROperFuncFinish);addTag("%s%d",TAG_CLOSURE_END,_CLOSURE_ID);_END_CLOSURE; }
+|   ClosureStart '{' '(' Args ')' T_In ClosureStmts '}'         { addCmd1(FAROperFuncFinish);addTag("%s%d",TAG_CLOSURE_END,_CLOSURE_ID);_END_CLOSURE; }
 ;
 
 ClosureStmts:

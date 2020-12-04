@@ -11,6 +11,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARDicRunInstance : FARBaseCodeRunInstance
 
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode dic:(NSDictionary *)dic;
+
 @end
 
 NS_ASSUME_NONNULL_END

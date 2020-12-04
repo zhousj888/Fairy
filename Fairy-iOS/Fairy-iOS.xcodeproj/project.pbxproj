@@ -61,6 +61,8 @@
 		65D5B2BF257A118400B6DA85 /* FARDicRunInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2BD257A118400B6DA85 /* FARDicRunInstance.m */; };
 		65D5B2C3257A11A200B6DA85 /* FARDicFuncRunInstance.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D5B2C1257A11A200B6DA85 /* FARDicFuncRunInstance.h */; };
 		65D5B2C4257A11A200B6DA85 /* FARDicFuncRunInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2C2257A11A200B6DA85 /* FARDicFuncRunInstance.m */; };
+		65D5B2C9257A30A300B6DA85 /* NSArray+Fairy.h in Headers */ = {isa = PBXBuildFile; fileRef = 65D5B2C7257A30A300B6DA85 /* NSArray+Fairy.h */; };
+		65D5B2CA257A30A300B6DA85 /* NSArray+Fairy.m in Sources */ = {isa = PBXBuildFile; fileRef = 65D5B2C8257A30A300B6DA85 /* NSArray+Fairy.m */; };
 		65EF90892562AD1000A98D1C /* test.far in Resources */ = {isa = PBXBuildFile; fileRef = 65EF90882562AD1000A98D1C /* test.far */; };
 		65EF908F25637F0000A98D1C /* FARCommandTag.h in Headers */ = {isa = PBXBuildFile; fileRef = 65EF908D25637F0000A98D1C /* FARCommandTag.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65EF909025637F0000A98D1C /* FARCommandTag.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF908E25637F0000A98D1C /* FARCommandTag.m */; };
@@ -175,6 +177,8 @@
 		65D5B2BD257A118400B6DA85 /* FARDicRunInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARDicRunInstance.m; sourceTree = "<group>"; };
 		65D5B2C1257A11A200B6DA85 /* FARDicFuncRunInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARDicFuncRunInstance.h; sourceTree = "<group>"; };
 		65D5B2C2257A11A200B6DA85 /* FARDicFuncRunInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARDicFuncRunInstance.m; sourceTree = "<group>"; };
+		65D5B2C7257A30A300B6DA85 /* NSArray+Fairy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+Fairy.h"; sourceTree = "<group>"; };
+		65D5B2C8257A30A300B6DA85 /* NSArray+Fairy.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+Fairy.m"; sourceTree = "<group>"; };
 		65EF90882562AD1000A98D1C /* test.far */ = {isa = PBXFileReference; lastKnownFileType = text; name = test.far; path = "Fairy-iOS-Demo/test.far"; sourceTree = SOURCE_ROOT; };
 		65EF908D25637F0000A98D1C /* FARCommandTag.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARCommandTag.h; sourceTree = "<group>"; };
 		65EF908E25637F0000A98D1C /* FARCommandTag.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARCommandTag.m; sourceTree = "<group>"; };
@@ -247,6 +251,8 @@
 				65D5B25A25772EB300B6DA85 /* FARNativeApi.m */,
 				65D5B25F2577337700B6DA85 /* NSDictionary+Fairy.h */,
 				65D5B2602577337700B6DA85 /* NSDictionary+Fairy.m */,
+				65D5B2C7257A30A300B6DA85 /* NSArray+Fairy.h */,
+				65D5B2C8257A30A300B6DA85 /* NSArray+Fairy.m */,
 			);
 			path = native;
 			sourceTree = "<group>";
@@ -494,6 +500,7 @@
 				6560C0812572509C00A3AEB5 /* FARClosureCodeObj.h in Headers */,
 				65EF909E2564003400A98D1C /* FARVirtualMachine.h in Headers */,
 				6560C09825727CF100A3AEB5 /* FARVMStack.h in Headers */,
+				65D5B2C9257A30A300B6DA85 /* NSArray+Fairy.h in Headers */,
 				65EF92C92569244500A98D1C /* FARBaseObj.h in Headers */,
 				65D5B21C2573E0A600B6DA85 /* FARNativeCodeObj.h in Headers */,
 				6560C09D2572804F00A3AEB5 /* FARStringCodeObj.h in Headers */,
@@ -631,6 +638,7 @@
 				65EF92C4256914FF00A98D1C /* FARVMCodeEnv.m in Sources */,
 				6560C09925727CF100A3AEB5 /* FARVMStack.m in Sources */,
 				6560C0822572509C00A3AEB5 /* FARClosureCodeObj.m in Sources */,
+				65D5B2CA257A30A300B6DA85 /* NSArray+Fairy.m in Sources */,
 				6560C06D25724A6800A3AEB5 /* FARBaseCodeRunInstance.m in Sources */,
 				65D5B2622577337700B6DA85 /* NSDictionary+Fairy.m in Sources */,
 				65D5B2B9257A116A00B6DA85 /* FARDicCodeObj.m in Sources */,

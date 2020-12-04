@@ -9,9 +9,8 @@
 
 @implementation NSDictionary (Fairy)
 
-
-- (FARBaseObj *)toFARObj {
-    return nil;
+- (FARDicRunInstance *)toFarObjWithEnv:(FARVMEnvironment *)env stack:(id)stack codeObj:(id)codeObj vmCode:(id)vmCode {
+    return [[FARDicRunInstance alloc] initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode dic:self];
 }
 
 @end

@@ -18,10 +18,14 @@
 
 
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode {
+    return [self initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode dic:[NSMutableDictionary dictionary]];
+}
+
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode dic:(NSDictionary *)dic {
     if (self = [super initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode]) {
         [self declareVar:FAR_SELF_INS];
         [self setPropertyWithKey:FAR_SELF_INS value:self];
-        _dic = [NSMutableDictionary dictionary];
+        _dic = [dic mutableCopy];
     }
     return self;
 }

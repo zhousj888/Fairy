@@ -19,10 +19,14 @@
 @implementation FARArrayRunInstance
 
 - (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode {
+    return [self initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode array:[NSMutableArray array]];
+}
+
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack codeObj:(FARCodeObj *)codeObj vmCode:(FARVMCode *)vmCode array:(NSArray *)array {
     if (self = [super initWithEnv:env stack:stack codeObj:codeObj vmCode:vmCode]) {
         [self declareVar:FAR_SELF_INS];
         [self setPropertyWithKey:FAR_SELF_INS value:self];
-        _array = [NSMutableArray array];
+        _array = [array mutableCopy];
     }
     return self;
 }
