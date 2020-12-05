@@ -33,7 +33,11 @@
 }
 
 - (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {
-    [self.env setVar:value key:key];
+    if ([self propertyWithId:key]) {
+        [self.env setVar:value key:key];
+    }else {
+        @throw [NSException exceptionWithName:@"找不到变量" reason:nil userInfo:nil];
+    }
 }
 
 - (BOOL)isEqualFalse {

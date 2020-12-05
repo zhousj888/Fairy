@@ -86,8 +86,9 @@
 - (FARBaseObj *)propertyWithId:(NSString *)name {
     FARBaseObj *baseObj = [super propertyWithId:name];
     
-    if ([baseObj isKindOfClass:[FARCodeObj class]]) {
-        baseObj = [((FARCodeObj *)baseObj) newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode];
+    if (!baseObj) {
+        //自己的环境找不到从捕获的环境宿主找
+        baseObj = [self.capturedEnvInstance propertyWithId:name];
     }
     
     if (!baseObj) {
@@ -99,11 +100,26 @@
         }
     }
     
-    if (baseObj) {
-        return baseObj;
+    if ([baseObj isKindOfClass:[FARCodeObj class]]) {
+        baseObj = [((FARCodeObj *)baseObj) newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode];
     }
-    //自己的环境找不到从捕获的环境宿主找
-    return [self.capturedEnvInstance propertyWithId:name];
+    
+    return baseObj;
+}
+
+- (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {
+    if ([super propertyWithId:key]) {
+        [super setPropertyWithKey:key value:value];
+    }else if ([self.capturedEnvInstance propertyWithId:key]){
+        [self.capturedEnvInstance setPropertyWithKey:key value:value];
+    }else {
+        FARBaseObj *superObj = [self propertyWithId:FAR_SUPER_INS];
+        if ([superObj propertyWithId:key]) {
+            [superObj setPropertyWithKey:key value:value];
+        }else {
+            @throw [NSException exceptionWithName:@"找不到对象" reason:nil userInfo:nil];
+        }
+    }
 }
 
 

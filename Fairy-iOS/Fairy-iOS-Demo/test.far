@@ -58,10 +58,15 @@ class View {
     }
 
 }
+class Spacer: View {
+
+}
+
 
 VStack() {
     View(width: 200, height: 100, backgroundColor: red)
     View(width: 200, height: 100, backgroundColor: blue)
+    Spacer()
     View(width: 100, height: 100, backgroundColor: yellow)
-    View()
+    
 }

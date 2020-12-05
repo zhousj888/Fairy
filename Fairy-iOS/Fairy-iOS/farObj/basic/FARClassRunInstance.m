@@ -57,6 +57,7 @@
         }
         [self.superInstance runWithParams:params];
         FARBaseObj *superIns = [self.stack pop];
+        [self declareVar:FAR_SUPER_INS];
         [self setPropertyWithKey:FAR_SUPER_INS value:superIns];
     }
     [self declareVar:FAR_SELF_INS];

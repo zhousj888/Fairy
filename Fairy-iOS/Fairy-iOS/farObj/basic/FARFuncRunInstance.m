@@ -31,14 +31,6 @@
     return nil;
 }
 
-- (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {
-    if ([self.env findVarForKey:key]) {
-        [self.env setVar:value key:key];
-    }else {
-        [self.capturedEnvInstance setPropertyWithKey:key value:value];
-    }
-}
-
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<func: %@>", self.codeObj.name];
