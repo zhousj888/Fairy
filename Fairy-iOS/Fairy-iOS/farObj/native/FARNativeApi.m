@@ -74,6 +74,10 @@
     return [self.class colorFromHexString:hexStr];
 }
 
+- (UIImage *)createImage:(NSDictionary *)params {
+    return [UIImage imageNamed:params[@"src"]];
+}
+
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];

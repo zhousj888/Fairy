@@ -3,14 +3,19 @@ var blue = Color(hex: "#0000ff")
 var yellow = Color(hex: "#fbff00")
 
 class Color {
-    var __innerNativeObj
+    var _nativeColor
     func init(hex) {
-        __innerNativeObj = __Native.createColor(hex: hex)
+        _nativeColor = __Native.createColor(hex: hex)
     }
+
+    func toNativeObj() {
+        return _nativeColor
+    }
+
 }
 
 class VStack {
-    var __innerNativeObj = __Native.createVStack()
+    var _nativeStack = __Native.createVStack()
 
     func init() {
         if _trailing_closure {
@@ -27,17 +32,21 @@ class VStack {
     }
     func addSubview(view) {
         if view {
-            __Native.addArrangedSubview(obj: __innerNativeObj, subview: view)
+            __Native.addArrangedSubview(obj: _nativeStack, subview: view)
         }
+    }
+    func toNativeObj() {
+        return _nativeStack
     }
 }
 
 class View {
-    var __innerNativeObj = __Native.createInstance(className: "UIView")
+    var _nativeView
     var _width
     var _height
     var _backgroundColor
     func init(width, height, backgroundColor) {
+        _nativeView = self.createNativeView()
         self._width = width
         self._height = height
         self._backgroundColor = backgroundColor
@@ -45,25 +54,55 @@ class View {
         self.setSize(width: width, height: height)
     }
 
+    func createNativeView() {
+        return __Native.createInstance(className: "UIView")
+    }
+
     func setSize(width, height) {
         if width && height {
-            __Native.setViewSize(obj: __innerNativeObj, width: width, height: height)
+            __Native.setViewSize(obj: _nativeView, width: width, height: height)
         }
     }
 
     func setColor(color) {
         if color {
-            __Native.setValue(obj: __innerNativeObj, key:"backgroundColor", value: color)
+            __Native.setValue(obj: _nativeView, key:"backgroundColor", value: color)
         }
+    }
+    func toNativeObj() {
+        return _nativeView
     }
 
 }
-class Spacer: View {
+class Spacer: View {}
+
+class ImageView: View {
+
+    func init(width, height, backgroundColor, src) {
+        self.setSrc(src: src)
+    }
+
+    func setSrc(src) {
+        var image = __Native.createImage(src: src)
+        __Native.setValue(obj: _nativeView, key:"image", value:image)
+    }
+
+    func createNativeView() {
+        return __Native.createInstance(className: "UIImageView")
+    }
+
+    func toNativeObj() {
+        return _nativeView
+    }
 
 }
 
 
+
+
 VStack() {
+    Spacer(width: 1, height: 50)
+    ImageView(width: 186, height: 48, src: "wetv")
     View(width: 200, height: 100, backgroundColor: red)
     View(width: 200, height: 100, backgroundColor: blue)
     Spacer()

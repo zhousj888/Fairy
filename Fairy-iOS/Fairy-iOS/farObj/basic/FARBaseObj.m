@@ -8,6 +8,7 @@
 #import "FARBaseObj.h"
 #import "FARVMEnvironment.h"
 #import "FARNativeWrapperInstance.h"
+#import "FARFuncRunInstance.h"
 
 @interface FARBaseObj()
 
@@ -46,12 +47,6 @@
 
 
 - (id)toNativeObj {
-    
-    FARNativeWrapperInstance *nativeWrapper = (FARNativeWrapperInstance *)[self propertyWithId:FAR_INNER_NATIVE_OBJ];
-    if (nativeWrapper) {
-        return  nativeWrapper.value;
-    }
-    
     @throw [NSException exceptionWithName:@"这个对象toNative没有实现" reason:nil userInfo:nil];
 }
 

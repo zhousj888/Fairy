@@ -52,4 +52,4 @@ NSString *const FAR_ARRAY_DIC_GET = @"get";
 NSString *const FAR_ARRAY_DIC_VALUE = @"value";
 NSString *const FAR_DIC_KEY = @"key";
 
-NSString *const FAR_INNER_NATIVE_OBJ = @"__innerNativeObj";
+NSString *const FAR_TO_NATIVE_OBJ = @"toNativeObj";

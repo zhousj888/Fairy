@@ -49,19 +49,27 @@
     
     NSLog(@"init start %@", self);
     
+    [self initContentWithSelfObj:self params:params];
+    
+    [self.stack push:self];
+    NSLog(@"init end %@", self);
+    return nil;
+}
+
+- (FARBaseObj *)initContentWithSelfObj:(FARBaseObj *)selfObj params:(NSDictionary *)params {
     //先将父类初始化好
     if (self.classCodeObj.superName) {
         self.superInstance = (FARClassRunInstance *)[self propertyWithId:self.classCodeObj.superName];
         if (!self.superInstance) {
             @throw [NSException exceptionWithName:@"父类找不到" reason:nil userInfo:nil];
         }
-        [self.superInstance runWithParams:params];
-        FARBaseObj *superIns = [self.stack pop];
         [self declareVar:FAR_SUPER_INS];
-        [self setPropertyWithKey:FAR_SUPER_INS value:superIns];
+        [self setPropertyWithKey:FAR_SUPER_INS value:self.superInstance];
+        [self.superInstance initContentWithSelfObj:selfObj params:params];
     }
+    
     [self declareVar:FAR_SELF_INS];
-    [self setPropertyWithKey:FAR_SELF_INS value:self];
+    [self setPropertyWithKey:FAR_SELF_INS value:selfObj];
     
     [super runWithParams:params];
     
@@ -73,10 +81,7 @@
         [initFunc runWithParams:params];
         [self.stack popTo:origSp];
     }
-    
-    [self.stack push:self];
-    NSLog(@"init end %@", self);
-    return nil;
+    return self;
 }
 
 - (NSString *)description

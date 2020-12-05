@@ -41,6 +41,7 @@
     UIColor*color = [UIColor colorWithHue:hue saturation:saturation brightness:brightness alpha:1];
     return color;
     return [UIColor clearColor];
+    
 }
 
 

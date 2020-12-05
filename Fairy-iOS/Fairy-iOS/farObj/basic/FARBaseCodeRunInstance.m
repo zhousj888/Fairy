@@ -23,6 +23,7 @@
 #import "FARDicCodeObj.h"
 #import "FARDicRunInstance.h"
 #import "FARDicFuncRunInstance.h"
+#import "FARNativeWrapperInstance.h"
 
 @interface FARBaseCodeRunInstance()
 
@@ -408,6 +409,12 @@
         }
     }
     return YES;
+}
+
+- (id)toNativeObj {
+    FARFuncRunInstance *runIns = (FARFuncRunInstance *)[self propertyWithId:FAR_TO_NATIVE_OBJ];
+    [runIns runWithParams:nil];
+    return ((FARNativeWrapperInstance *)self.stack.pop).value;
 }
 
 
