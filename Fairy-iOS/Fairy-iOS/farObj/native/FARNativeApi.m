@@ -60,6 +60,13 @@
     [obj setValue:value forKey:key];
 }
 
+- (void)callFunc:(NSDictionary *)params {
+    id obj = params[@"obj"];
+    NSString *funcName = params[@"funcName"];
+    SEL sel = NSSelectorFromString(funcName);
+    [obj performSelector:sel];
+}
+
 - (void)addArrangedSubview:(NSDictionary *)params {
     UIStackView *obj = params[@"obj"];
     UIView *subview = params[@"subview"];

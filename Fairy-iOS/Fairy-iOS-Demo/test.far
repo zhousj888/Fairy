@@ -90,6 +90,11 @@ class View {
         return _nativeView
     }
 
+    func sizeToFit() {
+        __Native.callFunc(obj: _nativeView, funcName:"sizeToFit")
+        return self
+    }
+
 }
 
 class Spacer: View {}
@@ -128,9 +133,19 @@ class Label: View {
 }
 
 
+
+
+
+
+
+
+
+
+
+
 VStack() {
     Spacer(width: 1, height: 50)
-    Label(width: 200, height: 100, text: "About WeTV")
+    Label(width: 100, height: 100, text: "About WeTV").sizeToFit()
     Spacer(width: 1, height: 50)
     ImageView(width: 186, height: 48, src: "wetv")
     Spacer(width: 1, height: 100)
@@ -141,6 +156,5 @@ VStack() {
     }
     Spacer(width: 1, height: 50)
     Label(width: 200, height: 50, text: "Find us on Facebook")
-    
-    Spacer()
+    VStack()
 }
