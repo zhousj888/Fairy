@@ -13,7 +13,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARNull : FARBaseCodeRunInstance
 
-+ (instancetype)null;
++ (instancetype)nullWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack;
+
 
 @end
 

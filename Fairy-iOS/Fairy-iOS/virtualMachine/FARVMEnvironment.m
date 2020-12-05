@@ -49,13 +49,11 @@
     
 }
 
-- (void)declareVar:(NSString *)key {
-    self.envDic[key] = [FARNull null];
+- (void)declareVar:(NSString *)key withGlobalEnv:(nonnull FARVMEnvironment *)globalEnv withStack:(nonnull FARVMStack *)stack{
+    self.envDic[key] = [FARNull nullWithEnv:globalEnv stack:stack];
 }
 
-- (void)declareLet:(NSString *)key {
-    self.envDic[key] = [FARNull null];
-}
+
 
 - (NSDictionary *)asParams {
     return self.envDic;

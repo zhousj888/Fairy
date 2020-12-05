@@ -31,19 +31,19 @@
     FARBaseObj *value = params[FAR_ARRAY_DIC_VALUE];
     if ([self.funcName isEqualToString:FAR_ARRAY_PUSH]) {
         [self.array addObject:value];
-        [self.stack pushNull];
+        [self.stack pushNullWithEnv:self.globalEnv];
     }else if ([self.funcName isEqualToString:FAR_ARRAY_REMOVE]) {
         [self.array removeObjectAtIndex:index];
-        [self.stack pushNull];
+        [self.stack pushNullWithEnv:self.globalEnv];
     }else if ([self.funcName isEqualToString:FAR_ARRAY_DIC_SET]) {
         self.array[index] = value;
-        [self.stack pushNull];
+        [self.stack pushNullWithEnv:self.globalEnv];
     }else if ([self.funcName isEqualToString:FAR_ARRAY_DIC_GET]) {
         FARBaseObj *value = self.array[index];
         [self.stack push:value];
     }else if([self.funcName isEqualToString:FAR_ARRAY_PUSH_AT_INDEX]){
         [self.array insertObject:value atIndex:index];
-        [self.stack pushNull];
+        [self.stack pushNullWithEnv:self.globalEnv];
     }else {
         @throw [NSException exceptionWithName:@"找不到方法" reason:nil userInfo:nil];
     }

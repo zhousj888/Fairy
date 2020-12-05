@@ -41,8 +41,8 @@
     [self.stackArr addObject:obj];
 }
 
-- (void)pushNull {
-    [self.stackArr addObject:[FARNull null]];
+- (void)pushNullWithEnv:(FARVMEnvironment *)globalEnv {
+    [self.stackArr addObject:[FARNull nullWithEnv:globalEnv stack:self]];
 }
 
 

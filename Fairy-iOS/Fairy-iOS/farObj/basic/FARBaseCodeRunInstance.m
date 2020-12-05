@@ -45,6 +45,10 @@
     return self;
 }
 
+- (void)declareVar:(NSString *)key {
+    [self.env declareVar:key withGlobalEnv:self.globalEnv withStack:self.stack];
+}
+
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     
     NSLog(@"runWithParams: code = %@, params = %@",self.codeObj.name ,params);
@@ -168,7 +172,7 @@
         case FAROperCmdPushIdentifier: {
             FARBaseObj *obj = [self propertyWithId:cmd.oper1];
             if (!obj) {
-                obj = [FARNull null];
+                obj = [FARNull nullWithEnv:self.globalEnv stack:self.stack];
             }
             [self.stack push:obj];
             return YES;
@@ -199,11 +203,11 @@
             return YES;
         }
         case FAROperCmdVar:{
-            [self.env declareVar:cmd.oper1];
+            [self.env declareVar:cmd.oper1 withGlobalEnv:self.globalEnv withStack:self.stack];
             return YES;
         }
         case FAROperCmdLet:{
-            [self.env declareLet:cmd.oper1];
+            [self.env declareVar:cmd.oper1 withGlobalEnv:self.globalEnv withStack:self.stack];
             return YES;
         }
         case FAROperCmdAdd:{
@@ -274,7 +278,7 @@
             return YES;
         }
         case FAROperSave:{
-            [self.env declareVar:cmd.oper1];
+            [self.env declareVar:cmd.oper1 withGlobalEnv:self.globalEnv withStack:self.stack];
             [self.env setVar:[self.stack pop] key:cmd.oper1];
             return YES;
         }
@@ -298,7 +302,7 @@
         }
         case FAROperCmdRet:{
             if (![cmd.oper1 isEqualToString:@"~"]) {
-                [self.stack push:[FARNull null]];
+                [self.stack push:[FARNull nullWithEnv:self.globalEnv stack:self.stack]];
             }
             self.isRet = YES;
             return NO;
@@ -308,7 +312,7 @@
             return NO;
         }
         case FAROperFuncFinish:{
-            [self.stack push:[FARNull null]];
+            [self.stack push:[FARNull nullWithEnv:self.globalEnv stack:self.stack]];
             self.isRet = YES;
             self.isFuncFinished = YES;
             return NO;
@@ -316,7 +320,7 @@
         case FAROperCmdCreateSaveTopClosure:{
             FARClosureRunInstance *closure = (FARClosureRunInstance *)[self.stack pop];
             closure.capturedEnvInstance = self;
-            [self.env declareVar:FAR_TRAILING_CLOSURE];
+            [self.env declareVar:FAR_TRAILING_CLOSURE withGlobalEnv:self.globalEnv withStack:self.stack];
             [self.env setVar:closure key:FAR_TRAILING_CLOSURE];
             return YES;
         }

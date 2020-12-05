@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARNullFuncInstance : FARBaseCodeRunInstance
 
-- (instancetype)initWithFuncName:(NSString *)funcName;
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack funcName:(NSString *)funcName;
 
 @end
 

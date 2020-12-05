@@ -33,7 +33,7 @@
     FARBaseObj *value = params[FAR_ARRAY_DIC_VALUE];
     if ([self.funcName isEqualToString:FAR_ARRAY_DIC_SET]) {
         self.dic[key] = value;
-        [self.stack pushNull];
+        [self.stack pushNullWithEnv:self.globalEnv];
     }else if ([self.funcName isEqualToString:FAR_ARRAY_DIC_GET]) {
         FARBaseObj *value = self.dic[key];
         [self.stack push:value];

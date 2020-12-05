@@ -59,21 +59,9 @@ class View {
 
 }
 
-func test() {
-    return -123
-}
-ScrollView() {
-    
-}
 VStack() {
-
-    var a = 3
-    while a > 0 {
-        a = a - 1
-        View(width: 200, height: 100, backgroundColor: red)
-        View(width: 200, height: 100, backgroundColor: blue)
-    }
-
+    View(width: 200, height: 100, backgroundColor: red)
+    View(width: 200, height: 100, backgroundColor: blue)
     View(width: 100, height: 100, backgroundColor: yellow)
-    View(width: 0, height: 0)
+    View()
 }

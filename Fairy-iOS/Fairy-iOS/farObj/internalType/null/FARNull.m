@@ -7,22 +7,39 @@
 
 #import "FARNull.h"
 #import "FARVMEnvironment.h"
+#import "FARNullFuncInstance.h"
 
 @implementation FARNull
 
-+ (instancetype)null {
++ (instancetype)nullWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack {
     
     static FARNull *instance = nil;
     static dispatch_once_t onceToken;
 
     dispatch_once(&onceToken, ^{
-        instance = [[FARNull alloc] initWithEnv:[[FARVMEnvironment alloc] init]];
+        instance = [[FARNull alloc] initWithEnv:env stack:stack];
     });
     return instance;
     
 }
 
+
+- (instancetype)initWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack {
+    if (self = [super initWithEnv:env]) {
+        self.stack = stack;
+    }
+    return self;
+}
+
+
 - (FARBaseObj *)propertyWithId:(NSString *)name {
+    
+    if ([name isEqualToString:FAR_CMPOR_FUNC] ||
+        [name isEqualToString:FAR_AND_FUNC] ||
+        [name isEqualToString:FAR_NOT_FUNC]
+        ) {
+        return [[FARNullFuncInstance alloc] initWithEnv:self.globalEnv stack:self.stack funcName:name];
+    }
     @throw [NSException exceptionWithName:@"不能对null取变量" reason:nil userInfo:nil];
 }
 

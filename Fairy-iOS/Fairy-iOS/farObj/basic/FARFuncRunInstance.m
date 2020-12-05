@@ -21,7 +21,7 @@
     NSInteger origSp = self.currentSp;
     [super runWithParams:params];
     if (origSp == self.currentSp) {
-        [self.stack pushNull];
+        [self.stack pushNullWithEnv:self.globalEnv];
     }else {
         FARBaseObj *ret = [self.stack pop];
         [self.stack popTo:origSp];

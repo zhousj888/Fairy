@@ -7,6 +7,7 @@
 
 #import <Foundation/Foundation.h>
 #import "FARBaseObj.h"
+#import "FARVMStack.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -19,8 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (nullable FARBaseObj *)findVarForKey:(NSString *)key;
 - (void)setVar:(FARBaseObj *)value key:(NSString *)key;//要先declare再set
-- (void)declareVar:(NSString *)key;
-- (void)declareLet:(NSString *)key;
+- (void)declareVar:(NSString *)key withGlobalEnv:(FARVMEnvironment *)globalEnv withStack:(FARVMStack *)stack;
 - (NSDictionary *)asParams;
 - (void)addParams:(NSDictionary *)params;
 

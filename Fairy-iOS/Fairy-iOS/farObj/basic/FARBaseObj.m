@@ -29,7 +29,7 @@
 }
 
 - (void)declareVar:(NSString *)key {
-    [self.env declareVar:key];
+    @throw [NSException exceptionWithName:@"baseObj不能乱定义变量😢" reason:nil userInfo:nil];
 }
 
 - (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {

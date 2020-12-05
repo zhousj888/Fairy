@@ -19,7 +19,7 @@
     NSInteger origSp = self.currentSp;
     [super runWithParams:params];
     if (origSp == self.currentSp) {
-        [self.stack pushNull];
+        [self.stack pushNullWithEnv:self.globalEnv];
     }else if (self.isFuncFinished){
         NSMutableArray<FARBaseObj *> *stackObjs = [NSMutableArray array];
         while (self.currentSp > origSp) {
