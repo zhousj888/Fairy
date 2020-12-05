@@ -47,7 +47,13 @@ class ViewContainer {
 
 class VStack: ViewContainer {
     func createNativeContainer() {
-        return __Native.createVStack()
+        return __Native.createStack(axis: "ver")
+    }
+}
+
+class HStack: ViewContainer {
+    func createNativeContainer() {
+        return __Native.createStack(axis: "hor")
     }
 }
 

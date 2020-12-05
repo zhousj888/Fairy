@@ -39,9 +39,14 @@
     return [[cls alloc] init];
 }
 
-- (id)createVStack:(NSDictionary *)params {
+- (id)createStack:(NSDictionary *)params {
     UIStackView *stackView = [[UIStackView alloc] init];
-    stackView.axis = UILayoutConstraintAxisVertical;
+    NSString *axis = params[@"axis"];
+    if ([axis isEqualToString:@"hor"]) {
+        stackView.axis = UILayoutConstraintAxisHorizontal;
+    }else {
+        stackView.axis = UILayoutConstraintAxisVertical;
+    }
     stackView.distribution = UIStackViewDistributionFill;
     stackView.alignment = UIStackViewAlignmentCenter;
     
