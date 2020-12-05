@@ -28,9 +28,6 @@ NSString *const FAR_NOT_FUNC = @"__not";
 NSString *const FAR_OPER_1 = @"__oper1";
 NSString *const FAR_OPER_2 = @"__oper2";
 
-NSString *const FAR_CLASS_SELF = @"self";
-NSString *const FAR_CLASS_SUPER = @"super";
-
 NSString *const FAR_TRAILING_CLOSURE = @"_trailing_closure";
 
 NSString *const FAR_MAIN_CODE = @"__main";

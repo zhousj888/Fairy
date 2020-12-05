@@ -110,6 +110,7 @@ class Label: View {
 
 }
 
+View()
 
 
 // VStack() {

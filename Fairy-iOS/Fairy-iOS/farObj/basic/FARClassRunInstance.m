@@ -12,8 +12,20 @@
 @implementation FARClassRunInstance
 
 
-
+//从self指向的对象开始找属性，沿着继承链往上找
 - (FARBaseObj *)propertyWithId:(NSString *)name {
+    FARClassRunInstance *selfObj = (FARClassRunInstance *)[super propertyWithId:FAR_SELF_INS];
+    if (self != selfObj) {
+        return [selfObj findPropertyWithName:name];
+    }else {
+        return [self findPropertyWithName:name];
+    }
+}
+
+
+//从当前类开始找属性，没有就从父类找，找init方法用这个
+- (FARBaseObj *)findPropertyWithName:(NSString *)name {
+    
     FARBaseObj *baseObj = [super propertyWithId:name];
     
     if (baseObj) {
@@ -38,10 +50,7 @@
     if (baseObj) {
         return baseObj;
     }
-    
-    //以上是在子类里面找，子类里面找不到从父类里面找
-    return [self.superInstance propertyWithId:name];
-    
+    return [self.superInstance findPropertyWithName:name];
 }
 
 
@@ -56,10 +65,14 @@
     return nil;
 }
 
-- (FARBaseObj *)initContentWithSelfObj:(FARBaseObj *)selfObj params:(NSDictionary *)params {
+- (void)initContentWithSelfObj:(FARBaseObj *)selfObj params:(NSDictionary *)params {
     //先将父类初始化好
+    
+    [self declareVar:FAR_SELF_INS];
+    [self setPropertyWithKey:FAR_SELF_INS value:selfObj];
+    
     if (self.classCodeObj.superName) {
-        self.superInstance = (FARClassRunInstance *)[self propertyWithId:self.classCodeObj.superName];
+        self.superInstance = (FARClassRunInstance *)[self findPropertyWithName:self.classCodeObj.superName];
         if (!self.superInstance) {
             @throw [NSException exceptionWithName:@"父类找不到" reason:nil userInfo:nil];
         }
@@ -68,20 +81,17 @@
         [self.superInstance initContentWithSelfObj:selfObj params:params];
     }
     
-    [self declareVar:FAR_SELF_INS];
-    [self setPropertyWithKey:FAR_SELF_INS value:selfObj];
     
     [super runWithParams:params];
     
     NSInteger origSp = self.currentSp;
     //调用init方法
-    FARFuncRunInstance *initFunc = (FARFuncRunInstance *)[self propertyWithId:FAR_INIT_FUNC];
+    FARFuncRunInstance *initFunc = (FARFuncRunInstance *)[self findPropertyWithName:FAR_INIT_FUNC];
     initFunc.capturedEnvInstance = self;
     if (initFunc) {
         [initFunc runWithParams:params];
         [self.stack popTo:origSp];
     }
-    return self;
 }
 
 - (NSString *)description
