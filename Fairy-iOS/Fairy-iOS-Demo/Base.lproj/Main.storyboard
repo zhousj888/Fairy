@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -17,24 +16,36 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O7p-sb-cqz">
-                                <rect key="frame" x="35" y="81" width="343" height="471"/>
-                                <color key="backgroundColor" systemColor="systemGray5Color"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8KB-bJ-ehf">
+                                <rect key="frame" x="30" y="73" width="354" height="582"/>
+                                <color key="backgroundColor" red="0.91748299870466321" green="0.91748299870466321" blue="0.91748299870466321" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="471" id="PNa-oE-t4f"/>
+                                    <constraint firstAttribute="height" constant="582" id="EdD-Du-yGr"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GA8-Ub-O9f">
+                                <rect key="frame" x="105" y="694" width="204" height="86"/>
+                                <color key="backgroundColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="86" id="SRz-vc-nVV"/>
+                                    <constraint firstAttribute="width" constant="204" id="j7A-Ev-EEy"/>
+                                </constraints>
+                                <state key="normal" title="热更新"/>
+                            </button>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="O7p-sb-cqz" secondAttribute="trailing" constant="36" id="4Mq-og-AXz"/>
-                            <constraint firstItem="O7p-sb-cqz" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="37" id="EI4-Nc-F4P"/>
-                            <constraint firstItem="O7p-sb-cqz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="35" id="hjL-Vo-cYJ"/>
+                            <constraint firstItem="8KB-bJ-ehf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8IP-lF-o04"/>
+                            <constraint firstItem="GA8-Ub-O9f" firstAttribute="top" secondItem="8KB-bJ-ehf" secondAttribute="bottom" constant="39" id="UZZ-aD-Z0q"/>
+                            <constraint firstItem="GA8-Ub-O9f" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dUt-zA-Z6i"/>
+                            <constraint firstItem="8KB-bJ-ehf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="29" id="ihs-96-zk5"/>
+                            <constraint firstItem="8KB-bJ-ehf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="zMV-YF-wMF"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
-                        <outlet property="Container" destination="O7p-sb-cqz" id="kwl-EH-DyU"/>
+                        <outlet property="container" destination="8KB-bJ-ehf" id="iz5-Dp-3yV"/>
+                        <outlet property="updateButton" destination="GA8-Ub-O9f" id="Noh-cU-s63"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -42,12 +53,4 @@
             <point key="canvasLocation" x="137.68115942028987" y="97.767857142857139"/>
         </scene>
     </scenes>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </systemColor>
-    </resources>
 </document>

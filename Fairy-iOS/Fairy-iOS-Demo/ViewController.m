@@ -9,8 +9,8 @@
 #import <Fairy_iOS/Fairy_iOS.h>
 
 @interface ViewController ()
-
-@property (weak, nonatomic) IBOutlet UIView *Container;
+@property (weak, nonatomic) IBOutlet UIView *container;
+@property (weak, nonatomic) IBOutlet UIButton *updateButton;
 
 @end
 
@@ -20,8 +20,20 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"test"
-                                                     ofType:@"far"];
+    [self.updateButton addTarget:self action:@selector(hotReload) forControlEvents:UIControlEventTouchUpInside];
+    [self loadVMView];
+}
+
+- (void)hotReload {
+    for (UIView *sub in self.container.subviews) {
+        [sub removeFromSuperview];
+    }
+    [self loadVMView];
+}
+
+- (void)loadVMView {
+    NSString *path = @"/Users/zhousunjing/Documents/Fairy/Fairy-iOS/Fairy-iOS-Demo/test.far";
+    
     NSString* content = [NSString stringWithContentsOfFile:path
                                                   encoding:NSUTF8StringEncoding
                                                       error:NULL];
@@ -29,9 +41,8 @@
     [vm runWithCode:content];
     
     UIView *view = [vm vmValueOfStackTop];
-    [self.Container addSubview:view];
-    view.frame = self.Container.bounds;
-    
+    [self.container addSubview:view];
+    view.frame = self.container.bounds;
 }
 
 - (UIColor *)randomColor {
