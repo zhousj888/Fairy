@@ -14,10 +14,12 @@ class Color {
 
 }
 
-class VStack {
-    var _nativeStack = __Native.createVStack()
+class ViewContainer {
+
+    var _nativeContainer
 
     func init() {
+        _nativeContainer = createNativeContainer()
         if _trailing_closure {
             var subviewArr = _trailing_closure()
             var index = 0
@@ -30,13 +32,22 @@ class VStack {
 
         }
     }
+
     func addSubview(view) {
         if view {
-            __Native.addArrangedSubview(obj: _nativeStack, subview: view)
+            __Native.addArrangedSubview(obj: _nativeContainer, subview: view)
         }
     }
+
     func toNativeObj() {
-        return _nativeStack
+        return _nativeContainer
+    }
+
+}
+
+class VStack: ViewContainer {
+    func createNativeContainer() {
+        return __Native.createVStack()
     }
 }
 
@@ -110,14 +121,12 @@ class Label: View {
 
 }
 
-View()
 
-
-// VStack() {
-//     Spacer(width: 1, height: 50)
-//     ImageView(width: 186, height: 48, src: "wetv")
-//     View(width: 200, height: 100, backgroundColor: red)
-//     View(width: 200, height: 100, backgroundColor: blue)
-//     View(width: 100, height: 100, backgroundColor: yellow)
-//     Spacer()
-// }
+VStack() {
+    Spacer(width: 1, height: 50)
+    ImageView(width: 186, height: 48, src: "wetv")
+    View(width: 200, height: 100, backgroundColor: red)
+    View(width: 200, height: 100, backgroundColor: blue)
+    View(width: 100, height: 100, backgroundColor: yellow)
+    Spacer()
+}

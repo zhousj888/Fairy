@@ -22,9 +22,16 @@
     }
 }
 
-
-//从当前类开始找属性，没有就从父类找，找init方法用这个
+//从当前类开始找属性，没有就从父类找
 - (FARBaseObj *)findPropertyWithName:(NSString *)name {
+    FARBaseObj *baseObj = [self findPropertyInCurrentClass:name];
+    if (baseObj) {
+        return baseObj;
+    }
+    return [self.superInstance findPropertyWithName:name];
+}
+
+- (FARBaseObj *)findPropertyInCurrentClass:(NSString *)name {
     
     FARBaseObj *baseObj = [super propertyWithId:name];
     
@@ -47,12 +54,8 @@
         ((FARFuncRunInstance *)baseObj).capturedEnvInstance = self;
     }
     
-    if (baseObj) {
-        return baseObj;
-    }
-    return [self.superInstance findPropertyWithName:name];
+    return baseObj;
 }
-
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     
@@ -72,7 +75,7 @@
     [self setPropertyWithKey:FAR_SELF_INS value:selfObj];
     
     if (self.classCodeObj.superName) {
-        self.superInstance = (FARClassRunInstance *)[self findPropertyWithName:self.classCodeObj.superName];
+        self.superInstance = (FARClassRunInstance *)[self findPropertyInCurrentClass:self.classCodeObj.superName];
         if (!self.superInstance) {
             @throw [NSException exceptionWithName:@"父类找不到" reason:nil userInfo:nil];
         }
@@ -86,7 +89,7 @@
     
     NSInteger origSp = self.currentSp;
     //调用init方法
-    FARFuncRunInstance *initFunc = (FARFuncRunInstance *)[self findPropertyWithName:FAR_INIT_FUNC];
+    FARFuncRunInstance *initFunc = (FARFuncRunInstance *)[self findPropertyInCurrentClass:FAR_INIT_FUNC];
     initFunc.capturedEnvInstance = self;
     if (initFunc) {
         [initFunc runWithParams:params];
