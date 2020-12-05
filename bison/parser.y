@@ -91,12 +91,12 @@ NewLines:
 
 
 IfWhileStmtsBlock:
-    IfWhileBlockStart '{' IfWhileStmts '}'          { printf("\tBlock结束\n"); }
+    IfWhileBlockStart '{' IfWhileStmts '}'          
 |   T_EOL IfWhileStmtsBlock
 ;
 
 IfWhileBlockStart:
-    /* empty */           { printf("\tBlock开始\n"); }
+    /* empty */           
 ;
 
 IfWhileStmts:

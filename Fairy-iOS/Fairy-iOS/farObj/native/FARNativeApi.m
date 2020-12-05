@@ -30,7 +30,7 @@
 
 - (void)log:(NSDictionary *)params {
     NSString *text = params[@"text"];
-    NSLog(@"NativeLog: ------------------>     %@",text);
+    FARLog(@"NativeLog: ------------------>     %@",text);
 }
 
 - (id)createInstance:(NSDictionary *)params {

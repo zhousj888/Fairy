@@ -52,8 +52,8 @@
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     
-    NSLog(@"runWithParams: code = %@, params = %@",self.codeObj.name ,params);
-    NSLog(@"current env = %@", self);
+    FARLog(@"runWithParams: code = %@, params = %@",self.codeObj.name ,params);
+    FARLog(@"current env = %@", self);
     
     if (params) {
         [self.env addParams:params];
@@ -69,17 +69,17 @@
         cmd = self.vmCode.commandArr[codeIndex.integerValue];
         
         //打印执行的命令
-        NSLog(@"cmd %@:---> %@", @(cmd.line),cmd);
+        FARLog(@"cmd %@:---> %@", @(cmd.line),cmd);
         
         if ([self _executeCmd:cmd]) {
             self.pc++;
         }
         //打印堆栈
         [self.stack printStack];
-        NSLog(@"\n");
+        FARLog(@"\n");
     }
     
-    NSLog(@"runWithParams: code = %@ finish",self.codeObj.name);
+    FARLog(@"runWithParams: code = %@ finish",self.codeObj.name);
     
     return nil;
 }

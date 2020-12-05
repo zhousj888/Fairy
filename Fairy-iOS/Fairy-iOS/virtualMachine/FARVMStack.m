@@ -62,7 +62,7 @@
     for(id stackEle in self.stackArr) {
         [mutStr appendFormat:@"%@,",stackEle];
     }
-    NSLog(@"stack:  %@",mutStr);
+    FARLog(@"stack:  %@",mutStr);
 }
 
 @end

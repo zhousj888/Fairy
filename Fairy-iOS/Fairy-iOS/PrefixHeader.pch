@@ -11,7 +11,8 @@
 
 #ifdef __OBJC__
 
-#define FARLog(message, ...) NSLog((@"FARLOG: %s [Line %d] " message), __PRETTY_FUNCTION__, __LINE__, ## __VA_ARGS__)
+#define FARLog(message, ...) NSLog(message, ## __VA_ARGS__)
+//#define FARLog(message, ...)
 
 #import "FARGlobalConst.h"
 

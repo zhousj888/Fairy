@@ -92,17 +92,17 @@ NSString *transCharsToNSString(char *chars) {
 
 
 void addCmd1(int cmd) {
-    NSLog(@"%@",transCmdToDescription(cmd));
+    FARLog(@"%@",transCmdToDescription(cmd));
     [commandArr addObject:[FARCommand commandWithCmd:cmd line:cur_line]];
 }
 
 void addCmd2(int cmd, char *oper1) {
-    NSLog(@"%@,%s",transCmdToDescription(cmd),oper1);
+    FARLog(@"%@,%s",transCmdToDescription(cmd),oper1);
     [commandArr addObject:[FARCommand commandWithCmd:cmd oper:transCharsToNSString(oper1) line:cur_line]];
 }
 
 void addCmd3(int cmd, char *oper1, char *oper2) {
-    NSLog(@"%@,%s,%s",transCmdToDescription(cmd),oper1,oper2);
+    FARLog(@"%@,%s,%s",transCmdToDescription(cmd),oper1,oper2);
     [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2) line:cur_line]];
 }
 
@@ -111,7 +111,7 @@ void addTag(char *format,...) {
     va_list argList;
     va_start(argList, format);
     NSString *tag = [[NSString alloc] initWithFormat:transCharsToNSString(format) arguments:argList];
-    NSLog(@"TAG: %@",tag);
+    FARLog(@"TAG: %@",tag);
     FARCommandTag *tagObj = [FARCommandTag tagWithName:tag codeIndex:commandArr.count];
     tagDic[tag] = tagObj;
     
@@ -134,9 +134,9 @@ void addTag(char *format,...) {
     
     yy_scan_string(code.UTF8String);
     yyparse();
-    NSLog(@"-------------------👆是汇编-------------------------------");
-    NSLog(@"😤\n\n\n------------------cmd sum = %@-------------------------\n\n\n😤",@(commandArr.count));
-    NSLog(@"-------------------👇是执行信息----------------------------");
+    FARLog(@"-------------------👆是汇编-------------------------------");
+    FARLog(@"😤\n\n\n------------------cmd sum = %@-------------------------\n\n\n😤",@(commandArr.count));
+    FARLog(@"-------------------👇是执行信息----------------------------");
     
     FARVMCode *vmCode = [[FARVMCode alloc] init];
     vmCode.commandArr = commandArr;

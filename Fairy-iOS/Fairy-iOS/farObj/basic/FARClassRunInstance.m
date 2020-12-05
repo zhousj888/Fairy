@@ -59,12 +59,12 @@
 
 - (FARBaseObj *)runWithParams:(NSDictionary *)params {
     
-    NSLog(@"init start %@", self);
+    FARLog(@"init start %@", self);
     
     [self initContentWithSelfObj:self params:params];
     
     [self.stack push:self];
-    NSLog(@"init end %@", self);
+    FARLog(@"init end %@", self);
     return nil;
 }
 
