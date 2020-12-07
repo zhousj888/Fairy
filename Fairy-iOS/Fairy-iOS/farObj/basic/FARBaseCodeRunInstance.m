@@ -28,7 +28,6 @@
 @interface FARBaseCodeRunInstance()
 
 @property (nonatomic, assign) NSInteger pc;//指向codeObj.codeIndexArr.index
-@property (nonatomic, assign) BOOL isRet;
 @property (nonatomic, assign) NSInteger currentExcuteLine;
 
 @end
@@ -405,14 +404,5 @@
     }
     return YES;
 }
-
-- (id)toNativeObj {
-    FARFuncRunInstance *runIns = (FARFuncRunInstance *)[self propertyWithId:FAR_TO_NATIVE_OBJ];
-    [runIns runWithParams:nil];
-    return ((FARNativeWrapperInstance *)self.stack.pop).value;
-}
-
-
-
 
 @end

@@ -8,6 +8,7 @@
 #import "FARClassRunInstance.h"
 #import "FARFuncRunInstance.h"
 #import "FARVMEnvironment.h"
+#import "FARNativeWrapperInstance.h"
 
 @implementation FARClassRunInstance
 
@@ -115,6 +116,12 @@
 - (NSString *)description
 {
     return [NSString stringWithFormat:@"<obj:%@,%p>", self.codeObj.name, self];
+}
+
+- (id)toNativeObj {
+    FARFuncRunInstance *runIns = (FARFuncRunInstance *)[self propertyWithId:FAR_TO_NATIVE_OBJ];
+    [runIns runWithParams:nil];
+    return ((FARNativeWrapperInstance *)self.stack.pop).value;
 }
 
 

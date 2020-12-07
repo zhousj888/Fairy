@@ -7,6 +7,8 @@
 
 #import "FARNativeApi.h"
 #import <UIKit/UIKit.h>
+#import "UIGestureRecognizer+Fairy.h"
+#import "FARObjectWrapper.h"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -51,6 +53,19 @@
     stackView.alignment = UIStackViewAlignmentCenter;
     
     return stackView;
+}
+
+- (void)setClickListener:(NSDictionary *)params {
+    UIView *view = params[@"obj"];
+    view.userInteractionEnabled = YES;
+    FARObjectWrapper *wrapper = params[@"clickListener"];
+    
+    UIGestureRecognizer *rec = [UITapGestureRecognizer nvm_gestureRecognizerWithActionBlock:^(UITapGestureRecognizer* sender) {
+        [wrapper callWithParams:nil];
+    }];
+    
+    [view addGestureRecognizer:rec];
+    
 }
 
 - (void)setValue:(NSDictionary *)params {

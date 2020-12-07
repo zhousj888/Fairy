@@ -8,7 +8,7 @@
 #import "FARBaseCodeRunInstance.h"
 
 NS_ASSUME_NONNULL_BEGIN
-
+//里面是native对象，外层是fairy对象
 @interface FARNativeWrapperInstance : FARBaseCodeRunInstance
 
 @property (nonatomic, strong) id value;

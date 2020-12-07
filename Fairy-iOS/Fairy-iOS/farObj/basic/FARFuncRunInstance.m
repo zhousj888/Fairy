@@ -8,6 +8,7 @@
 #import "FARFuncRunInstance.h"
 #import "FARCodeObj.h"
 #import "FARVMEnvironment.h"
+#import "FARObjectWrapper.h"
 
 @implementation FARFuncRunInstance
 
@@ -31,9 +32,17 @@
     return nil;
 }
 
-- (NSString *)description
-{
+- (void)makeReRunable {
+    self.isRet = NO;
+}
+
+- (NSString *)description {
     return [NSString stringWithFormat:@"<func: %@>", self.codeObj.name];
+}
+
+- (id)toNativeObj {
+    FARObjectWrapper *wrapper = [[FARObjectWrapper alloc] initWithFarObj:self];
+    return wrapper;
 }
 
 @end
