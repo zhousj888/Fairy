@@ -68,6 +68,21 @@
     return nil;
 }
 
+
+- (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {
+    
+    BOOL setSuccess = [super _safeSetPropertyWithKey:key value:value];
+    if (!setSuccess) {
+        FARBaseObj *superObj = self.superInstance;
+        if ([superObj propertyWithId:key]) {
+            [superObj setPropertyWithKey:key value:value];
+        }else {
+            @throw [NSException exceptionWithName:@"找不到对象" reason:nil userInfo:nil];
+        }
+    }
+    
+}
+
 - (void)initContentWithSelfObj:(FARBaseObj *)selfObj params:(NSDictionary *)params {
     //先将父类初始化好
     

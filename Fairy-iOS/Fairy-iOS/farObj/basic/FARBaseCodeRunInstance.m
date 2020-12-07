@@ -114,12 +114,7 @@
     }else if ([self.capturedEnvInstance propertyWithId:key]){
         [self.capturedEnvInstance setPropertyWithKey:key value:value];
     }else {
-        FARBaseObj *superObj = [self propertyWithId:FAR_SUPER_INS];
-        if ([superObj propertyWithId:key]) {
-            [superObj setPropertyWithKey:key value:value];
-        }else {
-            @throw [NSException exceptionWithName:@"找不到对象" reason:nil userInfo:nil];
-        }
+        @throw [NSException exceptionWithName:@"找不到对象" reason:nil userInfo:nil];
     }
 }
 

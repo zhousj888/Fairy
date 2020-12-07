@@ -24,6 +24,13 @@ NS_ASSUME_NONNULL_BEGIN
 - (BOOL)isEqualFalse;
 - (id)toNativeObj;
 
+
+//以下方法只能子类调用，外部不要调用
+
+//不抛出异常的设置变量，返回值表示是否设置成功
+- (BOOL)_safeSetPropertyWithKey:(NSString *)key value:(FARBaseObj *)value;
+
+
 @end
 
 NS_ASSUME_NONNULL_END

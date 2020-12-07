@@ -11,6 +11,7 @@
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UIView *container;
 @property (weak, nonatomic) IBOutlet UIButton *updateButton;
+@property (nonatomic, strong) UIView *vmView;
 
 @end
 
@@ -32,7 +33,7 @@
 }
 
 - (void)loadVMView {
-    NSString *path = @"/Users/zhousunjing/Documents/Fairy/Fairy-iOS/Fairy-iOS-Demo/test.far";
+    NSString *path = @"/Users/sunjingzhou/Documents/Fairy/Fairy-iOS/Fairy-iOS-Demo/test.far";
     
     NSString* content = [NSString stringWithContentsOfFile:path
                                                   encoding:NSUTF8StringEncoding
@@ -40,10 +41,12 @@
     FARVirtualMachine *vm = [[FARVirtualMachine alloc] init];
     [vm runWithCode:content];
     
-    UIView *view = [vm vmValueOfStackTop];
-    [self.container addSubview:view];
-    view.frame = self.container.bounds;
+    self.vmView = [vm vmValueOfStackTop];
+    [self.container addSubview:self.vmView];
+    self.vmView.frame = self.container.bounds;
 }
+
+
 
 - (UIColor *)randomColor {
     CGFloat hue = (arc4random() % 256 / 256.0);

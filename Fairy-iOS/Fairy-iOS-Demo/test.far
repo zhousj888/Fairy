@@ -14,12 +14,9 @@ class Color {
 
 }
 
-class ViewContainer {
-
-    var _nativeContainer
+class ViewContainer: View {
 
     func init() {
-        _nativeContainer = createNativeContainer()
         if _trailing_closure {
             var subviewArr = _trailing_closure()
             var index = 0
@@ -35,24 +32,24 @@ class ViewContainer {
 
     func addSubview(view) {
         if view {
-            __Native.addArrangedSubview(obj: _nativeContainer, subview: view)
+            __Native.addArrangedSubview(obj: _nativeView, subview: view)
         }
     }
 
     func toNativeObj() {
-        return _nativeContainer
+        return _nativeView
     }
 
 }
 
 class VStack: ViewContainer {
-    func createNativeContainer() {
+    func createNativeView() {
         return __Native.createStack(axis: "ver")
     }
 }
 
 class HStack: ViewContainer {
-    func createNativeContainer() {
+    func createNativeView() {
         return __Native.createStack(axis: "hor")
     }
 }
@@ -141,13 +138,11 @@ class Label: View {
 
 
 
-
-
 VStack() {
     Spacer(width: 1, height: 50)
-    Label(width: 100, height: 100, text: "About WeTV").sizeToFit()
+    Label(width: 100, height: 20, text: "About WeTV")  
     Spacer(width: 1, height: 50)
-    ImageView(width: 186, height: 48, src: "wetv")
+    ImageView(width: 186, height: 48, src: "wetv", click:test)
     Spacer(width: 1, height: 100)
     HStack() {
         Label(width: 200, height: 50, text: "Version 3.4.0")
