@@ -1,6 +1,13 @@
 var red = Color(hex: "#ff0000")
-var blue = Color(hex: "#0000ff")
+var blue = Color(hex: "#3c5a99")
 var yellow = Color(hex: "#fbff00")
+var white = Color(hex: "#ffffff")
+var gray = Color(hex: "#c0c2d0")
+var logoBg = Color(hex: "#f5f6f8")
+var versionTextColor = Color(hex: "#071139")
+
+
+
 
 class Color {
     var _nativeColor
@@ -120,19 +127,57 @@ class ImageView: View {
     }
 
 }
-
+var TextAlignmentCenter = "TextAlignmentCenter"
+var TextAlignmentLeft = "TextAlignmentLeft"
+var TextAlignmentRight = "TextAlignmentRight"
 class Label: View {
 
-    func init(text) {
+    func init(text, textColor, textAlignment, textSize) {
         self.setText(text: text)
+        self.setTextColor(textColor: textColor)
+        self.setTextAlignment(textAlignment: textAlignment)
+        self.setTextSize(textSize: textSize)
+        self.setBold(bold: bold)
     }
 
     func createNativeView() {
         return __Native.createInstance(className: "UILabel")
     }
 
+    func setBold(bold) {
+        if bold {
+            __Native.setTextBold(obj: _nativeView, bold: 1)
+        }else {
+            __Native.setTextBold(obj: _nativeView, bold: 0)
+        }
+        return self
+    }
+
+    func setTextSize(textSize) {
+        if textSize {
+            __Native.setTextSize(obj: _nativeView, textSize: textSize)
+        }
+        return self
+    }
+
     func setText(text) {
-        __Native.setValue(obj: _nativeView, key:"text", value:text)
+        if text {
+            __Native.setValue(obj: _nativeView, key:"text", value:text)
+        }
+        return self
+    }
+
+    func setTextColor(textColor) {
+        if textColor {
+            __Native.setValue(obj: _nativeView, key:"textColor", value: textColor)
+        }
+        return self
+    }
+
+    func setTextAlignment(textAlignment) {
+        if textAlignment {
+            __Native.setTextAlignment(obj: _nativeView, textAlignment: textAlignment)
+        }
         return self
     }
 
@@ -144,21 +189,21 @@ class Label: View {
 
 
 
-
-
-
 VStack() {
-    Spacer(width: 1, height: 50)
-    Label(width: 100, height: 20, text: "About WeTV")
-    Spacer(width: 1, height: 50)
-    ImageView(width: 186, height: 48, src: "wetv", click:test)
-    Spacer(width: 1, height: 100)
-    HStack() {
-        Label(width: 200, height: 50, text: "Version 3.4.0")
+    VStack(width: 400, height:200, backgroundColor: logoBg){
+        Spacer(width:1,height: 20)
+        Label(width: 200, height: 20, text: "About WeTV", textAlignment: TextAlignmentCenter, textColor: versionTextColor, bold:1, textSize: 18)
+        Spacer(width:1,height: 50)
+        ImageView(width: 186, height: 48, src: "wetv")
         Spacer()
-        Label(width: 100, height: 50, text: "Update")
+    }
+    HStack() {
+        Label(width: 200, height: 50, text: "当前版本 3.4.0", textSize: 14, textColor: versionTextColor)
+        Spacer()
+        Label(width: 100, height: 50, text: "已是最新版本", textAlignment: TextAlignmentRight, textColor: gray, textSize:14)
     }
     Spacer(width: 1, height: 50)
-    Label(width: 200, height: 50, text: "Find us on Facebook", backgroundColor: blue, radius: 8)
+    Label(width: 280, height: 38, text: "从Facebook联系我们", backgroundColor: blue, radius: 4, textColor: white, textAlignment: TextAlignmentCenter, textSize: 14, bold: 1)
+    Label(width: 200, height: 40, text: "关注我们，给我们发私信", textSize: 13, textColor: gray, textAlignment: TextAlignmentCenter)
     VStack()
 }

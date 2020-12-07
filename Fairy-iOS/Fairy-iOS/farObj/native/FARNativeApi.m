@@ -97,6 +97,38 @@
     view.layer.cornerRadius = radius.floatValue;
 }
 
+static NSString *const TextAlignmentCenter = @"TextAlignmentCenter";
+static NSString *const TextAlignmentLeft = @"TextAlignmentLeft";
+static NSString *const TextAlignmentRight = @"TextAlignmentRight";
+
+- (void)setTextAlignment:(NSDictionary *)params {
+    UILabel *label = params[@"obj"];
+    NSString *aligment = params[@"textAlignment"];
+    if ([aligment isEqualToString:TextAlignmentLeft]) {
+        label.textAlignment = NSTextAlignmentLeft;
+    }else if ([aligment isEqualToString:TextAlignmentCenter]) {
+        label.textAlignment = NSTextAlignmentCenter;
+    }else if([aligment isEqualToString:TextAlignmentRight]) {
+        label.textAlignment = NSTextAlignmentRight;
+    }
+}
+
+- (void)setTextSize:(NSDictionary *)params {
+    UILabel *label = params[@"obj"];
+    NSNumber *size = params[@"textSize"];
+    label.font = [UIFont systemFontOfSize:size.floatValue];
+}
+
+- (void)setTextBold:(NSDictionary *)params {
+    UILabel *label = params[@"obj"];
+    NSNumber *bold = params[@"bold"];
+    if ([bold boolValue]) {
+        label.font = [UIFont boldSystemFontOfSize:label.font.pointSize];
+    }else {
+        label.font = [UIFont systemFontOfSize:label.font.pointSize];
+    }
+}
+
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];
