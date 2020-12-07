@@ -31,6 +31,7 @@
         [self.stack push:otherObj];
     }else if ([self.funcName isEqualToString:FAR_AND_FUNC]){
         [self.stack pushNullWithEnv:self.globalEnv];
+        NSLog(@"asdfasdfasdf");
     }else if ([self.funcName isEqualToString:FAR_NOT_FUNC]){
         FARNumberRunInstance *one = [FARNumberCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode integer:1];
         [self.stack push:one];

@@ -145,6 +145,7 @@ void addTag(char *format,...) {
     commandArr = nil;
     tagDic = nil;
     tagIndexDic = nil;
+    cur_line = 1;
     return vmCode;
 }
 

@@ -12,15 +12,7 @@
 @implementation FARNull
 
 + (instancetype)nullWithEnv:(FARVMEnvironment *)env stack:(FARVMStack *)stack {
-    
-    static FARNull *instance = nil;
-    static dispatch_once_t onceToken;
-
-    dispatch_once(&onceToken, ^{
-        instance = [[FARNull alloc] initWithEnv:env stack:stack];
-    });
-    return instance;
-    
+    return [[FARNull alloc] initWithEnv:env stack:stack];
 }
 
 

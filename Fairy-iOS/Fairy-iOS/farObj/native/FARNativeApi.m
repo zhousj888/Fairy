@@ -90,6 +90,13 @@
     return [UIImage imageNamed:params[@"src"]];
 }
 
+- (void)setRadius:(NSDictionary *)params {
+    UIView *view = params[@"obj"];
+    NSNumber *radius = params[@"radius"];
+    view.layer.masksToBounds = YES;
+    view.layer.cornerRadius = radius.floatValue;
+}
+
 + (UIColor *)colorFromHexString:(NSString *)hexString {
     unsigned rgbValue = 0;
     NSScanner *scanner = [NSScanner scannerWithString:hexString];

@@ -59,11 +59,14 @@ class View {
     var _width
     var _height
     var _backgroundColor
-    func init(width, height, backgroundColor) {
+    var _radius
+    func init(width, height, backgroundColor, radius) {
         _nativeView = self.createNativeView()
         self._width = width
         self._height = height
         self._backgroundColor = backgroundColor
+        self._radius = radius
+        self.setRadius(radius: radius)
         self.setColor(color: backgroundColor)
         self.setSize(width: width, height: height)
     }
@@ -72,24 +75,28 @@ class View {
         return __Native.createInstance(className: "UIView")
     }
 
+    func setRadius(radius) {
+        if radius {
+            __Native.setRadius(obj: _nativeView, radius: radius)
+        }
+        return self
+    }
+
     func setSize(width, height) {
         if width && height {
             __Native.setViewSize(obj: _nativeView, width: width, height: height)
         }
+        return self
     }
 
     func setColor(color) {
         if color {
             __Native.setValue(obj: _nativeView, key:"backgroundColor", value: color)
         }
+        return self
     }
     func toNativeObj() {
         return _nativeView
-    }
-
-    func sizeToFit() {
-        __Native.callFunc(obj: _nativeView, funcName:"sizeToFit")
-        return self
     }
 
 }
@@ -105,6 +112,7 @@ class ImageView: View {
     func setSrc(src) {
         var image = __Native.createImage(src: src)
         __Native.setValue(obj: _nativeView, key:"image", value:image)
+        return self
     }
 
     func createNativeView() {
@@ -125,6 +133,7 @@ class Label: View {
 
     func setText(text) {
         __Native.setValue(obj: _nativeView, key:"text", value:text)
+        return self
     }
 
 }
@@ -140,7 +149,7 @@ class Label: View {
 
 VStack() {
     Spacer(width: 1, height: 50)
-    Label(width: 100, height: 20, text: "About WeTV")  
+    Label(width: 100, height: 20, text: "About WeTV")
     Spacer(width: 1, height: 50)
     ImageView(width: 186, height: 48, src: "wetv", click:test)
     Spacer(width: 1, height: 100)
@@ -150,6 +159,6 @@ VStack() {
         Label(width: 100, height: 50, text: "Update")
     }
     Spacer(width: 1, height: 50)
-    Label(width: 200, height: 50, text: "Find us on Facebook")
+    Label(width: 200, height: 50, text: "Find us on Facebook", backgroundColor: blue, radius: 8)
     VStack()
 }
