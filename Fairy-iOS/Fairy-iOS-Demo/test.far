@@ -94,7 +94,7 @@ class View {
 
 }
 
-class Spacer: View {}
+class Spacer: VStack {}
 
 class ImageView: View {
 
