@@ -215,7 +215,7 @@ VStack() {
     Label(width: 280, height: 38, text: "从Facebook联系我们", backgroundColor: blue, radius: 4, textColor: white, textAlignment: TextAlignmentCenter, textSize: 14, bold: 1, clickListener: onClick)
 
     var isVIP = true
-    if isVIP {
+    if !isVIP {
         Spacer(width: 1, height: 20)
         Label(width: 280, height: 38, text: "开通VIP！", backgroundColor: yellow, radius: 4, textColor: red, textAlignment: TextAlignmentCenter, textSize: 14, bold: 1, clickListener: onClick)
     }
