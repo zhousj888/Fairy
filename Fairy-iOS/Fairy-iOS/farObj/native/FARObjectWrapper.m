@@ -7,6 +7,7 @@
 
 #import "FARObjectWrapper.h"
 #import "FARFuncRunInstance.h"
+#import "NSDictionary+Fairy.h"
 
 @implementation FARObjectWrapper
 
@@ -20,7 +21,7 @@
 - (void)callWithParams:(NSDictionary *)params {
     [self.value runWithParams:params];
     if ([self.value isKindOfClass:[FARFuncRunInstance class]]) {
-        FARFuncRunInstance *funcIns = self.value;
+        FARFuncRunInstance *funcIns = (FARFuncRunInstance *)self.value;
         [funcIns makeReRunable];
     }
 }

@@ -36,6 +36,8 @@
         
         NSMutableDictionary *mutaParams = [params mutableCopy];
         for (NSString *key in params) {
+            NSString *rawValueKey = [NSString stringWithFormat:@"_raw_%@",key];
+            mutaParams[rawValueKey] = params[key];
             mutaParams[key] = [params[key] toNativeObj];
         }
         

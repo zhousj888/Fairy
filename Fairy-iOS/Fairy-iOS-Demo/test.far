@@ -1,11 +1,10 @@
 var red = Color(hex: "#ff0000")
 var blue = Color(hex: "#3c5a99")
-var yellow = Color(hex: "#fbff00")
+var yellow = Color(hex: "#ffd700")
 var white = Color(hex: "#ffffff")
 var gray = Color(hex: "#c0c2d0")
 var logoBg = Color(hex: "#f5f6f8")
 var versionTextColor = Color(hex: "#071139")
-
 
 
 
@@ -99,7 +98,7 @@ class View {
 
     func setClickListener(clickListener) {
         if clickListener {
-            __Native.setClickListener(obj: _nativeView, clickListener: clickListener)
+            __Native.setClickListener(obj: _nativeView, sender:self, clickListener: clickListener)
         }
         return self
     }
@@ -192,7 +191,13 @@ class Label: View {
 }
 
 
-
+var colorList = [red, yellow, blue]
+var colorIndex = 0
+func onClick(sender) {
+    sender.setBackgroundColor(color: colorList[colorIndex % 3])
+    colorIndex = colorIndex + 1
+    __Native.log(text: colorIndex)
+}
 
 
 VStack() {
@@ -217,7 +222,3 @@ VStack() {
     Spacer()
 }
 
-
-func onClick() {
-    __Native.log(text: "onClickonClickonClickonClickonClickonClickonClick")
-}

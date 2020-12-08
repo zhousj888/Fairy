@@ -9,6 +9,8 @@
 #import <UIKit/UIKit.h>
 #import "UIGestureRecognizer+Fairy.h"
 #import "FARObjectWrapper.h"
+#import "FARFuncRunInstance.h"
+#import "FARClassRunInstance.h"
 
 #define UIColorFromRGB(rgbValue) \
 [UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
@@ -31,7 +33,7 @@
 
 
 - (void)log:(NSDictionary *)params {
-    NSString *text = params[@"text"];
+    NSString *text = params[@"_raw_text"];
     FARLog(@"NativeLog: ------------------>     %@",text);
 }
 
@@ -59,9 +61,10 @@
     UIView *view = params[@"obj"];
     view.userInteractionEnabled = YES;
     FARObjectWrapper *wrapper = params[@"clickListener"];
+    FARClassRunInstance *sender = params[@"_raw_sender"];
     
-    UIGestureRecognizer *rec = [UITapGestureRecognizer nvm_gestureRecognizerWithActionBlock:^(UITapGestureRecognizer* sender) {
-        [wrapper callWithParams:nil];
+    UIGestureRecognizer *rec = [UITapGestureRecognizer nvm_gestureRecognizerWithActionBlock:^(UITapGestureRecognizer* senderView) {
+        [wrapper callWithParams:@{@"sender": sender}];
     }];
     
     [view addGestureRecognizer:rec];
