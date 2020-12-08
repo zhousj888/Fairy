@@ -301,15 +301,21 @@ EmptyOrLines:
 VarDecl:
     T_Var T_Identifier                              { addCmd2(FAROperCmdVar, $2); }
 |   T_Let T_Identifier                              { addCmd2(FAROperCmdLet, $2); }
-|   T_Var T_Identifier '=' EmptyOrLines Expr                     { addCmd2(FAROperCmdPop, $2); }
-|   T_Let T_Identifier '=' EmptyOrLines Expr                     { addCmd2(FAROperCmdPop, $2); }
+|   T_Var T_Identifier '=' AssignableValue                     { addCmd2(FAROperCmdPop, $2); }
+|   T_Let T_Identifier '=' AssignableValue                     { addCmd2(FAROperCmdPop, $2); }
 ;
 
 AssignStmt:
-    T_Identifier '=' EmptyOrLines Expr                           { addCmd2(FAROperCmdAssign, $1); }
-|   Primary '.' T_Identifier '=' EmptyOrLines Expr               { addCmd2(FAROperCmdSetProperty, $3); }
-|   Primary '[' Expr ']' '=' EmptyOrLines Expr                     { addCmd1(FAROperCmdSetSubscript); }
+    T_Identifier '=' AssignableValue                           { addCmd2(FAROperCmdAssign, $1); }
+|   Primary '.' T_Identifier '=' AssignableValue               { addCmd2(FAROperCmdSetProperty, $3); }
+|   Primary '[' Expr ']' '=' AssignableValue                   { addCmd1(FAROperCmdSetSubscript); }
 ;
+
+AssignableValue:
+    EmptyOrLines Expr
+|   EmptyOrLines CallFuncWithClosure
+;
+
 
 T_AssignStmtBegin:
     T_Identifier                                    { addCmd2(FAROperCmdPushIdentifier,"self"); }

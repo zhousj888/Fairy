@@ -197,7 +197,7 @@ func onClick(sender) {
     colorIndex = colorIndex + 1
 }
 
-VStack() {
+var mainView = VStack() {
     VStack(width: 400, height:200, backgroundColor: logoBg){
         Spacer(width:1,height: 20)
         Label(width: 200, height: 20, text: "About WeTV", textAlignment: TextAlignmentCenter, textColor: versionTextColor, bold:1, textSize: 18)
@@ -224,3 +224,4 @@ VStack() {
     Spacer()
 }
 
+mainView
