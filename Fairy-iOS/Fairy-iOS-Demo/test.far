@@ -193,7 +193,7 @@ class Label: View {
 var colorList = [red, yellow, blue]
 var colorIndex = 0
 func onClick(sender) {
-    sender.setBackgroundColor(color: colorList[colorIndex % 3])
+    sender.setBackgroundColor(color: colorList[colorIndex % colorList.count])
     colorIndex = colorIndex + 1
 }
 
