@@ -41,7 +41,7 @@ int maxClassFuncLength = 50;
 
 %token T_Int T_Var T_Void T_Return T_ReadInt T_While T_Repeat T_EOL T_Let T_Func T_For T_In T_Class
 %token T_If T_Else T_Break T_Continue T_Le T_Ge T_Eq T_Ne 
-%token T_And T_Or T_IntConstant T_StringConstant T_Identifier T_IntervalTo T_IntervalLess T_DecimalConstant
+%token T_And T_Or T_IntConstant T_StringConstant T_Identifier T_IntervalTo T_IntervalLess T_DecimalConstant T_True T_False
 
 %left '='
 %left T_Or
@@ -173,7 +173,7 @@ ActualParams:
 ;
 
 ActualParam:
-    T_Identifier ':' Expr                               { addCmd2(FAROperSave,$1); } 
+    T_Identifier ':' Expr                               { addCmd2(FAROperSave, $1); } 
 ;
 
 CallFuncSuffix:
@@ -202,7 +202,7 @@ Args:
 
 Arg:
     T_Identifier
-|   Arg '=' Expr                                          { addCmd2(FAROperSaveIfNil,$1); }
+|   Arg '=' Expr                                          { addCmd2(FAROperSaveIfNil, $1); }
 ;
 
 FuncDecl:
@@ -210,7 +210,7 @@ FuncDecl:
 ;
 
 FuncName:
-    T_Identifier                                          { if(currentClassName){currentFuncName = generString(maxClassFuncLength,"%s_%s",currentClassName,$1);} else {currentFuncName = $1;} addTag("%s%s",TAG_FUNC_START, currentFuncName); }
+    T_Identifier                                          { if(currentClassName){currentFuncName = generString(maxClassFuncLength,"%s_%s",currentClassName, $1);} else {currentFuncName = $1;} addTag("%s%s",TAG_FUNC_START, currentFuncName); }
 ;
 
 ClassDecl:
@@ -219,8 +219,8 @@ ClassDecl:
 ;
 
 ClassID:
-    T_Identifier                        { addTag("%s%s",TAG_CLASS_BEGIN,$1); currentClassName = $1; }
-|   T_Identifier ':' T_Identifier       { currentClassName = generString(maxClassFuncLength,"%s:%s",$1,$3);addTag("%s%s",TAG_CLASS_BEGIN,currentClassName);}
+    T_Identifier                        { addTag("%s%s",TAG_CLASS_BEGIN, $1); currentClassName = $1; }
+|   T_Identifier ':' T_Identifier       { currentClassName = generString(maxClassFuncLength,"%s:%s", $1,$3);addTag("%s%s",TAG_CLASS_BEGIN,currentClassName);}
 ;
 
 BreakStmt:
@@ -373,11 +373,13 @@ Expr:
 
 Primary:
     '(' Expr ')'
-|   T_IntConstant           { addCmd2(FAROperCmdPushInt,$1); }
-|   T_DecimalConstant       { addCmd2(FAROperCmdPushDouble,$1); }
-|   T_Identifier            { addCmd2(FAROperCmdPushIdentifier,$1); }
+|   T_IntConstant           { addCmd2(FAROperCmdPushInt, $1); }
+|   T_True                  { addCmd2(FAROperCmdPushTrue, $1); }
+|   T_False                 { addCmd2(FAROperCmdPushFalse, $1); }
+|   T_DecimalConstant       { addCmd2(FAROperCmdPushDouble, $1); }
+|   T_Identifier            { addCmd2(FAROperCmdPushIdentifier, $1); }
 |   IntervalExpr
-|   T_StringConstant        { addCmd2(FAROperCmdPushString,$1); }
+|   T_StringConstant        { addCmd2(FAROperCmdPushString, $1); }
 |   ArrayExpr               
 |   DictionExpr
 |   Primary CallFuncSuffix  { addCmd1(FAROperCallFunc); }

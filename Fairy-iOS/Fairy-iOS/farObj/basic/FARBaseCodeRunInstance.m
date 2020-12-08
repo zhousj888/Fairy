@@ -24,6 +24,9 @@
 #import "FARDicRunInstance.h"
 #import "FARDicFuncRunInstance.h"
 #import "FARNativeWrapperInstance.h"
+#import "FARBoolCodeObj.h"
+#import "FARBoolRunInstance.h"
+#import "FARBoolFunRunInstance.h"
 
 @interface FARBaseCodeRunInstance()
 
@@ -162,6 +165,16 @@
 - (BOOL)_executeCmd:(FARCommand *)cmd {
     self.currentExcuteLine = cmd.line;
     switch (cmd.operCmd) {
+        case FAROperCmdPushTrue:{
+            FARBoolRunInstance *obj = [FARBoolCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode boolValue:YES];
+            [self.stack push:obj];
+            return YES;
+        }
+        case FAROperCmdPushFalse: {
+            FARBoolRunInstance *obj = [FARBoolCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode boolValue:NO];
+            [self.stack push:obj];
+            return YES;
+        }
         case FAROperCmdPushInt: {
             FARNumberRunInstance *obj = (FARNumberRunInstance *)[FARNumberCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode integer:cmd.oper1.integerValue];
             [self.stack push:obj];

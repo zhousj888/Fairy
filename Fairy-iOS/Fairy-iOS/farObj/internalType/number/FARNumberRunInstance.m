@@ -49,7 +49,6 @@
        [name isEqualToString:FAR_CMPLE_FUNC] ||
        [name isEqualToString:FAR_CMPEQ_FUNC] ||
        [name isEqualToString:FAR_CMPNE_FUNC] ||
-       [name isEqualToString:FAR_CMPOR_FUNC] ||
        [name isEqualToString:FAR_AND_FUNC  ] ||
        [name isEqualToString:FAR_NEG_FUNC  ] ||
        [name isEqualToString:FAR_NOT_FUNC  ] ||

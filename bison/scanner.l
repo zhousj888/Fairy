@@ -51,6 +51,8 @@ STRING              (\042[^\042\n]*\042)
 "in"                { return T_In; }
 "class"             { return T_Class; }
 "repeat"            { return T_Repeat; }
+"true"              { return T_True; }
+"false"             { return T_False; }
 
 {INTEGER}           { _DUPTEXT return T_IntConstant; }
 {HEXINTEGER}        { _DUPTEXT return T_IntConstant; }
