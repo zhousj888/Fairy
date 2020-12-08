@@ -80,8 +80,7 @@ Stmt:
 ;
 
 StmtSeparator:
-    ';'
-|   NewLines
+   NewLines
 ;
 
 NewLines:
