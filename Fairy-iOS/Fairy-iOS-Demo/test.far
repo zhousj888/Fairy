@@ -49,12 +49,28 @@ class ViewContainer: View {
 }
 
 class VStack: ViewContainer {
+
+    func setBackgroundColor(color) {
+        if color {
+            __Native.setStackBgColor(obj: _nativeView, color: color)
+        }
+        return self
+    }
+
     func createNativeView() {
         return __Native.createStack(axis: "ver")
     }
 }
 
 class HStack: ViewContainer {
+
+    func setBackgroundColor(color) {
+        if color {
+            __Native.setStackBgColor(obj: _nativeView, color: color)
+        }
+        return self
+    }
+
     func createNativeView() {
         return __Native.createStack(axis: "hor")
     }
@@ -197,8 +213,9 @@ func onClick(sender) {
     colorIndex = colorIndex + 1
 }
 
+
 VStack() {
-    VStack(width: 400, height:200, backgroundColor: logoBg){
+    VStack(width: 400, height:200, backgroundColor: logoBg, clickListener: onClick){
         Spacer(width:1,height: 20)
         Label(width: 200, height: 20, text: "About WeTV", textAlignment: TextAlignmentCenter, textColor: versionTextColor, bold:1, textSize: 18)
         Spacer(width:1,height: 50)

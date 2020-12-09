@@ -57,6 +57,22 @@
     return stackView;
 }
 
+- (void)setStackBgColor:(NSDictionary *)params {
+    UIStackView *stackView = params[@"obj"];
+    UIColor *color = params[@"color"];
+    //如果之前设置了背景色要先去掉
+    if (stackView.tag) {
+        stackView.tag = 0;
+        UIView *bgView = stackView.subviews[0];
+        [bgView removeFromSuperview];
+    }
+    stackView.tag = 1;
+    UIView *bgView = [[UIView alloc] initWithFrame:stackView.bounds];
+    bgView.backgroundColor = color;
+    bgView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    [stackView insertSubview:bgView atIndex:0];
+}
+
 - (void)setClickListener:(NSDictionary *)params {
     UIView *view = params[@"obj"];
     view.userInteractionEnabled = YES;
