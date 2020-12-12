@@ -69,7 +69,7 @@ class Father {
   var height
   func init() {
     //init func will call automatically when new a instance
-	}
+  }
 }
 class Son: Father {
   var age
@@ -128,5 +128,43 @@ ImageView(width: 400, height: 200, src: "fairy")
 
 ```swift
 Spacer(width:1, height:40)
+```
+
+## Fairy - Native 交互
+
+### Fairy对象 => Native对象
+
+基本类型会自动转换，其他对象需要Fairy对象实现```toNativeObj``` 方法，系统会自动调用这个方法获取来进行转换
+
+### Native 对象 => Fairy对象
+
+基本类型会自动转换，其他对象会变成```FARNativeWrapperInstance```
+
+### Fairy 调用 native
+
+1. 增加 Fairy-Native 接口
+
+   ```objective-c
+   - (void)testFunc:(NSDictionary *)params {
+   }
+   ```
+
+   
+
+2. 在Fairy代码中调用
+
+   ```swift
+   __Native.testFunc(param: p)
+   ```
+
+### Native 调用 Fairy
+
+注意: 要先在Native中获取到Fairy对象，才能调用到Fairy
+
+```objective-c
+- (void)setClickListener:(NSDictionary *)params {
+			FARObjectWrapper *wrapper = params[@"clickListener"];
+  		[wrapper callWithParams:@{@"sender": sender}];
+ }
 ```
 
