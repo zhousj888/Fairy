@@ -1,5 +1,5 @@
 
-# Fairy frameword 的使用
+# Fairy frameword
 
 
 # Color
@@ -48,19 +48,20 @@ ImageView(width: 400, height: 200, src: "fairy")
 Spacer(width:1, height:40)
 ```
 
-## Fairy - Native 交互
+## Fairy <=> Native 
 
-### Fairy对象 => Native对象
+### Fairy object => Native object
 
 基本类型会自动转换，其他对象需要Fairy对象实现```toNativeObj``` 方法，系统会自动调用这个方法获取来进行转换
+Basic types will be automatically converted, other Fairy objects need to implement the ```toNativeObj``` method, the system will automatically call this method to obtain for conversion
 
 ### Native 对象 => Fairy对象
 
-基本类型会自动转换，其他对象会变成```FARNativeWrapperInstance```
+Basic types will be automatically converted, other objects will become ```FARNativeWrapperInstance```
 
-### Fairy 调用 native
+### Fairy call native
 
-1. 增加 Fairy-Native 接口
+1. add Fairy-Native interface in ```FARNativeApi.m```
 
    ```objective-c
    - (void)testFunc:(NSDictionary *)params {
@@ -69,15 +70,15 @@ Spacer(width:1, height:40)
 
    
 
-2. 在Fairy代码中调用
+2. call in Fairy
 
    ```swift
    __Native.testFunc(param: p)
    ```
 
-### Native 调用 Fairy
+### Native call Fairy
 
-注意: 要先在Native中获取到Fairy对象，才能调用到Fairy
+Note: You must get the Fairy object in Native before calling Fairy
 
 ```objective-c
 - (void)setClickListener:(NSDictionary *)params {
@@ -86,3 +87,4 @@ Spacer(width:1, height:40)
  }
 ```
 
+### you can see ```internalScript.far``` and find more usage

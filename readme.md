@@ -1,8 +1,8 @@
 # Fairy
 
-## 项目介绍
+## [English readme here!](./README_EN.md)
 
-### [English readme here!](./README_EN.md)
+## 项目介绍
 
 Fairy是一个轻量级的UI脚本语言，可以在iOS低版本上体验SwiftUI开发！
 

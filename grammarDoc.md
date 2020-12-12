@@ -1,5 +1,5 @@
 
-# 基本语法
+# Basic grammar
 
 ```swift
 //basic type
@@ -55,5 +55,6 @@ class Son: Father {
   }
 }
 
-//you can see internalScript.far and find more usage
 ```
+
+## you can see ```internalScript.far``` and find more usage
