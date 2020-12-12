@@ -1,10 +1,10 @@
 # Fairy
 
-## [English readme here!](./README_EN.md)
+## [中文简介在这里](./README_CN.md)
 
-## 项目介绍
+## Introduction
 
-Fairy是一个轻量级的UI脚本语言，可以在iOS低版本上体验SwiftUI开发！
+Fairy is a lightly UI script language, let you enjoy SwiftUI on low version iOS.
 
 
 
@@ -14,25 +14,26 @@ Fairy是一个轻量级的UI脚本语言，可以在iOS低版本上体验SwiftUI
 
 
 
-## 使用方式
+## How to use
 
-1. clone 这个仓库
-2. 然后打开Fairy-iOS下的Fairy-iOS.xcodeproj
-3. 运行Fairy-iOS-Demo 这个 target
+1. clone this repository
+2. open Fairy-iOS.xcodeproj
+3. run target Fairy-iOS-Demo
 
-
-目前还处在beta版本，如果想在项目中使用，可以将 Fairy-iOS 拷贝到你的工程中,作为子工程依赖
-
-
-## 语法
-### [基本语法](./grammarDoc.md)
-
-### [框架接口](./frameworkDoc.md)
+Fairy is just on beta version, so no cocoapods. You can copy it and rely as sub project.
 
 
-## 关于Fairy
+## Grammar
+### [BasicGrammar](./grammarDoc.md)
 
-Fairy的定位是一门轻量级的UI脚本语言，一个专门用来写UI的语言，语法主要借鉴SwiftUI。
-目前只开发了iOS上的虚拟机，所以相当于是SwiftUI的兼容实现。
-以后有时间的话还会增加Android和JavaScript的虚拟机，理想状况是只需要一个Fairy脚本，就可以实现三端渲染。
-当然如果有人愿意一起实现这些虚拟机就再好不过了😁，欢迎MR.
+### [Framework Interface](./frameworkDoc.md)
+
+
+## About Fairy
+
+Fairy is a script language specially used to write UI.
+The syntax is mainly borrowed from SwiftUI.
+There is only iOS virtual machine now.
+I will add Android and JavaScript VM later when i am free.
+Of course, it would be great if someone is willing to implement these virtual machines together😁, MR is welcome.
+The goal is to use a Fairy script to render the UI on Android, iOS and the Web.
