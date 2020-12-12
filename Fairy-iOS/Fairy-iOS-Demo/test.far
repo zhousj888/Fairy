@@ -2,10 +2,7 @@ var red = Color(hex: "#ff0000")
 var blue = Color(hex: "#3c5a99")
 var yellow = Color(hex: "#ffd700")
 var white = Color(hex: "#ffffff")
-var gray = Color(hex: "#c0c2d0")
-var logoBg = Color(hex: "#f5f6f8")
 var versionTextColor = Color(hex: "#071139")
-
 
 var colorList = [red, yellow, blue]
 var colorIndex = 0
@@ -14,30 +11,27 @@ func onClick(sender) {
     colorIndex = colorIndex + 1
 }
 
-
 VStack() {
-    VStack(width: 400, height:200, backgroundColor: logoBg, clickListener: onClick){
-        Spacer(width:1,height: 20)
-        Label(width: 200, height: 20, text: "About WeTV", textAlignment: TextAlignmentCenter, textColor: versionTextColor, bold:1, textSize: 18)
-        Spacer(width:1,height: 50)
-        ImageView(width: 186, height: 48, src: "wetv")
-        Spacer()
-    }
+    Spacer(width:1, height:20)
+    Label(width: 200, height: 50, text: "Fairy", textAlignment: TextAlignmentCenter, textColor: versionTextColor, bold:1, textSize: 18)
+    Spacer(width:1, height:40)
+    ImageView(width: 400, height: 200, src: "fairy")
+    Spacer(width:1, height:40)
+
     HStack() {
-        Label(width: 200, height: 50, text: "当前版本 3.4.0", textSize: 14, textColor: versionTextColor)
+        Label(width: 200, height: 50, text: "version 1.0", textSize: 14, textColor: versionTextColor)
         Spacer()
-        Label(width: 100, height: 50, text: "已是最新版本", textAlignment: TextAlignmentRight, textColor: gray, textSize:14)
-    }
-    Spacer(width: 1, height: 50)
-
-    Label(width: 280, height: 38, text: "从Facebook联系我们", backgroundColor: blue, radius: 4, textColor: white, textAlignment: TextAlignmentCenter, textSize: 14, bold: 1, clickListener: onClick)
-
-    var isVIP = true
-    if !isVIP {
-        Spacer(width: 1, height: 20)
-        Label(width: 280, height: 38, text: "开通VIP！", backgroundColor: yellow, radius: 4, textColor: red, textAlignment: TextAlignmentCenter, textSize: 14, bold: 1, clickListener: onClick)
+        Label(width: 100, height: 50, text: "it's HStack👈", textAlignment: TextAlignmentRight, textColor: red, textSize:14)
     }
 
-    Label(width: 200, height: 40, text: "关注我们，给我们发私信", textSize: 13, textColor: gray, textAlignment: TextAlignmentCenter)
+    Spacer(width:1, height:40) 
+    var index = 0
+    while index < 5 {
+        if index < 2 {
+            Label(width: 280, height: 38, text: "Click Here!", backgroundColor: blue, radius: 4, textColor: white, textAlignment: TextAlignmentCenter, textSize: 14, bold: 1, clickListener: onClick)
+            Spacer(width:1, height:10)
+        }
+        index = index + 1
+    }
     Spacer()
 }
