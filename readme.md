@@ -22,3 +22,8 @@ Fairy是一个轻量级的UI脚本语言，可以在iOS低版本上体验SwiftUI
 目前还处在beta版本，如果想在项目中使用，可以将 Fairy-iOS 拷贝到你的工程中,作为子工程依赖
 
 
+## 语法
+[基本语法](./grammarDoc.md)
+
+[框架接口](./frameworkDoc.md)
+
