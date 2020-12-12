@@ -1,0 +1,198 @@
+
+class Color {
+    var _nativeColor
+    func init(hex) {
+        _nativeColor = __Native.createColor(hex: hex)
+    }
+
+    func toNativeObj() {
+        return _nativeColor
+    }
+
+}
+
+class ViewContainer: View {
+
+    func init() {
+        if _trailing_closure {
+            var subviewArr = _trailing_closure()
+            var index = 0
+            if subviewArr.count {
+                repeat {
+                    self.addSubview(view: subviewArr[index])
+                    index = index + 1
+                } while index < subviewArr.count
+            }
+
+        }
+    }
+
+    func addSubview(view) {
+        if view {
+            __Native.addArrangedSubview(obj: _nativeView, subview: view)
+        }
+    }
+
+    func toNativeObj() {
+        return _nativeView
+    }
+
+}
+
+class VStack: ViewContainer {
+
+    func setBackgroundColor(color) {
+        if color {
+            __Native.setStackBgColor(obj: _nativeView, color: color)
+        }
+        return self
+    }
+
+    func createNativeView() {
+        return __Native.createStack(axis: "ver")
+    }
+}
+
+class HStack: ViewContainer {
+
+    func setBackgroundColor(color) {
+        if color {
+            __Native.setStackBgColor(obj: _nativeView, color: color)
+        }
+        return self
+    }
+
+    func createNativeView() {
+        return __Native.createStack(axis: "hor")
+    }
+}
+
+class View {
+    var _nativeView
+    var _width
+    var _height
+    var _backgroundColor
+    var _radius
+    func init(width, height, backgroundColor, radius) {
+        _nativeView = self.createNativeView()
+        self._width = width
+        self._height = height
+        self._backgroundColor = backgroundColor
+        self._radius = radius
+        self.setRadius(radius: radius)
+        self.setBackgroundColor(color: backgroundColor)
+        self.setSize(width: width, height: height)
+        self.setClickListener(clickListener: clickListener)
+    }
+
+    func createNativeView() {
+        return __Native.createInstance(className: "UIView")
+    }
+
+    func setRadius(radius) {
+        if radius {
+            __Native.setRadius(obj: _nativeView, radius: radius)
+        }
+        return self
+    }
+
+    func setSize(width, height) {
+        if width && height {
+            __Native.setViewSize(obj: _nativeView, width: width, height: height)
+        }
+        return self
+    }
+
+    func setClickListener(clickListener) {
+        if clickListener {
+            __Native.setClickListener(obj: _nativeView, sender:self, clickListener: clickListener)
+        }
+        return self
+    }
+
+    func setBackgroundColor(color) {
+        if color {
+            __Native.setValue(obj: _nativeView, key:"backgroundColor", value: color)
+        }
+        return self
+    }
+    func toNativeObj() {
+        return _nativeView
+    }
+
+}
+
+class Spacer: VStack {}
+
+class ImageView: View {
+
+    func init(src) {
+        self.setSrc(src: src)
+    }
+
+    func setSrc(src) {
+        var image = __Native.createImage(src: src)
+        __Native.setValue(obj: _nativeView, key:"image", value:image)
+        return self
+    }
+
+    func createNativeView() {
+        return __Native.createInstance(className: "UIImageView")
+    }
+
+}
+var TextAlignmentCenter = "TextAlignmentCenter"
+var TextAlignmentLeft = "TextAlignmentLeft"
+var TextAlignmentRight = "TextAlignmentRight"
+class Label: View {
+
+    func init(text, textColor, textAlignment, textSize) {
+        self.setText(text: text)
+        self.setTextColor(textColor: textColor)
+        self.setTextAlignment(textAlignment: textAlignment)
+        self.setTextSize(textSize: textSize)
+        self.setBold(bold: bold)
+    }
+
+    func createNativeView() {
+        return __Native.createInstance(className: "UILabel")
+    }
+
+    func setBold(bold) {
+        if bold {
+            __Native.setTextBold(obj: _nativeView, bold: 1)
+        }else {
+            __Native.setTextBold(obj: _nativeView, bold: 0)
+        }
+        return self
+    }
+
+    func setTextSize(textSize) {
+        if textSize {
+            __Native.setTextSize(obj: _nativeView, textSize: textSize)
+        }
+        return self
+    }
+
+    func setText(text) {
+        if text {
+            __Native.setValue(obj: _nativeView, key:"text", value:text)
+        }
+        return self
+    }
+
+    func setTextColor(textColor) {
+        if textColor {
+            __Native.setValue(obj: _nativeView, key:"textColor", value: textColor)
+        }
+        return self
+    }
+
+    func setTextAlignment(textAlignment) {
+        if textAlignment {
+            __Native.setTextAlignment(obj: _nativeView, textAlignment: textAlignment)
+        }
+        return self
+    }
+
+}

@@ -19,11 +19,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *oper4;
 @property (nonatomic, copy) NSString *oper5;
 @property (nonatomic, assign) NSInteger line;
+@property (nonatomic, copy) NSString *fileName;
 
-+ (instancetype)commandWithCmd:(NSInteger)cmd line:(NSInteger)line;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper:(nullable NSString *)oper line:(NSInteger)line;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(nullable NSString *)oper1 oper2:(nullable NSString *)oper2 line:(NSInteger)line;
-+ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(nullable NSString *)oper1 oper2:(nullable NSString *)oper2 oper3:(nullable NSString *)oper3 line:(NSInteger)line;
++ (instancetype)commandWithCmd:(NSInteger)cmd line:(NSInteger)line fileName:(NSString *)fileName;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper:(nullable NSString *)oper line:(NSInteger)line fileName:(NSString *)fileName;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(nullable NSString *)oper1 oper2:(nullable NSString *)oper2 line:(NSInteger)line fileName:(NSString *)fileName;
++ (instancetype)commandWithCmd:(NSInteger)cmd oper1:(nullable NSString *)oper1 oper2:(nullable NSString *)oper2 oper3:(nullable NSString *)oper3 line:(NSInteger)line fileName:(NSString *)fileName;
 
 
 @end

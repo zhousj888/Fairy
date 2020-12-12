@@ -11,11 +11,14 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface FARVMCode : NSObject
+@interface FARVMCode : NSObject<NSMutableCopying>
 
 @property (nonatomic, strong) NSMutableArray<FARCommand *> *commandArr;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, FARCommandTag *> *tagDic;
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray<FARCommandTag *>*> *tagIndexDic;
+
+- (void)printCode;
++ (FARVMCode *)linkCode:(FARVMCode *)code1 code2:(FARVMCode *)code2;
 
 @end
 

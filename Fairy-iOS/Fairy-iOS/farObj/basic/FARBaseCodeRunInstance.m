@@ -71,7 +71,7 @@
         cmd = self.vmCode.commandArr[codeIndex.integerValue];
         
         //打印执行的命令
-        FARLog(@"cmd %@:---> %@", @(cmd.line),cmd);
+        FARLog(@"cmd<%@,%@>:---> %@",cmd.fileName, @(cmd.line),cmd);
         
         if ([self _executeCmd:cmd]) {
             self.pc++;

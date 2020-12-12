@@ -31,12 +31,26 @@ static NSString *const kRetSp = @"__retSp";
 
 - (void)runWithCode:(NSString *)code {
     FARParser *parser = [[FARParser alloc] init];
-    FARVMCode *vmCode = [parser parse:code];
-    [vmCode.commandArr addObject:[FARCommand commandWithCmd:FAROperExit line:0]];
+    FARVMCode *rawCode = [parser parse:code withFileName:@"userCode"];
+    FARVMCode *internalCode = [self _generInternalCode];
     
-    self.vmCode = vmCode;
+    FARVMCode *linkedCode = [FARVMCode linkCode:internalCode code2:rawCode];
+    
+    self.vmCode = linkedCode;
     [self prepare];
     [self run];
+}
+
+- (FARVMCode *)_generInternalCode {
+    NSBundle *bundle = [NSBundle bundleForClass:self.class];
+    NSString *path = [bundle pathForResource:@"internalScript" ofType:@"far"];
+    NSString* content = [NSString stringWithContentsOfFile:path
+                                                  encoding:NSUTF8StringEncoding
+                                                      error:NULL];
+    
+    FARParser *parser = [[FARParser alloc] init];
+    FARVMCode *code = [parser parse:content withFileName:@"interbalScript"];
+    return code;
 }
 
 - (void)prepare {
@@ -47,6 +61,7 @@ static NSString *const kRetSp = @"__retSp";
 }
 
 - (void)run {
+    FARLog(@"-------------------👇是执行信息----------------------------");
     FARFuncCodeObj *mainCode = (FARFuncCodeObj *)[self.mainEnv findVarForKey:FAR_MAIN_CODE];
     FARBaseCodeRunInstance *mainRunInstance = [mainCode newRunInstanceWithEnv:self.mainEnv stack:self.stack vmCode:self.vmCode];
     //这里做一个特殊逻辑，mainCode里面的env就是global

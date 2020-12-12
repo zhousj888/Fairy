@@ -18,6 +18,7 @@ void* yy_scan_string (const char * yystr);
 static NSMutableArray<FARCommand *> *commandArr;
 static NSMutableDictionary<NSString *, FARCommandTag *> *tagDic;
 static NSMutableDictionary<NSNumber *, NSMutableArray<FARCommandTag *>*> *tagIndexDic;
+static NSString *currentFileName;
 
 
 char *generString(int stringLength,char *fmt,...) {
@@ -95,17 +96,17 @@ NSString *transCharsToNSString(char *chars) {
 
 void addCmd1(int cmd) {
     FARLog(@"%@",transCmdToDescription(cmd));
-    [commandArr addObject:[FARCommand commandWithCmd:cmd line:cur_line]];
+    [commandArr addObject:[FARCommand commandWithCmd:cmd line:cur_line fileName:currentFileName]];
 }
 
 void addCmd2(int cmd, char *oper1) {
     FARLog(@"%@,%s",transCmdToDescription(cmd),oper1);
-    [commandArr addObject:[FARCommand commandWithCmd:cmd oper:transCharsToNSString(oper1) line:cur_line]];
+    [commandArr addObject:[FARCommand commandWithCmd:cmd oper:transCharsToNSString(oper1) line:cur_line fileName:currentFileName]];
 }
 
 void addCmd3(int cmd, char *oper1, char *oper2) {
     FARLog(@"%@,%s,%s",transCmdToDescription(cmd),oper1,oper2);
-    [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2) line:cur_line]];
+    [commandArr addObject:[FARCommand commandWithCmd:cmd oper1:transCharsToNSString(oper1) oper2:transCharsToNSString(oper2) line:cur_line fileName:currentFileName]];
 }
 
 
@@ -129,16 +130,16 @@ void addTag(char *format,...) {
 
 @implementation FARParser
 
-- (FARVMCode *)parse:(NSString *)code {
+- (FARVMCode *)parse:(NSString *)code withFileName:(NSString *)fileName{
+    FARLog(@"-------------------👇解析文件->%@-------------------------------",fileName);
     commandArr = [NSMutableArray array];
     tagDic = [NSMutableDictionary dictionary];
     tagIndexDic = [NSMutableDictionary dictionary];
+    currentFileName = [fileName copy];
     
     yy_scan_string(code.UTF8String);
     yyparse();
-    FARLog(@"-------------------👆是汇编-------------------------------");
-    FARLog(@"😤\n\n\n------------------cmd sum = %@-------------------------\n\n\n😤",@(commandArr.count));
-    FARLog(@"-------------------👇是执行信息----------------------------");
+    FARLog(@"-------------------👆%@ 解析完成-------------------------------",fileName);
     
     FARVMCode *vmCode = [[FARVMCode alloc] init];
     vmCode.commandArr = commandArr;
@@ -147,9 +148,11 @@ void addTag(char *format,...) {
     commandArr = nil;
     tagDic = nil;
     tagIndexDic = nil;
+    currentFileName = nil;
     cur_line = 1;
     return vmCode;
 }
+
 
 
 @end

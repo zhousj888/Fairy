@@ -30,6 +30,7 @@
 		6560C0AE2572840B00A3AEB5 /* FARNumberRunInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 6560C0AC2572840B00A3AEB5 /* FARNumberRunInstance.m */; };
 		6560C0B2257286FD00A3AEB5 /* FARStringRunInstance.h in Headers */ = {isa = PBXBuildFile; fileRef = 6560C0B0257286FD00A3AEB5 /* FARStringRunInstance.h */; };
 		6560C0B3257286FD00A3AEB5 /* FARStringRunInstance.m in Sources */ = {isa = PBXBuildFile; fileRef = 6560C0B1257286FD00A3AEB5 /* FARStringRunInstance.m */; };
+		656A913625849A1600C8E586 /* internalScript.far in Resources */ = {isa = PBXBuildFile; fileRef = 656A913525849A1500C8E586 /* internalScript.far */; };
 		65BD65112562961B007AF316 /* FAROperCmd.h in Headers */ = {isa = PBXBuildFile; fileRef = 65BD65102562961B007AF316 /* FAROperCmd.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65BD652125629B7D007AF316 /* FARParser.h in Headers */ = {isa = PBXBuildFile; fileRef = 65BD651F25629B7D007AF316 /* FARParser.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65BD652225629B7D007AF316 /* FARParser.m in Sources */ = {isa = PBXBuildFile; fileRef = 65BD652025629B7D007AF316 /* FARParser.m */; };
@@ -162,6 +163,7 @@
 		6560C0AC2572840B00A3AEB5 /* FARNumberRunInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARNumberRunInstance.m; sourceTree = "<group>"; };
 		6560C0B0257286FD00A3AEB5 /* FARStringRunInstance.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARStringRunInstance.h; sourceTree = "<group>"; };
 		6560C0B1257286FD00A3AEB5 /* FARStringRunInstance.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARStringRunInstance.m; sourceTree = "<group>"; };
+		656A913525849A1500C8E586 /* internalScript.far */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = internalScript.far; sourceTree = "<group>"; };
 		65BD65102562961B007AF316 /* FAROperCmd.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FAROperCmd.h; sourceTree = "<group>"; };
 		65BD651F25629B7D007AF316 /* FARParser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FARParser.h; sourceTree = "<group>"; };
 		65BD652025629B7D007AF316 /* FARParser.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FARParser.m; sourceTree = "<group>"; };
@@ -270,6 +272,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		656A913425849A1500C8E586 /* internalScript */ = {
+			isa = PBXGroup;
+			children = (
+				656A913525849A1500C8E586 /* internalScript.far */,
+			);
+			path = internalScript;
+			sourceTree = "<group>";
+		};
 		65D5B23C25760B4700B6DA85 /* native */ = {
 			isa = PBXGroup;
 			children = (
@@ -491,6 +501,7 @@
 		65F6C3EF25626B6200C8B94C /* Fairy-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				656A913425849A1500C8E586 /* internalScript */,
 				65D5B2522576684A00B6DA85 /* bison */,
 				65D5B24825760EEC00B6DA85 /* virtualMachine */,
 				65D5B24725760ED300B6DA85 /* parser */,
@@ -669,6 +680,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				656A913625849A1600C8E586 /* internalScript.far in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

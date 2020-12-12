@@ -12,7 +12,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface FARParser : NSObject
 
-- (FARVMCode *)parse:(NSString *)code;
+- (FARVMCode *)parse:(NSString *)code withFileName:(NSString *)fileName;
 
 @end
 
