@@ -1,6 +1,6 @@
 # Fairy
 
-## [中文简介在这里](./README_CN.md)
+## [中文简介](./README_CN.md)
 
 ## Introduction
 
