@@ -13,7 +13,7 @@ func onClick(sender) {
 
 VStack() {
     Spacer(width:1, height:20)
-    Label(width: 200, height: 50, text: "Fairy", textAlignment: TextAlignmentCenter, textColor: versionTextColor, bold:1, textSize: 18)
+    Label(width: 200, height: 50, text: "Fairy", textAlignment: TextAlignmentCenter, textColor: versionTextColor, bold:true, textSize: 18)
     Spacer(width:1, height:40)
     ImageView(width: 400, height: 200, src: "fairy")
     Spacer(width:1, height:40)

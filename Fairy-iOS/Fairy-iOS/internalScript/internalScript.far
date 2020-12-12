@@ -1,6 +1,6 @@
 
 
-//test
+//grammar test
 
 var __a = 1
 func __test(param1, param2) {
@@ -13,11 +13,24 @@ __a = __test(param1: 1, param2: 2) {
 
 assert(condition: __a == 7)
 
-if __a {
+if __a > 7{
+    assert(condition: 0)
+}else if __a == 7 {
     assert(condition: __a)
 }else {
-    assert(condition: !__a)
+    assert(condition: 0)
 }
+
+var __array = [1,2,3]
+__array.push(value: 4)
+assert(condition: __array.count == 4)
+__array.pushAtIndex(index: 0, value: 5)
+__array.remove(index: 2)
+assert(condition: __array[0] == 5)
+
+var __dic = {"1": 1,"2": 2, "3": 3}
+__dic["2"] = 4
+assert(condition: __dic["2"] == 4)
 
 while __a > 0 {
     assert(condition: __a)
