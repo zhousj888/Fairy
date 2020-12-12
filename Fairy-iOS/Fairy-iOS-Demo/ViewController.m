@@ -34,8 +34,11 @@
 }
 
 - (void)loadVMView {
+    NSString *filePath = [NSString stringWithUTF8String:__FILE__];
+    NSRange range = [filePath rangeOfString:@"ViewController.m"];
     
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"far"];
+    NSString *pathPrefix = [filePath substringToIndex:range.location];
+    NSString *path = [NSString stringWithFormat:@"%@test.far", pathPrefix];
     
     NSString* content = [NSString stringWithContentsOfFile:path
                                                   encoding:NSUTF8StringEncoding
