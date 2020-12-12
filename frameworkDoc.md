@@ -54,7 +54,6 @@ Spacer(width:1, height:40)
 
 ### Fairy object => Native object
 
-基本类型会自动转换，其他对象需要Fairy对象实现```toNativeObj``` 方法，系统会自动调用这个方法获取来进行转换
 Basic types will be automatically converted, other Fairy objects need to implement the ```toNativeObj``` method, the system will automatically call this method to obtain for conversion
 
 ### Native object => Fairy object
