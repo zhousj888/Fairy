@@ -45,7 +45,7 @@
     
     self.vmView = [vm vmValueOfStackTop];
     [self.container addSubview:self.vmView];
-//    [self.view setNeedsUpdateConstraints];
+    
 }
 
 - (void)viewWillLayoutSubviews {
