@@ -62,7 +62,7 @@
     for(id stackEle in self.stackArr) {
         [mutStr appendFormat:@"%@,",stackEle];
     }
-    FARLog(@"stack:%p ===>  %@", self,mutStr);
+    FARLog(@"stack: ===>  %@",mutStr);
 }
 
 @end

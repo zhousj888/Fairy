@@ -87,8 +87,8 @@
     }
 }
 
-- (BOOL)isEqualFalse {
-    return !self.number.boolValue;
+- (BOOL)isEqualTrue {
+    return self.number.boolValue;
 }
 
 - (id)toNativeObj {

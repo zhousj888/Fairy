@@ -42,8 +42,8 @@
 }
 
 
-- (BOOL)isEqualFalse {
-    return !self.boolValue;
+- (BOOL)isEqualTrue {
+    return self.boolValue;
 }
 
 - (id)toNativeObj {

@@ -47,10 +47,11 @@
     return NO;
 }
 
-- (BOOL)isEqualFalse {
-    return NO;
-}
 
+
+- (BOOL)isEqualTrue {
+    return YES;
+}
 
 - (id)toNativeObj {
     @throw [NSException exceptionWithName:@"这个对象toNative没有实现" reason:nil userInfo:nil];

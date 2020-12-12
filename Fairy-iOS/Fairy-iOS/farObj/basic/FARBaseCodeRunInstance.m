@@ -100,6 +100,10 @@
             FARBasicFuncRunInstance *basicFunc = [[FARBasicFuncRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:nil vmCode:self.vmCode funcName:name];
             basicFunc.capturedEnvInstance = self;
             baseObj = basicFunc;
+        }else if ([name isEqualToString:FAR_ASSERT]) {
+            FARBasicFuncRunInstance *basicFunc = [[FARBasicFuncRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:nil vmCode:self.vmCode funcName:name];
+            basicFunc.capturedEnvInstance = self;
+            baseObj = basicFunc;
         }
     }
     
@@ -213,14 +217,14 @@
             return NO;
         }
         case FAROperCmdJz:{
-            if ([[self.stack pop] isEqualFalse]) {
+            if (![[self.stack pop] isEqualTrue]) {
                 [self jmpTag:cmd.oper1];
                 return NO;
             }
             return YES;
         }
         case FAROperCmdJnz:{
-            if (![[self.stack pop] isEqualFalse]) {
+            if ([[self.stack pop] isEqualTrue]) {
                 [self jmpTag:cmd.oper1];
                 return NO;
             }

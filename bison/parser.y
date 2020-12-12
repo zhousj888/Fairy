@@ -66,7 +66,7 @@ Stmt:
     StmtSeparator
 |   VarDecl StmtSeparator                       
 |   FuncDecl                                    
-|   AssignStmt StmtSeparator                                                           
+|   AssignStmt StmtSeparator  
 |   WholeIfStmt                                      
 |   WhileStmt                                   
 |   BreakStmt StmtSeparator                     

@@ -43,8 +43,9 @@
     @throw [NSException exceptionWithName:@"不能对null设置变量" reason:nil userInfo:nil];
 }
 
-- (BOOL)isEqualFalse {
-    return YES;
+
+- (BOOL)isEqualTrue {
+    return NO;
 }
 
 - (NSString *)description

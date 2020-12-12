@@ -21,7 +21,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (FARBaseObj *)propertyWithId:(NSString *)name;
 - (void)declareVar:(NSString *)key;
 - (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value;
-- (BOOL)isEqualFalse;
+- (BOOL)isEqualTrue;
 - (id)toNativeObj;
 
 

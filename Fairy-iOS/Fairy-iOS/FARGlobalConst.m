@@ -50,3 +50,6 @@ NSString *const FAR_ARRAY_DIC_VALUE = @"value";
 NSString *const FAR_DIC_KEY = @"key";
 
 NSString *const FAR_TO_NATIVE_OBJ = @"toNativeObj";
+
+NSString *const FAR_ASSERT = @"assert";
+NSString *const FAR_ASSERT_CONDITION = @"condition";

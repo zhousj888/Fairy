@@ -32,7 +32,13 @@
         }else {
             [self.stack push:[FARNumberCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode integer:0]];
         }
-    }else {
+    } else if([self.funcName isEqualToString:FAR_ASSERT]) {
+        FARBaseObj *obj = params[FAR_ASSERT_CONDITION];
+        if (![obj isEqualTrue]) {
+            @throw [NSException exceptionWithName:@"断言错误！" reason:nil userInfo:nil];
+        }
+    }
+    else {
         @throw [NSException exceptionWithName:@"找不到方法" reason:nil userInfo:nil];
     }
     return nil;

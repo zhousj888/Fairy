@@ -1,4 +1,76 @@
 
+
+//test
+
+var __a = 1
+func __test(param1, param2) {
+    return param1 + param2 * _trailing_closure()
+}
+
+__a = __test(param1: 1, param2: 2) {
+    return 3
+}
+
+assert(condition: __a == 7)
+
+if __a {
+    assert(condition: __a)
+}else {
+    assert(condition: !__a)
+}
+
+while __a > 0 {
+    assert(condition: __a)
+    __a = __a - 1
+}
+
+assert(condition: !__a)
+var __b = 0
+
+repeat {
+    __b = __b + 1
+    if (__b < 6) {
+        continue
+    }else {
+        break
+    }
+} while __a < 10
+
+
+assert(condition: __b == 6)
+
+class __Father {
+    var superAge
+    func init() {
+        superAge = 10
+    }
+    func height() {
+        return 11
+    }
+}
+
+class __Son: __Father {
+    var age = 0
+    func init(age) {
+        self.age = age
+    }
+    func height() {
+        return 6
+    }
+    func superHeight() {
+        return super.height()
+    }
+}
+
+var __son = __Son(age: 3)
+assert(condition: __son.age == 3)
+assert(condition: __son.superHeight() == 6)//TODO: 这里调不到父类的方法
+
+
+
+
+//Views
+
 class Color {
     var _nativeColor
     func init(hex) {
@@ -196,3 +268,4 @@ class Label: View {
     }
 
 }
+
