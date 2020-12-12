@@ -34,7 +34,8 @@
 }
 
 - (void)loadVMView {
-    NSString *path = @"/Users/sunjingzhou/Documents/Fairy/Fairy-iOS/Fairy-iOS-Demo/test.far";
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"far"];
     
     NSString* content = [NSString stringWithContentsOfFile:path
                                                   encoding:NSUTF8StringEncoding
