@@ -47,13 +47,20 @@ class Father {
   func init() {
     //init func will call automatically when new a instance
   }
+  func run(){
+
+  }
 }
+
 class Son: Father {
   var age
   func init() {
     //first call super.init, then call this
   }
 }
+
+var son = Son()
+son.run()
 
 ```
 

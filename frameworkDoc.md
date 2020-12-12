@@ -1,5 +1,5 @@
 
-# Fairy frameword
+# Fairy framework
 
 
 # Color
@@ -14,8 +14,10 @@ var c = Color(hex: "#ffffff")
 ```swift
 
 View(width: 200, height: 50, backgroundColor: red, radius: 2)
-//all those property you can call set function, like this👇
+//all those property you can call set function, like this👇,except width and height
 View(width: 200, height: 50).setBackgroundColor(color: blue)
+//you can call setSize adjust width and height
+View().setSize(width: 100, height: 100)
 
 ```
 
