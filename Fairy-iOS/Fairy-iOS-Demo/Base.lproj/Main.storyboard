@@ -26,12 +26,14 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GA8-Ub-O9f">
                                 <rect key="frame" x="105" y="694" width="204" height="86"/>
-                                <color key="backgroundColor" systemColor="systemOrangeColor"/>
+                                <color key="backgroundColor" red="0.54238013698630139" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="86" id="SRz-vc-nVV"/>
                                     <constraint firstAttribute="width" constant="204" id="j7A-Ev-EEy"/>
                                 </constraints>
-                                <state key="normal" title="Hot Reload"/>
+                                <state key="normal" title="Hot Reload">
+                                    <color key="titleColor" red="0.0" green="0.30894156678082191" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -57,9 +59,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
