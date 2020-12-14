@@ -103,7 +103,6 @@
 		65EF92DC2569258E00A98D1C /* FARCodeObj.m in Sources */ = {isa = PBXBuildFile; fileRef = 65EF92DA2569258E00A98D1C /* FARCodeObj.m */; };
 		65F6C3F225626B6200C8B94C /* Fairy_iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 65F6C3F025626B6200C8B94C /* Fairy_iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		65F6C42425626BE200C8B94C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6C42325626BE200C8B94C /* AppDelegate.m */; };
-		65F6C42725626BE200C8B94C /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6C42625626BE200C8B94C /* SceneDelegate.m */; };
 		65F6C42A25626BE200C8B94C /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 65F6C42925626BE200C8B94C /* ViewController.m */; };
 		65F6C42D25626BE200C8B94C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 65F6C42B25626BE200C8B94C /* Main.storyboard */; };
 		65F6C42F25626BE600C8B94C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65F6C42E25626BE600C8B94C /* Assets.xcassets */; };
@@ -240,8 +239,6 @@
 		65F6C42025626BE100C8B94C /* Fairy-iOS-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Fairy-iOS-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		65F6C42225626BE200C8B94C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		65F6C42325626BE200C8B94C /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		65F6C42525626BE200C8B94C /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		65F6C42625626BE200C8B94C /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		65F6C42825626BE200C8B94C /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		65F6C42925626BE200C8B94C /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		65F6C42C25626BE200C8B94C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -520,8 +517,6 @@
 			children = (
 				65F6C42225626BE200C8B94C /* AppDelegate.h */,
 				65F6C42325626BE200C8B94C /* AppDelegate.m */,
-				65F6C42525626BE200C8B94C /* SceneDelegate.h */,
-				65F6C42625626BE200C8B94C /* SceneDelegate.m */,
 				65F6C42825626BE200C8B94C /* ViewController.h */,
 				65F6C42925626BE200C8B94C /* ViewController.m */,
 				65F6C42B25626BE200C8B94C /* Main.storyboard */,
@@ -759,7 +754,6 @@
 				65F6C42A25626BE200C8B94C /* ViewController.m in Sources */,
 				65F6C42425626BE200C8B94C /* AppDelegate.m in Sources */,
 				65F6C43525626BE600C8B94C /* main.m in Sources */,
-				65F6C42725626BE200C8B94C /* SceneDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
