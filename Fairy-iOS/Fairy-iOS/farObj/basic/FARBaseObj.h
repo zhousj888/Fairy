@@ -15,6 +15,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, readwrite) FARVMEnvironment *env;
 @property (nonatomic, readwrite) FARVMEnvironment *globalEnv;
+@property (nonatomic, assign) BOOL isDestroyed;
 
 - (instancetype)init NS_UNAVAILABLE;
 - (instancetype)initWithEnv:(FARVMEnvironment *)env;

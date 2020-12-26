@@ -12,9 +12,6 @@
 
 @interface FARBaseObj()
 
-
-@property (nonatomic, assign) BOOL isDestroyed;
-
 @end
 
 @implementation FARBaseObj
@@ -51,14 +48,11 @@
 }
 
 - (void)destroy {
-    
-    if (self.isDestroyed) {
-        return;
+    if (!self.env.isDestroyed) {
+        self.env.isDestroyed = YES;
+        [self.env destroy];
     }
-    
-    self.isDestroyed = YES;
-    
-    [self.env destroy];
+    self.env = nil;
 }
 
 

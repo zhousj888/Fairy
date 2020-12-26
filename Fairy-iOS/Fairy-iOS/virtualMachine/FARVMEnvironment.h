@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @interface FARVMEnvironment : NSObject
 
 @property (nonatomic, strong) FARVMEnvironment *outer;
+@property (nonatomic, assign) BOOL isDestroyed;
 
 - (instancetype)init;
 - (instancetype)initWithOuter:(FARVMEnvironment * _Nullable )outer;

@@ -48,4 +48,9 @@
     return [super propertyWithId:name];
 }
 
+- (void)destroy {
+    [super destroy];
+    self.array = nil;
+}
+
 @end
