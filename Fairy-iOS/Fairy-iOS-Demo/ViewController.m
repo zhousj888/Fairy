@@ -12,6 +12,9 @@
 @property (weak, nonatomic) IBOutlet UIView *container;
 @property (weak, nonatomic) IBOutlet UIButton *updateButton;
 @property (nonatomic, strong) UIView *vmView;
+@property (weak, nonatomic) IBOutlet UIButton *cleanButton;
+@property (nonatomic, strong) FARVirtualMachine *vm;
+
 
 @end
 
@@ -23,7 +26,15 @@
     self.container.layer.borderWidth = 1;
     self.container.layer.borderColor = [UIColor blueColor].CGColor;
     [self.updateButton addTarget:self action:@selector(hotReload) forControlEvents:UIControlEventTouchUpInside];
+    [self.cleanButton addTarget:self action:@selector(clean) forControlEvents:UIControlEventTouchUpInside];
     [self loadVMView];
+}
+
+- (void)clean {
+    for (UIView *sub in self.container.subviews) {
+        [sub removeFromSuperview];
+    }
+    self.vm = nil;
 }
 
 - (void)hotReload {
@@ -43,10 +54,10 @@
     NSString* content = [NSString stringWithContentsOfFile:path
                                                   encoding:NSUTF8StringEncoding
                                                       error:NULL];
-    FARVirtualMachine *vm = [[FARVirtualMachine alloc] init];
-    [vm runWithCode:content];
+    self.vm = [[FARVirtualMachine alloc] init];
+    [self.vm runWithCode:content];
     
-    self.vmView = [vm vmValueOfStackTop];
+    self.vmView = [self.vm vmValueOfStackTop];
     [self.container addSubview:self.vmView];
     
 }

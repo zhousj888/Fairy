@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -25,28 +25,38 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GA8-Ub-O9f">
-                                <rect key="frame" x="105" y="694" width="204" height="86"/>
+                                <rect key="frame" x="105" y="694" width="204" height="50"/>
                                 <color key="backgroundColor" red="0.54238013698630139" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="86" id="SRz-vc-nVV"/>
+                                    <constraint firstAttribute="height" constant="50" id="SRz-vc-nVV"/>
                                     <constraint firstAttribute="width" constant="204" id="j7A-Ev-EEy"/>
                                 </constraints>
                                 <state key="normal" title="Hot Reload">
                                     <color key="titleColor" red="0.0" green="0.30894156678082191" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jyg-l0-jAn">
+                                <rect key="frame" x="105" y="752" width="204" height="50"/>
+                                <color key="backgroundColor" red="0.0" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" title="Clean"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="8KB-bJ-ehf" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="8IP-lF-o04"/>
+                            <constraint firstItem="Jyg-l0-jAn" firstAttribute="height" secondItem="GA8-Ub-O9f" secondAttribute="height" id="Bji-ju-6IT"/>
                             <constraint firstItem="GA8-Ub-O9f" firstAttribute="top" secondItem="8KB-bJ-ehf" secondAttribute="bottom" constant="39" id="UZZ-aD-Z0q"/>
                             <constraint firstItem="GA8-Ub-O9f" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="dUt-zA-Z6i"/>
+                            <constraint firstItem="Jyg-l0-jAn" firstAttribute="centerX" secondItem="GA8-Ub-O9f" secondAttribute="centerX" id="e1Q-Lx-0ql"/>
+                            <constraint firstItem="Jyg-l0-jAn" firstAttribute="top" secondItem="GA8-Ub-O9f" secondAttribute="bottom" constant="8" symbolic="YES" id="gS7-jQ-ouE"/>
                             <constraint firstItem="8KB-bJ-ehf" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="29" id="ihs-96-zk5"/>
+                            <constraint firstItem="Jyg-l0-jAn" firstAttribute="width" secondItem="GA8-Ub-O9f" secondAttribute="width" id="rQO-iT-hXh"/>
                             <constraint firstItem="8KB-bJ-ehf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="30" id="zMV-YF-wMF"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="cleanButton" destination="Jyg-l0-jAn" id="82p-tC-ckR"/>
                         <outlet property="container" destination="8KB-bJ-ehf" id="iz5-Dp-3yV"/>
                         <outlet property="updateButton" destination="GA8-Ub-O9f" id="Noh-cU-s63"/>
                     </connections>

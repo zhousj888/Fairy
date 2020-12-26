@@ -23,6 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value;
 - (BOOL)isEqualTrue;
 - (id)toNativeObj;
+- (void)destroy;
 
 
 //以下方法只能子类调用，外部不要调用

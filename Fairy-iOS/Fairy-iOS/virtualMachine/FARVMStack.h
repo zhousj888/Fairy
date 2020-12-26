@@ -20,6 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (FARBaseObj *)peek;
 - (void)popTo:(NSInteger)sp;
 - (void)printStack;
+- (void)destroy;
 
 @end
 

@@ -24,6 +24,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary *)asParams;
 - (void)addParams:(NSDictionary *)params;
 
+- (void)destroy;
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -29,6 +29,13 @@ static NSString *const kRetSp = @"__retSp";
 
 @implementation FARVirtualMachine
 
+- (void)dealloc {
+    [self.stack destroy];
+    [self.codeEnv destroy];
+    [self.mainEnv destroy];
+    NSLog(@"FARVirtualMachine dealloc");
+}
+
 - (void)runWithCode:(NSString *)code {
     FARParser *parser = [[FARParser alloc] init];
     FARVMCode *rawCode = [parser parse:code withFileName:@"userCode"];

@@ -65,4 +65,9 @@
     FARLog(@"stack: ===>  %@",mutStr);
 }
 
+- (void)destroy {
+    [self.stackArr removeAllObjects];
+    self.stackArr = nil;
+}
+
 @end

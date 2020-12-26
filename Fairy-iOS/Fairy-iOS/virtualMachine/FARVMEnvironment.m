@@ -11,6 +11,7 @@
 @interface FARVMEnvironment()
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, FARBaseObj *> *envDic;
+@property (nonatomic, assign) BOOL isDestroyed;
 
 @end
 
@@ -51,6 +52,24 @@
 
 - (void)declareVar:(NSString *)key withGlobalEnv:(nonnull FARVMEnvironment *)globalEnv withStack:(nonnull FARVMStack *)stack{
     self.envDic[key] = [FARNull nullWithEnv:globalEnv stack:stack];
+}
+
+
+- (void)destroy {
+    
+    if (self.isDestroyed) {
+        return;
+    }
+    
+    self.isDestroyed = YES;
+    for (NSString *objKey in self.envDic) {
+        FARBaseObj *obj = self.envDic[objKey];
+        [obj destroy];
+    }
+    
+    [self.envDic removeAllObjects];
+    
+    self.envDic = nil;
 }
 
 
