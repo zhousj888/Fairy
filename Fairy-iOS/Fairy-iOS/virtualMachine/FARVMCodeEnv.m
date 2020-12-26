@@ -28,7 +28,7 @@
 
 @interface FARVMCodeEnv()
 
-@property (nonatomic, strong) FARVMCode *vmCode;
+@property (nonatomic, weak) FARVMCode *vmCode;
 @property (nonatomic, strong) NSMutableDictionary<NSNumber *, NSMutableArray<FARCommandTag *>*> *tagIndexDicCopy;
 @property (nonatomic, strong) NSMutableDictionary<NSString *, FARCodeObj *>* codeObjDic;
 
