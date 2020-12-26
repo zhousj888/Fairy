@@ -147,6 +147,13 @@
 
 }
 
+- (void)destroy {
+    [super destroy];
+    self.vmCode = nil;
+    self.tagIndexDicCopy = nil;
+    self.codeObjDic = nil;
+}
+
 
 - (void)setVar:(id)value key:(NSString *)key {
     @throw [NSException exceptionWithName:@"代码表不能设置变量" reason:nil userInfo:nil];

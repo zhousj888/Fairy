@@ -35,6 +35,7 @@
         [sub removeFromSuperview];
     }
     self.vm = nil;
+    self.vmView = nil;
 }
 
 - (void)hotReload {
