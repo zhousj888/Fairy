@@ -11,6 +11,7 @@
 @interface FARVMEnvironment()
 
 @property (nonatomic, strong) NSMutableDictionary<NSString *, FARBaseObj *> *envDic;
+@property (nonatomic, strong) NSHashTable<FARBaseObj *> *weakTable;
 
 @end
 
@@ -25,6 +26,7 @@
     if (self) {
         _envDic = [NSMutableDictionary dictionary];
         _outer = outer;
+        _weakTable = [NSHashTable hashTableWithOptions:NSPointerFunctionsWeakMemory];
     }
     return self;
 }
@@ -63,9 +65,21 @@
         }
     }
     
+    for (FARBaseObj *obj in self.weakTable) {
+        if (!obj.isDestroyed) {
+            obj.isDestroyed = YES;
+            [obj destroy];
+        }
+    }
+    
+    
     [self.envDic removeAllObjects];
     
     self.envDic = nil;
+}
+
+- (void)addWeakRef:(FARBaseObj *)obj {
+    [self.weakTable addObject:obj];
 }
 
 

@@ -25,6 +25,8 @@ NS_ASSUME_NONNULL_BEGIN
 - (NSDictionary *)asParams;
 - (void)addParams:(NSDictionary *)params;
 
+- (void)addWeakRef:(FARBaseObj *)obj;
+
 - (void)destroy;
 
 @end

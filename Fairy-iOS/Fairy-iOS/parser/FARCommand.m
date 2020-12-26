@@ -35,7 +35,7 @@ NSString *transCmdToDescription(int cmd);
 
 - (NSString *)description
 {
-    return [NSString stringWithFormat:@"(cmd=%@,oper1=%@,oper2=%@,oper3=%@", transCmdToDescription((int)self.operCmd),self.oper1,self.oper2,self.oper3];
+    return [NSString stringWithFormat:@"(fileName=%@,line=%@,cmd=%@,oper1=%@,oper2=%@,oper3=%@",self.fileName,@(self.line), transCmdToDescription((int)self.operCmd),self.oper1,self.oper2,self.oper3];
 }
 
 

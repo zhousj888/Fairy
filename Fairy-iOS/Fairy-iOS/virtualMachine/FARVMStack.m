@@ -66,6 +66,14 @@
 }
 
 - (void)destroy {
+    
+    for (FARBaseObj *obj in self.stackArr) {
+        if (!obj.isDestroyed) {
+            obj.isDestroyed = YES;
+            [obj destroy];
+        }
+    }
+    
     [self.stackArr removeAllObjects];
     self.stackArr = nil;
 }

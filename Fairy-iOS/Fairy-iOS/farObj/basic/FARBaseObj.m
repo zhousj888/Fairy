@@ -19,6 +19,8 @@
 - (instancetype)initWithEnv:(FARVMEnvironment *)env {
     if (self = [super init]) {
         _globalEnv = env;
+        //每个Far对象初始化的时候把自己加到全局Env，方便之后销毁
+        [_globalEnv addWeakRef:self];
         _env = [[FARVMEnvironment alloc] initWithOuter:_globalEnv];
     }
     return self;
