@@ -13,10 +13,6 @@
 #import "FARFuncCodeObj.h"
 #import "FARFuncRunInstance.h"
 
-
-static NSString *const kRetPc = @"__retPc";
-static NSString *const kRetSp = @"__retSp";
-
 @interface FARVirtualMachine()
 
 @property (nonatomic, strong) FARVMCode *vmCode;
@@ -39,7 +35,7 @@ static NSString *const kRetSp = @"__retSp";
 - (void)runWithCode:(NSString *)code {
     FARParser *parser = [[FARParser alloc] init];
     FARVMCode *rawCode = [parser parse:code withFileName:@"userCode"];
-    FARVMCode *internalCode = [self _generInternalCode];
+    FARVMCode *internalCode = [self generInternalCode];
     
     FARVMCode *linkedCode = [FARVMCode linkCode:internalCode code2:rawCode];
     
@@ -48,7 +44,7 @@ static NSString *const kRetSp = @"__retSp";
     [self run];
 }
 
-- (FARVMCode *)_generInternalCode {
+- (FARVMCode *)generInternalCode {
     NSBundle *bundle = [NSBundle bundleForClass:self.class];
     NSString *path = [bundle pathForResource:@"internalScript" ofType:@"far"];
     NSString* content = [NSString stringWithContentsOfFile:path

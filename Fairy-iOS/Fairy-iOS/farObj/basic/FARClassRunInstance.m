@@ -72,7 +72,7 @@
 
 - (void)setPropertyWithKey:(NSString *)key value:(FARBaseObj *)value {
     
-    BOOL setSuccess = [super _safeSetPropertyWithKey:key value:value];
+    BOOL setSuccess = [super safeSetPropertyWithKey:key value:value];
     if (!setSuccess) {
         FARBaseObj *superObj = self.superInstance;
         if ([superObj propertyWithId:key]) {

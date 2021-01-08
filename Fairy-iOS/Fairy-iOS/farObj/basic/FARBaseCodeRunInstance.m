@@ -73,7 +73,7 @@
         //打印执行的命令
         FARLog(@"cmd<%@,%@>:---> %@",cmd.fileName, @(cmd.line),cmd);
         
-        if ([self _executeCmd:cmd]) {
+        if ([self executeCmd:cmd]) {
             self.pc++;
         }
         //打印堆栈
@@ -152,7 +152,7 @@
     }
 }
 
-- (void)_oper2objWithOperation:(NSString *)operName {
+- (void)oper2objWithOperation:(NSString *)operName {
     FARBaseObj *oper2 = [self.stack pop];
     FARBaseObj *oper1 = [self.stack pop];
     
@@ -166,7 +166,7 @@
 }
 
 //返回是否pc++
-- (BOOL)_executeCmd:(FARCommand *)cmd {
+- (BOOL)executeCmd:(FARCommand *)cmd {
     self.currentExcuteLine = cmd.line;
     switch (cmd.operCmd) {
         case FAROperCmdPushTrue:{
@@ -239,56 +239,56 @@
             return YES;
         }
         case FAROperCmdAdd:{
-            [self _oper2objWithOperation:FAR_ADD_FUNC];
+            [self oper2objWithOperation:FAR_ADD_FUNC];
             return YES;
         }
         case FAROperCmdSub:{
-            [self _oper2objWithOperation:FAR_SUB_FUNC];
+            [self oper2objWithOperation:FAR_SUB_FUNC];
             return YES;
         }
         case FAROperCmdMul:{
-            [self _oper2objWithOperation:FAR_MUL_FUNC];
+            [self oper2objWithOperation:FAR_MUL_FUNC];
             return YES;
         }
         case FAROperCmdDiv:{
-            [self _oper2objWithOperation:FAR_DIV_FUNC];
+            [self oper2objWithOperation:FAR_DIV_FUNC];
             return YES;
         }
 
         case FAROperCmdMod:{
-            [self _oper2objWithOperation:FAR_MOD_FUNC];
+            [self oper2objWithOperation:FAR_MOD_FUNC];
             return YES;
         }
         case FAROperCmdCmpgt:{
-            [self _oper2objWithOperation:FAR_CMPGT_FUNC];
+            [self oper2objWithOperation:FAR_CMPGT_FUNC];
             return YES;
         }
         case FAROperCmdCmplt:{
-            [self _oper2objWithOperation:FAR_CMPLT_FUNC];
+            [self oper2objWithOperation:FAR_CMPLT_FUNC];
             return YES;
         }
         case FAROperCmdCmpge:{
-            [self _oper2objWithOperation:FAR_CMPGE_FUNC];
+            [self oper2objWithOperation:FAR_CMPGE_FUNC];
             return YES;
         }
         case FAROperCmdCmple:{
-            [self _oper2objWithOperation:FAR_CMPLE_FUNC];
+            [self oper2objWithOperation:FAR_CMPLE_FUNC];
             return YES;
         }
         case FAROperCmdCmpeq:{
-            [self _oper2objWithOperation:FAR_CMPEQ_FUNC];
+            [self oper2objWithOperation:FAR_CMPEQ_FUNC];
             return YES;
         }
         case FAROperCmdCmpne:{
-            [self _oper2objWithOperation:FAR_CMPNE_FUNC];
+            [self oper2objWithOperation:FAR_CMPNE_FUNC];
             return YES;
         }
         case FAROperCmdOr:{
-            [self _oper2objWithOperation:FAR_CMPOR_FUNC];
+            [self oper2objWithOperation:FAR_CMPOR_FUNC];
             return YES;
         }
         case FAROperCmdAnd:{
-            [self _oper2objWithOperation:FAR_AND_FUNC];
+            [self oper2objWithOperation:FAR_AND_FUNC];
             return YES;
         }
         case FAROperCmdNeg:{

@@ -101,10 +101,10 @@
     
 }
 
-- (FARNumberRunInstance *)_createNewNumberWithInteger:(NSInteger)number {
+- (FARNumberRunInstance *)createNewNumberWithInteger:(NSInteger)number {
     return [[FARNumberRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:self.codeObj vmCode:self.vmCode integer:number];
 }
-- (FARNumberRunInstance *)_createNewNumberWithDouble:(double)number {
+- (FARNumberRunInstance *)createNewNumberWithDouble:(double)number {
     return [[FARNumberRunInstance alloc] initWithEnv:self.globalEnv stack:self.stack codeObj:self.codeObj vmCode:self.vmCode decimal:number];
 }
 
@@ -114,71 +114,71 @@
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue + otherNumber.doubleValue;
         
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue + otherNumber.intergerValue;
     
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 
 - (FARNumberRunInstance *)subOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue - otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue - otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 - (FARNumberRunInstance *)mulOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue * otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue * otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 - (FARNumberRunInstance *)divOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue / otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue / otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 
 - (FARNumberRunInstance *)modOtherNumber:(FARNumberRunInstance *)otherNumber {
     NSInteger result = self.intergerValue % otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 - (FARNumberRunInstance *)cmpgtOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue > otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue > otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 - (FARNumberRunInstance *)cmpltOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue < otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue < otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 - (FARNumberRunInstance *)cmpgeOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue >= otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue >= otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 
 
@@ -186,60 +186,60 @@
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue <= otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue <= otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 
 - (FARNumberRunInstance *)cmpeqOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue == otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue == otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 - (FARNumberRunInstance *)cmpneOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue != otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue != otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 - (FARNumberRunInstance *)orOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue || otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue || otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 - (FARNumberRunInstance *)andOtherNumber:(FARNumberRunInstance *)otherNumber {
     
     if (self.type == FARNumberTypeDouble || otherNumber.type == FARNumberTypeDouble) {
         double result = self.doubleValue && otherNumber.doubleValue;
-        return [self _createNewNumberWithDouble:result];
+        return [self createNewNumberWithDouble:result];
     }
     NSInteger result = self.intergerValue && otherNumber.intergerValue;
-    return [self _createNewNumberWithInteger:result];
+    return [self createNewNumberWithInteger:result];
 }
 
 - (FARNumberRunInstance *)neg {
     if (self.type == FARNumberTypeInterger) {
-        return [self _createNewNumberWithInteger:-self.intergerValue];
+        return [self createNewNumberWithInteger:-self.intergerValue];
     }
-    return [self _createNewNumberWithDouble:-self.doubleValue];
+    return [self createNewNumberWithDouble:-self.doubleValue];
 }
 - (FARNumberRunInstance *)doNot {
     if (self.type == FARNumberTypeInterger) {
-        return [self _createNewNumberWithInteger:!self.intergerValue];
+        return [self createNewNumberWithInteger:!self.intergerValue];
     }
-    return [self _createNewNumberWithDouble:!self.doubleValue];
+    return [self createNewNumberWithDouble:!self.doubleValue];
     
 }
 

@@ -12,12 +12,6 @@
 #import "FARFuncRunInstance.h"
 #import "FARClassRunInstance.h"
 
-#define UIColorFromRGB(rgbValue) \
-[UIColor colorWithRed:((float)((rgbValue & 0xFF0000) >> 16))/255.0 \
-                green:((float)((rgbValue & 0x00FF00) >>  8))/255.0 \
-                 blue:((float)((rgbValue & 0x0000FF) >>  0))/255.0 \
-                alpha:1.0]
-
 @implementation FARNativeApi
 
 
@@ -131,18 +125,18 @@
     view.layer.cornerRadius = radius.floatValue;
 }
 
-static NSString *const TextAlignmentCenter = @"TextAlignmentCenter";
-static NSString *const TextAlignmentLeft = @"TextAlignmentLeft";
-static NSString *const TextAlignmentRight = @"TextAlignmentRight";
+static NSString *const gTextAlignmentCenter = @"TextAlignmentCenter";
+static NSString *const gTextAlignmentLeft = @"TextAlignmentLeft";
+static NSString *const gTextAlignmentRight = @"TextAlignmentRight";
 
 - (void)setTextAlignment:(NSDictionary *)params {
     UILabel *label = params[@"obj"];
     NSString *aligment = params[@"textAlignment"];
-    if ([aligment isEqualToString:TextAlignmentLeft]) {
+    if ([aligment isEqualToString:gTextAlignmentLeft]) {
         label.textAlignment = NSTextAlignmentLeft;
-    }else if ([aligment isEqualToString:TextAlignmentCenter]) {
+    }else if ([aligment isEqualToString:gTextAlignmentCenter]) {
         label.textAlignment = NSTextAlignmentCenter;
-    }else if([aligment isEqualToString:TextAlignmentRight]) {
+    }else if([aligment isEqualToString:gTextAlignmentRight]) {
         label.textAlignment = NSTextAlignmentRight;
     }
 }
