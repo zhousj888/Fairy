@@ -170,12 +170,12 @@
     self.currentExcuteLine = cmd.line;
     switch (cmd.operCmd) {
         case FAROperCmdPushTrue:{
-            FARBoolRunInstance *obj = [FARBoolCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode boolValue:YES];
+            FARBoolRunInstance *obj = (FARBoolRunInstance *)[FARBoolCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode boolValue:YES];
             [self.stack push:obj];
             return YES;
         }
         case FAROperCmdPushFalse: {
-            FARBoolRunInstance *obj = [FARBoolCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode boolValue:NO];
+            FARBoolRunInstance *obj = (FARBoolRunInstance *)[FARBoolCodeObj newRunInstanceWithEnv:self.globalEnv stack:self.stack vmCode:self.vmCode boolValue:NO];
             [self.stack push:obj];
             return YES;
         }
