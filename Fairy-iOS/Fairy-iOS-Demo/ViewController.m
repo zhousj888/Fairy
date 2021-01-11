@@ -22,7 +22,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     self.container.layer.borderWidth = 1;
     self.container.layer.borderColor = [UIColor blueColor].CGColor;
     [self.updateButton addTarget:self action:@selector(hotReload) forControlEvents:UIControlEventTouchUpInside];
