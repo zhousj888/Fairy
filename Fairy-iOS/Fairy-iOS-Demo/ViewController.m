@@ -58,7 +58,7 @@
     self.vm = [[FARVirtualMachine alloc] init];
     [self.vm runWithCode:content];
     
-    self.vmView = [self.vm vmValueOfStackTop];
+    self.vmView = [self.vm vmRetValue];
     [self.container addSubview:self.vmView];
     
 }

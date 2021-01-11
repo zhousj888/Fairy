@@ -72,7 +72,7 @@
     [mainRunInstance runWithParams:nil];
 }
 
-- (id)vmValueOfStackTop {
+- (id)vmRetValue {
     return self.stack.peek.toNativeObj;
 }
 
