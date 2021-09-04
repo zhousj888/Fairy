@@ -34,6 +34,3 @@ Fairy is just on beta version, so no cocoapods. You can copy it and rely as sub 
 Fairy is a script language specially used to write UI.
 The syntax is mainly borrowed from SwiftUI.
 There is only iOS virtual machine now.
-I will add Android and JavaScript VM later when i am free.
-Of course, it would be great if someone is willing to implement these virtual machines together😁, MR is welcome.
-The goal is to use a Fairy script to render the UI on Android, iOS and the Web.
